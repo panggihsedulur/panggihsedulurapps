@@ -92,7 +92,7 @@ export default function HeroSection() {
 
             {/* Heading */}
             <h1
-              className="animate-fade-in delay-200 text-5xl sm:text-6xl lg:text-7xl xl:text-7xl font-medium tracking-tighter leading-[0.9]"
+              className="animate-fade-in delay-200 text-5xl sm:text-6xl lg:text-7xl xl:text-[5.5rem] font-medium tracking-tighter leading-[0.9]"
               style={{
                 maskImage:
                   "linear-gradient(180deg, black 0%, black 80%, transparent 100%)",
@@ -100,30 +100,30 @@ export default function HeroSection() {
                   "linear-gradient(180deg, black 0%, black 80%, transparent 100%)",
               }}
             >
-              Temukan
+              Temukan UKM
               <br />
               <span className="bg-gradient-to-br from-white via-white to-[#ffcd75] bg-clip-text text-transparent">
-                UKM & Paguyuban
+                & Paguyuban
               </span>
               <br />
-              yang Tepat untukmu!
+              Sesuai Passionmu
             </h1>
 
             {/* Description */}
             <p className="animate-fade-in delay-300 max-w-xl text-lg text-zinc-400 leading-relaxed">
-              Program pengenalan Paguyuban Mahasiswa Daerah dan UKM Universitas
-              Jenderal Soedirman. Ikuti tes minat bakat singkat, kunjungi booth
-              pameran, dan temukan wadah terbaik untuk menggali potensimu!
+              Ikuti kuisioner interaktif untuk mendapatkan rekomendasi Unit
+              Kegiatan Mahasiswa dan Paguyuban Daerah yang paling sesuai dengan
+              minat, bakat, dan karaktermu.
             </p>
 
             {/* CTA Buttons */}
-            <div className="animate-fade-in delay-400 flex flex-col sm:flex-row gap-4">
-              <button className="group inline-flex items-center justify-center gap-2 rounded-full bg-white px-8 py-4 text-sm font-semibold text-zinc-950 transition-all hover:scale-[1.02] hover:bg-zinc-200 active:scale-[0.98]">
-                View Portfolio
+            <div className="animate-fade-in delay-400 flex flex-row sm:flex-row gap-4">
+              <button className="group inline-flex items-center justify-center gap-2 rounded-full bg-white px-4 py-2 sm:px-8 sm:py-4 text-sm font-semibold text-zinc-950 transition-all hover:scale-[1.02] hover:bg-zinc-200 active:scale-[0.98]">
+                Mulai Kuisioner
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </button>
 
-              <button className="group inline-flex items-center justify-center gap-2 rounded-full border border-white/10 bg-white/5 px-8 py-4 text-sm font-semibold text-white backdrop-blur-sm transition-colors hover:bg-white/10 hover:border-white/20">
+              <button className="group inline-flex items-center justify-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 sm:px-8 sm:py-4 text-sm font-semibold text-white backdrop-blur-sm transition-colors hover:bg-white/10 hover:border-white/20">
                 <Play className="w-4 h-4 fill-current" />
                 Watch Showreel
               </button>
@@ -144,10 +144,10 @@ export default function HeroSection() {
                   </div>
                   <div>
                     <div className="text-3xl font-bold tracking-tight text-white">
-                      150+
+                      65+
                     </div>
                     <div className="text-sm text-zinc-400">
-                      Projects Delivered
+                      UKM & Paguyuban Tersedia
                     </div>
                   </div>
                 </div>

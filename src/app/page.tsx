@@ -1,10 +1,12 @@
 import React from "react";
-import HeroSection from "@/components/glassmorphism-trust-hero";
+import HeroSection from "@/components/Hero";
+import Section1 from "@/components/Section1";
 
 export default function HeroDemo() {
   return (
-    <div className="w-full h-screen overflow-y-auto bg-zinc-950">
+    <>
       <HeroSection />
-    </div>
+      <Section1 />
+    </>
   );
 }
