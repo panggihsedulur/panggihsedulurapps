@@ -81,6 +81,8 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+  --text-gradient: linear-gradient(to right, #5a9cad, #033e4c, #5a9cad);
+  --text-gradient-secondary: linear-gradient(to right, #5a9cad, #033e4c);
 }
 
 .dark {
@@ -126,5 +128,27 @@
   }
   html {
     @apply font-sans;
+  }
+}
+
+@layer utilities {
+  .font-edwardian {
+    font-family:
+      "Edwardian Script ITC", "ITC Edwardian Script", "Edwardian Script",
+      cursive;
+    font-weight: 400;
+  }
+
+  .text-gradient {
+    background-image: var(--text-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .text-gradient-2 {
+    background-image: var(--text-gradient-secondary);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
   }
 }
