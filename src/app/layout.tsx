@@ -39,7 +39,7 @@ export default function RootLayout({
         inter.variable,
       )}
     >
-      <body className="min-h-full flex flex-col justify-center ">
+      <body className="min-h-full flex flex-col justify-center  ">
         <AnimatedMenuDemo />
         {children}
       </body>

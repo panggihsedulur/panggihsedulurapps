@@ -38,7 +38,7 @@ const StatItem = ({ value, label }: { value: string; label: string }) => (
 // --- MAIN COMPONENT ---
 export default function HeroSection() {
   return (
-    <div className="relative w-full bg-zinc-950 text-white overflow-hidden font-sans">
+    <div className="relative w-full  text-white overflow-hidden font-sans">
       {/* 
         SCOPED ANIMATIONS 
       */}
@@ -67,7 +67,7 @@ export default function HeroSection() {
 
       {/* Background Image with Gradient Mask */}
       <div
-        className="absolute inset-0 z-0 bg-[url(https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/a72ca2f3-9dd1-4fe4-84ba-fe86468a5237_3840w.webp?w=800&q=80)] bg-cover bg-center opacity-40"
+        className="absolute inset-0 z-0 bg-[url('/hero-bg.png')] bg-cover bg-center opacity-100"
         style={{
           maskImage:
             "linear-gradient(180deg, transparent, black 0%, black 70%, transparent)",
@@ -89,7 +89,12 @@ export default function HeroSection() {
                 </span>
               </div>
             </div>
-
+            {/* <h1
+          className={`text-5xl mb-3 text-center min-h-24 ${chauPhilomene.className} text-gradient`}
+        >
+          <span className="font-edwardian text-8xl mr-2">U</span>km
+          <span className="font-edwardian text-8xl mr-2">P</span>aguyuban
+        </h1> */}
             {/* Heading */}
             <h1
               className="animate-fade-in delay-200 text-5xl sm:text-6xl lg:text-7xl xl:text-[5.5rem] font-medium tracking-tighter leading-[0.9]"
@@ -100,9 +105,12 @@ export default function HeroSection() {
                   "linear-gradient(180deg, black 0%, black 80%, transparent 100%)",
               }}
             >
-              Temukan UKM
+              <span className="font-edwardian text-6xl mr-6 sm:text-7xl lg:text-8xl xl:text-[7rem]">
+                T
+              </span>
+              emukan UKM
               <br />
-              <span className="bg-gradient-to-br from-white via-white to-[#ffcd75] bg-clip-text text-transparent">
+              <span className="bg-gradient-to-br from-white via-white to-[#3c5759] bg-clip-text text-transparent">
                 & Paguyuban
               </span>
               <br />

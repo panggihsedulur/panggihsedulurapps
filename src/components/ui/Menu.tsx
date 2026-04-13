@@ -9,7 +9,7 @@ import {
 } from "@/components/systaliko-ui/animated-menu";
 import Link from "next/link";
 import { useState, useEffect } from "react";
-import { GlassCard } from "./glass-card";
+
 const menuItems = [
   {
     title: "Beranda   ",
@@ -78,8 +78,8 @@ export function AnimatedMenuDemo() {
             Panggih Sedulur
           </span>
         </div>
-        <AnimatedMenu className="relative">
-          <AnimatedMenuButton className="w-25.5 h-[40px]  text-primary-foreground">
+        <AnimatedMenu className="relative ">
+          <AnimatedMenuButton className="w-25.5 h-[40px]  text-primary-foreground ">
             <AnimatedMenuButtonToggleIcon />
             <AnimatedMenuButtonLabel />
           </AnimatedMenuButton>
@@ -89,7 +89,7 @@ export function AnimatedMenuDemo() {
                 {menuItems.map((item, i) => (
                   <AnimatedMenuItem key={i} order={i}>
                     <Link
-                      className="text-2xl font-medium text-muted"
+                      className="text-2xl font-medium text-muted text-gradient-2"
                       href={item.href}
                       title={item.title}
                     >
@@ -105,7 +105,7 @@ export function AnimatedMenuDemo() {
                     order={i + menuItems.length}
                   >
                     <Link
-                      className=" font-medium text-muted/80 text-sm tracking-wide uppercase"
+                      className=" font-medium text-muted/80 text-sm tracking-wide uppercase text-gradient-2"
                       href={item.href}
                       title={item.title}
                     >
