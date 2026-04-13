@@ -1,11 +1,21 @@
 import { ExpandableCard } from "@/components/ui/expandable-card";
 
-export function ExpandableCardDemo() {
+interface ExpandableCardDemoProps {
+  title: string;
+  src: string;
+  description: string;
+}
+
+export function ExpandableCardDemo({
+  title,
+  src,
+  description,
+}: ExpandableCardDemoProps) {
   return (
     <ExpandableCard
-      title="Whispering Forest"
-      src="https://cdn.badtz-ui.com/images/components/expandable-card/haunted-house.webp"
-      description="A Yokai Tale"
+      title={title}
+      src={src}
+      description={description}
       classNameExpanded="[&_h4]:text-black dark:[&_h4]:text-white [&_h4]:font-medium "
     >
       <h4>The Village's Secret</h4>

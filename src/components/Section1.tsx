@@ -23,7 +23,7 @@ export default function Section1() {
         }}
       /> */}
 
-      <div className="relative z-10 mx-auto max-w-7xl px-4 pt-24 pb-12 sm:px-6 md:pt- md:pb-20 lg:px-8 min-h-">
+      <div className="relative z-10 mx-auto max-w-7xl px-4 pt-24 pb-12 sm:px-6 md:pt-20 md:pb-20 lg:px-8 min-h-">
         <h1
           className={`text-5xl mb-3 text-center min-h-24 ${chauPhilomene.className} text-gradient`}
         >
