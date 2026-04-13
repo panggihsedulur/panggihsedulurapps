@@ -1,6 +1,4 @@
 import { Chau_Philomene_One } from "next/font/google";
-// Jika komponen ini belum digunakan di dalam page, kamu bisa menghapusnya nanti
-import { ExpandableCardDemo } from "./client/ExpandableCardDemo";
 
 const chauPhilomene = Chau_Philomene_One({
   weight: "400",
@@ -54,7 +52,7 @@ export default function ComingSoonPage() {
             className="flex items-center gap-2 px-8 py-3 rounded-full bg-gradient-to-r from-[#5a9cad] via-[#033e4c] to-[#5a9cad] text-white font-semibold transition-transform hover:scale-105 shadow-md w-full sm:w-auto justify-center"
           >
             <svg
-              xmlns="http://www.w3.org/default/svg"
+              xmlns="http://www.w3.org/2000/svg"
               width="20"
               height="20"
               viewBox="0 0 24 24"
@@ -74,7 +72,7 @@ export default function ComingSoonPage() {
             className="flex items-center gap-2 px-8 py-3 rounded-full border-2 border-[#033e4c] text-[#033e4c] font-semibold transition-all hover:bg-[#033e4c] hover:text-white w-full sm:w-auto justify-center"
           >
             <svg
-              xmlns="http://www.w3.org/default/svg"
+              xmlns="http://www.w3.org/2000/svg"
               width="20"
               height="20"
               viewBox="0 0 24 24"
