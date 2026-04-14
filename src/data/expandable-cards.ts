@@ -89,14 +89,4 @@ export const expandableCards: ExpandableCardItem[] = [
       "Built on cliffs above the fog, the monastery trains seekers to listen before they speak. Their final ritual begins at sunrise, where each step upward reveals a deeper truth.",
     detailFooterTitle: "Ritual at First Light",
   },
-  {
-    id: "ukm-9",
-    title: "Skyline Monastery",
-    src: "/hero-bg.png",
-    description: "Cloudbound Ritual",
-    detailTitle: "Steps to the Clouds",
-    detailBody:
-      "Built on cliffs above the fog, the monastery trains seekers to listen before they speak. Their final ritual begins at sunrise, where each step upward reveals a deeper truth.",
-    detailFooterTitle: "Ritual at First Light",
-  },
 ];
