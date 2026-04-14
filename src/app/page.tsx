@@ -11,7 +11,7 @@ export default function ComingSoonPage() {
       <div className="absolute inset-0 bg-black/30 backdrop-blur-sm"></div>
 
       {/* Main Card */}
-      <div className="relative z-10 w-full max-w-4xl bg-white/95 rounded-3xl shadow-2xl px-5 py-7 sm:p-8 md:p-14 text-center mt-10 md:mt-12 border-2 border-[#5a9cad]/20 backdrop-blur-md">
+      <div className="relative z-10  w-full max-w-4xl bg-white/95 rounded-3xl shadow-2xl px-5 py-7 sm:p-8 md:p-14 text-center mt-10 md:mt-12 border-2 border-[#5a9cad]/20 backdrop-blur-md flex flex-col items-center justify-center">
         {/* Title Badge */}
         <div className="absolute -top-6 left-1/2 -translate-x-1/2 w-max max-w-[92%] px-5 py-2.5 sm:px-8 sm:py-3 md:px-12 md:py-4 rounded-full bg-gradient-to-r from-[#5a9cad] via-[#033e4c] to-[#5a9cad] text-white font-bold text-sm sm:text-lg md:text-3xl shadow-lg whitespace-nowrap">
           Panggih Sedulur 2026
