@@ -29,9 +29,10 @@ export default function ComingSoonPage() {
         <h2
           className={`mt-10 md:mt-12 text-5xl md:text-6xl mb-3 text-center min-h-24 ${chauPhilomene.className} text-transparent bg-clip-text bg-gradient-to-r from-[#5a9cad] to-[#033e4c]`}
         >
-          ~ <span className="font-edwardian text-7xl md:text-8xl mr-1 ">C</span>
+          ~{" "}
+          <span className="font-edwardian text-7xl md:text-8xl mr-3  ">C</span>
           oming
-          <span className="font-edwardian text-7xl md:text-8xl mr-1 ml-4 ">
+          <span className="font-edwardian text-7xl md:text-8xl mr-3 ml-4 ">
             S
           </span>
           oon ~
