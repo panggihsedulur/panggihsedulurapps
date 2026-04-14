@@ -48,7 +48,6 @@ export default function RootLayout({
       )}
     >
       <body className="min-h-full flex flex-col justify-center  ">
-        {/* <AnimatedMenuDemo /> */}
         {children}
       </body>
       <Analytics />
