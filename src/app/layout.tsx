@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Inter } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/next";
 import { cn } from "@/lib/utils";
@@ -15,6 +16,12 @@ const geistSans = Geist({
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+});
+
+const chauPhilomene = localFont({
+  src: "./fonts/ChauPhilomeneOne-Regular.ttf",
+  variable: "--font-chau-philomene",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -35,12 +42,13 @@ export default function RootLayout({
         "antialiased",
         geistSans.variable,
         geistMono.variable,
+        chauPhilomene.variable,
         "font-sans",
         inter.variable,
       )}
     >
       <body className="min-h-full flex flex-col justify-center  ">
-        {/* <AnimatedMenuDemo /> */}
+        <AnimatedMenuDemo />
         {children}
       </body>
       <Analytics />

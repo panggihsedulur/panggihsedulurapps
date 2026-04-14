@@ -1,11 +1,3 @@
-import { Chau_Philomene_One } from "next/font/google";
-
-const chauPhilomene = Chau_Philomene_One({
-  weight: "400",
-  subsets: ["latin"],
-  display: "swap",
-});
-
 export default function ComingSoonPage() {
   return (
     <main
@@ -27,7 +19,7 @@ export default function ComingSoonPage() {
 
         {/* Subtitle - Coming Soon (Updated Font & Style) */}
         <h2
-          className={`mt-10 md:mt-12 text-5xl md:text-6xl mb-3 text-center min-h-24 ${chauPhilomene.className} text-transparent bg-clip-text bg-gradient-to-r from-[#5a9cad] to-[#033e4c]`}
+          className="mt-10 md:mt-12 text-5xl md:text-6xl font-normal font-heading mb-3 text-center min-h-24 text-transparent bg-clip-text bg-gradient-to-r from-[#5a9cad] to-[#033e4c]"
         >
           ~{" "}
           <span className="font-edwardian text-7xl md:text-8xl mr-3  ">C</span>
