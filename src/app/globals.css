@@ -2,6 +2,22 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
+@font-face {
+  font-family: "Chau Philomene";
+  src: url("/fonts/ChauPhilomeneOne-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Edwardian Script ITC";
+  src: url("/fonts/edwardianscriptitc.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
@@ -135,7 +151,7 @@
   .font-edwardian {
     font-family:
       "Edwardian Script ITC", "ITC Edwardian Script", "Edwardian Script",
-      cursive;
+      "Times New Roman", serif;
     font-weight: 400;
   }
 

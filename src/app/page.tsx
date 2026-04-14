@@ -1,7 +1,7 @@
 export default function ComingSoonPage() {
   return (
     <main
-      className="min-h-screen relative flex items-center justify-center p-4 overflow-hidden bg-gray-100 bg-cover bg-center"
+      className="min-h-screen relative flex items-center md:items-center justify-center p-3 sm:p-4 overflow-hidden bg-gray-100 bg-cover bg-center"
       // TODO: Ganti URL di bawah dengan gambar background Monumen Soedirman
       style={{
         backgroundImage: "url('hero-bg.png')",
@@ -11,27 +11,32 @@ export default function ComingSoonPage() {
       <div className="absolute inset-0 bg-black/30 backdrop-blur-sm"></div>
 
       {/* Main Card */}
-      <div className="relative z-10 w-full max-w-4xl bg-white/95 rounded-3xl shadow-2xl p-8 md:p-14 text-center mt-12 border-2 border-[#5a9cad]/20 backdrop-blur-md">
+      <div className="relative z-10 w-full max-w-4xl bg-white/95 rounded-3xl shadow-2xl px-5 py-7 sm:p-8 md:p-14 text-center mt-10 md:mt-12 border-2 border-[#5a9cad]/20 backdrop-blur-md">
         {/* Title Badge */}
-        <div className="absolute -top-7 left-1/2 -translate-x-1/2 w-max max-w-[90%] px-8 md:px-12 py-3 md:py-4 rounded-full bg-gradient-to-r from-[#5a9cad] via-[#033e4c] to-[#5a9cad] text-white font-bold text-xl md:text-3xl shadow-lg whitespace-nowrap">
+        <div className="absolute -top-6 left-1/2 -translate-x-1/2 w-max max-w-[92%] px-5 py-2.5 sm:px-8 sm:py-3 md:px-12 md:py-4 rounded-full bg-gradient-to-r from-[#5a9cad] via-[#033e4c] to-[#5a9cad] text-white font-bold text-sm sm:text-lg md:text-3xl shadow-lg whitespace-nowrap">
           Panggih Sedulur 2026
         </div>
 
         {/* Subtitle - Coming Soon (Updated Font & Style) */}
-        <h2
-          className="mt-10 md:mt-12 text-5xl md:text-6xl font-normal font-heading mb-3 text-center min-h-24 text-transparent bg-clip-text bg-gradient-to-r from-[#5a9cad] to-[#033e4c]"
-        >
-          ~{" "}
-          <span className="font-edwardian text-7xl md:text-8xl mr-3  ">C</span>
-          oming
-          <span className="font-edwardian text-7xl md:text-8xl mr-3 ml-4 ">
-            S
+        <h2 className="mt-12 sm:mt-14 text-3xl sm:text-5xl md:text-6xl font-normal font-heading mb-3 text-center leading-none text-transparent bg-clip-text bg-gradient-to-r from-[#5a9cad] to-[#033e4c]">
+          <span className="inline-flex flex-wrap items-center justify-center gap-x-2 gap-y-0">
+            <span className="font-edwardian text-5xl sm:text-7xl md:text-8xl leading-none">
+              C
+            </span>
+            <span className="text-3xl sm:text-5xl md:text-6xl leading-none">
+              oming
+            </span>
+            <span className="font-edwardian text-5xl sm:text-7xl md:text-8xl leading-none">
+              S
+            </span>
+            <span className="text-3xl sm:text-5xl md:text-6xl leading-none">
+              oon
+            </span>
           </span>
-          oon ~
         </h2>
 
         {/* Description Text */}
-        <p className="mt-8 text-gray-800 leading-relaxed text-sm md:text-lg font-medium max-w-2xl mx-auto">
+        <p className="mt-6 sm:mt-8 text-gray-800 leading-relaxed text-sm sm:text-base md:text-lg font-medium max-w-2xl mx-auto px-1 sm:px-0">
           Panggih Sedulur adalah pameran interaktif yang dirancang sebagai ruang
           eksplorasi bagi mahasiswa Universitas Jenderal Soedirman untuk
           menemukan Unit Kegiatan Mahasiswa (UKM) dan Paguyuban Daerah yang
@@ -39,10 +44,10 @@ export default function ComingSoonPage() {
         </p>
 
         {/* Action Buttons */}
-        <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-5">
+        <div className="mt-8 sm:mt-10 flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 sm:gap-5">
           <a
             href="http://wa.me/6281775468854"
-            className="flex items-center gap-2 px-8 py-3 rounded-full bg-gradient-to-r from-[#5a9cad] via-[#033e4c] to-[#5a9cad] text-white font-semibold transition-transform hover:scale-105 shadow-md w-full sm:w-auto justify-center"
+            className="flex items-center gap-2 px-6 py-3 sm:px-8 rounded-full bg-gradient-to-r from-[#5a9cad] via-[#033e4c] to-[#5a9cad] text-white font-semibold transition-transform hover:scale-105 shadow-md w-full sm:w-auto justify-center text-sm sm:text-base"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -62,7 +67,7 @@ export default function ComingSoonPage() {
 
           <a
             href="https://www.instagram.com/panggihsedulur/"
-            className="flex items-center gap-2 px-8 py-3 rounded-full border-2 border-[#033e4c] text-[#033e4c] font-semibold transition-all hover:bg-[#033e4c] hover:text-white w-full sm:w-auto justify-center"
+            className="flex items-center gap-2 px-6 py-3 sm:px-8 rounded-full border-2 border-[#033e4c] text-[#033e4c] font-semibold transition-all hover:bg-[#033e4c] hover:text-white w-full sm:w-auto justify-center text-sm sm:text-base"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -84,8 +89,8 @@ export default function ComingSoonPage() {
         </div>
 
         {/* Divider & Footer */}
-        <div className="mt-14 pt-8 border-t border-gray-200">
-          <p className="text-sm text-gray-500">
+        <div className="mt-10 sm:mt-14 pt-6 sm:pt-8 border-t border-gray-200">
+          <p className="text-xs sm:text-sm text-gray-500 leading-relaxed">
             © 2026 Panggih Sedulur - Universitas Jenderal Soedirman <br />
             Badan Eksekutif Mahasiswa (BEM) Universitas Jenderal Soedirman. All
             rights reserved.
