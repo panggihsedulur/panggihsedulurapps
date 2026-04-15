@@ -1,4 +1,35 @@
+import type { Metadata } from "next";
+
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://panggihsedulur.com";
+
+export const metadata: Metadata = {
+  title: "Beranda",
+  description:
+    "Panggih Sedulur adalah pameran interaktif UNSOED untuk membantu mahasiswa mengenal UKM dan paguyuban daerah.",
+  alternates: {
+    canonical: "/",
+  },
+};
+
 export default function ComingSoonPage() {
+  const organizationSchema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "Panggih Sedulur 2026",
+    url: siteUrl,
+    sameAs: ["https://www.instagram.com/panggihsedulur/"],
+    contactPoint: [
+      {
+        "@type": "ContactPoint",
+        contactType: "customer support",
+        telephone: "+62-817-7546-8854",
+        areaServed: "ID",
+        availableLanguage: ["id"],
+      },
+    ],
+  };
+
   return (
     <main
       className="min-h-screen relative flex items-center md:items-center justify-center p-3 sm:p-4 overflow-hidden bg-gray-100 bg-cover bg-center"
@@ -9,6 +40,11 @@ export default function ComingSoonPage() {
     >
       {/* Overlay Gelap */}
       <div className="absolute inset-0 bg-black/30 backdrop-blur-sm"></div>
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+      />
 
       {/* Main Card */}
       <div className="relative z-10  w-full max-w-4xl bg-white/95 rounded-3xl shadow-2xl px-5 py-7 sm:p-8 md:p-14 text-center mt-10 md:mt-12 border-2 border-[#5a9cad]/20 backdrop-blur-md flex flex-col items-center justify-center">
