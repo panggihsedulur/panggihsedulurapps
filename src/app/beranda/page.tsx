@@ -7,6 +7,7 @@ import { AnimatedMenuDemo } from "@/components/ui/Menu";
 export const metadata: Metadata = {
   title: "Beranda Interaktif",
   description:
+    "Eksplorasi pengalaman interaktif Panggih Sedulur untuk mengenal UKM dan komunitas mahasiswa UNSOED.",
   alternates: {
     canonical: "/beranda",
   },
