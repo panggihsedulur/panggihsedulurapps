@@ -5,11 +5,17 @@ const siteUrl =
   "https://www.panggihsedulur.bem-unsoed.com";
 
 export const metadata: Metadata = {
-  title: "Coming Soon",
+  title: "Panggih Sedulur",
   description:
-    "Panggih Sedulur adalah pameran interaktif UNSOED untuk membantu mahasiswa mengenal UKM dan paguyuban daerah.",
+    "Panggih Sedulur adalah pameran interaktif UNSOED untuk membantu mahasiswa mengenal UKM dan paguyuban daerah terbaik.",
   alternates: {
     canonical: "/",
+  },
+  openGraph: {
+    title: "Panggih Sedulur",
+    description:
+      "Panggih Sedulur adalah pameran interaktif UNSOED untuk membantu mahasiswa mengenal UKM dan paguyuban daerah terbaik.",
+    url: "/",
   },
 };
 
@@ -31,6 +37,14 @@ export default function ComingSoonPage() {
     ],
   };
 
+  const websiteSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "Panggih Sedulur",
+    url: siteUrl,
+    inLanguage: "id-ID",
+  };
+
   return (
     <main
       className="min-h-screen relative flex items-center md:items-center justify-center p-3 sm:p-4 overflow-hidden bg-gray-100 bg-cover bg-center"
@@ -47,12 +61,21 @@ export default function ComingSoonPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
       />
 
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+      />
+
       {/* Main Card */}
       <div className="relative z-10  w-full max-w-4xl bg-white/95 rounded-3xl shadow-2xl px-5 py-7 sm:p-8 md:p-14 text-center mt-10 md:mt-12 border-2 border-[#5a9cad]/20 backdrop-blur-md flex flex-col items-center justify-center">
         {/* Title Badge */}
         <div className="absolute -top-6 left-1/2 -translate-x-1/2 w-max max-w-[92%] px-5 py-2.5 sm:px-8 sm:py-3 md:px-12 md:py-4 rounded-full bg-gradient-to-r from-[#5a9cad] via-[#033e4c] to-[#5a9cad] text-white font-bold text-sm sm:text-lg md:text-3xl shadow-lg whitespace-nowrap">
           Panggih Sedulur 2026
         </div>
+
+        <h1 className="sr-only">
+          Panggih Sedulur - Pameran Interaktif UKM dan Paguyuban Daerah UNSOED
+        </h1>
 
         {/* Subtitle - Coming Soon (Updated Font & Style) */}
         <h2 className="mt-12 sm:mt-14 text-3xl sm:text-5xl md:text-6xl font-normal font-heading mb-3 text-center leading-none text-transparent bg-clip-text bg-gradient-to-r from-[#5a9cad] to-[#033e4c]">
@@ -74,16 +97,15 @@ export default function ComingSoonPage() {
 
         {/* Description Text */}
         <p className="mt-6 sm:mt-8 text-gray-800 leading-relaxed text-sm sm:text-base md:text-lg font-medium max-w-2xl mx-auto px-1 sm:px-0">
-          Panggih Sedulur adalah pameran interaktif yang dirancang sebagai ruang
-          eksplorasi bagi mahasiswa Universitas Jenderal Soedirman untuk
-          menemukan Unit Kegiatan Mahasiswa (UKM) dan Paguyuban Daerah yang
-          paling sesuai dengan minat, bakat, dan karakter mereka
+          Panggih Sedulur adalah program pengenalan UKM dan paguyuban daerah
+          bagi mahasiswa Universitas Jenderal Soedirman agar lebih mudah
+          menemukan komunitas yang sesuai dengan minat dan bakat.
         </p>
 
         {/* Action Buttons */}
         <div className="mt-8 sm:mt-10 flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 sm:gap-5">
           <a
-            href="http://wa.me/6281775468854"
+            href="https://wa.me/6281775468854"
             className="flex items-center gap-2 px-6 py-3 sm:px-8 rounded-full bg-gradient-to-r from-[#5a9cad] via-[#033e4c] to-[#5a9cad] text-white font-semibold transition-transform hover:scale-105 shadow-md w-full sm:w-auto justify-center text-sm sm:text-base"
           >
             <svg

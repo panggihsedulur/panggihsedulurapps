@@ -5,7 +5,7 @@ import Section1 from "@/components/features/Section1";
 import { AnimatedMenuDemo } from "@/components/ui/Menu";
 
 export const metadata: Metadata = {
-  title: "Beranda",
+  title: "Panggih Sedulur Beranda",
   description:
     "Eksplorasi pengalaman interaktif Panggih Sedulur untuk mengenal UKM dan komunitas mahasiswa UNSOED.",
   alternates: {
