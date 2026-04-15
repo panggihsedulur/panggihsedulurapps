@@ -31,8 +31,8 @@ const chauPhilomene = localFont({
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Panggih Sedulur 2026",
-    template: "%s | Panggih Sedulur 2026",
+    default: "Panggih Sedulur",
+    template: "%s | Panggih Sedulur - Unsoed",
   },
   description:
     "Pameran interaktif mahasiswa Universitas Jenderal Soedirman untuk eksplorasi UKM dan Paguyuban Daerah.",
@@ -58,7 +58,7 @@ export const metadata: Metadata = {
       "Temukan UKM dan paguyuban daerah yang paling sesuai dengan minat, bakat, dan karakter kamu.",
     images: [
       {
-        url: "/hero-bg.png",
+        url: "/coming-soon.png",
         width: 1200,
         height: 630,
         alt: "Panggih Sedulur 2026",
@@ -70,7 +70,7 @@ export const metadata: Metadata = {
     title: "Panggih Sedulur 2026",
     description:
       "Pameran interaktif UNSOED untuk eksplorasi UKM dan paguyuban daerah.",
-    images: ["/hero-bg.png"],
+    images: ["/coming-soon.png"],
   },
   robots: {
     index: true,

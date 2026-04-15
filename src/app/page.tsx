@@ -5,7 +5,7 @@ const siteUrl =
   "https://www.panggihsedulur.bem-unsoed.com";
 
 export const metadata: Metadata = {
-  title: "Beranda",
+  title: "Coming Soon",
   description:
     "Panggih Sedulur adalah pameran interaktif UNSOED untuk membantu mahasiswa mengenal UKM dan paguyuban daerah.",
   alternates: {
@@ -17,7 +17,7 @@ export default function ComingSoonPage() {
   const organizationSchema = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: "Panggih Sedulur 2026",
+    name: "Panggih Sedulur",
     url: siteUrl,
     sameAs: ["https://www.instagram.com/panggihsedulur/"],
     contactPoint: [
@@ -36,7 +36,7 @@ export default function ComingSoonPage() {
       className="min-h-screen relative flex items-center md:items-center justify-center p-3 sm:p-4 overflow-hidden bg-gray-100 bg-cover bg-center"
       // TODO: Ganti URL di bawah dengan gambar background Monumen Soedirman
       style={{
-        backgroundImage: "url('hero-bg.png')",
+        backgroundImage: "url('coming-soon-bg.png')",
       }}
     >
       {/* Overlay Gelap */}
