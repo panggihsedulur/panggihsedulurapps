@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default function HeroDemo() {
+export default function Beranda() {
   return (
     <>
       <AnimatedMenuDemo />

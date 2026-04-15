@@ -69,17 +69,22 @@ export function AnimatedMenuDemo() {
       }`}
     >
       <div className="w-full max-w-7xl transition-all duration-300 flex items-center justify-between">
-        <div
-          className="py-1 px-2 bg-white/5 backdrop-blur-lg 
-              border border-white/20 
-              shadow-lg text-white rounded-2xl "
-        >
-          <span className="text-xl font-bold tracking-tight">
-            Panggih Sedulur
-          </span>
-        </div>
+        <Link href="/">
+          <div className="py-1 px-2 bg-white/5 backdrop-blur-lg border border-white/20 shadow-lg text-black rounded-4xl h-full bg-linear-to-bl from-primary/95 to-primary border shadow-md inset-shadow-xs inset-shadow-foreground rounded-3xl text-black">
+            <h1 className="text-xl sm:text-xl font-normal font-heading  text-center  text-gradient">
+              <span className="font-edwardian text-3xl sm:text-4xl  mr-0.5 ">
+                P
+              </span>
+              anggih
+              <span className="font-edwardian text-3xl sm:text-4xl mr-0.5">
+                S
+              </span>
+              edulur
+            </h1>
+          </div>
+        </Link>
         <AnimatedMenu className="relative ">
-          <AnimatedMenuButton className="w-25.5 h-[40px]  text-primary-foreground ">
+          <AnimatedMenuButton className="w-25.5 h-[40px] ">
             <AnimatedMenuButtonToggleIcon />
             <AnimatedMenuButtonLabel />
           </AnimatedMenuButton>

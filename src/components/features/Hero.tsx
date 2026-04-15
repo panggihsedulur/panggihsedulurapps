@@ -81,14 +81,14 @@ export default function HeroSection() {
           {/* --- LEFT COLUMN --- */}
           <div className="lg:col-span-7 flex flex-col justify-center space-y-8 pt-8">
             {/* Badge */}
-            <div className="animate-fade-in delay-100">
+            {/* <div className="animate-fade-in delay-100">
               <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 backdrop-blur-md transition-colors hover:bg-white/10">
                 <span className="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-zinc-300 flex items-center gap-2">
                   Panggih Sedulur 2026
-                  {/* <Star className="w-3.5 h-3.5 text-yellow-400 fill-yellow-400" /> */}
+                  <Star className="w-3.5 h-3.5 text-yellow-400 fill-yellow-400" />
                 </span>
               </div>
-            </div>
+            </div> */}
             {/* <h1
           className={`text-5xl mb-3 text-center min-h-24 ${chauPhilomene.className} text-gradient`}
         >
@@ -105,7 +105,7 @@ export default function HeroSection() {
                   "linear-gradient(180deg, black 0%, black 80%, transparent 100%)",
               }}
             >
-              <span className="font-edwardian text-6xl mr-6 sm:text-7xl lg:text-8xl xl:text-[7rem]">
+              <span className="font-edwardian text-6xl mr-6 sm:text-7xl lg:text-8xl xl:text-[8rem]">
                 T
               </span>
               emukan UKM
