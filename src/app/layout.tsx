@@ -6,7 +6,8 @@ import { Analytics } from "@vercel/analytics/next";
 import { cn } from "@/lib/utils";
 
 const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://panggihsedulur.bem-unsoed.com";
+  process.env.NEXT_PUBLIC_SITE_URL ??
+  "https://www.panggihsedulur.bem-unsoed.com";
 const googleSiteVerification = process.env.GOOGLE_SITE_VERIFICATION ?? "";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });

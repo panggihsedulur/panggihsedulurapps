@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 import { MenuToggleIcon } from "@/components/menu-toggle-icon";
 import { useScroll } from "@/components/use-scroll";
 
-export default function Header() {
+export function Header() {
   const [open, setOpen] = React.useState(false);
   const scrolled = useScroll(10);
 

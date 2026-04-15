@@ -1,7 +1,8 @@
 import type { MetadataRoute } from "next";
 
 const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://panggihsedulur.bem-unsoed.com";
+  process.env.NEXT_PUBLIC_SITE_URL ??
+  "https://www.panggihsedulur.bem-unsoed.com";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date();
