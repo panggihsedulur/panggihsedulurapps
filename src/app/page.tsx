@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://panggihsedulur.com";
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://panggihsedulur.bem-unsoed.com";
 
 export const metadata: Metadata = {
   title: "Beranda",
