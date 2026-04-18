@@ -84,6 +84,7 @@ export function AnimatedMenuDemo() {
           </div>
         </Link>
         <AnimatedMenu className="relative ">
+          {" "}
           <AnimatedMenuButton className="w-25.5 h-[40px] ">
             <AnimatedMenuButtonToggleIcon />
             <AnimatedMenuButtonLabel />
@@ -94,7 +95,7 @@ export function AnimatedMenuDemo() {
                 {menuItems.map((item, i) => (
                   <AnimatedMenuItem key={i} order={i}>
                     <Link
-                      className="text-2xl font-medium text-muted text-gradient-2"
+                      className="text-2xl font-medium text-muted text-gradient"
                       href={item.href}
                       title={item.title}
                     >
@@ -110,7 +111,7 @@ export function AnimatedMenuDemo() {
                     order={i + menuItems.length}
                   >
                     <Link
-                      className=" font-medium text-muted/80 text-sm tracking-wide uppercase text-gradient-2"
+                      className=" font-medium text-muted/80 text-sm tracking-wide uppercase text-gradient"
                       href={item.href}
                       title={item.title}
                     >

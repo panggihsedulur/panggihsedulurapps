@@ -80,7 +80,7 @@ export function AnimatedMenu({
   );
 }
 const buttonIconVariants = cva(
-  "flex flex-col gap-1.5 justify-center items-center p-1 relative *:bg-current",
+  "flex flex-col gap-1.5 justify-center items-center p-1 relative *:bg-linear-to-r *:from-[#5a9cad] *:via-[#033e4c] *:to-[#5a9cad]",
   {
     variants: {
       size: {
@@ -135,7 +135,7 @@ export function AnimatedMenuButtonLabel({
       <AnimatePresence>
         <motion.span
           key={closeLabel}
-          className="will-change-transform col-start-1 row-start-1"
+          className="will-change-transform col-start-1 row-start-1 text-gradient"
           initial={{ y: "0%" }}
           animate={isOpen ? { y: "-100%" } : { y: "0%" }}
           exit={{ y: "-100%" }}
@@ -144,7 +144,7 @@ export function AnimatedMenuButtonLabel({
         </motion.span>
         <motion.span
           key={openLabel}
-          className="will-change-transform col-start-1 row-start-1"
+          className="will-change-transform col-start-1 row-start-1 text-gradient"
           initial={{ y: "100%" }}
           animate={isOpen ? { y: "0%" } : { y: "100%" }}
           exit={{ y: "100%" }}
