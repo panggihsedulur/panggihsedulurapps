@@ -99,6 +99,7 @@
   --sidebar-ring: oklch(0.708 0 0);
   --text-gradient: linear-gradient(to right, #5a9cad, #033e4c, #5a9cad);
   --text-gradient-secondary: linear-gradient(to right, #5a9cad, #033e4c);
+  --foreground-gradient: linear-gradient(to right, #5a9cad, #033e4c);
 }
 
 .dark {

@@ -68,9 +68,11 @@ export function AnimatedMenuDemo() {
         isScrolled ? "pt-6 " : "pt-9"
       }`}
     >
-      <div className="w-full max-w-7xl transition-all duration-300 flex items-center justify-between">
+      <div
+        className={`w-full  transition-all duration-300 flex  items-center justify-between ${isScrolled ? "max-w-305" : "max-w-7xl"}`}
+      >
         <Link href="/">
-          <div className="py-1 px-2 bg-white/5 backdrop-blur-lg border border-white/20 shadow-lg text-black rounded-4xl h-full bg-linear-to-bl from-primary/95 to-primary border shadow-md inset-shadow-xs inset-shadow-foreground rounded-3xl text-black">
+          <div className="py-0 px-2 bg-white/5 backdrop-blur-lg border border-white/20 shadow-lg text-black rounded-4xl h-full bg-linear-to-bl from-primary/95 to-primary  border shadow-md inset-shadow-xs inset-shadow-foreground rounded-3xl text-black">
             <h1 className="text-xl sm:text-xl font-normal font-heading  text-center  text-gradient">
               <span className="font-edwardian text-3xl sm:text-4xl  mr-0.5 ">
                 P

@@ -3,6 +3,7 @@ import React from "react";
 import HeroSection from "@/components/features/Hero";
 import Section1 from "@/components/features/Section1";
 import { AnimatedMenuDemo } from "@/components/ui/Menu";
+import { Footer } from "@/components/footer";
 
 export const metadata: Metadata = {
   title: "Panggih Sedulur Beranda",
@@ -19,6 +20,7 @@ export default function Beranda() {
       <AnimatedMenuDemo />
       <HeroSection />
       <Section1 />
+      <Footer/>
     </>
   );
 }
