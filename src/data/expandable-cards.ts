@@ -11,7 +11,7 @@ export interface ExpandableCardItem {
 export const expandableCards: ExpandableCardItem[] = [
   {
     id: "ukm-1",
-    title: "Whispering Forest",
+    title: "Whispering Forestlk",
     src: "/hero-bg.png",
     description: "A Yokai Tale",
     detailTitle: "The Villages Secret",
