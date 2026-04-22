@@ -4,7 +4,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/next";
 import { cn } from "@/lib/utils";
-
+import { SpeedInsights } from "@vercel/speed-insights/react";
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL ??
   "https://www.panggihsedulur.bem-unsoed.com";
@@ -108,6 +108,7 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col justify-center  ">
         {children}
+        <SpeedInsights />
       </body>
       <Analytics />
     </html>
