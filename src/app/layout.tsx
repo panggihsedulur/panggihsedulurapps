@@ -5,6 +5,8 @@ import "./globals.css";
 import { Analytics } from "@vercel/analytics/next";
 import { cn } from "@/lib/utils";
 import { SpeedInsights } from "@vercel/speed-insights/react";
+import { AnimatedMenuDemo } from "@/components/ui/Menu";
+import { Footer } from "@/components/footer";
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL ??
   "https://www.panggihsedulur.bem-unsoed.com";
@@ -109,6 +111,8 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col justify-center  ">
         {children}
         <SpeedInsights />
+        <AnimatedMenuDemo />
+        <Footer />
       </body>
       <Analytics />
     </html>

@@ -16,8 +16,8 @@ const menuItems = [
     href: "/#home",
   },
   {
-    title: "Daftar UKM",
-    href: "/#about",
+    title: "UKM & Paguyuban",
+    href: "/ukm-paguyuban",
   },
   {
     title: "Daftar Paguyuban",

@@ -17,10 +17,8 @@ export const metadata: Metadata = {
 export default function Beranda() {
   return (
     <>
-      <AnimatedMenuDemo />
       <HeroSection />
       <Section1 />
-      <Footer/>
     </>
   );
 }
