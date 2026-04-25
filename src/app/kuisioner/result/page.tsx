@@ -18,7 +18,7 @@ export default function ResultPage() {
     const storedUKMs = localStorage.getItem("recommendedUKMs");
 
     if (!storedResult || !storedUKMs) {
-      router.push("/biodata");
+      router.push("/kuisioner/biodata");
       return;
     }
 
@@ -32,7 +32,7 @@ export default function ResultPage() {
         setIsLoading(false);
       } catch (err) {
         console.error("Error parsing result:", err);
-        router.push("/biodata");
+        router.push("/kuisioner/biodata");
       }
     });
   }, [router]);
@@ -225,7 +225,7 @@ export default function ResultPage() {
           <button
             onClick={() => {
               localStorage.clear();
-              router.push("/biodata");
+              router.push("/kuisioner/biodata");
             }}
             className="bg-white hover:bg-gray-50 text-gray-800 border-2 border-gray-300 px-8 py-3 rounded-lg font-medium transition"
           >

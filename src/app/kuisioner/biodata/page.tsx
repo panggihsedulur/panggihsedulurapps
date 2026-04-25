@@ -17,7 +17,7 @@ export default function BiodataPage() {
       localStorage.setItem("biodata", JSON.stringify(data));
 
       // Redirect ke halaman kuis
-      router.push("/test");
+      router.push("/kuisioner/test");
     } catch (error) {
       console.error("Error:", error);
       alert("Terjadi kesalahan. Silakan coba lagi.");

@@ -54,7 +54,7 @@ export default function TestPage() {
   useEffect(() => {
     const storedBiodata = localStorage.getItem("biodata");
     if (!storedBiodata) {
-      router.push("/biodata");
+      router.push("/kuisioner/biodata");
       return;
     }
 
@@ -125,7 +125,7 @@ export default function TestPage() {
         );
 
         // Redirect ke result page
-        router.push("/result");
+        router.push("/kuisioner/result");
       } else {
         setError(`Gagal menyimpan hasil: ${saveError}`);
         setIsLoading(false);
@@ -231,7 +231,7 @@ export default function TestPage() {
           <button
             onClick={() => {
               localStorage.clear();
-              router.push("/biodata");
+              router.push("/kuisioner/biodata");
             }}
             className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium transition"
           >
