@@ -6,6 +6,7 @@ const siteUrl =
   "https://www.panggihsedulur.bem-unsoed.com";
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: "Panggih Sedulur",
   description:
     "Panggih Sedulur adalah pameran interaktif UNSOED untuk membantu mahasiswa mengenal UKM dan paguyuban daerah terbaik.",
@@ -16,7 +17,7 @@ export const metadata: Metadata = {
     title: "Panggih Sedulur",
     description:
       "Panggih Sedulur adalah pameran interaktif UNSOED untuk membantu mahasiswa mengenal UKM dan paguyuban daerah terbaik.",
-    url: "/",
+    url: siteUrl,
   },
 };
 

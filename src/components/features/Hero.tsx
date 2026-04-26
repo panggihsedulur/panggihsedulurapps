@@ -1,7 +1,6 @@
 import React from "react";
 import {
   ArrowRight,
-  Play,
   Target,
   Crown,
   // Brand Icons
@@ -13,6 +12,7 @@ import {
   Cpu,
 } from "lucide-react";
 import Link from "next/link";
+import { FaInstagram } from "react-icons/fa6";
 // --- MOCK BRANDS ---
 // Replaced PNGs with Lucide icons to simulate tech logos
 const CLIENTS = [
@@ -109,7 +109,7 @@ export default function HeroSection() {
               </span>
               emukan UKM
               <br />
-              <span className="bg-gradient-to-br from-white via-white to-[#3c5759] bg-clip-text text-transparent">
+              <span className="bg-linear-to-br from-white via-white to-[#3c5759] bg-clip-text text-transparent">
                 & Paguyuban
               </span>
               <br />
@@ -125,16 +125,21 @@ export default function HeroSection() {
 
             {/* CTA Buttons */}
             <div className="animate-fade-in delay-400 flex flex-row sm:flex-row gap-4">
-              <Link href="biodata">
+              <Link href="kuisioner">
                 <button className="group inline-flex items-center justify-center gap-2 rounded-full bg-white px-4 py-2 sm:px-8 sm:py-4 text-sm font-semibold text-zinc-950 transition-all hover:scale-[1.02] hover:bg-zinc-200 active:scale-[0.98]">
                   Mulai Kuisioner
                   <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                 </button>
               </Link>
-              <button className="group inline-flex items-center justify-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 sm:px-8 sm:py-4 text-sm font-semibold text-white backdrop-blur-sm transition-colors hover:bg-white/10 hover:border-white/20">
-                <Play className="w-4 h-4 fill-current" />
-                Watch Showreel
-              </button>
+              <Link
+                href="https://www.instagram.com/panggihsedulur/"
+                target="_blank"
+              >
+                <button className="group inline-flex items-center justify-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 sm:px-8 sm:py-4 text-sm font-semibold text-white backdrop-blur-sm transition-colors hover:bg-white/10 hover:border-white/20">
+                  <FaInstagram className="w-6 h-6 fill-current" />
+                  Kunjungi Instagram
+                </button>
+              </Link>
             </div>
           </div>
 
@@ -167,7 +172,7 @@ export default function HeroSection() {
                     <span className="text-white font-medium">98%</span>
                   </div>
                   <div className="h-2 w-full overflow-hidden rounded-full bg-zinc-800/50">
-                    <div className="h-full w-[98%] rounded-full bg-gradient-to-r from-white to-zinc-400" />
+                    <div className="h-full w-[98%] rounded-full bg-linear-to-r from-white to-zinc-400" />
                   </div>
                 </div>
 

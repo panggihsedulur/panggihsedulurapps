@@ -1,157 +1,63 @@
-# 📋 IMPLEMENTATION PLAN - Kuisioner UKM Unsoed
+# IMPLEMENTATION PLAN - Kuisioner UKM Unsoed
 
-> Berdasarkan: KuisionerLogic.md + RancanganLogikaKuis.md
+Status plan disesuaikan dengan implementasi yang sudah ada di repo saat ini.
 
----
+## Phase 1: Setup & Infrastructure
 
-## 🎯 PHASE 1: SETUP & INFRASTRUCTURE
+- [x] Setup struktur Next.js App Router
+- [x] Setup Tailwind CSS
+- [x] Setup Supabase client di src/lib/supabase.ts
+- [x] Setup schema validasi (Zod) di src/lib/schema.ts
+- [ ] Verifikasi environment variable di semua environment deploy
 
-- [ ] **Setup Supabase Database**
-  - [ ] Buat tabel `student_results` dengan schema
-  - [ ] Setup authentication (opsional, bisa pakai UUID)
-  - [ ] Create `supabase.ts` client
+## Phase 2: Data Layer
 
-- [ ] **Setup Next.js Project Structure**
-  - [ ] Verifikasi folder structure
-  - [ ] Install dependencies: `shadcn/ui`, `lucide-react`, `@supabase/supabase-js`
-  - [ ] Verifikasi Tailwind CSS
+- [x] src/lib/questions.ts
+  - [x] Level 1 (5 pertanyaan utama)
+  - [x] Level 2-3 branching
+- [x] src/lib/ukm-data.ts
+  - [x] Mapping kategori ke UKM
+  - [x] Pre-filtering biodata
+  - [x] Data UKM + priority
+- [x] src/lib/quiz-helpers.ts
+  - [x] Kalkulasi top kategori
+  - [x] Kombinasi rekomendasi (scoring + pre-filter + branching)
+  - [x] Save hasil ke Supabase
 
----
+## Phase 3: Components
 
-## 📝 PHASE 2: DATA LAYER (Logika Kuisioner)
+- [x] src/components/test/BiodataForm.tsx
+- [x] src/components/test/QuestionCard.tsx
+- [x] src/components/test/ProgressBar.tsx
+- [x] src/components/test/UkmCard.tsx
 
-- [ ] **Buat `lib/questions.ts`**
-  - [ ] Level 1: 5 pertanyaan utama (5 kategori)
-  - [ ] Level 2-3: Pertanyaan percabangan untuk setiap kategori
-  - [ ] Semua detail dari RancanganLogikaKuis.md
+## Phase 4: Pages
 
-- [ ] **Buat `lib/ukm-data.ts`**
-  - [ ] Mapping kategori → UKM recommendations
-  - [ ] Pre-filtering rules (agama, KIP-K, fakultas)
-  - [ ] Deskripsi singkat tiap UKM
+- [x] src/app/kuisioner/biodata/page.tsx
+- [x] src/app/kuisioner/test/page.tsx
+- [x] src/app/kuisioner/result/page.tsx
+- [x] Backward compatibility route redirect
+  - [x] src/app/biodata/page.tsx
+  - [x] src/app/test/page.tsx
+  - [x] src/app/result/page.tsx
 
-- [ ] **Buat `lib/calculate.ts`**
-  - [ ] Scoring logic (akumulasi poin per kategori)
-  - [ ] Fungsi mencari top 2 kategori
-  - [ ] Fungsi mapping kategori → UKM recommendations
-  - [ ] Fungsi apply pre-filtering berdasarkan biodata
+## Phase 5: Integration & Quality
 
----
+- [x] LocalStorage flow biodata/result
+- [x] Insert ke tabel student_results
+- [ ] End-to-end test flow nyata (biodata -> test -> result -> Supabase)
+- [ ] Final copywriting polish untuk UI result dan CTA
+- [ ] Konsolidasi lint warnings non-blocking pada komponen non-kuisioner
 
-## 🎨 PHASE 3: COMPONENTS
+## Kategori Final (Implementasi)
 
-- [ ] **Buat `components/test/BiodataForm.tsx`**
-  - [ ] Form: nama, NIM, fakultas, jurusan, agama, status KIP-K
-  - [ ] Simpan ke state/localStorage
-  - [ ] Validasi input
+1. Olahraga
+2. Seni
+3. Penalaran
+4. Pecinta Alam
+5. Sosial & Disiplin
 
-- [ ] **Buat `components/test/QuestionCard.tsx`**
-  - [ ] Display pertanyaan + pilihan
-  - [ ] Handle click → update score
-  - [ ] Dynamic rendering berdasarkan kategori dominan (Level 2-3)
+## Catatan
 
-- [ ] **Buat `components/test/ProgressBar.tsx`**
-  - [ ] Show progress kuisioner (x dari total pertanyaan)
-
-- [ ] **Buat `components/test/UkmCard.tsx`**
-  - [ ] Display rekomendasi UKM
-  - [ ] Tampilkan badge/description
-
----
-
-## 🏠 PHASE 4: PAGES
-
-- [ ] **`app/page.tsx` (Landing Page)**
-  - [ ] CTA button → `/biodata`
-
-- [ ] **`app/biodata/page.tsx` (Biodata Form)**
-  - [ ] Render BiodataForm
-  - [ ] Redirect ke `/test` setelah submit
-
-- [ ] **`app/test/page.tsx` (Quiz Page)**
-  - [ ] Render QuestionCard + ProgressBar
-  - [ ] Navigate Level 1 → Level 2/3 berdasarkan score
-  - [ ] Submit → calculate score + save to Supabase → redirect `/result`
-
-- [ ] **`app/result/page.tsx` (Result Page)**
-  - [ ] Fetch data dari session/localStorage
-  - [ ] Tampilkan top kategori
-  - [ ] Tampilkan 2-3 UKM rekomendasi dengan UkmCard
-  - [ ] Styling hasil
-
----
-
-## 🔧 PHASE 5: INTEGRASI & DEPLOYMENT
-
-- [ ] **State Management**
-  - [ ] Setup Zustand atau Context untuk global biodata + score
-  - [ ] Atau gunakan localStorage untuk simplicity
-
-- [ ] **Supabase Integration**
-  - [ ] Implement insert ke `student_results` di `/test`
-
-- [ ] **Testing & Refinement**
-  - [ ] End-to-end test seluruh flow
-  - [ ] Mobile responsiveness check
-  - [ ] Animation & UX polish
-
----
-
-## 📊 PRIORITAS IMPLEMENTASI (Recommended Order)
-
-```
-1. Setup Supabase + struktur folder
-   ↓
-2. lib/questions.ts (semua soal)
-   ↓
-3. lib/ukm-data.ts (mapping UKM)
-   ↓
-4. lib/calculate.ts (scoring logic)
-   ↓
-5. BiodataForm + QuestionCard component
-   ↓
-6. /biodata page
-   ↓
-7. /test page (quiz logic)
-   ↓
-8. /result page
-   ↓
-9. Supabase save + styling final
-```
-
----
-
-## 📌 NOTES
-
-### KATEGORI UTAMA (5)
-
-1. **Seni** - musik, seni, pertunjukan
-2. **Olahraga** - bola, beladiri, raket, catur
-3. **Penalaran & Keilmuan** - riset, debat, jurnalisme, robotik
-4. **Pecinta Alam** - hiking, panjat tebing, arum jeram
-5. **Kemanusiaan & Sosial** - medis, keamanan, pramuka, relawan
-
-### PRE-FILTERING (Biodata)
-
-- Agama: Islam → UKKI, Protestan → PMKP, Katolik → UMAKA
-- KIP-K: "Ya" → Himabisi
-- Fakultas Kesehatan → CIMSA (boost)
-
-### SCORING SYSTEM
-
-- Setiap jawaban Level 1: +10 poin ke kategori tertentu
-- Top kategori → Level 2/3 branching
-- Hasil akhir: 2-3 UKM terbaik + pre-filtered recommendations
-
----
-
-## 🚀 NEXT STEP
-
-Mana yang ingin dikerjakan duluan?
-
-- [ ] Setup Supabase + struktur folder
-- [ ] lib/questions.ts
-- [ ] lib/ukm-data.ts
-- [ ] lib/calculate.ts
-- [ ] Components
-- [ ] Pages
+- Dokumen ini menggantikan plan awal yang masih memakai route lama /biodata, /test, /result sebagai rute utama.
+- Rute utama saat ini menggunakan prefix /kuisioner.

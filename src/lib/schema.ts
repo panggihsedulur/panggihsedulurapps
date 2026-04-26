@@ -2,7 +2,7 @@ import { z } from "zod";
 
 /**
  * Biodata Form Schema
- * Validasi input dari halaman /biodata
+ * Validasi input dari halaman /kuisioner/biodata
  */
 export const BiodataSchema = z.object({
   nama: z

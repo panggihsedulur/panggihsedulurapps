@@ -22,10 +22,10 @@ src/lib/
 - [x] `lib/supabase.ts` - Client setup
 - [x] `lib/schema.ts` - Zod schemas (Biodata, QuizResult)
 - [x] `lib/quiz-helpers.ts` - Helper functions (saveQuizResult, getPreFilteredUKM, etc)
-- [ ] `components/test/BiodataForm.tsx` - Form dengan validasi Zod
-- [ ] `app/biodata/page.tsx` - Halaman biodata
-- [ ] `app/test/page.tsx` - Halaman kuis + scoring
-- [ ] `app/result/page.tsx` - Halaman hasil + rekomendasi
+- [x] `components/test/BiodataForm.tsx` - Form dengan validasi Zod
+- [x] `app/kuisioner/biodata/page.tsx` - Halaman biodata
+- [x] `app/kuisioner/test/page.tsx` - Halaman kuis + scoring + branching
+- [x] `app/kuisioner/result/page.tsx` - Halaman hasil + rekomendasi
 
 ---
 
@@ -56,7 +56,7 @@ export function BiodataForm() {
     localStorage.setItem("biodata", JSON.stringify(data));
 
     // Redirect ke halaman kuis
-    router.push("/test");
+    router.push("/kuisioner/test");
   };
 
   return (
@@ -85,7 +85,7 @@ import { useRouter } from "next/navigation";
 import {
   saveQuizResult,
   getTopKategori,
-  getPreFilteredUKM,
+  getCombinedRecommendationNames,
 } from "@/lib/quiz-helpers";
 import { initializeSkor, type Biodata, type Kategori } from "@/lib/schema";
 
@@ -116,14 +116,16 @@ export default function TestPage() {
     if (!biodata) return;
 
     const topKategori = getTopKategori(skor, 2);
-    const preFiltered = getPreFilteredUKM(
+
+    // Ambil rekomendasi gabungan dari helper (scoring + pre-filter)
+    const rekomendasi_ukm = getCombinedRecommendationNames(
+      topKategori,
       biodata.agama,
       biodata.is_kipk,
       biodata.fakultas,
+      [],
+      3,
     );
-
-    // TODO: Generate rekomendasi_ukm dari lib/ukm-data.ts berdasarkan topKategori
-    const rekomendasi_ukm = [...preFiltered, ...topKategori]; // Placeholder
 
     const result = {
       biodata,
@@ -136,7 +138,7 @@ export default function TestPage() {
     const { success, error } = await saveQuizResult(result);
     if (success) {
       localStorage.setItem("quizResult", JSON.stringify(result));
-      router.push("/result");
+      router.push("/kuisioner/result");
     } else {
       alert("Gagal menyimpan: " + error);
     }
@@ -200,20 +202,20 @@ npm install zod @supabase/supabase-js react-hook-form @hookform/resolvers
 
 ## 📝 Notes
 
-1. **Biodata disimpan di localStorage** saat user submit di halaman `/biodata`
-2. **Scoring terjadi di halaman `/test`** saat user menjawab kuis
+1. **Biodata disimpan di localStorage** saat user submit di halaman `/kuisioner/biodata`
+2. **Scoring terjadi di halaman `/kuisioner/test`** saat user menjawab kuis
 3. **Pada submit**, data dikirim ke Supabase via `saveQuizResult()`
-4. **Result page menampilkan** data dari localStorage
-5. **Pre-filtering** otomatis diterapkan di `getPreFilteredUKM()`
+4. **Result page (`/kuisioner/result`) menampilkan** data dari localStorage
+5. **Pre-filtering** otomatis diterapkan di helper kombinasi rekomendasi
 
 ---
 
 ## ✅ Next Steps
 
-1. Buat `lib/ukm-data.ts` — mapping kategori → UKM recommendations
-2. Buat `lib/questions.ts` — semua soal Level 1-3
-3. Implementasi komponen BiodataForm, QuestionCard, UkmCard
-4. Buat halaman `/biodata`, `/test`, `/result`
-5. Testing end-to-end di Supabase dashboard
+1. Uji end-to-end dengan data nyata di tabel `student_results`
+2. Tambahkan fallback UI jika Supabase tidak tersedia
+3. Tambahkan test otomatis untuk helper scoring dan recommendation
+4. Evaluasi penyimpanan state (localStorage vs server session)
+5. Rapikan dokumentasi deployment environment variable
 
 <!-- END:SUPABASE-SETUP -->

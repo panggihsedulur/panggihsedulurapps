@@ -8,7 +8,7 @@ import {
 
 /**
  * Simpan hasil kuis ke Supabase
- * Gunakan di halaman /test setelah submit
+ * Gunakan di halaman /kuisioner/test setelah submit
  */
 export async function saveQuizResult(
   data: QuizResult,
