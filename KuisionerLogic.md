@@ -19,9 +19,6 @@ src/
       biodata/page.tsx
       test/page.tsx
       result/page.tsx
-    biodata/page.tsx   # redirect legacy
-    test/page.tsx      # redirect legacy
-    result/page.tsx    # redirect legacy
   components/test/
     BiodataForm.tsx
     QuestionCard.tsx
@@ -94,4 +91,4 @@ Payload yang dikirim ke Supabase:
 - Alur biodata -> test -> result sudah terimplementasi.
 - Branching question sudah aktif.
 - Penyimpanan hasil ke Supabase sudah terimplementasi.
-- Rute lama tetap didukung via redirect agar kompatibel.
+- Route kuisioner hanya menggunakan prefix /kuisioner.

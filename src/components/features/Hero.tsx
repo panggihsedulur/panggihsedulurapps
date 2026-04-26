@@ -83,7 +83,8 @@ export default function HeroSection() {
             {/* <div className="animate-fade-in delay-100">
               <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 backdrop-blur-md transition-colors hover:bg-white/10">
                 <span className="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-zinc-300 flex items-center gap-2">
-                  Panggih Sedulur 2026
+                  
+                  
                   <Star className="w-3.5 h-3.5 text-yellow-400 fill-yellow-400" />
                 </span>
               </div>
@@ -117,7 +118,7 @@ export default function HeroSection() {
             </h1>
 
             {/* Description */}
-            <p className="animate-fade-in delay-300 max-w-xl text-lg text-zinc-400 leading-relaxed">
+            <p className="animate-fade-in delay-300 max-w-xl text-lg text-white leading-relaxed">
               Ikuti kuisioner interaktif untuk mendapatkan rekomendasi Unit
               Kegiatan Mahasiswa dan Paguyuban Daerah yang paling sesuai dengan
               minat, bakat, dan karaktermu.

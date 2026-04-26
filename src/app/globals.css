@@ -149,6 +149,10 @@
 }
 
 @layer utilities {
+  .font-quiz {
+    font-family: var(--font-quiz), var(--font-sans), sans-serif;
+  }
+
   .font-edwardian {
     font-family:
       "Edwardian Script ITC", "ITC Edwardian Script", "Edwardian Script",

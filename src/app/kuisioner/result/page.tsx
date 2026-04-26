@@ -39,10 +39,10 @@ export default function ResultPage() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-blue-50 to-indigo-100">
+      <div className="min-h-screen flex items-center justify-center bg-[#fcfaf2]">
         <div className="text-center">
-          <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mb-4"></div>
-          <p className="text-gray-600">Memproses hasil...</p>
+          <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-[#0d4d4d] mb-4"></div>
+          <p className="text-slate-600">Memproses hasil...</p>
         </div>
       </div>
     );
@@ -71,80 +71,39 @@ export default function ResultPage() {
   };
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-blue-50 to-indigo-100 py-12 px-4">
-      <div className="max-w-6xl mx-auto">
+    <div className="min-h-screen bg-[#fcfaf2] py-10 px-4 text-slate-800">
+      <div className="max-w-6xl mx-auto mt-15">
         {/* Celebration Header */}
         <div className="text-center mb-12">
-          <div className="mb-6">
-            <span className="text-6xl">🎉</span>
-          </div>
-          <h1 className="text-4xl font-bold text-gray-800 mb-2">
+          <div className="mb-6"></div>
+          <h1 className="text-4xl font-extrabold text-[#0d4d4d] mb-2">
             Selamat, {result.biodata.nama}!
           </h1>
-          <p className="text-xl text-gray-600 mb-4">
+          <p className="text-xl text-slate-600 mb-4">
             Kamu adalah{" "}
-            <span className="font-bold text-blue-600">
+            <span className="font-bold text-[#0d4d4d]">
               {getPersonalityTitle(highestCategory)}
             </span>
           </p>
-          <div className="inline-block bg-linear-to-r from-blue-100 to-indigo-100 border-2 border-blue-500 rounded-lg px-6 py-3">
-            <p className="text-lg font-semibold text-blue-900">
+          <div className="inline-block bg-[#c5a059]/10 border-2 border-[#c5a059] rounded-2xl px-6 py-3">
+            <p className="text-lg font-semibold text-[#0d4d4d]">
               Kategori Dominan:{" "}
               <span className="text-2xl">{highestCategory}</span>
             </p>
-            <p className="text-sm text-blue-700 mt-1">
+            <p className="text-sm text-[#0d4d4d]/80 mt-1">
               Skor: {highestScore} dari 50 poin
             </p>
           </div>
         </div>
 
         {/* Score Distribution */}
-        <div className="bg-white rounded-lg shadow-lg p-8 mb-12">
-          <h2 className="text-2xl font-bold text-gray-800 mb-6">
-            Distribusi Poin Kategori
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
-            {Object.entries(scoreMap).map(([kategori, skor]) => {
-              const isTopKategori = result.top_kategori.includes(kategori);
-              return (
-                <div
-                  key={kategori}
-                  className={`p-4 rounded-lg text-center transition-all ${
-                    isTopKategori
-                      ? "bg-linear-to-br from-blue-500 to-blue-600 text-white shadow-md"
-                      : "bg-gray-50 text-gray-800"
-                  }`}
-                >
-                  <p
-                    className={`text-sm font-medium mb-2 ${isTopKategori ? "text-blue-100" : ""}`}
-                  >
-                    {kategori}
-                  </p>
-                  <p
-                    className={`text-3xl font-bold mb-2 ${isTopKategori ? "text-white" : "text-blue-600"}`}
-                  >
-                    {skor}
-                  </p>
-                  <div className="w-full bg-gray-200 rounded-full h-2">
-                    <div
-                      className={`h-2 rounded-full transition-all ${
-                        isTopKategori ? "bg-white" : "bg-blue-500"
-                      }`}
-                      style={{ width: `${(skor / 50) * 100}%` }}
-                    ></div>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
 
         {/* Recommendations */}
-        <div className="mb-12">
-          <h2 className="text-3xl font-bold text-gray-800 mb-2">
-            🎯 UKM Rekomendasi Untuk Kamu
+        <div className="mb-12 ">
+          <h2 className="text-3xl font-extrabold text-[#0d4d4d] mb-2 text-center">
+            UKM Rekomendasi Untuk Kamu
           </h2>
-          <p className="text-gray-600 mb-8">
+          <p className="text-slate-600 mb-8 text-center">
             Berdasarkan hasil kuisioner, berikut adalah UKM yang paling sesuai
             dengan minat dan bakatmu:
           </p>
@@ -159,11 +118,50 @@ export default function ResultPage() {
             </div>
           )}
         </div>
+        <div className="bg-white rounded-[2.5rem] shadow-[0_25px_50px_-12px_rgba(13,77,77,0.2)] border-b-10 border-gray-200 p-8 mb-12">
+          <h2 className="text-2xl font-extrabold text-[#0d4d4d] mb-6">
+            Distribusi Poin Kategori
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
+            {Object.entries(scoreMap).map(([kategori, skor]) => {
+              const isTopKategori = result.top_kategori.includes(kategori);
+              return (
+                <div
+                  key={kategori}
+                  className={`p-4 rounded-lg text-center transition-all ${
+                    isTopKategori
+                      ? "bg-[#0d4d4d] text-white shadow-md"
+                      : "bg-[#fcfaf2] text-slate-800 border border-[#c5a059]/15"
+                  }`}
+                >
+                  <p
+                    className={`text-sm font-medium mb-2 ${isTopKategori ? "text-white/90" : ""}`}
+                  >
+                    {kategori}
+                  </p>
+                  <p
+                    className={`text-3xl font-bold mb-2 ${isTopKategori ? "text-white" : "text-[#0d4d4d]"}`}
+                  >
+                    {skor}
+                  </p>
+                  <div className="w-full bg-gray-200 rounded-full h-2">
+                    <div
+                      className={`h-2 rounded-full transition-all ${
+                        isTopKategori ? "bg-[#c5a059]" : "bg-[#0d4d4d]"
+                      }`}
+                      style={{ width: `${(skor / 50) * 100}%` }}
+                    ></div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
 
         {/* Call to Action */}
-        <div className="bg-linear-to-r from-blue-500 to-blue-600 rounded-lg shadow-lg p-8 text-center text-white mb-12">
+        <div className="bg-linear-to-r from-[#0d4d4d] to-[#146a6a] rounded-[2rem] shadow-[0_25px_50px_-12px_rgba(13,77,77,0.45)] p-8 text-center text-white mb-12">
           <h3 className="text-2xl font-bold mb-4">Langkah Berikutnya</h3>
-          <p className="mb-6 text-blue-100">
+          <p className="mb-6 text-white/85">
             Kunjungi booth UKM rekomendasi di acara Panggih Sedulur untuk
             mendapatkan kode rahasia dan hadiah menarik!
           </p>
@@ -176,37 +174,39 @@ export default function ResultPage() {
         </div>
 
         {/* User Info */}
-        <div className="bg-white rounded-lg shadow-md p-6 mb-8">
-          <h3 className="text-lg font-bold text-gray-800 mb-4">Data Peserta</h3>
+        <div className="bg-white rounded-3xl shadow-[0_20px_40px_-20px_rgba(13,77,77,0.35)] border border-[#c5a059]/20 p-6 mb-8">
+          <h3 className="text-lg font-bold text-[#0d4d4d] mb-4">
+            Data Peserta
+          </h3>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4 text-sm">
             <div>
-              <p className="text-gray-600">Nama</p>
-              <p className="font-semibold text-gray-800">
+              <p className="text-slate-600">Nama</p>
+              <p className="font-semibold text-slate-800">
                 {result.biodata.nama}
               </p>
             </div>
             <div>
-              <p className="text-gray-600">NIM</p>
-              <p className="font-semibold text-gray-800">
+              <p className="text-slate-600">NIM</p>
+              <p className="font-semibold text-slate-800">
                 {result.biodata.nim}
               </p>
             </div>
             <div>
-              <p className="text-gray-600">Fakultas</p>
-              <p className="font-semibold text-gray-800">
+              <p className="text-slate-600">Fakultas</p>
+              <p className="font-semibold text-slate-800">
                 {result.biodata.fakultas}
               </p>
             </div>
             <div>
-              <p className="text-gray-600">Jurusan</p>
-              <p className="font-semibold text-gray-800">
+              <p className="text-slate-600">Jurusan</p>
+              <p className="font-semibold text-slate-800">
                 {result.biodata.jurusan}
               </p>
             </div>
             {result.biodata.agama && (
               <div>
-                <p className="text-gray-600">Agama</p>
-                <p className="font-semibold text-gray-800">
+                <p className="text-slate-600">Agama</p>
+                <p className="font-semibold text-slate-800">
                   {result.biodata.agama}
                 </p>
               </div>
@@ -227,7 +227,7 @@ export default function ResultPage() {
               localStorage.clear();
               router.push("/kuisioner/biodata");
             }}
-            className="bg-white hover:bg-gray-50 text-gray-800 border-2 border-gray-300 px-8 py-3 rounded-lg font-medium transition"
+            className="bg-white hover:bg-[#fcfaf2] text-[#0d4d4d] border-2 border-[#0d4d4d]/25 px-8 py-3 rounded-xl font-bold transition"
           >
             ↻ Mulai Ulang
           </button>
@@ -236,14 +236,14 @@ export default function ResultPage() {
               // Bisa di-extend untuk share/download result
               alert("Fitur share akan segera tersedia!");
             }}
-            className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-medium transition"
+            className="bg-[#0d4d4d] hover:bg-[#0a3a3a] text-white px-8 py-3 rounded-xl font-bold transition shadow-[0_4px_0_0_#052b2b]"
           >
             📤 Share Hasil
           </button>
         </div>
 
         {/* Footer Info */}
-        <div className="mt-12 text-center text-gray-600 text-sm">
+        <div className="mt-12 text-center text-slate-600 text-sm">
           <p>
             Data kamu telah disimpan untuk keperluan statistik UKM Universitas
             Jenderal Soedirman

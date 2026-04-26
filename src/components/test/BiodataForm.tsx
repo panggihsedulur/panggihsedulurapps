@@ -32,14 +32,17 @@ export function BiodataForm({ onSubmit, isLoading = false }: BiodataFormProps) {
     >
       {/* Nama */}
       <div>
-        <label htmlFor="nama" className="block text-sm font-medium mb-2">
+        <label
+          htmlFor="nama"
+          className="block text-sm font-bold text-[#0d4d4d] mb-2"
+        >
           Nama Lengkap *
         </label>
         <input
           id="nama"
           {...register("nama")}
           placeholder="Masukkan nama lengkap"
-          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full px-4 py-3 border border-[#c5a059]/35 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#0d4d4d]/30 bg-white"
         />
         {errors.nama && (
           <p className="text-red-500 text-sm mt-1">{errors.nama.message}</p>
@@ -48,14 +51,17 @@ export function BiodataForm({ onSubmit, isLoading = false }: BiodataFormProps) {
 
       {/* NIM */}
       <div>
-        <label htmlFor="nim" className="block text-sm font-medium mb-2">
+        <label
+          htmlFor="nim"
+          className="block text-sm font-bold text-[#0d4d4d] mb-2"
+        >
           NIM *
         </label>
         <input
           id="nim"
           {...register("nim")}
           placeholder="Masukkan NIM"
-          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full px-4 py-3 border border-[#c5a059]/35 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#0d4d4d]/30 bg-white"
         />
         {errors.nim && (
           <p className="text-red-500 text-sm mt-1">{errors.nim.message}</p>
@@ -64,13 +70,16 @@ export function BiodataForm({ onSubmit, isLoading = false }: BiodataFormProps) {
 
       {/* Fakultas */}
       <div>
-        <label htmlFor="fakultas" className="block text-sm font-medium mb-2">
+        <label
+          htmlFor="fakultas"
+          className="block text-sm font-bold text-[#0d4d4d] mb-2"
+        >
           Fakultas *
         </label>
         <select
           id="fakultas"
           {...register("fakultas")}
-          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full px-4 py-3 border border-[#c5a059]/35 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#0d4d4d]/30 bg-white"
         >
           <option value="">-- Pilih Fakultas --</option>
           <option value="Teknik">Teknik</option>
@@ -93,14 +102,17 @@ export function BiodataForm({ onSubmit, isLoading = false }: BiodataFormProps) {
 
       {/* Jurusan */}
       <div>
-        <label htmlFor="jurusan" className="block text-sm font-medium mb-2">
+        <label
+          htmlFor="jurusan"
+          className="block text-sm font-bold text-[#0d4d4d] mb-2"
+        >
           Jurusan/Program Studi *
         </label>
         <input
           id="jurusan"
           {...register("jurusan")}
           placeholder="Masukkan jurusan/program studi"
-          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full px-4 py-3 border border-[#c5a059]/35 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#0d4d4d]/30 bg-white"
         />
         {errors.jurusan && (
           <p className="text-red-500 text-sm mt-1">{errors.jurusan.message}</p>
@@ -109,13 +121,16 @@ export function BiodataForm({ onSubmit, isLoading = false }: BiodataFormProps) {
 
       {/* Agama */}
       <div>
-        <label htmlFor="agama" className="block text-sm font-medium mb-2">
+        <label
+          htmlFor="agama"
+          className="block text-sm font-bold text-[#0d4d4d] mb-2"
+        >
           Agama (Opsional)
         </label>
         <select
           id="agama"
           {...register("agama")}
-          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full px-4 py-3 border border-[#c5a059]/35 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#0d4d4d]/30 bg-white"
         >
           <option value="">-- Tidak Dipilih --</option>
           <option value="Islam">Islam</option>
@@ -136,9 +151,12 @@ export function BiodataForm({ onSubmit, isLoading = false }: BiodataFormProps) {
           id="is_kipk"
           type="checkbox"
           {...register("is_kipk")}
-          className="w-5 h-5 accent-blue-500"
+          className="w-5 h-5 accent-[#0d4d4d]"
         />
-        <label htmlFor="is_kipk" className="text-sm font-medium cursor-pointer">
+        <label
+          htmlFor="is_kipk"
+          className="text-sm font-medium text-slate-700 cursor-pointer"
+        >
           Penerima Beasiswa KIP-K / Bidikmisi (Opsional)
         </label>
       </div>
@@ -147,12 +165,12 @@ export function BiodataForm({ onSubmit, isLoading = false }: BiodataFormProps) {
       <Button
         type="submit"
         disabled={isLoading}
-        className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg font-medium transition"
+        className="w-full bg-[#0d4d4d] hover:bg-[#0a3a3a] text-white py-3 rounded-xl font-bold transition shadow-[0_4px_0_0_#052b2b]"
       >
         {isLoading ? "Loading..." : "Lanjut ke Kuis"}
       </Button>
 
-      <p className="text-xs text-gray-500 text-center">
+      <p className="text-xs text-slate-500 text-center">
         * Wajib diisi | Data anda akan disimpan untuk keperluan statistik UKM
       </p>
     </form>

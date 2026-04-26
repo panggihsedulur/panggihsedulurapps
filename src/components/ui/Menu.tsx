@@ -9,6 +9,7 @@ import {
 } from "@/components/systaliko-ui/animated-menu";
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 
 const menuItems = [
   {
@@ -48,6 +49,7 @@ const socialLinks = [
 ];
 export function AnimatedMenuDemo() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const pathname = usePathname();
 
   // Deteksi saat user melakukan scroll
   useEffect(() => {
@@ -62,6 +64,11 @@ export function AnimatedMenuDemo() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  if (pathname.startsWith("/kuisioner/test")) {
+    return null;
+  }
+
   return (
     <header
       className={`dark fixed top-0 left-0 right-0 z-50 flex justify-center transition-all duration-300 px-4 ${

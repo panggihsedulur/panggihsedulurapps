@@ -21,6 +21,29 @@ export function QuestionCard({
 }: QuestionCardProps) {
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
 
+  const optionStyles = [
+    {
+      base: "bg-[linear-gradient(180deg,#b5c000_0%,#8e9800_100%)] shadow-[0_5px_0_0_#5e6600]",
+      isSelected: "ring-4 ring-[#e9ff77]/35",
+    },
+    {
+      base: "bg-[linear-gradient(180deg,#be7dff_0%,#8f2eff_100%)] shadow-[0_5px_0_0_#6122aa]",
+      isSelected: "ring-4 ring-[#ddb8ff]/35",
+    },
+    {
+      base: "bg-[linear-gradient(180deg,#ff7d00_0%,#ff4a00_100%)] shadow-[0_5px_0_0_#b43300]",
+      isSelected: "ring-4 ring-[#ffbf8e]/35",
+    },
+    {
+      base: "bg-[linear-gradient(180deg,#10c8c4_0%,#0c8f88_100%)] shadow-[0_5px_0_0_#076660]",
+      isSelected: "ring-4 ring-[#8ff0ec]/35",
+    },
+    {
+      base: "bg-[linear-gradient(180deg,#4f6fd6_0%,#2d4698_100%)] shadow-[0_5px_0_0_#1f2f68]",
+      isSelected: "ring-4 ring-[#9fb4ff]/35",
+    },
+  ];
+
   const handleSelectOption = (optionId: string) => {
     setSelectedOption(optionId);
   };
@@ -32,91 +55,55 @@ export function QuestionCard({
   };
 
   return (
-    <div className="w-full max-w-2xl mx-auto">
-      {/* Progress Indicator */}
-      <div className="mb-6">
-        <div className="flex justify-between items-center mb-2">
-          <span className="text-sm font-medium text-gray-600">
-            Pertanyaan {currentIndex + 1} dari {totalQuestions}
-          </span>
-          <span className="text-sm font-medium text-gray-600">
-            {Math.round(((currentIndex + 1) / totalQuestions) * 100)}%
-          </span>
-        </div>
-        <div className="w-full bg-gray-200 rounded-full h-2">
-          <div
-            className="bg-blue-600 h-2 rounded-full transition-all duration-300"
-            style={{
-              width: `${((currentIndex + 1) / totalQuestions) * 100}%`,
-            }}
-          ></div>
+    <div className="w-full max-w-3xl mx-auto">
+      <div className="relative z-10 text-center mb-8">
+        <div className="relative rounded-3xl border border-white/10 bg-white/5 px-6 py-8 md:px-8 md:py-10 shadow-[0_22px_40px_-18px_rgba(0,0,0,0.7)] backdrop-blur-xl">
+          <div className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/15 bg-[#0b141b] px-6 py-2 text-2xl font-semibold text-[#ffd15a] shadow-[0_6px_16px_rgba(0,0,0,0.35)]">
+            {currentIndex + 1} / {totalQuestions}
+          </div>
+          <h2 className="text-xl leading-tight md:text-3xl font-semibold text-white">
+            {question.text}
+          </h2>
         </div>
       </div>
 
-      {/* Question Card */}
-      <div className="rounded-xl border border-gray-200 p-6 bg-white shadow-md">
-        {/* Question Text */}
-        <h2 className="text-lg font-bold text-gray-800 mb-6">
-          {question.text}
-        </h2>
+      <div className="grid grid-cols-1 gap-4 mb-8">
+        {question.options.map((option, index) => {
+          const palette = optionStyles[index % optionStyles.length];
+          const isSelected = selectedOption === option.id;
 
-        {/* Options */}
-        <div className="space-y-3 mb-6">
-          {question.options.map((option, index) => (
-            <div
+          return (
+            <button
               key={option.id}
+              type="button"
               onClick={() => handleSelectOption(option.id)}
-              className={`p-4 border-2 rounded-lg cursor-pointer transition-all ${
-                selectedOption === option.id
-                  ? "border-blue-600 bg-blue-50"
-                  : "border-gray-200 bg-white hover:border-blue-300"
-              }`}
+              className={`w-full rounded-2xl px-6 py-5 text-center text-lg md:text-2xl font-medium text-white transition-all active:scale-[0.98] hover:brightness-110 ${palette.base} ${isSelected ? palette.isSelected : ""}`}
             >
-              <div className="flex items-start gap-3">
-                <div
-                  className={`w-6 h-6 rounded-full border-2 flex items-center justify-center flex-shrink-0 mt-0.5 ${
-                    selectedOption === option.id
-                      ? "border-blue-600 bg-blue-600"
-                      : "border-gray-300"
-                  }`}
-                >
-                  {selectedOption === option.id && (
-                    <div className="w-2 h-2 bg-white rounded-full"></div>
-                  )}
-                </div>
-                <div>
-                  <p className="font-medium text-gray-800">
-                    {String.fromCharCode(65 + index)}.
-                  </p>
-                  <p className="text-gray-700">{option.text}</p>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Action Buttons */}
-        <div className="flex gap-3">
-          <Button
-            onClick={handleSubmitAnswer}
-            disabled={!selectedOption || isLoading}
-            className="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg font-medium transition disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            {isLoading
-              ? "Loading..."
-              : currentIndex === totalQuestions - 1
-                ? "Selesai"
-                : "Lanjut"}
-          </Button>
-        </div>
-
-        {/* Help Text */}
-        {!selectedOption && (
-          <p className="text-sm text-gray-500 text-center mt-4">
-            Pilih satu jawaban untuk melanjutkan
-          </p>
-        )}
+              {option.text}
+            </button>
+          );
+        })}
       </div>
+
+      <div className="flex gap-3">
+        <Button
+          onClick={handleSubmitAnswer}
+          disabled={!selectedOption || isLoading}
+          className="flex-1 bg-white/10 hover:bg-white/15 text-white py-3 rounded-xl font-semibold transition disabled:opacity-50 disabled:cursor-not-allowed border border-white/20 backdrop-blur-sm"
+        >
+          {isLoading
+            ? "Loading..."
+            : currentIndex === totalQuestions - 1
+              ? "Selesai"
+              : "Lanjut"}
+        </Button>
+      </div>
+
+      {!selectedOption && (
+        <p className="mt-6 text-center text-sm font-medium text-white/70 animate-pulse">
+          Pilih satu jawaban untuk melanjutkan
+        </p>
+      )}
     </div>
   );
 }

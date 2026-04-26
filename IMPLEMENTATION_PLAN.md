@@ -36,10 +36,6 @@ Status plan disesuaikan dengan implementasi yang sudah ada di repo saat ini.
 - [x] src/app/kuisioner/biodata/page.tsx
 - [x] src/app/kuisioner/test/page.tsx
 - [x] src/app/kuisioner/result/page.tsx
-- [x] Backward compatibility route redirect
-  - [x] src/app/biodata/page.tsx
-  - [x] src/app/test/page.tsx
-  - [x] src/app/result/page.tsx
 
 ## Phase 5: Integration & Quality
 
@@ -60,4 +56,4 @@ Status plan disesuaikan dengan implementasi yang sudah ada di repo saat ini.
 ## Catatan
 
 - Dokumen ini menggantikan plan awal yang masih memakai route lama /biodata, /test, /result sebagai rute utama.
-- Rute utama saat ini menggunakan prefix /kuisioner.
+- Rute utama saat ini hanya menggunakan prefix /kuisioner.

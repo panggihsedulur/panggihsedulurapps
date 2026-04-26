@@ -25,6 +25,7 @@ export default function TestPage() {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [branchQuestionId, setBranchQuestionId] = useState<string | null>(null);
   const [branchStep, setBranchStep] = useState(0);
+  const [branchTotalSteps, setBranchTotalSteps] = useState(1);
   const [branchRecommendations, setBranchRecommendations] = useState<string[]>(
     [],
   );
@@ -67,6 +68,7 @@ export default function TestPage() {
         setCurrentQuestionIndex(0);
         setBranchQuestionId(null);
         setBranchStep(0);
+        setBranchTotalSteps(1);
         setBranchRecommendations([]);
         setDominantCategory(null);
         setIsInitializing(false);
@@ -175,6 +177,7 @@ export default function TestPage() {
     setPhase("branch");
     setBranchQuestionId(startBranchQuestionId);
     setBranchStep(0);
+    setBranchTotalSteps(1);
   };
 
   // Handle jawaban kuis (Branch Level 2/3)
@@ -190,6 +193,7 @@ export default function TestPage() {
     setBranchRecommendations(mergedRecommendations);
 
     if (branchOption.nextQuestionId) {
+      setBranchTotalSteps(2);
       setBranchQuestionId(branchOption.nextQuestionId);
       setBranchStep((prev) => prev + 1);
       return;
@@ -210,10 +214,10 @@ export default function TestPage() {
   // Loading state
   if (isInitializing) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-blue-50 to-indigo-100">
+      <div className="min-h-screen flex items-center justify-center bg-[#081819]">
         <div className="text-center">
-          <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mb-4"></div>
-          <p className="text-gray-600">Memuat kuis...</p>
+          <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-white mb-4"></div>
+          <p className="text-white/80">Memuat kuis...</p>
         </div>
       </div>
     );
@@ -222,18 +226,18 @@ export default function TestPage() {
   // Error state
   if (error) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-blue-50 to-indigo-100 p-4">
-        <div className="bg-white rounded-lg shadow-lg p-8 max-w-md text-center">
+      <div className="min-h-screen flex items-center justify-center bg-[#081819] p-4">
+        <div className="bg-white rounded-[2rem] shadow-[0_25px_50px_-12px_rgba(13,77,77,0.2)] border-b-8 border-gray-200 p-8 max-w-md text-center">
           <h2 className="text-2xl font-bold text-red-600 mb-4">
             Terjadi Kesalahan
           </h2>
-          <p className="text-gray-600 mb-6">{error}</p>
+          <p className="text-slate-600 mb-6">{error}</p>
           <button
             onClick={() => {
               localStorage.clear();
               router.push("/kuisioner/biodata");
             }}
-            className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium transition"
+            className="bg-[#0d4d4d] hover:bg-[#0a3a3a] text-white px-6 py-3 rounded-xl font-bold transition shadow-[0_4px_0_0_#052b2b]"
           >
             Kembali ke Awal
           </button>
@@ -256,29 +260,27 @@ export default function TestPage() {
   const totalQuestions =
     phase === "level1"
       ? levelOneQuestions.length
-      : levelOneQuestions.length + 2;
+      : levelOneQuestions.length + branchTotalSteps;
   const currentProgressIndex =
     phase === "level1"
       ? currentQuestionIndex
       : levelOneQuestions.length + branchStep;
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-blue-50 to-indigo-100 py-12 px-4">
-      <div className="max-w-3xl mx-auto">
-        {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-800 mb-2">
-            Kuis Minat Bakat
-          </h1>
-          <p className="text-gray-600">
-            {phase === "level1"
-              ? "Jawab pertanyaan berikut dengan jujur dan sesuai dengan dirimu"
-              : "Lanjutkan dengan pertanyaan lanjutan untuk rekomendasi UKM yang lebih presisi"}
-          </p>
-        </div>
+    <div className="relative min-h-screen overflow-hidden px-4 py-8 text-white">
+      <div
+        className="absolute inset-0 z-0 bg-[url('/hero-bg.png')] bg-cover bg-center opacity-100"
+        style={{
+          maskImage:
+            "linear-gradient(180deg, transparent, black 0%, black 70%, transparent)",
+          WebkitMaskImage:
+            "linear-gradient(180deg, transparent, black 0%, black 70%, transparent)",
+        }}
+      />
 
+      <div className="mx-auto w-full max-w-3xl">
         {/* Progress Bar */}
-        <div className="mb-8 bg-white rounded-lg p-4 shadow-md">
+        <div className="relative z-10 mb-8 rounded-3xl border border-white/10 bg-white/5 p-4 shadow-[0_20px_45px_-30px_rgba(0,0,0,0.9)] backdrop-blur-xl">
           <ProgressBar
             current={currentProgressIndex + 1}
             total={totalQuestions}
@@ -288,31 +290,38 @@ export default function TestPage() {
 
         {/* Question Card */}
         {currentQuestion && (
-          <QuestionCard
-            question={currentQuestion}
-            onAnswer={handleAnswer}
-            isLoading={isLoading}
-            currentIndex={currentProgressIndex}
-            totalQuestions={totalQuestions}
-          />
+          <div className="relative z-10">
+            <QuestionCard
+              question={currentQuestion}
+              onAnswer={handleAnswer}
+              isLoading={isLoading}
+              currentIndex={currentProgressIndex}
+              totalQuestions={totalQuestions}
+            />
+          </div>
         )}
 
-        {/* Scoring Preview (opsional) */}
-        <div className="mt-8 bg-white rounded-lg p-4 shadow-md">
-          <h3 className="font-semibold text-gray-800 mb-4">
+        <div className="relative z-10 mt-8 rounded-3xl border border-white/10 bg-white/5 p-6 shadow-[0_20px_45px_-30px_rgba(0,0,0,0.9)] backdrop-blur-xl">
+          <h3 className="mb-4 text-base font-semibold text-white/90">
             Poin Kategori Saat Ini
           </h3>
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
+          <div className="grid grid-cols-2 gap-3 md:grid-cols-5">
             {Object.entries(skor).map(([kategori, poin]) => (
               <div
                 key={kategori}
-                className="bg-blue-50 p-3 rounded-lg text-center"
+                className="rounded-xl border border-white/10 bg-black/20 p-3 text-center"
               >
-                <p className="text-xs text-gray-600 font-medium">{kategori}</p>
-                <p className="text-2xl font-bold text-blue-600">{poin}</p>
+                <p className="text-xs font-medium text-zinc-300">{kategori}</p>
+                <p className="text-2xl font-bold text-white">{poin}</p>
               </div>
             ))}
           </div>
+        </div>
+
+        <div className="relative z-10 mt-7 flex items-center justify-center">
+          <p className="text-sm text-white/60">
+            Jawab sesuai preferensi pribadimu
+          </p>
         </div>
       </div>
     </div>

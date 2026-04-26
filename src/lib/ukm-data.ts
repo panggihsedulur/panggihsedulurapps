@@ -548,8 +548,9 @@ export function getCombinedRecommendations(
     .map((name) => getUKMById(name))
     .filter((ukm): ukm is UKM => ukm !== undefined);
 
-  // Priority order: pre-filter biodata > branch result > scoring fallback
-  const combined = [...preFilteredUKM, ...branchRecommendedUKM, ...recommended];
+  // Priority order: branch result > pre-filter biodata > scoring fallback
+  // Branch answers are the most specific signal from quiz flow.
+  const combined = [...branchRecommendedUKM, ...preFilteredUKM, ...recommended];
   const uniqueIds = new Set<string>();
   return combined.filter((ukm) => {
     if (uniqueIds.has(ukm.id)) return false;

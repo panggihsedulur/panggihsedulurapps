@@ -38,12 +38,6 @@ NEXT_PUBLIC_SITE_URL=https://www.panggihsedulur.bem-unsoed.com
 - /kuisioner/test -> kuis level 1 + branching
 - /kuisioner/result -> hasil rekomendasi
 
-Kompatibilitas rute lama tetap ada:
-
-- /biodata -> redirect ke /kuisioner/biodata
-- /test -> redirect ke /kuisioner/test
-- /result -> redirect ke /kuisioner/result
-
 ## Alur Sistem
 
 1. User isi biodata di /kuisioner/biodata.
