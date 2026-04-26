@@ -306,7 +306,7 @@ export const fullUkmAndPaguyubanData: ExpandableCardItem[] = [
     id: "ukm-083",
     title: "UMAKA",
     src: "https://dummyimage.com/400x400/4a148c/ffffff&text=UMAKA",
-    description: "Unit Kegiatan Mahasiswa Kerohanian",
+    description: "Unit Kegiatan Mahasiswa Katolik ",
     category: "Kerohanian",
     detailTitle: "Tentang UMAKA",
     detailBody: "Unit kegiatan mahasiswa bidang kerohanian.",
