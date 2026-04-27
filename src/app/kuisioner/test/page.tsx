@@ -267,16 +267,7 @@ export default function TestPage() {
       : levelOneQuestions.length + branchStep;
 
   return (
-    <div className="relative min-h-screen overflow-hidden px-4 py-8 text-white">
-      <div
-        className="absolute inset-0 z-0 bg-[url('/hero-bg.png')] bg-cover bg-center opacity-100"
-        style={{
-          maskImage:
-            "linear-gradient(180deg, transparent, black 0%, black 70%, transparent)",
-          WebkitMaskImage:
-            "linear-gradient(180deg, transparent, black 0%, black 70%, transparent)",
-        }}
-      />
+    <div className="relative min-h-screen px-4 py-8 text-white">
 
       <div className="mx-auto w-full max-w-3xl">
         {/* Progress Bar */}

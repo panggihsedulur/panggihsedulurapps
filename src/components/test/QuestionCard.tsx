@@ -23,24 +23,29 @@ export function QuestionCard({
 
   const optionStyles = [
     {
-      base: "bg-[linear-gradient(180deg,#b5c000_0%,#8e9800_100%)] shadow-[0_5px_0_0_#5e6600]",
-      isSelected: "ring-4 ring-[#e9ff77]/35",
+      base: "hover:bg-cyan-500/10 border-white/5 bg-white/5",
+      isSelected: "bg-cyan-500/20 border-cyan-500/50 ring-2 ring-cyan-500/20 shadow-[0_0_20px_rgba(6,182,212,0.15)]",
+      icon: "text-cyan-400",
     },
     {
-      base: "bg-[linear-gradient(180deg,#be7dff_0%,#8f2eff_100%)] shadow-[0_5px_0_0_#6122aa]",
-      isSelected: "ring-4 ring-[#ddb8ff]/35",
+      base: "hover:bg-emerald-500/10 border-white/5 bg-white/5",
+      isSelected: "bg-emerald-500/20 border-emerald-500/50 ring-2 ring-emerald-500/20 shadow-[0_0_20px_rgba(16,185,129,0.15)]",
+      icon: "text-emerald-400",
     },
     {
-      base: "bg-[linear-gradient(180deg,#ff7d00_0%,#ff4a00_100%)] shadow-[0_5px_0_0_#b43300]",
-      isSelected: "ring-4 ring-[#ffbf8e]/35",
+      base: "hover:bg-blue-500/10 border-white/5 bg-white/5",
+      isSelected: "bg-blue-500/20 border-blue-500/50 ring-2 ring-blue-500/20 shadow-[0_0_20px_rgba(59,130,246,0.15)]",
+      icon: "text-blue-400",
     },
     {
-      base: "bg-[linear-gradient(180deg,#10c8c4_0%,#0c8f88_100%)] shadow-[0_5px_0_0_#076660]",
-      isSelected: "ring-4 ring-[#8ff0ec]/35",
+      base: "hover:bg-violet-500/10 border-white/5 bg-white/5",
+      isSelected: "bg-violet-500/20 border-violet-500/50 ring-2 ring-violet-500/20 shadow-[0_0_20px_rgba(139,92,246,0.15)]",
+      icon: "text-violet-400",
     },
     {
-      base: "bg-[linear-gradient(180deg,#4f6fd6_0%,#2d4698_100%)] shadow-[0_5px_0_0_#1f2f68]",
-      isSelected: "ring-4 ring-[#9fb4ff]/35",
+      base: "hover:bg-teal-500/10 border-white/5 bg-white/5",
+      isSelected: "bg-teal-500/20 border-teal-500/50 ring-2 ring-teal-500/20 shadow-[0_0_20px_rgba(20,184,166,0.15)]",
+      icon: "text-teal-400",
     },
   ];
 
@@ -77,9 +82,17 @@ export function QuestionCard({
               key={option.id}
               type="button"
               onClick={() => handleSelectOption(option.id)}
-              className={`w-full rounded-2xl px-6 py-5 text-center text-lg md:text-2xl font-medium text-white transition-all active:scale-[0.98] hover:brightness-110 ${palette.base} ${isSelected ? palette.isSelected : ""}`}
+              className={`group relative flex w-full items-center gap-4 rounded-2xl border px-6 py-5 text-left transition-all active:scale-[0.98] backdrop-blur-sm ${isSelected ? palette.isSelected : palette.base}`}
             >
-              {option.text}
+              <div className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/5 transition-all group-hover:scale-110 ${isSelected ? "border-cyan-500/50 bg-cyan-500/20 text-white" : "text-white/40"}`}>
+                {String.fromCharCode(65 + index)}
+              </div>
+              <span className={`text-lg md:text-xl font-medium transition-colors ${isSelected ? "text-white" : "text-white/80 group-hover:text-white"}`}>
+                {option.text}
+              </span>
+              {isSelected && (
+                <div className="absolute right-6 h-2 w-2 rounded-full bg-cyan-400 shadow-[0_0_10px_rgba(34,211,238,0.8)]" />
+              )}
             </button>
           );
         })}
@@ -89,13 +102,13 @@ export function QuestionCard({
         <Button
           onClick={handleSubmitAnswer}
           disabled={!selectedOption || isLoading}
-          className="flex-1 bg-white/10 hover:bg-white/15 text-white py-3 rounded-xl font-semibold transition disabled:opacity-50 disabled:cursor-not-allowed border border-white/20 backdrop-blur-sm"
+          className="flex-1 bg-gradient-to-r from-cyan-600 to-emerald-600 hover:from-cyan-500 hover:to-emerald-500 text-white py-8 rounded-2xl font-bold text-xl transition-all disabled:opacity-30 disabled:cursor-not-allowed shadow-xl shadow-cyan-900/20 active:scale-[0.98]"
         >
           {isLoading
             ? "Loading..."
             : currentIndex === totalQuestions - 1
-              ? "Selesai"
-              : "Lanjut"}
+              ? "Selesai ✨"
+              : "Lanjut →"}
         </Button>
       </div>
 

@@ -39,10 +39,10 @@ export default function ResultPage() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#fcfaf2]">
+      <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-[#0d4d4d] mb-4"></div>
-          <p className="text-slate-600">Memproses hasil...</p>
+          <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-white mb-4"></div>
+          <p className="text-white/80">Memproses hasil...</p>
         </div>
       </div>
     );
@@ -71,26 +71,26 @@ export default function ResultPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#fcfaf2] py-10 px-4 text-slate-800">
+    <div className="min-h-screen py-10 px-4 text-white">
       <div className="max-w-6xl mx-auto mt-15">
         {/* Celebration Header */}
         <div className="text-center mb-12">
           <div className="mb-6"></div>
-          <h1 className="text-4xl font-extrabold text-[#0d4d4d] mb-2">
+          <h1 className="text-4xl font-extrabold text-white mb-2">
             Selamat, {result.biodata.nama}!
           </h1>
-          <p className="text-xl text-slate-600 mb-4">
+          <p className="text-xl text-white/80 mb-4">
             Kamu adalah{" "}
-            <span className="font-bold text-[#0d4d4d]">
+            <span className="font-bold text-white">
               {getPersonalityTitle(highestCategory)}
             </span>
           </p>
-          <div className="inline-block bg-[#c5a059]/10 border-2 border-[#c5a059] rounded-2xl px-6 py-3">
-            <p className="text-lg font-semibold text-[#0d4d4d]">
+          <div className="inline-block bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl px-6 py-3 shadow-xl">
+            <p className="text-lg font-semibold text-white">
               Kategori Dominan:{" "}
               <span className="text-2xl">{highestCategory}</span>
             </p>
-            <p className="text-sm text-[#0d4d4d]/80 mt-1">
+            <p className="text-sm text-white/70 mt-1">
               Skor: {highestScore} dari 50 poin
             </p>
           </div>
@@ -100,10 +100,10 @@ export default function ResultPage() {
 
         {/* Recommendations */}
         <div className="mb-12 ">
-          <h2 className="text-3xl font-extrabold text-[#0d4d4d] mb-2 text-center">
+          <h2 className="text-3xl font-extrabold text-white mb-2 text-center">
             UKM Rekomendasi Untuk Kamu
           </h2>
-          <p className="text-slate-600 mb-8 text-center">
+          <p className="text-white/70 mb-8 text-center">
             Berdasarkan hasil kuisioner, berikut adalah UKM yang paling sesuai
             dengan minat dan bakatmu:
           </p>
@@ -118,8 +118,8 @@ export default function ResultPage() {
             </div>
           )}
         </div>
-        <div className="bg-white rounded-[2.5rem] shadow-[0_25px_50px_-12px_rgba(13,77,77,0.2)] border-b-10 border-gray-200 p-8 mb-12">
-          <h2 className="text-2xl font-extrabold text-[#0d4d4d] mb-6">
+        <div className="bg-white/10 backdrop-blur-xl rounded-[2.5rem] shadow-2xl border border-white/10 p-8 mb-12">
+          <h2 className="text-2xl font-extrabold text-white mb-6">
             Distribusi Poin Kategori
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
@@ -130,24 +130,24 @@ export default function ResultPage() {
                   key={kategori}
                   className={`p-4 rounded-lg text-center transition-all ${
                     isTopKategori
-                      ? "bg-[#0d4d4d] text-white shadow-md"
-                      : "bg-[#fcfaf2] text-slate-800 border border-[#c5a059]/15"
+                      ? "bg-white/20 text-white shadow-lg border border-white/30"
+                      : "bg-black/20 text-white/70 border border-white/10"
                   }`}
                 >
                   <p
-                    className={`text-sm font-medium mb-2 ${isTopKategori ? "text-white/90" : ""}`}
+                    className={`text-sm font-medium mb-2 ${isTopKategori ? "text-white" : ""}`}
                   >
                     {kategori}
                   </p>
                   <p
-                    className={`text-3xl font-bold mb-2 ${isTopKategori ? "text-white" : "text-[#0d4d4d]"}`}
+                    className={`text-3xl font-bold mb-2 ${isTopKategori ? "text-white" : "text-white/90"}`}
                   >
                     {skor}
                   </p>
-                  <div className="w-full bg-gray-200 rounded-full h-2">
+                  <div className="w-full bg-white/10 rounded-full h-2">
                     <div
                       className={`h-2 rounded-full transition-all ${
-                        isTopKategori ? "bg-[#c5a059]" : "bg-[#0d4d4d]"
+                        isTopKategori ? "bg-cyan-400" : "bg-white/40"
                       }`}
                       style={{ width: `${(skor / 50) * 100}%` }}
                     ></div>
@@ -159,62 +159,62 @@ export default function ResultPage() {
         </div>
 
         {/* Call to Action */}
-        <div className="bg-linear-to-r from-[#0d4d4d] to-[#146a6a] rounded-[2rem] shadow-[0_25px_50px_-12px_rgba(13,77,77,0.45)] p-8 text-center text-white mb-12">
+        <div className="bg-gradient-to-r from-cyan-900/40 to-emerald-900/40 backdrop-blur-lg rounded-[2rem] shadow-2xl border border-white/10 p-8 text-center text-white mb-12">
           <h3 className="text-2xl font-bold mb-4">Langkah Berikutnya</h3>
-          <p className="mb-6 text-white/85">
+          <p className="mb-6 text-white/80">
             Kunjungi booth UKM rekomendasi di acara Panggih Sedulur untuk
             mendapatkan kode rahasia dan hadiah menarik!
           </p>
           <div className="space-y-3">
-            <p className="font-semibold">
+            <p className="font-semibold text-cyan-200">
               📍 Lokasi: Area UKM - Panggih Sedulur
             </p>
-            <p className="font-semibold">⏰ Waktu: [Sesuai jadwal acara]</p>
+            <p className="font-semibold text-cyan-200">⏰ Waktu: [Sesuai jadwal acara]</p>
           </div>
         </div>
 
         {/* User Info */}
-        <div className="bg-white rounded-3xl shadow-[0_20px_40px_-20px_rgba(13,77,77,0.35)] border border-[#c5a059]/20 p-6 mb-8">
-          <h3 className="text-lg font-bold text-[#0d4d4d] mb-4">
+        <div className="bg-white/5 backdrop-blur-md rounded-3xl shadow-xl border border-white/10 p-6 mb-8">
+          <h3 className="text-lg font-bold text-white mb-4">
             Data Peserta
           </h3>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4 text-sm">
             <div>
-              <p className="text-slate-600">Nama</p>
-              <p className="font-semibold text-slate-800">
+              <p className="text-white/60">Nama</p>
+              <p className="font-semibold text-white">
                 {result.biodata.nama}
               </p>
             </div>
             <div>
-              <p className="text-slate-600">NIM</p>
-              <p className="font-semibold text-slate-800">
+              <p className="text-white/60">NIM</p>
+              <p className="font-semibold text-white">
                 {result.biodata.nim}
               </p>
             </div>
             <div>
-              <p className="text-slate-600">Fakultas</p>
-              <p className="font-semibold text-slate-800">
+              <p className="text-white/60">Fakultas</p>
+              <p className="font-semibold text-white">
                 {result.biodata.fakultas}
               </p>
             </div>
             <div>
-              <p className="text-slate-600">Jurusan</p>
-              <p className="font-semibold text-slate-800">
+              <p className="text-white/60">Jurusan</p>
+              <p className="font-semibold text-white">
                 {result.biodata.jurusan}
               </p>
             </div>
             {result.biodata.agama && (
               <div>
-                <p className="text-slate-600">Agama</p>
-                <p className="font-semibold text-slate-800">
+                <p className="text-white/60">Agama</p>
+                <p className="font-semibold text-white">
                   {result.biodata.agama}
                 </p>
               </div>
             )}
             {result.biodata.is_kipk && (
               <div>
-                <p className="text-gray-600">Status</p>
-                <p className="font-semibold text-green-600">Penerima KIP-K</p>
+                <p className="text-white/60">Status</p>
+                <p className="font-semibold text-emerald-400">Penerima KIP-K</p>
               </div>
             )}
           </div>
@@ -227,7 +227,7 @@ export default function ResultPage() {
               localStorage.clear();
               router.push("/kuisioner/biodata");
             }}
-            className="bg-white hover:bg-[#fcfaf2] text-[#0d4d4d] border-2 border-[#0d4d4d]/25 px-8 py-3 rounded-xl font-bold transition"
+            className="bg-white/10 hover:bg-white/20 text-white border border-white/20 px-8 py-3 rounded-xl font-bold transition backdrop-blur-sm"
           >
             ↻ Mulai Ulang
           </button>
@@ -243,7 +243,7 @@ export default function ResultPage() {
         </div>
 
         {/* Footer Info */}
-        <div className="mt-12 text-center text-slate-600 text-sm">
+        <div className="mt-12 text-center text-white/50 text-sm">
           <p>
             Data kamu telah disimpan untuk keperluan statistik UKM Universitas
             Jenderal Soedirman
