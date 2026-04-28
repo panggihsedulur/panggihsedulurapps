@@ -23,29 +23,39 @@ export function QuestionCard({
 
   const optionStyles = [
     {
-      base: "hover:bg-cyan-500/10 border-white/5 bg-white/5",
-      isSelected: "bg-cyan-500/20 border-cyan-500/50 ring-2 ring-cyan-500/20 shadow-[0_0_20px_rgba(6,182,212,0.15)]",
-      icon: "text-cyan-400",
+      // Hijau Zaitun (Sesuai Tombol 1 di gambar)
+      base: "bg-gradient-to-b from-[#A8B81B] to-[#616F00] text-white rounded-[12px] shadow-[0_4px_4px_rgba(0,0,0,0.25)] hover:brightness-110 transition-all",
+      isSelected:
+        "bg-gradient-to-b from-[#b7c91e] to-[#6f7f00] text-white rounded-[12px] ring-2 ring-white/50 shadow-inner translate-y-[2px]",
+      icon: "text-lime-100",
     },
     {
-      base: "hover:bg-emerald-500/10 border-white/5 bg-white/5",
-      isSelected: "bg-emerald-500/20 border-emerald-500/50 ring-2 ring-emerald-500/20 shadow-[0_0_20px_rgba(16,185,129,0.15)]",
-      icon: "text-emerald-400",
+      // Ungu (Sesuai Tombol 2 di gambar)
+      base: "bg-gradient-to-b from-[#A859FF] to-[#6815D8] text-white rounded-[12px] shadow-[0_4px_4px_rgba(0,0,0,0.25)] hover:brightness-110 transition-all",
+      isSelected:
+        "bg-gradient-to-b from-[#b873ff] to-[#7618f5] text-white rounded-[12px] ring-2 ring-white/50 shadow-inner translate-y-[2px]",
+      icon: "text-purple-100",
     },
     {
-      base: "hover:bg-blue-500/10 border-white/5 bg-white/5",
-      isSelected: "bg-blue-500/20 border-blue-500/50 ring-2 ring-blue-500/20 shadow-[0_0_20px_rgba(59,130,246,0.15)]",
-      icon: "text-blue-400",
+      // Oranye (Sesuai Tombol 3 di gambar)
+      base: "bg-gradient-to-b from-[#FF7700] to-[#E03700] text-white rounded-[12px] shadow-[0_4px_4px_rgba(0,0,0,0.25)] hover:brightness-110 transition-all",
+      isSelected:
+        "bg-gradient-to-b from-[#ff871a] to-[#ff3f00] text-white rounded-[12px] ring-2 ring-white/50 shadow-inner translate-y-[2px]",
+      icon: "text-orange-100",
     },
     {
-      base: "hover:bg-violet-500/10 border-white/5 bg-white/5",
-      isSelected: "bg-violet-500/20 border-violet-500/50 ring-2 ring-violet-500/20 shadow-[0_0_20px_rgba(139,92,246,0.15)]",
-      icon: "text-violet-400",
+      // Cyan/Teal (Sesuai Tombol 4 di gambar)
+      base: "bg-gradient-to-b from-[#00D5CB] to-[#008781] text-white rounded-[12px] shadow-[0_4px_4px_rgba(0,0,0,0.25)] hover:brightness-110 transition-all",
+      isSelected:
+        "bg-gradient-to-b from-[#00ebd0] to-[#009b94] text-white rounded-[12px] ring-2 ring-white/50 shadow-inner translate-y-[2px]",
+      icon: "text-cyan-100",
     },
     {
-      base: "hover:bg-teal-500/10 border-white/5 bg-white/5",
-      isSelected: "bg-teal-500/20 border-teal-500/50 ring-2 ring-teal-500/20 shadow-[0_0_20px_rgba(20,184,166,0.15)]",
-      icon: "text-teal-400",
+      // Biru (Tombol 5 - Pelengkap agar berjumlah 5)
+      base: "bg-gradient-to-b from-[#188CFF] to-[#004B99] text-white rounded-[12px] shadow-[0_4px_4px_rgba(0,0,0,0.25)] hover:brightness-110 transition-all",
+      isSelected:
+        "bg-gradient-to-b from-[#2d99ff] to-[#005bb8] text-white rounded-[12px] ring-2 ring-white/50 shadow-inner translate-y-[2px]",
+      icon: "text-blue-100",
     },
   ];
 
@@ -84,10 +94,14 @@ export function QuestionCard({
               onClick={() => handleSelectOption(option.id)}
               className={`group relative flex w-full items-center gap-4 rounded-2xl border px-6 py-5 text-left transition-all active:scale-[0.98] backdrop-blur-sm ${isSelected ? palette.isSelected : palette.base}`}
             >
-              <div className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/5 transition-all group-hover:scale-110 ${isSelected ? "border-cyan-500/50 bg-cyan-500/20 text-white" : "text-white/40"}`}>
+              <div
+                className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/5 transition-all group-hover:scale-110 ${isSelected ? "border-cyan-500/50 bg-cyan-500/20 text-white" : "text-white/40"}`}
+              >
                 {String.fromCharCode(65 + index)}
               </div>
-              <span className={`text-lg md:text-xl font-medium transition-colors ${isSelected ? "text-white" : "text-white/80 group-hover:text-white"}`}>
+              <span
+                className={`text-lg md:text-xl font-medium transition-colors ${isSelected ? "text-white" : "text-white/80 group-hover:text-white"}`}
+              >
                 {option.text}
               </span>
               {isSelected && (
@@ -102,12 +116,12 @@ export function QuestionCard({
         <Button
           onClick={handleSubmitAnswer}
           disabled={!selectedOption || isLoading}
-          className="flex-1 bg-gradient-to-r from-cyan-600 to-emerald-600 hover:from-cyan-500 hover:to-emerald-500 text-white py-8 rounded-2xl font-bold text-xl transition-all disabled:opacity-30 disabled:cursor-not-allowed shadow-xl shadow-cyan-900/20 active:scale-[0.98]"
+          className="flex-1 bg-gradient-to-b from-[#05b682] to-[#027a56] text-white py-5 rounded-[16px] font-bold text-xl transition-all duration-150 disabled:opacity-50 disabled:cursor-not-allowed shadow-[0_6px_0_#014d36,0_10px_10px_rgba(0,0,0,0.25)] active:translate-y-[6px] active:shadow-none hover:brightness-110"
         >
           {isLoading
             ? "Loading..."
             : currentIndex === totalQuestions - 1
-              ? "Selesai ✨"
+              ? "Selesai"
               : "Lanjut →"}
         </Button>
       </div>
