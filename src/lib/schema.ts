@@ -12,8 +12,8 @@ export const BiodataSchema = z.object({
     .trim(),
   nim: z
     .string()
-    .min(8, "NIM minimal 8 karakter")
-    .max(20, "NIM maksimal 20 karakter")
+    .min(9, "NIM harus 9 karakter")
+    .max(9, "NIM harus 9 karakter")
     .trim(),
   fakultas: z.string().min(3, "Pilih fakultas").trim(),
   jurusan: z.string().min(3, "Pilih jurusan").trim(),
