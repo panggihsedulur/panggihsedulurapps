@@ -15,7 +15,7 @@ export const fullUkmAndPaguyubanData: ExpandableCardItem[] = [
   // ==========================================
   {
     id: "pg-120",
-    title: "Himpunan Mahasiswa Majalengka Purwokerto",
+    title: "Himpunan Mahasiswa Majalengka Purwokertoooo",
     src: "https://dummyimage.com/400x400/004d40/ffffff&text=Majalengka",
     description: "Paguyuban Mahasiswa Majalengka",
     category: "Paguyuban Daerah",
