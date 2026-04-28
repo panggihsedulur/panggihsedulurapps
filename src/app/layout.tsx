@@ -1,16 +1,24 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Inter } from "next/font/google";
+import { Geist, Geist_Mono, Inter, Poppins } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/next";
 import { cn } from "@/lib/utils";
 import { SpeedInsights } from "@vercel/speed-insights/react";
+import { AnimatedMenuDemo } from "@/components/ui/Menu";
+import { Footer } from "@/components/footer";
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL ??
   "https://www.panggihsedulur.bem-unsoed.com";
 const googleSiteVerification = process.env.GOOGLE_SITE_VERIFICATION ?? "";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
+
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-quiz",
+});
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -102,6 +110,7 @@ export default function RootLayout({
         geistSans.variable,
         geistMono.variable,
         chauPhilomene.variable,
+        poppins.variable,
         "font-sans",
         inter.variable,
       )}
@@ -109,6 +118,8 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col justify-center  ">
         {children}
         <SpeedInsights />
+        <AnimatedMenuDemo />
+        <Footer />
       </body>
       <Analytics />
     </html>

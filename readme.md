@@ -1,36 +1,59 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Panggih Sedulur Apps
 
-## Getting Started
+Web app kuisioner minat bakat UKM dan paguyuban UNSOED.
 
-First, run the development server:
+## Stack
+
+- Next.js 16 (App Router)
+- TypeScript
+- Tailwind CSS
+- Supabase (penyimpanan hasil kuis)
+- Zod + React Hook Form (validasi biodata)
+
+## Jalankan Lokal
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Jika port 3000 sudah dipakai, Next.js otomatis pindah ke port lain.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Environment Variable
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Buat file .env.local:
 
-## Learn More
+```env
+NEXT_PUBLIC_SUPABASE_URL=...
+NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=...
+NEXT_PUBLIC_SITE_URL=https://www.panggihsedulur.bem-unsoed.com
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Rute Utama
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- / -> landing page
+- /beranda -> hero/beranda
+- /kuisioner -> masuk ke biodata
+- /kuisioner/biodata -> form biodata
+- /kuisioner/test -> kuis level 1 + branching
+- /kuisioner/result -> hasil rekomendasi
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Alur Sistem
 
-## Deploy on Vercel
+1. User isi biodata di /kuisioner/biodata.
+2. Biodata disimpan ke localStorage.
+3. User menjawab 5 soal level 1 untuk scoring kategori.
+4. Sistem lanjut ke pertanyaan branching sesuai kategori dominan.
+5. Rekomendasi final digabung dari:
+   - hasil scoring
+   - pre-filter biodata (agama, KIP-K, fakultas)
+   - hasil branching
+6. Hasil disimpan ke tabel Supabase student_results.
+7. Halaman hasil menampilkan kategori dominan, skor, dan rekomendasi UKM.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Referensi Dokumen
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- RancanganLogikaKuis.md -> logika kuis dan branching final
+- UKM_DATA_REFERENCE.md -> data UKM dan helper rekomendasi
+- SUPABASE_INTEGRATION.md -> setup dan integrasi Supabase
+- IMPLEMENTATION_PLAN.md -> status implementasi saat ini
