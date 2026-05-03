@@ -18,7 +18,7 @@ export interface UKM {
  */
 export const preFilteringRules = {
   agama: {
-    Islam: ["UKKI"],
+    Islam: ["UKKI", "USMAN"],
     "Kristen Protestan": ["PMKP"],
     "Kristen Katolik": ["UMAKA"],
   },
@@ -70,6 +70,14 @@ export const olahragaUKM: UKM[] = [
     category: "Olahraga - Tim",
     description: "Unit olahraga bola tangan dengan program kompetisi.",
     priority: 4,
+  },
+  {
+    id: "ukm-113",
+    name: "UFU",
+    title: "UKM Futsal Unsoed",
+    category: "Olahraga - Tim",
+    description: "Unit kegiatan mahasiswa yang berfokus pada olahraga futsal.",
+    priority: 5,
   },
   // Bela Diri
   {
@@ -181,30 +189,15 @@ export const seniUKM: UKM[] = [
     description: "Seni musik dan ketangkasan melalui instrumen marching band.",
     priority: 1,
   },
-  // Teater & Tari
-  {
-    id: "ukm-086",
-    name: "USMAN",
-    title: "Unit Kegiatan Mahasiswa USMAN",
-    category: "Seni - Teater",
-    description: "Unit kegiatan mahasiswa fokus pada seni pertunjukan teater.",
-    priority: 1,
-  },
+  // Tari
   {
     id: "ukm-118",
     name: "SAKTA",
-    title: "Unit Kegiatan Mahasiswa SAKTA",
+    title: "UKM Sanggar Kreasi Tari Soedirman",
     category: "Seni - Tari",
-    description: "Unit kegiatan mahasiswa fokus pada seni tari dan koreografi.",
+    description:
+      "Unit kegiatan mahasiswa yang berfokus pada pengembangan seni tari dan koreografi.",
     priority: 2,
-  },
-  {
-    id: "ukm-113",
-    name: "UFU",
-    title: "Unit Kegiatan Mahasiswa UFU",
-    category: "Seni - Film",
-    description: "Unit kegiatan mahasiswa fokus pada sinematografi dan film.",
-    priority: 3,
   },
   // Budaya Populer
   {
@@ -362,9 +355,10 @@ export const sosialUKM: UKM[] = [
   {
     id: "ukm-111",
     name: "Muda Bersinar",
-    title: "Unit Kegiatan Mahasiswa Muda Bersinar",
-    category: "Sosial - Kemanusiaan",
-    description: "Unit kegiatan untuk pengembangan potensi generasi muda.",
+    title: "UKM Anti Narkoba Muda Bersinar",
+    category: "Sosial - Anti Narkoba",
+    description:
+      "Unit kegiatan mahasiswa yang berfokus pada edukasi, kampanye, dan pencegahan penyalahgunaan narkoba.",
     priority: 1,
   },
   // Sosial & Kepemimpinan Internasional
@@ -392,6 +386,15 @@ export const sosialUKM: UKM[] = [
  * Biasanya tidak muncul dari scoring, tapi dari pre-filtering biodata
  */
 export const kerohanianUKM: UKM[] = [
+  {
+    id: "ukm-086",
+    name: "USMAN",
+    title: "UKM Seni Islam dan Al Qur'an",
+    category: "Kerohanian",
+    description:
+      "Unit kegiatan mahasiswa tingkat universitas yang berfokus pada pengembangan seni Islam dan Al Qur'an.",
+    priority: 2,
+  },
   {
     id: "ukm-085",
     name: "UKKI",
@@ -473,12 +476,12 @@ export function getUKMById(id: string): UKM | undefined {
 /**
  * Helper: Get recommended UKM berdasarkan top category
  * @param topKategori - Array kategori teratas (e.g., ['Olahraga', 'Seni'])
- * @param limit - Jumlah rekomendasi UKM
+ * @param limit - Jumlah rekomendasi UKM (opsional). Jika tidak diisi, kembalikan semua hasil.
  * @returns Array UKM yang direkomendasikan
  */
 export function getRecommendedUKM(
   topKategori: string[],
-  limit: number = 3,
+  limit?: number,
 ): UKM[] {
   const recommended: UKM[] = [];
 
@@ -494,7 +497,7 @@ export function getRecommendedUKM(
   const uniqueUKM = Array.from(
     new Map(recommended.map((ukm) => [ukm.id, ukm])).values(),
   );
-  return uniqueUKM.slice(0, limit);
+  return typeof limit === "number" ? uniqueUKM.slice(0, limit) : uniqueUKM;
 }
 
 /**
@@ -548,9 +551,15 @@ export function getCombinedRecommendations(
     .map((name) => getUKMById(name))
     .filter((ukm): ukm is UKM => ukm !== undefined);
 
-  // Priority order: branch result > pre-filter biodata > scoring fallback
-  // Branch answers are the most specific signal from quiz flow.
-  const combined = [...branchRecommendedUKM, ...preFilteredUKM, ...recommended];
+  // Prefer the most specific signal from quiz flow.
+  // If user answered branch questions, only use branch-based recommendations
+  // (plus biodata pre-filtering), without adding generic scoring fallback.
+  const combined =
+    branchRecommendedUKM.length > 0
+      ? [...branchRecommendedUKM, ...preFilteredUKM]
+      : preFilteredUKM.length > 0
+        ? [...preFilteredUKM]
+        : [...recommended];
   const uniqueIds = new Set<string>();
   return combined.filter((ukm) => {
     if (uniqueIds.has(ukm.id)) return false;

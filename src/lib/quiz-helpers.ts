@@ -55,7 +55,7 @@ export async function saveQuizResult(
  */
 export function getRecommendedUKMNames(
   topKategori: string[],
-  limit: number = 3,
+  limit?: number,
 ): string[] {
   const recommended = getRecommendedUKM(topKategori, limit);
   return recommended.map((ukm) => ukm.name);
@@ -71,7 +71,7 @@ export function getCombinedRecommendationNames(
   is_kipk?: boolean,
   fakultas?: string,
   branchRecommendations: string[] = [],
-  limit: number = 3,
+  limit?: number,
 ): string[] {
   const combined = getCombinedRecommendations(
     topKategori,
@@ -80,7 +80,9 @@ export function getCombinedRecommendationNames(
     fakultas,
     branchRecommendations,
   );
-  return combined.slice(0, limit).map((ukm) => ukm.name);
+  return limit
+    ? combined.slice(0, limit).map((ukm) => ukm.name)
+    : combined.map((ukm) => ukm.name);
 }
 
 /**
@@ -93,15 +95,16 @@ export function getCombinedRecommendationObjects(
   is_kipk?: boolean,
   fakultas?: string,
   branchRecommendations: string[] = [],
-  limit: number = 3,
+  limit?: number,
 ): UKM[] {
-  return getCombinedRecommendations(
+  const combined = getCombinedRecommendations(
     topKategori,
     agama,
     is_kipk,
     fakultas,
     branchRecommendations,
-  ).slice(0, limit);
+  );
+  return limit ? combined.slice(0, limit) : combined;
 }
 
 /**

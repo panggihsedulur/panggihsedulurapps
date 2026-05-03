@@ -26,6 +26,8 @@ export default function TestPage() {
   const [branchQuestionId, setBranchQuestionId] = useState<string | null>(null);
   const [branchStep, setBranchStep] = useState(0);
   const [branchTotalSteps, setBranchTotalSteps] = useState(1);
+  const [branchCategories, setBranchCategories] = useState<Kategori[]>([]);
+  const [branchCategoryIndex, setBranchCategoryIndex] = useState(0);
   const [branchRecommendations, setBranchRecommendations] = useState<string[]>(
     [],
   );
@@ -33,6 +35,10 @@ export default function TestPage() {
     null,
   );
   const [skor, setSkor] = useState<Record<Kategori, number>>(initializeSkor());
+  const [finalSkorForSubmit, setFinalSkorForSubmit] = useState<Record<
+    Kategori,
+    number
+  > | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isInitializing, setIsInitializing] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -69,8 +75,11 @@ export default function TestPage() {
         setBranchQuestionId(null);
         setBranchStep(0);
         setBranchTotalSteps(1);
+        setBranchCategories([]);
+        setBranchCategoryIndex(0);
         setBranchRecommendations([]);
         setDominantCategory(null);
+        setFinalSkorForSubmit(null);
         setIsInitializing(false);
       } catch (err) {
         console.error("Error parsing biodata:", err);
@@ -79,6 +88,37 @@ export default function TestPage() {
       }
     });
   }, [router]);
+
+  const startBranchForCategory = (kategori: Kategori): boolean => {
+    const startBranchQuestionId = getBranchStartQuestionId(kategori);
+    const firstBranchQuestion = getBranchQuestionById(startBranchQuestionId);
+
+    if (!firstBranchQuestion) {
+      return false;
+    }
+
+    setPhase("branch");
+    setBranchQuestionId(startBranchQuestionId);
+    setBranchStep(0);
+    setBranchTotalSteps(1);
+    return true;
+  };
+
+  const proceedToNextBranchOrSubmit = async (
+    mergedRecommendations: string[],
+  ) => {
+    const categories = branchCategories;
+    for (let i = branchCategoryIndex + 1; i < categories.length; i += 1) {
+      if (startBranchForCategory(categories[i])) {
+        setBranchCategoryIndex(i);
+        return;
+      }
+    }
+
+    const skorToSubmit = finalSkorForSubmit ?? skor;
+    const dominant = categories[0] ?? dominantCategory;
+    await handleSubmitQuiz(skorToSubmit, dominant, mergedRecommendations);
+  };
 
   // Submit kuis dan simpan hasil
   const handleSubmitQuiz = async (
@@ -104,7 +144,6 @@ export default function TestPage() {
         biodata.is_kipk,
         biodata.fakultas,
         selectedBranchRecommendations,
-        3,
       );
 
       // Prepare result object
@@ -159,25 +198,33 @@ export default function TestPage() {
       return;
     }
 
-    const topOne = getTopKategori(updatedSkor, 1)[0] as Kategori | undefined;
+    const computedTopKategori = getTopKategori(updatedSkor, 2);
+    const topKategori = computedTopKategori as Kategori[];
+    const topOne = topKategori[0];
+
     if (!topOne) {
       await handleSubmitQuiz(updatedSkor, null, []);
       return;
     }
 
     setDominantCategory(topOne);
-    const startBranchQuestionId = getBranchStartQuestionId(topOne);
-    const firstBranchQuestion = getBranchQuestionById(startBranchQuestionId);
+    setFinalSkorForSubmit(updatedSkor);
+    setBranchCategories(topKategori);
+    setBranchCategoryIndex(0);
+    setBranchRecommendations([]);
 
-    if (!firstBranchQuestion) {
-      await handleSubmitQuiz(updatedSkor, topOne, []);
-      return;
+    let startedBranch = false;
+    for (let i = 0; i < topKategori.length; i += 1) {
+      if (startBranchForCategory(topKategori[i])) {
+        setBranchCategoryIndex(i);
+        startedBranch = true;
+        break;
+      }
     }
 
-    setPhase("branch");
-    setBranchQuestionId(startBranchQuestionId);
-    setBranchStep(0);
-    setBranchTotalSteps(1);
+    if (!startedBranch) {
+      await handleSubmitQuiz(updatedSkor, topOne, []);
+    }
   };
 
   // Handle jawaban kuis (Branch Level 2/3)
@@ -199,7 +246,7 @@ export default function TestPage() {
       return;
     }
 
-    await handleSubmitQuiz(skor, dominantCategory, mergedRecommendations);
+    await proceedToNextBranchOrSubmit(mergedRecommendations);
   };
 
   const handleAnswer = async (optionId: string) => {
@@ -268,7 +315,6 @@ export default function TestPage() {
 
   return (
     <div className="relative min-h-screen px-4 py-8 text-white">
-
       <div className="mx-auto w-full max-w-3xl">
         {/* Progress Bar */}
         <div className="relative z-10 mb-8 rounded-3xl border border-white/10 bg-white/5 p-4 shadow-[0_20px_45px_-30px_rgba(0,0,0,0.9)] backdrop-blur-xl">

@@ -414,9 +414,9 @@ export const BRANCH_QUESTIONS: Record<string, Question> = {
     options: [
       {
         id: "olahraga-l3-team-football",
-        text: "Bola di lapangan hijau.",
+        text: "Sepak bola / futsal di lapangan.",
         weight: zeroWeight,
-        recommendations: ["UFC"],
+        recommendations: ["UFC", "UFU"],
       },
       {
         id: "olahraga-l3-team-basket",
@@ -518,41 +518,15 @@ export const BRANCH_QUESTIONS: Record<string, Question> = {
       },
       {
         id: "seni-l2-performing",
-        text: "Seni pertunjukan, teater, atau kreasi visual (sinematografi).",
+        text: "Seni pertunjukan atau tari.",
         weight: zeroWeight,
-        nextQuestionId: "seni-l3-expression",
+        recommendations: ["SAKTA"],
       },
       {
         id: "seni-l2-japan",
         text: "Aku tertarik banget dengan budaya populer, terutama Jepang!",
         weight: zeroWeight,
         recommendations: ["Jejepangan Kazoku 1963"],
-      },
-    ],
-  },
-  "seni-l3-expression": {
-    id: "seni-l3-expression",
-    level: 3,
-    category: "Seni",
-    text: "Bagaimana cara kamu mengekspresikan senimu?",
-    options: [
-      {
-        id: "seni-l3-theater",
-        text: "Lewat akting, bermain peran, dan pertunjukan teater.",
-        weight: zeroWeight,
-        recommendations: ["USMAN"],
-      },
-      {
-        id: "seni-l3-dance",
-        text: "Lewat olah tubuh, koreografi, dan seni tari.",
-        weight: zeroWeight,
-        recommendations: ["SAKTA"],
-      },
-      {
-        id: "seni-l3-film",
-        text: "Di balik layar, menangkap momen lewat lensa kamera atau membuat film.",
-        weight: zeroWeight,
-        recommendations: ["UFU"],
       },
     ],
   },

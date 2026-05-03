@@ -4,7 +4,7 @@
 
 Agar kuisioner tidak terlalu panjang, beberapa UKM akan langsung direkomendasikan berdasarkan input form pendaftaran awal:
 
-- Agama: Islam -> UKKI, Protestan -> Pmkp, Katolik -> UMAKA.
+- Agama: Islam -> UKKI + USMAN, Protestan -> PMKP, Katolik -> UMAKA.
 - Status Beasiswa KIP-K: Jika "Ya" -> Himabisi.
 - Fakultas: Jika "Kedokteran/Rumpun Kesehatan" -> bisa mendapat rekomendasi ekstra ke CIMSA.
 
@@ -92,7 +92,7 @@ Sistem mendeteksi **Poin Kategori Tertinggi** dan memunculkan pertanyaan spesifi
 **Level 3 Tanya:**  
 "Olahraga tim seperti apa yang paling menantang buatmu?"
 
-- Pilih Bola di lapangan hijau -> Rekomendasi: UFC (Unit Sepak Bola)
+- Pilih Sepak bola / futsal di lapangan -> Rekomendasi: UFC + UFU (UKM Futsal Unsoed)
 - Pilih Bola basket di lapangan kayu -> Rekomendasi: UBB (Unit Bola Basket)
 - Pilih Smash bola melewati net -> Rekomendasi: Bola Voli
 - Pilih Lempar tangkap ke gawang (indoor) -> Rekomendasi: Hand Ball
@@ -145,13 +145,9 @@ Sistem mendeteksi **Poin Kategori Tertinggi** dan memunculkan pertanyaan spesifi
 - Opsi 2: "Bermain alat musik dengan disiplin tinggi dan formasi."  
   -> Rekomendasi: MBBPS (Marching Band)
 
-- Opsi 3: "Seni pertunjukan, teater, atau kreasi visual (Sinematografi)."
+- Opsi 3: "Seni pertunjukan atau tari."
 
-  **Level 3 Tanya:**  
-  "Bagaimana cara kamu mengekspresikan senimu?"
-  - Lewat akting, bermain peran, dan pertunjukan teater -> Rekomendasi: USMAN
-  - Lewat olah tubuh, koreografi, dan seni tari -> Rekomendasi: SAKTA
-  - Di balik layar, menangkap momen lewat lensa kamera atau membuat film -> Rekomendasi: UFU
+  -> Rekomendasi: SAKTA (UKM Sanggar Kreasi Tari Soedirman)
 
 - Opsi 4: "Aku tertarik banget dengan budaya populer, terutama Jepang!"  
   -> Rekomendasi: Jejepangan Kazoku 1963
@@ -213,13 +209,13 @@ Sistem mendeteksi **Poin Kategori Tertinggi** dan memunculkan pertanyaan spesifi
   -> Rekomendasi: Racana Soedirman (Pramuka)
 
 - Opsi 4: "Kampanye sosial, penyuluhan, dan pengabdian masyarakat."  
-  -> Rekomendasi: Muda Bersinar, AIESEC
+  -> Rekomendasi: Muda Bersinar (UKM Anti Narkoba), AIESEC
 
 ---
 
 ## 4. TAMPILAN HASIL (RESULT SCREEN)
 
-Setelah mahasiswa selesai memilih, tampilkan **2-3 UKM terbaik** dengan profil singkatnya agar mereka tahu booth mana yang harus dikunjungi.
+Setelah mahasiswa selesai memilih, tampilkan **daftar rekomendasi UKM** dengan profil singkatnya agar mereka tahu booth mana yang harus dikunjungi.
 
 ### Contoh Output Layar:
 

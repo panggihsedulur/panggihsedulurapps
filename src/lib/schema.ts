@@ -45,10 +45,7 @@ export const QuizResultSchema = z.object({
     .array(z.string())
     .min(1, "Minimal ada 1 kategori top")
     .max(2, "Maksimal 2 kategori top"),
-  rekomendasi_ukm: z
-    .array(z.string())
-    .min(1, "Minimal ada 1 rekomendasi UKM")
-    .max(5, "Maksimal 5 rekomendasi UKM"),
+  rekomendasi_ukm: z.array(z.string()).min(1, "Minimal ada 1 rekomendasi UKM"),
 });
 
 export type QuizResult = z.infer<typeof QuizResultSchema>;

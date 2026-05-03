@@ -124,14 +124,13 @@ export default function TestPage() {
       biodata.is_kipk,
       biodata.fakultas,
       [],
-      3,
     );
 
     const result = {
       biodata,
       skor_kategori: skor,
       top_kategori: topKategori,
-      rekomendasi_ukm: rekomendasi_ukm.slice(0, 3), // Top 3
+      rekomendasi_ukm,
     };
 
     // Simpan ke Supabase

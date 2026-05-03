@@ -52,13 +52,14 @@ Catatan:
 1. User isi biodata di /kuisioner/biodata.
 2. Biodata disimpan di localStorage.
 3. User menjawab 5 soal level 1 (scoring kategori).
-4. Sistem ambil kategori dominan, lalu menampilkan branching level 2/3.
-5. Sistem gabungkan rekomendasi dari:
-   - pre-filter biodata
-   - hasil branching
-   - fallback top kategori scoring
-6. Data hasil disimpan ke Supabase tabel student_results.
-7. User diarahkan ke /kuisioner/result.
+4. Sistem ambil top kategori (maks 2 kategori) dari hasil scoring level 1.
+5. Sistem menampilkan branching level 2/3 untuk setiap kategori top (berurutan), jika pertanyaannya tersedia.
+6. Sistem gabungkan rekomendasi dari:
+   - hasil branching (paling spesifik dari jawaban user)
+   - pre-filter biodata (agama/KIP-K/fakultas)
+   - fallback scoring hanya jika tidak ada hasil branching dan tidak ada hasil pre-filter
+7. Data hasil disimpan ke Supabase tabel student_results.
+8. User diarahkan ke /kuisioner/result.
 
 ## 5. Skema Data Hasil
 

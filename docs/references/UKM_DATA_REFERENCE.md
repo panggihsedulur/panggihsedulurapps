@@ -35,7 +35,7 @@ Sistem rekomendasi UKM bekerja dengan 3 level:
 │ LEVEL 3: FINAL RECOMMENDATION                        │
 │ - Combine scoring + pre-filtering                    │
 │ - Deduplicate & sort by priority                     │
-│ - Top 3 UKM final untuk user                        │
+│ - Tidak ada hard limit: tampilkan semua yang relevan  │
 └──────────────────────────────────────────────────────┘
 ```
 
@@ -50,36 +50,34 @@ lib/ukm-data.ts
 ├── Interface UKM
 ├── Pre-filtering Rules (agama, KIP-K, fakultas)
 ├── Kategori Arrays:
-│   ├── olahragaUKM (13 UKM)
-│   ├── seniUKM (6 UKM)
-│   ├── penaranUKM (6 UKM)
-│   ├── alamBebasUKM (4 UKM)
-│   ├── sosialUKM (6 UKM)
-│   ├── kerohanianUKM (3 UKM - special)
-│   └── khususUKM (2 UKM - special)
+│   ├── olahragaUKM
+│   ├── seniUKM
+│   ├── penaranUKM
+│   ├── alamBebasUKM
+│   ├── sosialUKM
+│   ├── kerohanianUKM (special)
+│   └── khususUKM (special)
 ├── Master Maps
 └── Helper Functions
 ```
 
 ### Kategori Scoring (5)
 
-#### 1. OLAHRAGA (13 UKM)
+#### 1. OLAHRAGA
 
-- **Tim Sports**: UFC, UBB, Bola Voli, Hand Ball
+- **Tim Sports**: UFC, UFU, UBB, Bola Voli, Hand Ball
 - **Bela Diri**: Taekwondo, PSHT, Merpati Putih, BKC, KEMPO, Gokasi
 - **Raket**: Bulutangkis, Tenis Meja, Tenis Lapangan
 - **Strategi**: Catur
 
-#### 2. SENI (6 UKM)
+#### 2. SENI
 
 - **Vokal**: PSM GBS
 - **Musik**: MBBPS
-- **Teater**: USMAN
-- **Tari**: SAKTA
-- **Film**: UFU
+- **Tari**: SAKTA (Sanggar Kreasi Tari Soedirman)
 - **Budaya Populer**: Jejepangan Kazoku 1963
 
-#### 3. PENALARAN (6 UKM)
+#### 3. PENALARAN
 
 - **Riset**: UKMPR
 - **Bahasa**: SEF
@@ -88,31 +86,32 @@ lib/ukm-data.ts
 - **Jurnalistik**: LPM Sketsa
 - **Teknologi**: Soedirman Robotic Team
 
-#### 4. PECINTA ALAM (4 UKM)
+#### 4. PECINTA ALAM
 
 - **Hiking**: UPL MPA
 - **Panjat**: Panjat Tebing
 - **Air**: Arung Jeram
 - **Kepanduan**: Racana Soedirman
 
-#### 5. SOSIAL & DISIPLIN (6 UKM)
+#### 5. SOSIAL & DISIPLIN
 
 - **Medis**: KSR-PMI
 - **Bela Negara**: MENWA
 - **Relawan**: Racana Soedirman
-- **Kemanusiaan**: Muda Bersinar
+- **Anti Narkoba**: Muda Bersinar
 - **Internasional**: AIESEC
 - **Kesehatan**: CIMSA
 
 ### Kategori Spesial (Pre-filtering)
 
-#### KEROHANIAN (3 UKM)
+#### KEROHANIAN
 
 - UKKI (Islam)
+- USMAN (Seni Islam & Al Qur'an)
 - PMKP (Kristen Protestan)
 - UMAKA (Kristen Katolik)
 
-#### KHUSUS (2 UKM)
+#### KHUSUS
 
 - Himabisi (KIP-K)
 - CIMSA (Fakultas Kesehatan)
@@ -150,7 +149,7 @@ const ukm = getUKMById("UFC");
 console.log(ukm?.name); // "UFC"
 ```
 
-### 2. `getRecommendedUKM(topKategori: string[], limit: number = 3): UKM[]`
+### 2. `getRecommendedUKM(topKategori: string[], limit?: number): UKM[]`
 
 Dapatkan rekomendasi UKM hanya berdasarkan scoring (tanpa pre-filtering).
 
@@ -158,7 +157,7 @@ Dapatkan rekomendasi UKM hanya berdasarkan scoring (tanpa pre-filtering).
 import { getRecommendedUKM } from "@/lib/ukm-data";
 
 const topKategori = ["Olahraga", "Seni"];
-const recommendations = getRecommendedUKM(topKategori, 3);
+const recommendations = getRecommendedUKM(topKategori);
 
 // Output:
 // [
@@ -168,9 +167,12 @@ const recommendations = getRecommendedUKM(topKategori, 3);
 // ]
 ```
 
-### 3. `getCombinedRecommendations(topKategori, agama?, is_kipk?, fakultas?): UKM[]`
+### 3. `getCombinedRecommendations(topKategori, agama?, is_kipk?, fakultas?, branchRecommendations?): UKM[]`
 
-Dapatkan rekomendasi UKM gabungan: scoring + pre-filtering biodata.
+Dapatkan rekomendasi UKM gabungan.
+
+- Jika `branchRecommendations` ada (jawaban Level 2/3), hasil akan **mengutamakan rekomendasi branch** (ditambah pre-filter biodata).
+- Fallback scoring digunakan hanya jika tidak ada rekomendasi dari branch dan tidak ada pre-filter biodata.
 
 ```typescript
 import { getCombinedRecommendations } from '@/lib/ukm-data'
@@ -179,7 +181,8 @@ const recommendations = getCombinedRecommendations(
   topKategori: ['Olahraga', 'Seni'],
   agama: 'Islam',
   is_kipk: true,
-  fakultas: 'Kesehatan'
+  fakultas: 'Kesehatan',
+  branchRecommendations: ['UFC']
 )
 
 // Output termasuk:
@@ -199,7 +202,7 @@ Tersimpan dalam `preFilteringRules` object:
 ```typescript
 export const preFilteringRules = {
   agama: {
-    Islam: ["UKKI"],
+    Islam: ["UKKI", "USMAN"],
     "Kristen Protestan": ["PMKP"],
     "Kristen Katolik": ["UMAKA"],
   },
@@ -219,7 +222,7 @@ export const preFilteringRules = {
 
 File `quiz-helpers.ts` menyediakan helper functions yang lebih user-friendly:
 
-### `getRecommendedUKMNames(topKategori, limit = 3): string[]`
+### `getRecommendedUKMNames(topKategori, limit?): string[]`
 
 Return array nama UKM (bukan object).
 
@@ -230,7 +233,7 @@ const names = getRecommendedUKMNames(["Olahraga", "Seni"]);
 // Output: ['UFC', 'Bola Voli', 'PSM GBS']
 ```
 
-### `getCombinedRecommendationNames(topKategori, agama, is_kipk, fakultas, limit = 3): string[]`
+### `getCombinedRecommendationNames(topKategori, agama, is_kipk, fakultas, branchRecommendations, limit?): string[]`
 
 Return array nama UKM dengan pre-filtering included.
 
@@ -242,12 +245,12 @@ const names = getCombinedRecommendationNames(
   "Islam",
   true,
   "Kesehatan",
-  3,
+  [],
 );
 // Output: ['UFC', 'UKKI', 'Himabisi'] (atau kombinasi lainnya)
 ```
 
-### `getCombinedRecommendationObjects(topKategori, agama, is_kipk, fakultas, limit = 3): UKM[]`
+### `getCombinedRecommendationObjects(topKategori, agama, is_kipk, fakultas, branchRecommendations, limit?): UKM[]`
 
 Return object UKM lengkap untuk result page (bisa display deskripsi).
 
@@ -259,7 +262,7 @@ const ukmObjects = getCombinedRecommendationObjects(
   "Islam",
   true,
   "Kesehatan",
-  3,
+  [],
 );
 
 ukmObjects.forEach((ukm) => {
@@ -287,7 +290,7 @@ const ukmObjects = getCombinedRecommendationObjects(
   biodata.agama,
   biodata.is_kipk,
   biodata.fakultas,
-  3,
+  [],
 );
 
 const result = {
@@ -299,63 +302,3 @@ const result = {
 
 const { success, error } = await saveQuizResult(result);
 ```
-
----
-
-## 💾 Storage di Supabase
-
-Tabel `student_results` menyimpan:
-
-| Kolom             | Tipe            | Contoh                              |
-| ----------------- | --------------- | ----------------------------------- |
-| `nama`            | text            | "Adi Sudarsono"                     |
-| `nim`             | text            | "D500190109"                        |
-| `fakultas`        | text            | "Teknik"                            |
-| `jurusan`         | text            | "Teknik Informatika"                |
-| `agama`           | text (optional) | "Islam"                             |
-| `is_kipk`         | boolean         | true                                |
-| `skor_kategori`   | jsonb           | `{"Olahraga": 40, "Seni": 20, ...}` |
-| `rekomendasi_ukm` | text[]          | `["UFC", "UKKI", "Himabisi"]`       |
-| `top_kategori`    | text[]          | `["Olahraga", "Sosial & Disiplin"]` |
-
----
-
-## ✨ Priority System
-
-Setiap UKM dalam kategori memiliki `priority` (1 = highest):
-
-```typescript
-// Contoh dalam olahragaUKM
-{ id: 'ukm-104', name: 'UFC', priority: 1 },  // Paling diprioritaskan
-{ id: 'ukm-102', name: 'UBB', priority: 2 },
-{ id: 'ukm-092', name: 'Bola Voli', priority: 3 },
-```
-
-Saat sorting dalam `getRecommendedUKM()`, UKM dengan priority lebih rendah akan muncul lebih dulu.
-
----
-
-## 🎓 Level 2-3 Branching (Future)
-
-Saat ini `ukm-data.ts` hanya support Level 1 scoring + pre-filtering.
-
-Untuk Level 2-3 branching (pertanyaan percabangan berdasarkan kategori dominan), perlu:
-
-1. Buat `lib/questions-level2.ts` dengan dynamic questions per kategori
-2. Render questions conditionally di `/test` page
-3. Capture sub-kategori pilihan (e.g., "Olahraga - Tim" vs "Olahraga - Bela Diri")
-
----
-
-## 📋 Checklist Implementasi
-
-- [x] `lib/ukm-data.ts` - UKM data + helpers
-- [x] Integration di `lib/quiz-helpers.ts`
-- [ ] Implementasi `lib/questions.ts` (Level 1 only untuk MVP)
-- [ ] Test page integration
-- [ ] Result page display
-- [ ] End-to-end testing
-
----
-
-<!-- END:UKM-DATA-REFERENCE -->
