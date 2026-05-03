@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { FaInstagram } from "react-icons/fa6";
+
 // --- MOCK BRANDS ---
 // Replaced PNGs with Lucide icons to simulate tech logos
 const CLIENTS = [
