@@ -26,25 +26,25 @@ export default function BiodataPage() {
   };
 
   return (
-    <div className="min-h-screen py-10 px-4 text-white">
+    <div className="min-h-screen py-10 px-4 text-gradient ">
       <div className="max-w-2xl mx-auto mt-15">
         {/* Header */}
         <div className="text-center mb-10">
           <h1 className="text-3xl sm:text-5xl font-normal font-heading  text-center">
             Kuisioner Minat Bakat UKM
           </h1>
-          <p className="text-white/70">
+          <p className="text-black/50">
             Temukan UKM yang paling sesuai dengan minat dan bakatmu!
           </p>
         </div>
 
         {/* Form Section */}
-        <div className="bg-white/10 backdrop-blur-xl rounded-[2.5rem] shadow-[0_25px_50px_-12px_rgba(0,0,0,0.5)] border border-white/10 p-8 md:p-12">
+        <div className="bg-white/50 backdrop-blur-xl rounded-[1rem] shadow-[0_25px_50px_-12px_rgba(0,0,0,0.5)] border border-white/10 p-8 md:p-12">
           <div className="mb-8 text-center">
-            <h2 className="text-2xl font-extrabold text-white mb-2">
+            <h2 className="text-2xl font-extrabold text-gradient   mb-2">
               Data Pribadi
             </h2>
-            <p className="text-white/60">
+            <p className="text-gradient">
               Lengkapi informasi berikut untuk memulai kuisioner
             </p>
           </div>
@@ -54,8 +54,8 @@ export default function BiodataPage() {
 
         {/* Info Box */}
         <div className="mt-8 bg-white/5 border border-white/10 rounded-2xl p-6 backdrop-blur-sm">
-          <h3 className="font-bold text-white mb-2">Informasi</h3>
-          <ul className="text-sm text-white/80 space-y-2">
+          <h3 className="font-bold text-black mb-2">Informasi</h3>
+          <ul className="text-sm text-black/80 space-y-2">
             <li>✓ Kuisioner ini gratis dan tidak memiliki nilai akademik</li>
             <li>✓ Hasil rekomendasi berdasarkan minat dan preferensimu</li>
             <li>✓ Data disimpan untuk keperluan statistik UKM</li>

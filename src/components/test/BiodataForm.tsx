@@ -34,7 +34,7 @@ export function BiodataForm({ onSubmit, isLoading = false }: BiodataFormProps) {
       <div>
         <label
           htmlFor="nama"
-          className="block text-sm font-bold text-white/90 mb-2"
+          className="block text-sm font-bold text-gradient mb-2"
         >
           Nama Lengkap *
         </label>
@@ -42,7 +42,7 @@ export function BiodataForm({ onSubmit, isLoading = false }: BiodataFormProps) {
           id="nama"
           {...register("nama")}
           placeholder="Masukkan nama lengkap"
-          className="w-full px-4 py-3 border border-white/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-500/30 bg-white/5 text-white placeholder:text-white/30 backdrop-blur-sm transition-all focus:bg-white/10"
+          className="w-full px-4 py-3 border border-white/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-500/30 bg-white/5 text-gradient placeholder:text-white/30 backdrop-blur-sm transition-all focus:bg-white/10"
         />
         {errors.nama && (
           <p className="text-rose-400 text-xs font-medium mt-1.5 ml-1">
@@ -55,7 +55,7 @@ export function BiodataForm({ onSubmit, isLoading = false }: BiodataFormProps) {
       <div>
         <label
           htmlFor="nim"
-          className="block text-sm font-bold text-white/90 mb-2"
+          className="block text-sm font-bold text-gradient mb-2"
         >
           NIM *
         </label>
@@ -63,7 +63,7 @@ export function BiodataForm({ onSubmit, isLoading = false }: BiodataFormProps) {
           id="nim"
           {...register("nim")}
           placeholder="Masukkan NIM"
-          className="w-full px-4 py-3 border border-white/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-500/30 bg-white/5 text-white placeholder:text-white/30 backdrop-blur-sm transition-all focus:bg-white/10"
+          className="w-full px-4 py-3 border border-white/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-500/30 bg-white/5 text-gradient placeholder:text-white/30 backdrop-blur-sm transition-all focus:bg-white/10"
         />
         {errors.nim && (
           <p className="text-rose-400 text-xs font-medium mt-1.5 ml-1">
@@ -76,14 +76,14 @@ export function BiodataForm({ onSubmit, isLoading = false }: BiodataFormProps) {
       <div>
         <label
           htmlFor="fakultas"
-          className="block text-sm font-bold text-white/90 mb-2"
+          className="block text-sm font-bold text-gradient mb-2"
         >
           Fakultas *
         </label>
         <select
           id="fakultas"
           {...register("fakultas")}
-          className="w-full px-4 py-3 border border-white/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-500/30 bg-white/5 text-white backdrop-blur-sm transition-all focus:bg-white/10 appearance-none [&>option]:bg-slate-900 [&>option]:text-white"
+          className="w-full px-4 py-3 border border-white/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-500/30 bg-white/5 text-gradient backdrop-blur-sm transition-all focus:bg-white/10 appearance-none [&>option]:bg-slate-900 [&>option]:text-white"
         >
           <option value="">-- Pilih Fakultas --</option>
           <option value="Teknik">Teknik</option>
@@ -110,7 +110,7 @@ export function BiodataForm({ onSubmit, isLoading = false }: BiodataFormProps) {
       <div>
         <label
           htmlFor="jurusan"
-          className="block text-sm font-bold text-white/90 mb-2"
+          className="block text-sm font-bold text-gradient mb-2"
         >
           Jurusan/Program Studi *
         </label>
@@ -118,7 +118,7 @@ export function BiodataForm({ onSubmit, isLoading = false }: BiodataFormProps) {
           id="jurusan"
           {...register("jurusan")}
           placeholder="Masukkan jurusan/program studi"
-          className="w-full px-4 py-3 border border-white/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-500/30 bg-white/5 text-white placeholder:text-white/30 backdrop-blur-sm transition-all focus:bg-white/10"
+          className="w-full px-4 py-3 border border-white/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-500/30 bg-white/5 text-gradient placeholder:text-white/30 backdrop-blur-sm transition-all focus:bg-white/10"
         />
         {errors.jurusan && (
           <p className="text-rose-400 text-xs font-medium mt-1.5 ml-1">
@@ -131,14 +131,14 @@ export function BiodataForm({ onSubmit, isLoading = false }: BiodataFormProps) {
       <div>
         <label
           htmlFor="agama"
-          className="block text-sm font-bold text-white/90 mb-2"
+          className="block text-sm font-bold text-gradient mb-2"
         >
           Agama (Opsional)
         </label>
         <select
           id="agama"
           {...register("agama")}
-          className="w-full px-4 py-3 border border-white/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-500/30 bg-white/5 text-white backdrop-blur-sm transition-all focus:bg-white/10 appearance-none [&>option]:bg-slate-900 [&>option]:text-white"
+          className="w-full px-4 py-3 border border-white/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-500/30 bg-white/5 text-gradient backdrop-blur-sm transition-all focus:bg-white/10 appearance-none [&>option]:bg-slate-900 [&>option]:text-white"
         >
           <option value="">-- Tidak Dipilih --</option>
           <option value="Islam">Islam</option>
@@ -165,7 +165,7 @@ export function BiodataForm({ onSubmit, isLoading = false }: BiodataFormProps) {
         />
         <label
           htmlFor="is_kipk"
-          className="text-sm font-medium text-white/70 cursor-pointer"
+          className="text-sm font-medium text-gradient cursor-pointer"
         >
           Penerima Beasiswa KIP-K / Bidikmisi (Opsional)
         </label>
@@ -180,7 +180,7 @@ export function BiodataForm({ onSubmit, isLoading = false }: BiodataFormProps) {
         {isLoading ? "Memproses..." : "Lanjut ke Kuis →"}
       </Button>
 
-      <p className="text-xs text-white/30 text-center italic">
+      <p className="text-xs text-black/50 text-center italic">
         * Wajib diisi | Data anda aman dan hanya untuk keperluan statistik UKM
       </p>
     </form>

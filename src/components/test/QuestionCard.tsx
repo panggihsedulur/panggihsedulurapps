@@ -76,7 +76,7 @@ export function QuestionCard({
           <div className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/15 bg-[#0b141b] px-6 py-2 text-2xl font-semibold text-[#ffd15a] shadow-[0_6px_16px_rgba(0,0,0,0.35)]">
             {currentIndex + 1} / {totalQuestions}
           </div>
-          <h2 className="text-xl leading-tight md:text-3xl font-semibold text-white">
+          <h2 className="text-xl leading-tight md:text-3xl font-semibold text-gradient">
             {question.text}
           </h2>
         </div>

@@ -18,10 +18,10 @@ export function ProgressBar({
       {/* Labels */}
       {showLabel && (
         <div className="flex justify-between items-center mb-3">
-          <span className="font-semibold text-base tracking-wide uppercase text-white/80">
+          <span className="font-semibold text-base tracking-wide uppercase text-gradient">
             Kuisioner Minat & Bakat
           </span>
-          <span className="text-sm font-semibold text-white bg-black/30 px-4 py-1 rounded-full border border-white/15 shadow-sm backdrop-blur-sm">
+          <span className="text-sm font-semibold text-gradient bg-black/30 px-4 py-1 rounded-full border border-white/15 shadow-sm backdrop-blur-sm">
             Soal {current} / {total}
           </span>
         </div>
