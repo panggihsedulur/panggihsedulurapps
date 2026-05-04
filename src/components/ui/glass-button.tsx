@@ -18,7 +18,7 @@ const glassButtonVariants = cva(
     defaultVariants: {
       size: "default",
     },
-  }
+  },
 );
 
 const glassButtonTextVariants = cva(
@@ -35,18 +35,33 @@ const glassButtonTextVariants = cva(
     defaultVariants: {
       size: "default",
     },
-  }
+  },
 );
 
 export interface GlassButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+  extends
+    React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof glassButtonVariants> {
   contentClassName?: string;
   wrapperClassName?: string;
 }
 
-export const GlassButton = React.forwardRef<HTMLButtonElement, GlassButtonProps>(
-  ({ className, children, size, contentClassName, wrapperClassName, onClick, ...props }, ref) => {
+export const GlassButton = React.forwardRef<
+  HTMLButtonElement,
+  GlassButtonProps
+>(
+  (
+    {
+      className,
+      children,
+      size,
+      contentClassName,
+      wrapperClassName,
+      onClick,
+      ...props
+    },
+    ref,
+  ) => {
     const handleWrapperClick = (e: React.MouseEvent<HTMLDivElement>) => {
       const button = e.currentTarget.querySelector("button");
       if (button && e.target !== button) button.click();
@@ -64,7 +79,7 @@ export const GlassButton = React.forwardRef<HTMLButtonElement, GlassButtonProps>
             .glass-button-shadow::after { content: ""; position: absolute; inset: 0; border-radius: 9999px; background: linear-gradient(180deg, oklch(from var(--foreground) l c h / 20%), oklch(from var(--foreground) l c h / 10%)); width: calc(100% - var(--shadow-cutoff-fix) - 0.25em); height: calc(100% - var(--shadow-cutoff-fix) - 0.25em); top: calc(var(--shadow-cutoff-fix) - 0.5em); left: calc(var(--shadow-cutoff-fix) - 0.875em); padding: 0.125em; box-sizing: border-box; mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); mask-composite: exclude; transition: all var(--anim-time) var(--anim-ease); opacity: 1; }
             .glass-button { -webkit-tap-highlight-color: transparent; backdrop-filter: blur(clamp(1px, 0.125em, 4px)); transition: all var(--anim-time) var(--anim-ease); background: linear-gradient(-75deg, oklch(from var(--background) l c h / 5%), oklch(from var(--background) l c h / 20%), oklch(from var(--background) l c h / 5%)); box-shadow: inset 0 0.125em 0.125em oklch(from var(--foreground) l c h / 5%), inset 0 -0.125em 0.125em oklch(from var(--background) l c h / 50%), 0 0.25em 0.125em -0.125em oklch(from var(--foreground) l c h / 20%), 0 0 0.1em 0.25em inset oklch(from var(--background) l c h / 20%), 0 0 0 0 oklch(from var(--background) l c h); } 
             .glass-button:hover { transform: scale(0.975); backdrop-filter: blur(0.01em); box-shadow: inset 0 0.125em 0.125em oklch(from var(--foreground) l c h / 5%), inset 0 -0.125em 0.125em oklch(from var(--background) l c h / 50%), 0 0.15em 0.05em -0.1em oklch(from var(--foreground) l c h / 25%), 0 0 0.05em 0.1em inset oklch(from var(--background) l c h / 50%), 0 0 0 0 oklch(from var(--background) l c h); } 
-            .glass-button-text { color: oklch(from var(--foreground) l c h / 90%); text-shadow: 0em 0.25em 0.05em oklch(from var(--foreground) l c h / 10%); transition: all var(--anim-time) var(--anim-ease); } 
+            .glass-button-text { text-shadow: 0em 0.25em 0.05em oklch(from var(--foreground) l c h / 10%); transition: all var(--anim-time) var(--anim-ease); } 
             .glass-button:hover .glass-button-text { text-shadow: 0.025em 0.025em 0.025em oklch(from var(--foreground) l c h / 12%); } 
             .glass-button-text::after { content: ""; display: block; position: absolute; width: calc(100% - var(--border-width)); height: calc(100% - var(--border-width)); top: calc(0% + var(--border-width) / 2); left: calc(0% + var(--border-width) / 2); box-sizing: border-box; border-radius: 9999px; overflow: clip; background: linear-gradient(var(--angle-2), transparent 0%, oklch(from var(--background) l c h / 50%) 40% 50%, transparent 55%); z-index: 3; mix-blend-mode: screen; pointer-events: none; background-size: 200% 200%; background-position: 0% 50%; transition: background-position calc(var(--anim-time) * 1.25) var(--anim-ease), --angle-2 calc(var(--anim-time) * 1.25) var(--anim-ease); } 
             .glass-button:hover .glass-button-text::after { background-position: 25% 50%; } 
@@ -85,16 +100,28 @@ export const GlassButton = React.forwardRef<HTMLButtonElement, GlassButtonProps>
           `}
         </style>
         <div
-          className={cn("glass-button-wrap cursor-pointer rounded-full relative", wrapperClassName)}
+          className={cn(
+            "glass-button-wrap cursor-pointer rounded-full relative",
+            wrapperClassName,
+          )}
           onClick={handleWrapperClick}
         >
           <button
-            className={cn("glass-button relative z-10", glassButtonVariants({ size }), className)}
+            className={cn(
+              "glass-button relative z-10",
+              glassButtonVariants({ size }),
+              className,
+            )}
             ref={ref}
             onClick={onClick}
             {...props}
           >
-            <span className={cn(glassButtonTextVariants({ size }), contentClassName)}>
+            <span
+              className={cn(
+                glassButtonTextVariants({ size }),
+                contentClassName,
+              )}
+            >
               {children}
             </span>
           </button>
@@ -102,6 +129,6 @@ export const GlassButton = React.forwardRef<HTMLButtonElement, GlassButtonProps>
         </div>
       </>
     );
-  }
+  },
 );
 GlassButton.displayName = "GlassButton";
