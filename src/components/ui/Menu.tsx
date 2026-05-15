@@ -9,6 +9,7 @@ import {
 } from "@/components/systaliko-ui/animated-menu";
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 
 const menuItems = [
   {
@@ -16,12 +17,12 @@ const menuItems = [
     href: "/#home",
   },
   {
-    title: "Daftar UKM",
-    href: "/#about",
+    title: "UKM & Paguyuban",
+    href: "/ukm-paguyuban",
   },
   {
-    title: "Daftar Paguyuban",
-    href: "/#Services",
+    title: "Kuisioner",
+    href: "/kuisioner",
   },
   {
     title: "Panitia",
@@ -48,6 +49,7 @@ const socialLinks = [
 ];
 export function AnimatedMenuDemo() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const pathname = usePathname();
 
   // Deteksi saat user melakukan scroll
   useEffect(() => {
@@ -62,6 +64,11 @@ export function AnimatedMenuDemo() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  if (pathname.startsWith("/kuisioner/test")) {
+    return null;
+  }
+
   return (
     <header
       className={`dark fixed top-0 left-0 right-0 z-50 flex justify-center transition-all duration-300 px-4 ${
@@ -72,7 +79,7 @@ export function AnimatedMenuDemo() {
         className={`w-full  transition-all duration-300 flex  items-center justify-between ${isScrolled ? "max-w-305" : "max-w-7xl"}`}
       >
         <Link href="/">
-          <div className="py-0 px-2 bg-white/5 backdrop-blur-lg border border-white/20 shadow-lg text-black rounded-4xl h-full bg-linear-to-bl from-primary/95 to-primary  border shadow-md inset-shadow-xs inset-shadow-foreground rounded-3xl text-black">
+          <div className="h-full rounded-3xl border border-white/20 bg-linear-to-bl from-primary/95 to-primary px-2 py-0 text-black shadow-md backdrop-blur-lg inset-shadow-xs inset-shadow-foreground">
             <h1 className="text-xl sm:text-xl font-normal font-heading  text-center  text-gradient">
               <span className="font-edwardian text-3xl sm:text-4xl  mr-0.5 ">
                 P
@@ -87,7 +94,7 @@ export function AnimatedMenuDemo() {
         </Link>
         <AnimatedMenu className="relative ">
           {" "}
-          <AnimatedMenuButton className="w-25.5 h-[40px] ">
+          <AnimatedMenuButton className="w-25.5 h-10 ">
             <AnimatedMenuButtonToggleIcon />
             <AnimatedMenuButtonLabel />
           </AnimatedMenuButton>

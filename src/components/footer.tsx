@@ -1,3 +1,5 @@
+"use client";
+import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 
 import { Button } from "@/components/ui/button";
@@ -10,8 +12,20 @@ import {
   FaYoutube,
   FaXTwitter,
 } from "react-icons/fa6";
-
 export function Footer() {
+  const pathname = usePathname();
+  if (pathname.startsWith("/kuisioner/test")) {
+    return null;
+  }
+  if (pathname.startsWith("/kuisioner/biodata")) {
+    return null;
+  }
+  if (pathname.startsWith("/kuisioner/result")) {
+    return null;
+  }
+  if (pathname.startsWith("/kuisioner")) {
+    return null;
+  }
   return (
     <footer className="relative">
       <div
@@ -85,7 +99,8 @@ export function Footer() {
         <div className="absolute inset-x-0 h-px w-full bg-border" />
         <div className="flex max-w-7xl flex-col justify-between gap-2 py-4">
           <p className="text-center font-light text-muted-foreground text-sm">
-            &copy; {new Date().getFullYear()} efferd, All rights reserved
+            &copy; {new Date().getFullYear()} Panggih Sedulur, All rights
+            reserved
           </p>
         </div>
       </div>
