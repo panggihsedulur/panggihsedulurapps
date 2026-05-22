@@ -34,14 +34,14 @@ export default function BiodataPage() {
             Kuisioner Minat Bakat UKM
           </h1>
           <p className="text-black/50">
-            Temukan UKM yang paling sesuai dengan minat dan bakatmu!
+            Temukan UKM yang paling sesuai dengan minat dan bakatmu
           </p>
         </div>
 
         {/* Form Section */}
         <div className="bg-white/50 backdrop-blur-xl rounded-[1rem] shadow-[0_25px_50px_-12px_rgba(0,0,0,0.5)] border border-white/10 p-8 md:p-12">
           <div className="mb-8 text-center">
-            <h2 className="text-2xl font-extrabold text-gradient   mb-2">
+            <h2 className="text-2xl font-extrabold text-gradient mb-2">
               Data Pribadi
             </h2>
             <p className="text-gradient">

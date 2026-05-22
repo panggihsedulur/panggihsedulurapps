@@ -6,6 +6,96 @@ import {
   type UKM,
 } from "./ukm-data";
 
+type SerializedError = {
+  message: string;
+  meta?: Record<string, unknown>;
+};
+
+function serializeUnknownError(error: unknown): SerializedError {
+  if (error == null) {
+    return { message: "Unknown error (null/undefined)", meta: { error } };
+  }
+
+  if (typeof error === "string") {
+    return { message: error };
+  }
+
+  if (error instanceof Error) {
+    return {
+      message: error.message || "Unknown error",
+      meta: {
+        name: error.name,
+        stack: error.stack,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        cause: (error as any).cause,
+      },
+    };
+  }
+
+  if (typeof error === "object") {
+    const meta: Record<string, unknown> = {};
+    // Common Supabase/PostgREST fields
+    for (const key of [
+      "message",
+      "details",
+      "hint",
+      "code",
+      "status",
+      "statusText",
+    ]) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      if (key in (error as any)) meta[key] = (error as any)[key];
+    }
+
+    // In some consoles (and across Next boundaries) these error objects render as `{}`
+    // because their fields are non-enumerable. Capture own property names explicitly.
+    try {
+      const ownKeys = Object.getOwnPropertyNames(error);
+      for (const key of ownKeys) {
+        if (key in meta) continue;
+        try {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          meta[key] = (error as any)[key];
+        } catch {
+          // ignore unreadable props
+        }
+      }
+    } catch {
+      // ignore
+    }
+
+    const message =
+      typeof meta.message === "string" && meta.message.trim()
+        ? meta.message
+        : "Supabase request failed";
+
+    return { message, meta };
+  }
+
+  return { message: String(error), meta: { error } };
+}
+
+function formatSupabaseError(error: unknown): string {
+  const serialized = serializeUnknownError(error);
+  const meta = serialized.meta ?? {};
+  const parts: string[] = [serialized.message];
+
+  const code = typeof meta.code === "string" ? meta.code : undefined;
+  const details = typeof meta.details === "string" ? meta.details : undefined;
+  const hint = typeof meta.hint === "string" ? meta.hint : undefined;
+  const status =
+    typeof meta.status === "number" || typeof meta.status === "string"
+      ? String(meta.status)
+      : undefined;
+
+  if (code) parts.push(`code=${code}`);
+  if (status) parts.push(`status=${status}`);
+  if (details) parts.push(`details=${details}`);
+  if (hint) parts.push(`hint=${hint}`);
+
+  return parts.join(" | ");
+}
+
 /**
  * Simpan hasil kuis ke Supabase
  * Gunakan di halaman /kuisioner/test setelah submit
@@ -34,18 +124,33 @@ export async function saveQuizResult(
     const { error } = await supabase.from("student_results").insert([payload]);
 
     if (error) {
-      console.error("Supabase error:", error);
-      return { success: false, error: error.message };
+      // Make the error actionable in console (otherwise it often prints as `{}`)
+      const serialized = serializeUnknownError(error);
+      const meta = serialized.meta ?? {};
+      // If meta.message is undefined it can overwrite `message` below, and Next's
+      // console overlay will stringify it as `{}`. Ensure message always wins.
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const { message: _metaMessage, ...metaWithoutMessage } = meta;
+      console.error("Supabase insert error:", {
+        ...metaWithoutMessage,
+        message: serialized.message,
+      });
+      return { success: false, error: formatSupabaseError(error) };
     }
 
     console.log("Data berhasil disimpan");
     return { success: true };
   } catch (error) {
-    if (error instanceof Error) {
-      console.error("Validation error:", error.message);
-      return { success: false, error: error.message };
-    }
-    return { success: false, error: "Unknown error occurred" };
+    // This catch includes validation (Zod) and any unexpected runtime errors.
+    const serialized = serializeUnknownError(error);
+    const meta = serialized.meta ?? {};
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { message: _metaMessage, ...metaWithoutMessage } = meta;
+    console.error("saveQuizResult error:", {
+      ...metaWithoutMessage,
+      message: serialized.message,
+    });
+    return { success: false, error: serialized.message };
   }
 }
 
