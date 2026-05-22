@@ -6,7 +6,7 @@ import {
   AnimatedMenuButtonLabel,
   AnimatedMenuList,
   AnimatedMenuItem,
-} from "@/components/systaliko-ui/animated-menu";
+} from "@/components/navigation/animated-menu";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
@@ -33,6 +33,7 @@ const menuItems = [
     href: "/contact",
   },
 ];
+
 const socialLinks = [
   {
     title: "Instagram",
@@ -47,11 +48,11 @@ const socialLinks = [
     href: "https://wa.me/6281234567890",
   },
 ];
+
 export function AnimatedMenuDemo() {
   const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
 
-  // Deteksi saat user melakukan scroll
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 20) {
@@ -76,7 +77,9 @@ export function AnimatedMenuDemo() {
       }`}
     >
       <div
-        className={`w-full  transition-all duration-300 flex  items-center justify-between ${isScrolled ? "max-w-305" : "max-w-7xl"}`}
+        className={`w-full  transition-all duration-300 flex  items-center justify-between ${
+          isScrolled ? "max-w-305" : "max-w-7xl"
+        }`}
       >
         <Link href="/">
           <div className="h-full rounded-3xl border border-white/20 bg-linear-to-bl from-primary/95 to-primary px-2 py-0 text-black shadow-md backdrop-blur-lg inset-shadow-xs inset-shadow-foreground">
@@ -92,6 +95,7 @@ export function AnimatedMenuDemo() {
             </h1>
           </div>
         </Link>
+
         <AnimatedMenu className="relative ">
           {" "}
           <AnimatedMenuButton className="w-25.5 h-10 ">

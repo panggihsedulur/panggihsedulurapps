@@ -16,7 +16,7 @@ const GradientBackground = () => (
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       preserveAspectRatio="xMidYMid slice"
-      className="fixed top-0 left-0 w-full h-full pointer-events-none z-0"
+      className={cn("fixed top-0 left-0 w-full h-full pointer-events-none z-0")}
     >
       <defs>
         <linearGradient id="rev_grad1" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -116,7 +116,6 @@ export const QuestionnaireBackground = ({
     <div className="relative min-h-screen bg-background overflow-hidden flex flex-col">
       <GradientBackground />
 
-      {/* Content Container */}
       <div className="relative z-10 w-full flex-1">{children}</div>
     </div>
   );

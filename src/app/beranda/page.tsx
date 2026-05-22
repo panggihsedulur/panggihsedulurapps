@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import React from "react";
 import HeroSection from "@/components/features/Hero";
+import { Section2 } from "@/components/features/Section2";
 
 export const metadata: Metadata = {
   title: "Panggih Sedulur Beranda",
@@ -15,6 +16,7 @@ export default function Beranda() {
   return (
     <>
       <HeroSection />
+      <Section2 />
     </>
   );
 }

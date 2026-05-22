@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { BiodataForm } from "@/components/test/BiodataForm";
+import { BiodataForm } from "@/components/forms/BiodataForm";
 import { type Biodata } from "@/lib/schema";
 
 export default function BiodataPage() {

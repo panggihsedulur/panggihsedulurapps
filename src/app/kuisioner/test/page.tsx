@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { QuestionCard } from "@/components/test/QuestionCard";
-import { ProgressBar } from "@/components/test/ProgressBar";
+import { QuestionCard } from "@/components/quiz/QuestionCard";
+import { ProgressBar } from "@/components/quiz/ProgressBar";
 import {
   getBranchOption,
   getBranchQuestionById,

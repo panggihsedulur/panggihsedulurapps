@@ -2,9 +2,9 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { UkmGrid } from "@/components/test/UkmCard";
+import { UkmGrid } from "@/components/ukm/UkmCard";
 import { type QuizResult } from "@/lib/schema";
-import { type UKM } from "@/lib/ukm-data";
+import { type UKM } from "@/data/ukm-data";
 
 export default function ResultPage() {
   const router = useRouter();

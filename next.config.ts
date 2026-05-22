@@ -6,6 +6,14 @@ const nextConfig: NextConfig = {
     // even if there are other lockfiles in parent directories.
     root: __dirname,
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com",
+      },
+    ],
+  },
 };
 
 export default nextConfig;

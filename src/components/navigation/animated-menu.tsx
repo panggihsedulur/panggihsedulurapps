@@ -41,24 +41,30 @@ const itemVariants = {
     },
   }),
 } as Variants;
+
 interface AnimatedMenuContextValue {
   isOpen: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
+
 interface AnimatedMenuListProps extends HTMLMotionProps<"div"> {
   menuListVariants?: Variants;
 }
+
 interface AnimatedMenuItemProps extends HTMLMotionProps<"div"> {
   order?: number;
   variants?: Variants;
 }
+
 interface AnimatedMenuButtonLabelProps extends React.HTMLAttributes<HTMLDivElement> {
   closeLabel?: string;
   openLabel?: string;
 }
+
 const AnimatedMenuContext = React.createContext<
   AnimatedMenuContextValue | undefined
 >(undefined);
+
 function useAnimatedMenuContext() {
   const context = React.useContext(AnimatedMenuContext);
   if (context === undefined) {
@@ -68,6 +74,7 @@ function useAnimatedMenuContext() {
   }
   return context;
 }
+
 export function AnimatedMenu({
   ...props
 }: React.HTMLAttributes<HTMLDivElement>) {
@@ -79,6 +86,7 @@ export function AnimatedMenu({
     </AnimatedMenuContext.Provider>
   );
 }
+
 const buttonIconVariants = cva(
   "flex flex-col gap-1.5 justify-center items-center p-1 relative *:bg-linear-to-r *:from-[#5a9cad] *:via-[#033e4c] *:to-[#5a9cad]",
   {
@@ -95,6 +103,7 @@ const buttonIconVariants = cva(
     },
   },
 );
+
 export function AnimatedMenuButtonToggleIcon({
   className,
   size = "sm",
@@ -117,6 +126,7 @@ export function AnimatedMenuButtonToggleIcon({
     </div>
   );
 }
+
 export function AnimatedMenuButtonLabel({
   closeLabel = "Menu",
   openLabel = "Close",

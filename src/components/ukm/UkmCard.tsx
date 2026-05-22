@@ -4,8 +4,8 @@ import { ExpandableCardDemo } from "@/components/features/ExpandableCardDemo";
 import {
   expandableCards,
   type ExpandableCardItem,
-} from "@/data/expandable-cards";
-import { type UKM } from "@/lib/ukm-data";
+} from "@/data/paguyuban-data";
+import { type UKM } from "@/data/ukm-data";
 
 interface UkmCardProps {
   ukm: UKM;
@@ -40,6 +40,7 @@ export function UkmCard({ ukm, rank }: UkmCardProps) {
       title={cardData.title}
       src={cardData.src}
       description={cardData.description}
+      category={cardData.category}
       detailTitle={cardData.detailTitle}
       detailBody={cardData.detailBody}
       detailFooterTitle={detailFooterTitle}
@@ -47,9 +48,6 @@ export function UkmCard({ ukm, rank }: UkmCardProps) {
   );
 }
 
-/**
- * Grid component untuk display multiple UKM
- */
 interface UkmGridProps {
   ukms: UKM[];
   showRank?: boolean;
@@ -57,7 +55,7 @@ interface UkmGridProps {
 
 export function UkmGrid({ ukms, showRank = true }: UkmGridProps) {
   return (
-    <div className="flex flex-row gap-6 justify-center items-center flex-wrap ">
+    <div className="grid grid-cols-1 items-start justify-items-center gap-6 sm:grid-cols-2 lg:grid-cols-4">
       {ukms.map((ukm, index) => (
         <UkmCard
           key={ukm.id}

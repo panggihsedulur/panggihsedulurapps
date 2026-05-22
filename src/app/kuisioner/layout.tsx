@@ -1,13 +1,9 @@
-import { QuestionnaireBackground } from "@/components/questionnaire-background";
+import { QuestionnaireBackground } from "@/components/blocks/questionnaire-background";
 
 export default function KuisionerLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  return (
-    <QuestionnaireBackground>
-      {children}
-    </QuestionnaireBackground>
-  );
+  return <QuestionnaireBackground>{children}</QuestionnaireBackground>;
 }

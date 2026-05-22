@@ -4,7 +4,7 @@ import {
   getCombinedRecommendations,
   getRecommendedUKM,
   type UKM,
-} from "./ukm-data";
+} from "@/data/ukm-data";
 
 type SerializedError = {
   message: string;

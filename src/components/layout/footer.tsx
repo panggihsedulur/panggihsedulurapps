@@ -12,6 +12,7 @@ import {
   FaYoutube,
   FaXTwitter,
 } from "react-icons/fa6";
+
 export function Footer() {
   const pathname = usePathname();
   if (pathname.startsWith("/kuisioner/test")) {

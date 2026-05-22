@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 import { ExpandableCardDemo } from "@/components/features/ExpandableCardDemo";
-import { expandableCards } from "@/data/expandable-cards";
+import { expandableCards } from "@/data/paguyuban-data";
 export default function UkmPaguyuban() {
   return (
     <div className="relative w-full overflow-hidden font-sans ">
@@ -21,13 +21,14 @@ export default function UkmPaguyuban() {
           <span className="font-edwardian text-7xl sm:text-8xl mr-2">P</span>
           aguyuban
         </h1>
-        <div className="flex flex-row gap-6 justify-center items-start flex-wrap mt-12">
+        <div className="mt-12 grid grid-cols-1 items-start justify-items-center gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {expandableCards.map((card) => (
             <ExpandableCardDemo
               key={card.id}
               title={card.title}
               src={card.src}
               description={card.description}
+              category={card.category}
               detailTitle={card.detailTitle}
               detailBody={card.detailBody}
               detailFooterTitle={card.detailFooterTitle}

@@ -23,35 +23,30 @@ export function QuestionCard({
 
   const optionStyles = [
     {
-      // Hijau Zaitun (Sesuai Tombol 1 di gambar)
       base: "bg-gradient-to-b from-[#A8B81B] to-[#616F00] text-white rounded-[12px] shadow-[0_4px_4px_rgba(0,0,0,0.25)] hover:brightness-110 transition-all",
       isSelected:
         "bg-gradient-to-b from-[#b7c91e] to-[#6f7f00] text-white rounded-[12px] ring-2 ring-white/50 shadow-inner translate-y-[2px]",
       icon: "text-lime-100",
     },
     {
-      // Ungu (Sesuai Tombol 2 di gambar)
       base: "bg-gradient-to-b from-[#A859FF] to-[#6815D8] text-white rounded-[12px] shadow-[0_4px_4px_rgba(0,0,0,0.25)] hover:brightness-110 transition-all",
       isSelected:
         "bg-gradient-to-b from-[#b873ff] to-[#7618f5] text-white rounded-[12px] ring-2 ring-white/50 shadow-inner translate-y-[2px]",
       icon: "text-purple-100",
     },
     {
-      // Oranye (Sesuai Tombol 3 di gambar)
       base: "bg-gradient-to-b from-[#FF7700] to-[#E03700] text-white rounded-[12px] shadow-[0_4px_4px_rgba(0,0,0,0.25)] hover:brightness-110 transition-all",
       isSelected:
         "bg-gradient-to-b from-[#ff871a] to-[#ff3f00] text-white rounded-[12px] ring-2 ring-white/50 shadow-inner translate-y-[2px]",
       icon: "text-orange-100",
     },
     {
-      // Cyan/Teal (Sesuai Tombol 4 di gambar)
       base: "bg-gradient-to-b from-[#00D5CB] to-[#008781] text-white rounded-[12px] shadow-[0_4px_4px_rgba(0,0,0,0.25)] hover:brightness-110 transition-all",
       isSelected:
         "bg-gradient-to-b from-[#00ebd0] to-[#009b94] text-white rounded-[12px] ring-2 ring-white/50 shadow-inner translate-y-[2px]",
       icon: "text-cyan-100",
     },
     {
-      // Biru (Tombol 5 - Pelengkap agar berjumlah 5)
       base: "bg-gradient-to-b from-[#188CFF] to-[#004B99] text-white rounded-[12px] shadow-[0_4px_4px_rgba(0,0,0,0.25)] hover:brightness-110 transition-all",
       isSelected:
         "bg-gradient-to-b from-[#2d99ff] to-[#005bb8] text-white rounded-[12px] ring-2 ring-white/50 shadow-inner translate-y-[2px]",
@@ -92,15 +87,25 @@ export function QuestionCard({
               key={option.id}
               type="button"
               onClick={() => handleSelectOption(option.id)}
-              className={`group relative flex w-full items-center gap-4 rounded-2xl border px-6 py-5 text-left transition-all active:scale-[0.98] backdrop-blur-sm ${isSelected ? palette.isSelected : palette.base}`}
+              className={`group relative flex w-full items-center gap-4 rounded-2xl border px-6 py-5 text-left transition-all active:scale-[0.98] backdrop-blur-sm ${
+                isSelected ? palette.isSelected : palette.base
+              }`}
             >
               <div
-                className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/5 transition-all group-hover:scale-110 ${isSelected ? "border-cyan-500/50 bg-cyan-500/20 text-white" : "text-white/40"}`}
+                className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/5 transition-all group-hover:scale-110 ${
+                  isSelected
+                    ? "border-cyan-500/50 bg-cyan-500/20 text-white"
+                    : "text-white/40"
+                }`}
               >
                 {String.fromCharCode(65 + index)}
               </div>
               <span
-                className={`text-lg md:text-xl font-medium transition-colors ${isSelected ? "text-white" : "text-white/80 group-hover:text-white"}`}
+                className={`text-lg md:text-xl font-medium transition-colors ${
+                  isSelected
+                    ? "text-white"
+                    : "text-white/80 group-hover:text-white"
+                }`}
               >
                 {option.text}
               </span>
