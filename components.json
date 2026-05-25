@@ -26,6 +26,7 @@
     "@einui": "https://ui.eindev.ir/r/{name}.json",
     "@aceternity": "https://ui.aceternity.com/registry/{name}.json",
     "@efferd": "https://efferd.com/r/{name}.json",
-    "@supabase": "https://supabase.com/ui/r/{name}.json"
+    "@supabase": "https://supabase.com/ui/r/{name}.json",
+    "@magicui": "https://magicui.design/r/{name}"
   }
 }
