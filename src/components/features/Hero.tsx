@@ -95,7 +95,7 @@ export default function HeroSection() {
             {/* <div className="animate-fade-in delay-500 relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-6 sm:p-8 backdrop-blur-xl shadow-2xl"> */}
             <div className="animate-fade-in delay-500 relative h-64 w-64 sm:h-80 sm:w-80 lg:h-125 lg:w-105">
               <Image
-                src="/maskot-nunjuk.png"
+                src="/aa.png"
                 alt="Logo Panggih Sedulur"
                 fill
                 priority
