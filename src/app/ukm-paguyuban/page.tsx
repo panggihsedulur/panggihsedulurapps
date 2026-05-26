@@ -15,10 +15,10 @@ export default function UkmPaguyuban() {
       <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-white mask-[radial-gradient(ellipse_at_center,transparent_20%,black)] dark:bg-black"></div>
       <div className="relative z-10 mx-auto max-w-7xl px-4 pt-24 pb-12 sm:px-6 md:pt-20 md:pb-20 lg:px-8 min-h-screen">
         {/* ini isi sectionya */}
-        <h1 className="text-4xl sm:text-5xl font-normal font-heading mb-3 text-center min-h-24 text-gradient">
-          <span className="font-edwardian text-7xl sm:text-8xl mr-2 ">U</span>
+        <h1 className="text-3xl sm:text-4xl font-normal font-heading  text-center min-h-24 text-gradient">
+          <span className="font-edwardian text-6xl sm:text-7xl mr-2 ">U</span>
           km
-          <span className="font-edwardian text-7xl sm:text-8xl mr-2">P</span>
+          <span className="font-edwardian text-6xl sm:text-7xl mr-2">P</span>
           aguyuban
         </h1>
         <div className="mt-12 grid grid-cols-1 items-start justify-items-center gap-6 sm:grid-cols-2 lg:grid-cols-4">
