@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import React from "react";
 import HeroSection from "@/components/features/Hero";
-import { Section2 } from "@/components/features/Section2";
 import MaskotSection from "@/components/features/maskotSection";
 
 export const metadata: Metadata = {
@@ -18,7 +17,6 @@ export default function Beranda() {
     <>
       <HeroSection />
       <MaskotSection />
-      <Section2 />
     </>
   );
 }
