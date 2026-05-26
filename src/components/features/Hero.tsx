@@ -8,11 +8,28 @@ import { GlassButton } from "@/components/ui/glass-button";
 
 // --- MAIN COMPONENT ---
 export default function HeroSection() {
+  const rightColumnWrapperClass =
+    "lg:col-span-5 flex items-center justify-center lg:justify-end p-4 lg:p-0";
+  const rightInteractiveGroupClass =
+    "group relative flex items-center justify-center w-full max-w-sm sm:max-w-md lg:max-w-none transition-all duration-500 ease-out hover:-translate-y-2";
+  const ambientGlowClass =
+    "absolute h-72 w-72 lg:h-[28rem] lg:w-[28rem] rounded-full bg-gradient-to-tr from-cyan-500/20 to-blue-600/20 blur-[80px] animate-pulse transition-all duration-500 group-hover:scale-110 group-hover:from-cyan-500/30";
+  const accentOrbTopRightClass =
+    "absolute -top-12 -right-6 h-32 w-32 rounded-full bg-orange-400/20 blur-3xl opacity-70 group-hover:opacity-100 transition-opacity duration-500";
+  const accentOrbBottomLeftClass =
+    "absolute -bottom-10 -left-10 h-40 w-40 rounded-full bg-indigo-500/20 blur-3xl opacity-60";
+  const glassContainerClass =
+    "relative w-full rounded-[2.5rem] border border-white/15 bg-gradient-to-b from-white/10 to-white/[0.02] backdrop-blur-2xl shadow-[0_25px_50px_-12px_rgba(0,0,0,0.5)] before:absolute before:inset-0 before:rounded-[2.5rem] before:bg-gradient-to-tr before:from-transparent before:via-white/5 before:to-white/20 before:-z-10 p-8 lg:p-12 overflow-hidden";
+  const innerSheenClass =
+    "absolute top-0 left-0 w-full h-full bg-radial-gradient from-white/5 to-transparent pointer-events-none";
+  const logoWrapperClass =
+    "relative w-full aspect-square max-w-[16rem] sm:max-w-[18rem] lg:max-w-[24rem] xl:max-w-[26rem] mx-auto animate-float transition-transform duration-700 ease-out group-hover:scale-105";
+
   return (
     <div className="relative w-full min-h-dvh text-white overflow-hidden font-sans flex flex-col">
       {/* Background Image with Gradient Mask */}
       <div
-        className="absolute inset-0 z-0 bg-[url('/hero-bg.png')] bg-cover bg-center opacity-100"
+        className="absolute inset-0 z-0 bg-[url('/bghero.webp')] bg-cover bg-center opacity-100"
         style={{
           maskImage:
             "linear-gradient(180deg, transparent, black 0%, black 70%, transparent)",
@@ -25,23 +42,6 @@ export default function HeroSection() {
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-8 items-center mt-12 lg:mt-0 md:mt-0">
           {/* --- LEFT COLUMN --- */}
           <div className="lg:col-span-7 flex flex-col justify-center space-y-8">
-            {/* Badge */}
-            {/* <div className="animate-fade-in delay-100">
-              <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 backdrop-blur-md transition-colors hover:bg-white/10">
-                <span className="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-zinc-300 flex items-center gap-2">
-                  
-                  
-                  <Star className="w-3.5 h-3.5 text-yellow-400 fill-yellow-400" />
-                </span>
-              </div>
-            </div> */}
-            {/* <h1
-          className={`text-5xl mb-3 text-center min-h-24 ${chauPhilomene.className} text-gradient`}
-        >
-          <span className="font-edwardian text-8xl mr-2">U</span>km
-          <span className="font-edwardian text-8xl mr-2">P</span>aguyuban
-        </h1> */}
-            {/* Heading */}
             <h1
               className="animate-fade-in delay-200 text-5xl sm:text-6xl lg:text-7xl xl:text-[5.5rem] font-medium tracking-tighter leading-[0.9]"
               style={{
@@ -56,7 +56,7 @@ export default function HeroSection() {
               </span>
               emukan UKM
               <br />
-              <span className="bg-linear-to-br from-white via-white to-[#3c5759] bg-clip-text text-transparent">
+              <span className="bg-linear-to-br from-white via-white to-[#59c5cd] bg-clip-text text-transparent">
                 & Paguyuban
               </span>
               <br />
@@ -91,18 +91,24 @@ export default function HeroSection() {
           </div>
 
           {/* --- RIGHT COLUMN --- */}
-          <div className="lg:col-span-5 flex items-center justify-center lg:justify-end">
-            {/* <div className="animate-fade-in delay-500 relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-6 sm:p-8 backdrop-blur-xl shadow-2xl"> */}
-            <div className="animate-fade-in delay-500 relative h-64 w-64 sm:h-80 sm:w-80 lg:h-125 lg:w-105">
-              <Image
-                src="/aa.png"
-                alt="Logo Panggih Sedulur"
-                fill
-                priority
-                sizes="(min-width: 1024px) 420px, (min-width: 640px) 320px, 256px"
-                className="object-contain"
-              />
-              {/* </div> */}
+          <div className={rightColumnWrapperClass}>
+            <div className={rightInteractiveGroupClass}>
+              <div className={ambientGlowClass} />
+              <div className={accentOrbTopRightClass} />
+              <div className={accentOrbBottomLeftClass} />
+              <div className={glassContainerClass}>
+                <div className={innerSheenClass} />
+                <div className={logoWrapperClass}>
+                  <Image
+                    src="/logo-pangsud.webp"
+                    alt="Logo Panggih Sedulur"
+                    fill
+                    priority
+                    sizes="(min-width: 1024px) 420px, (min-width: 640px) 320px, 256px"
+                    className="object-contain drop-shadow-[0_20px_35px_rgba(0,0,0,0.35)] transition-all duration-500 group-hover:drop-shadow-[0_30px_50px_rgba(6,182,212,0.25)]"
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>
