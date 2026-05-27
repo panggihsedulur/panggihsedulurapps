@@ -37,19 +37,19 @@ const demoImages = [
   {
     id: "6",
     src: "https://images.unsplash.com/photo-1562575214-da9fcf59b907?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzV8fGFpfGVufDB8MXwwfHx8MA%3D%3D&auto=format&fit=crop&q=60&w=900",
-    alt: "Tropical leaves",
+    alt: "AI technology visualization",
     rotation: 8,
   },
   {
     id: "7",
     src: "https://plus.unsplash.com/premium_photo-1676637656210-390da73f4951?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mzd8fGFpfGVufDB8MXwwfHx8MA%3D%3D&auto=format&fit=crop&q=60&w=900",
-    alt: "Tropical leaves",
+    alt: "Futuristic digital landscape",
     rotation: 8,
   },
   {
     id: "8",
     src: "https://images.unsplash.com/photo-1664448003794-2d446c53dcae?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NTV8fGFpfGVufDB8MXwwfHx8MA%3D%3D&auto=format&fit=crop&q=60&w=900",
-    alt: "Tropical leaves",
+    alt: "Creative digital artwork",
     rotation: 8,
   },
 ];
@@ -73,22 +73,23 @@ export function PanggihIntroSection() {
         <div className="max-w-3xl mx-auto text-center  relative z-10">
           <h2
             id="intro-heading"
+            aria-label="Apa itu Panggih Sedulur"
             className="text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tighter text-center text-gradient mb-2"
           >
-            <span className="font-edwardian text-5xl sm:text-6xl md:text-7xl mr-1 sm:mr-2">
+            <span className="font-edwardian text-5xl sm:text-6xl md:text-7xl mr-1 sm:mr-2" aria-hidden="true">
               A
             </span>
             pa itu{" "}
-            <span className="font-edwardian text-5xl sm:text-6xl md:text-7xl mr-1 sm:mr-2">
+            <span className="font-edwardian text-5xl sm:text-6xl md:text-7xl mr-1 sm:mr-2" aria-hidden="true">
               P
             </span>
             anggih{" "}
-            <span className="font-edwardian text-5xl sm:text-6xl md:text-7xl mr-1 sm:mr-2">
+            <span className="font-edwardian text-5xl sm:text-6xl md:text-7xl mr-1 sm:mr-2" aria-hidden="true">
               S
             </span>
             edulur
           </h2>{" "}
-          <p className="text-center  max-w-sm transition-colors"></p>
+
           <p className="mt-5 text-neutral-500  text-lg leading-relaxed">
             Panggih Sedulur merupakan program pengenalan Unit Kegiatan Mahasiswa
             (UKM) dan Paguyuban Mahasiswa Daerah kepada mahasiswa aktif

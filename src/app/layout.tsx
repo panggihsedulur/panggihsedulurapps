@@ -39,7 +39,7 @@ const chauPhilomene = localFont({
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Panggih Sedulur",
+    default: "Panggih Sedulur 2026 - Temukan UKM & Paguyuban UNSOED",
     template: "%s | Panggih Sedulur - Unsoed",
   },
   description:
@@ -118,10 +118,10 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col justify-center  ">
         {children}
         <SpeedInsights />
+        <Analytics />
         <AnimatedMenuDemo />
         <Footer />
       </body>
-      <Analytics />
     </html>
   );
 }

@@ -18,7 +18,25 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${siteUrl}/beranda`,
       lastModified,
       changeFrequency: "weekly",
+      priority: 0.9,
+    },
+    {
+      url: `${siteUrl}/ukm-paguyuban`,
+      lastModified,
+      changeFrequency: "weekly",
       priority: 0.8,
+    },
+    {
+      url: `${siteUrl}/kuisioner`,
+      lastModified,
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
+      url: `${siteUrl}/biodata`,
+      lastModified,
+      changeFrequency: "monthly",
+      priority: 0.5,
     },
   ];
 }

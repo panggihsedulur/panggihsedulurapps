@@ -7,16 +7,16 @@ const siteUrl =
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: "Panggih Sedulur",
+  title: "Panggih Sedulur 2026 - Temukan UKM & Paguyuban Daerah UNSOED",
   description:
-    "Panggih Sedulur adalah pameran interaktif UNSOED untuk membantu mahasiswa mengenal UKM dan paguyuban daerah terbaik.",
+    "Panggih Sedulur adalah pameran interaktif UNSOED untuk membantu mahasiswa mengenal UKM dan paguyuban daerah terbaik. Ikuti kuisioner dan temukan komunitas yang sesuai denganmu.",
   alternates: {
     canonical: "/",
   },
   openGraph: {
-    title: "Panggih Sedulur",
+    title: "Panggih Sedulur 2026 - Temukan UKM & Paguyuban Daerah UNSOED",
     description:
-      "Panggih Sedulur adalah pameran interaktif UNSOED untuk membantu mahasiswa mengenal UKM dan paguyuban daerah terbaik.",
+      "Ikuti kuisioner interaktif Panggih Sedulur dan temukan UKM serta paguyuban daerah UNSOED yang paling sesuai dengan minat dan bakatmu.",
     url: siteUrl,
   },
 };

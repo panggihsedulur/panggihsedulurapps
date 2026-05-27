@@ -54,6 +54,7 @@ export default function HeroSection() {
             className="lg:col-span-7 flex flex-col justify-center space-y-8"
           >
             <h1
+              aria-label="Temukan UKM & Paguyuban Sesuai Passionmu"
               className="animate-fade-in delay-200 text-4xl sm:text-6xl lg:text-7xl xl:text-[5.5rem] font-medium tracking-tighter leading-[0.9] origin-left scale-[1.25] sm:scale-100"
               style={{
                 maskImage:
@@ -62,7 +63,7 @@ export default function HeroSection() {
                   "linear-gradient(180deg, black 0%, black 80%, transparent 100%)",
               }}
             >
-              <span className="font-edwardian text-5xl mr-6 sm:text-7xl lg:text-8xl xl:text-[8rem]">
+              <span aria-hidden="true" className="font-edwardian text-5xl mr-6 sm:text-7xl lg:text-8xl xl:text-[8rem]">
                 T
               </span>
               emukan UKM

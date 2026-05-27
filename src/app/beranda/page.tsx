@@ -6,7 +6,6 @@ import { MaskotProfilesSection } from "@/components/features/MaskotProfilesSecti
 import { SloganBannerSection } from "@/components/features/SloganBannerSection";
 
 import { GridPattern } from "@/components/ui/grid-pattern";
-import App from "@/components/testimonial-v2";
 import TestimonialsSection from "@/components/testimonial-v2";
 
 export const metadata: Metadata = {
