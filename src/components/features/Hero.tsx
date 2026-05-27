@@ -1,5 +1,6 @@
 "use client";
 import React from "react";
+import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
@@ -39,11 +40,21 @@ export default function HeroSection() {
       />
 
       <div className=" relative z-10 mx-auto max-w-7xl w-full flex-1 flex items-center px-4 py-12 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-8 items-center mt-12 lg:mt-0 md:mt-0">
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-8 items-center mt-17 lg:mt-0 md:mt-0">
           {/* --- LEFT COLUMN --- */}
-          <div className="lg:col-span-7 flex flex-col justify-center space-y-8">
+          <motion.div
+            initial={{ opacity: 0, x: -60 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.15 }}
+            transition={{
+              duration: 1.1,
+              ease: [0.16, 1, 0.3, 1],
+              opacity: { duration: 0.8 },
+            }}
+            className="lg:col-span-7 flex flex-col justify-center space-y-8"
+          >
             <h1
-              className="animate-fade-in delay-200 text-5xl sm:text-6xl lg:text-7xl xl:text-[5.5rem] font-medium tracking-tighter leading-[0.9]"
+              className="animate-fade-in delay-200 text-4xl sm:text-6xl lg:text-7xl xl:text-[5.5rem] font-medium tracking-tighter leading-[0.9] origin-left scale-[1.25] sm:scale-100"
               style={{
                 maskImage:
                   "linear-gradient(180deg, black 0%, black 80%, transparent 100%)",
@@ -51,7 +62,7 @@ export default function HeroSection() {
                   "linear-gradient(180deg, black 0%, black 80%, transparent 100%)",
               }}
             >
-              <span className="font-edwardian text-6xl mr-6 sm:text-7xl lg:text-8xl xl:text-[8rem]">
+              <span className="font-edwardian text-5xl mr-6 sm:text-7xl lg:text-8xl xl:text-[8rem]">
                 T
               </span>
               emukan UKM
@@ -88,10 +99,20 @@ export default function HeroSection() {
                 </button>
               </Link>
             </div>
-          </div>
+          </motion.div>
 
           {/* --- RIGHT COLUMN --- */}
-          <div className={rightColumnWrapperClass}>
+          <motion.div
+            initial={{ opacity: 0, x: 60 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.15 }}
+            transition={{
+              duration: 1.1,
+              ease: [0.16, 1, 0.3, 1],
+              opacity: { duration: 0.8 },
+            }}
+            className={rightColumnWrapperClass}
+          >
             <div className={rightInteractiveGroupClass}>
               <div className={ambientGlowClass} />
               <div className={accentOrbTopRightClass} />
@@ -110,7 +131,7 @@ export default function HeroSection() {
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </div>

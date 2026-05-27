@@ -14,53 +14,39 @@ interface ImageCard {
 
 interface ImageCarouselHeroProps {
   images: ImageCard[];
-  title?: string;
-  subtitle?: string;
-  description?: string;
-  ctaText?: string;
-  onCtaClick?: () => void;
-  features?: Array<{
-    title: string;
-    description: string;
-  }>;
 }
 
-export default function ImageCarouselHero({
-  images,
-}: ImageCarouselHeroProps) {
+export function ImageCarouselHero({ images }: ImageCarouselHeroProps) {
+  const containerRef = useRef<HTMLDivElement | null>(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [rotatingCards, setRotatingCards] = useState<number[]>([]);
-  const [radius, setRadius] = useState(180);
-  const containerRef = useRef<HTMLDivElement>(null);
+  const [isInView, setIsInView] = useState(false);
 
-  // Responsive radius — recalculate when container resizes
   useEffect(() => {
-    const updateRadius = () => {
-      if (containerRef.current) {
-        const w = containerRef.current.offsetWidth;
-        // On mobile: fill most of the width; on desktop: cap at 200px
-        const cardHalf = 64; // w-32 = 128px / 2
-        const padding = 20;
-        const computed = w / 2 - cardHalf - padding;
-        setRadius(Math.min(200, Math.max(80, computed)));
-      }
-    };
+    const el = containerRef.current;
+    if (!el) return;
 
-    updateRadius();
-    const ro = new ResizeObserver(updateRadius);
-    if (containerRef.current) ro.observe(containerRef.current);
-    return () => ro.disconnect();
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsInView(entry.isIntersecting),
+      { threshold: 0.2 },
+    );
+
+    observer.observe(el);
+
+    return () => observer.disconnect();
   }, []);
 
-  // Continuous rotation
+  // Continuous rotation animation
   useEffect(() => {
+    if (!isInView) return;
     const interval = setInterval(() => {
-      setRotatingCards((prev) => prev.map((v) => (v + 0.4) % 360));
+      setRotatingCards((prev) => prev.map((_, i) => (prev[i] + 0.5) % 360));
     }, 50);
-    return () => clearInterval(interval);
-  }, []);
 
-  // Initialize angles
+    return () => clearInterval(interval);
+  }, [isInView]);
+
+  // Initialize rotating cards
   useEffect(() => {
     setRotatingCards(images.map((_, i) => i * (360 / images.length)));
   }, [images.length]);
@@ -73,68 +59,71 @@ export default function ImageCarouselHero({
     });
   };
 
-  // Height = diameter + card height + padding so nothing is ever clipped
-  const cardH = 160; // h-40
-  const diameter = radius * 2;
-  const containerH = diameter + cardH + 48;
-
   return (
-    <div className="relative w-full" ref={containerRef}>
-      {/* Carousel Container — height adapts to radius */}
-      <div
-        className="relative w-full"
-        style={{ height: containerH }}
-        onMouseMove={handleMouseMove}
-        onMouseEnter={() => {}}
-        onMouseLeave={() =>
-          setMousePosition({ x: 0.5, y: 0.5 })
-        }
-      >
-        {/* Rotating Image Cards */}
-        <div className="absolute inset-0 flex items-center justify-center">
-          {images.map((image, index) => {
-            const angle = (rotatingCards[index] || 0) * (Math.PI / 180);
-            const x = Math.cos(angle) * radius;
-            const y = Math.sin(angle) * radius;
+    <div className="relative w-full min-h-screen  from-background via-background to-background overflow-hidden">
+      {/* Animated background gradient */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-primary/5 to-transparent rounded-full blur-3xl animate-pulse" />
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-tr from-primary/5 to-transparent rounded-full blur-3xl animate-pulse" />
+      </div>
 
-            const perspectiveX = (mousePosition.x - 0.5) * 16;
-            const perspectiveY = (mousePosition.y - 0.5) * 16;
+      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-4 sm:px-6 lg:px-8">
+        {/* Carousel Container */}
+        <div
+          ref={containerRef}
+          className="relative w-full max-w-6xl h-96 sm:h-[500px] mb-12 sm:mb-16"
+          onMouseMove={handleMouseMove}
+        >
+          {/* Rotating Image Cards */}
+          <div className="absolute inset-0 flex items-center justify-center perspective">
+            {images.map((image, index) => {
+              const angle = (rotatingCards[index] || 0) * (Math.PI / 180);
+              const radius = isInView ? 180 : 0;
+              const x = Math.cos(angle) * radius;
+              const y = Math.sin(angle) * radius;
 
-            return (
-              <div
-                key={image.id}
-                className="absolute w-32 h-40 sm:w-36 sm:h-44 transition-all duration-300"
-                style={{
-                  transform: `
-                    translate(${x}px, ${y}px)
-                    rotateX(${perspectiveY}deg)
-                    rotateY(${perspectiveX}deg)
-                    rotateZ(${image.rotation}deg)
-                  `,
-                  transformStyle: "preserve-3d",
-                }}
-              >
+              // 3D perspective effect based on mouse position
+              const perspectiveX = (mousePosition.x - 0.5) * 20;
+              const perspectiveY = (mousePosition.y - 0.5) * 20;
+
+              return (
                 <div
-                  className={cn(
-                    "relative w-full h-full rounded-2xl overflow-hidden shadow-2xl",
-                    "transition-all duration-300 hover:shadow-3xl hover:scale-110",
-                    "cursor-pointer group",
-                  )}
-                  style={{ transformStyle: "preserve-3d" }}
+                  key={image.id}
+                  className="absolute w-32 h-40 sm:w-40 sm:h-48 transition-all duration-700 ease-out"
+                  style={{
+                    transform: `
+                      translate(${x}px, ${y}px)
+                      rotateX(${perspectiveY}deg)
+                      rotateY(${perspectiveX}deg)
+                      rotateZ(${image.rotation}deg)
+                    `,
+                    transformStyle: "preserve-3d",
+                  }}
                 >
-                  <Image
-                    src={image.src || "/placeholder.svg"}
-                    alt={image.alt}
-                    fill
-                    className="object-cover group-hover:scale-110 transition-transform duration-500"
-                    priority={index < 3}
-                  />
-                  {/* Shine effect */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-white/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div
+                    className={cn(
+                      "relative w-full h-full rounded-2xl overflow-hidden shadow-2xl",
+                      "transition-all duration-300 hover:shadow-3xl hover:scale-110",
+                      "cursor-pointer group",
+                    )}
+                    style={{
+                      transformStyle: "preserve-3d",
+                    }}
+                  >
+                    <Image
+                      src={image.src || "/placeholder.svg"}
+                      alt={image.alt}
+                      fill
+                      className="object-cover group-hover:scale-110 transition-transform duration-500"
+                      priority={index < 3}
+                    />
+                    {/* Shine effect */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-white/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
       </div>
     </div>

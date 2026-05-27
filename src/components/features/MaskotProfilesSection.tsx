@@ -1,10 +1,8 @@
 "use client";
 
-import { useEffect, useRef, useReducer } from "react";
-import { GridPattern } from "@/components/ui/grid-pattern";
-import ImageCarouselHero from "@/components/ai-image-generator-hero";
-
-// ─── Types ────────────────────────────────────────────────────────────────────
+import { motion } from "framer-motion";
+import { useEffect, useReducer, useRef } from "react";
+import Image from "next/image";
 
 interface MascotData {
   id: string;
@@ -21,59 +19,6 @@ interface MascotData {
   flip: boolean;
   theme: "teal" | "amber";
 }
-
-// ─── Static data ──────────────────────────────────────────────────────────────
-
-const demoImages = [
-  {
-    id: "1",
-    src: "https://images.unsplash.com/photo-1684369176170-463e84248b70?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fGFpfGVufDB8MXwwfHx8MA%3D%3D&auto=format&fit=crop&q=60&w=900",
-    alt: "Mountain landscape",
-    rotation: -15,
-  },
-  {
-    id: "2",
-    src: "https://plus.unsplash.com/premium_photo-1677269465314-d5d2247a0b0c?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fGFpfGVufDB8MXwwfHx8MA%3D%3D&auto=format&fit=crop&q=60&w=900",
-    alt: "Abstract art",
-    rotation: -8,
-  },
-  {
-    id: "3",
-    src: "https://images.unsplash.com/photo-1524673360092-e07b7ae58845?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjR8fGFpfGVufDB8MXwwfHx8MA%3D%3D&auto=format&fit=crop&q=60&w=900",
-    alt: "City skyline",
-    rotation: 5,
-  },
-  {
-    id: "4",
-    src: "https://plus.unsplash.com/premium_photo-1680610653084-6e4886519caf?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzN8fGFpfGVufDB8MXwwfHx8MA%3D%3D&auto=format&fit=crop&q=60&w=900",
-    alt: "Nature photography",
-    rotation: 12,
-  },
-  {
-    id: "5",
-    src: "https://plus.unsplash.com/premium_photo-1680608979589-e9349ed066d5?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8QWl8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&q=60&w=900",
-    alt: "Digital art",
-    rotation: -12,
-  },
-  {
-    id: "6",
-    src: "https://images.unsplash.com/photo-1562575214-da9fcf59b907?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzV8fGFpfGVufDB8MXwwfHx8MA%3D%3D&auto=format&fit=crop&q=60&w=900",
-    alt: "Tropical leaves",
-    rotation: 8,
-  },
-  {
-    id: "7",
-    src: "https://plus.unsplash.com/premium_photo-1676637656210-390da73f4951?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mzd8fGFpfGVufDB8MXwwfHx8MA%3D%3D&auto=format&fit=crop&q=60&w=900",
-    alt: "Tropical leaves",
-    rotation: 8,
-  },
-  {
-    id: "8",
-    src: "https://images.unsplash.com/photo-1664448003794-2d446c53dcae?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NTV8fGFpfGVufDB8MXwwfHx8MA%3D%3D&auto=format&fit=crop&q=60&w=900",
-    alt: "Tropical leaves",
-    rotation: 8,
-  },
-];
 
 const MASCOTS: MascotData[] = [
   {
@@ -115,8 +60,6 @@ const MASCOTS: MascotData[] = [
   },
 ];
 
-// ─── Theme tokens ─────────────────────────────────────────────────────────────
-
 const THEME = {
   teal: {
     border: "border-sky-200",
@@ -140,8 +83,6 @@ const THEME = {
   },
 } as const;
 
-// ─── Speech bubble ────────────────────────────────────────────────────────────
-
 interface BubbleProps {
   mascot: MascotData;
 }
@@ -149,9 +90,6 @@ interface BubbleProps {
 function SpeechBubble({ mascot }: BubbleProps) {
   const t = THEME[mascot.theme];
 
-  // Tail sits on the mascot side:
-  // flip=false → mascot left, tail on LEFT edge of bubble
-  // flip=true  → mascot right, tail on RIGHT edge of bubble
   const tailBase =
     "absolute bottom-7 w-5 h-5 bg-white border-b-[2.5px] rounded-bl-2xl pointer-events-none";
 
@@ -176,19 +114,16 @@ function SpeechBubble({ mascot }: BubbleProps) {
     <div
       className={[
         "relative bg-white rounded-[26px] border-[2.5px] p-5 mb-5",
-        // On mobile the tail is hidden; we show it only sm+ with 'sm:block'
         t.border,
       ].join(" ")}
       style={{ boxShadow: t.glowShadow }}
     >
-      {/* Tail — hidden on mobile, shown sm+ */}
       <span
         className={["hidden sm:block", mascot.flip ? tailRight : tailLeft].join(
           " ",
         )}
       />
 
-      {/* Name */}
       <p
         className={[
           "font-bold text-xl sm:text-[22px] mb-0.5 leading-tight",
@@ -198,7 +133,6 @@ function SpeechBubble({ mascot }: BubbleProps) {
         {mascot.greeting}
       </p>
 
-      {/* Role */}
       <p
         className={[
           "text-[10.5px] font-bold tracking-[2px] uppercase mb-2.5",
@@ -208,12 +142,10 @@ function SpeechBubble({ mascot }: BubbleProps) {
         {mascot.role}
       </p>
 
-      {/* Description */}
       <p className="text-[13px] sm:text-[13.5px] text-slate-500 leading-relaxed mb-3">
         {mascot.description}
       </p>
 
-      {/* Traits */}
       <div className="flex flex-wrap gap-1.5 mb-3">
         {mascot.traits.map((tr) => (
           <span
@@ -228,7 +160,6 @@ function SpeechBubble({ mascot }: BubbleProps) {
         ))}
       </div>
 
-      {/* ID strip */}
       <div className="flex gap-3 flex-wrap pt-2.5 border-t border-dashed border-slate-100">
         {[
           { label: "Lahir", val: mascot.birthdate },
@@ -249,18 +180,15 @@ function SpeechBubble({ mascot }: BubbleProps) {
   );
 }
 
-// ─── Mascot figure ────────────────────────────────────────────────────────────
-
 function MascotFigure({ mascot }: { mascot: MascotData }) {
   return (
     <div
       className={[
-        // ~1.5x larger than previous (w-36/sm:w-40)
         "flex-shrink-0 w-[13.5rem] sm:w-60",
         mascot.flip ? "animate-float-delayed" : "animate-float",
       ].join(" ")}
     >
-      <img
+      <Image
         src={mascot.imageUrl}
         alt={`Maskot ${mascot.name}`}
         width={240}
@@ -273,8 +201,6 @@ function MascotFigure({ mascot }: { mascot: MascotData }) {
     </div>
   );
 }
-
-// ─── Mascot row ───────────────────────────────────────────────────────────────
 
 function MascotRow({
   mascot,
@@ -291,10 +217,6 @@ function MascotRow({
     <div
       className={["transition-all duration-700 ease-out", enterClass].join(" ")}
     >
-      {/*
-        MOBILE  (<sm): figure centered on top, bubble below — always vertical
-        DESKTOP (sm+): side by side, flip controls order
-      */}
       <div
         className={[
           "flex flex-col items-center gap-3",
@@ -302,7 +224,6 @@ function MascotRow({
           mascot.flip ? "sm:flex-row-reverse" : "",
         ].join(" ")}
       >
-        {/* Figure always first in DOM, CSS reorders on desktop via flex-row-reverse */}
         <MascotFigure mascot={mascot} />
         <div className="w-full sm:flex-1">
           <SpeechBubble mascot={mascot} />
@@ -311,8 +232,6 @@ function MascotRow({
     </div>
   );
 }
-
-// ─── Separator ────────────────────────────────────────────────────────────────
 
 function Separator() {
   return (
@@ -324,10 +243,7 @@ function Separator() {
   );
 }
 
-// ─── Main section ─────────────────────────────────────────────────────────────
-
-export default function MaskotSection() {
-  // Track which rows are visible (scroll-triggered)
+export function MaskotProfilesSection() {
   const [visible, toggle] = useReducer(
     (state: boolean[], idx: number) =>
       state.map((v, i) => (i === idx ? true : v)),
@@ -337,12 +253,6 @@ export default function MaskotSection() {
   const rowRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
-    // Fire initial animation after mount (above-fold content)
-    const timers = MASCOTS.map((_, i) =>
-      setTimeout(() => toggle(i), 300 + i * 280),
-    );
-
-    // Scroll-triggered for anything below fold
     const io = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -356,59 +266,37 @@ export default function MaskotSection() {
     rowRefs.current.forEach((el) => el && io.observe(el));
 
     return () => {
-      timers.forEach(clearTimeout);
       io.disconnect();
     };
   }, []);
 
   return (
-    <>
-      {/* Inject keyframes once — Tailwind can't do arbitrary keyframe animations */}
-      <style>{`
-        @keyframes float {
-          0%, 100% { transform: translateY(0px); }
-          50%       { transform: translateY(-10px); }
-        }
-        @keyframes float-delayed {
-          0%, 100% { transform: translateY(0px); }
-          50%       { transform: translateY(-10px); }
-        }
-        .animate-float          { animation: float 4s ease-in-out infinite; }
-        .animate-float-delayed  { animation: float 4s ease-in-out infinite .5s; }
-      `}</style>
-
-      <section
-        className="relative bg-white py-14 px-4 sm:px-6 overflow-hidden"
-        aria-labelledby="maskot-heading"
+    <section
+      className="relative py-10 px-4 sm:px-6"
+      aria-labelledby="maskot-heading"
+    >
+      <motion.div
+        initial={{ opacity: 0, y: 50, rotate: -2 }}
+        whileInView={{ opacity: 1, y: 0, rotate: 0 }}
+        viewport={{ once: true, amount: 0.15 }}
+        transition={{
+          duration: 1.2,
+          ease: [0.16, 1, 0.3, 1],
+          opacity: { duration: 0.8 },
+        }}
       >
-        {/* Background: white + grid (#5aa0ac) */}
-        <div className="absolute inset-0 pointer-events-none">
-          <GridPattern
-            width={48}
-            height={48}
-            className="absolute inset-0 stroke-[#5aa0ac]/25 fill-[#5aa0ac]/[0.06] [mask-image:radial-gradient(ellipse_at_center,black_55%,transparent_82%)]"
-          />
-        </div>
-
-        {/* ── Section header ─────────────────────────────────────────────────── */}
-
-        <div className="max-w-3xl mx-auto text-center mb-6 relative z-10">
-          <h2 className="text-3xl sm:text-4xl font-semibold tracking-tighter text-center text-gradient mb-2">
-            <span className="font-edwardian text-6xl sm:text-7xl mr-2">A</span>
-            pa itu{" "}
-            <span className="font-edwardian text-6xl sm:text-7xl mr-2">P</span>
-            anggih{" "}
-            <span className="font-edwardian text-6xl sm:text-7xl mr-2">S</span>
-            edulur
-          </h2>
-          <p className="text-[14px] sm:text-[16px] text-slate-600 leading-relaxed px-4">
-            Panggih Sedulur merupakan program pengenalan Unit Kegiatan Mahasiswa
-            (UKM) dan Paguyuban Mahasiswa Daerah kepada mahasiswa aktif
-            Universitas Jenderal Soedirman, terutama kepada mahasiswa baru.
-          </p>
-        </div>
-
-        <ImageCarouselHero images={demoImages} />
+        <style>{`
+          @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50%       { transform: translateY(-10px); }
+          }
+          @keyframes float-delayed {
+            0%, 100% { transform: translateY(0px); }
+            50%       { transform: translateY(-10px); }
+          }
+          .animate-float          { animation: float 4s ease-in-out infinite; }
+          .animate-float-delayed  { animation: float 4s ease-in-out infinite .5s; }
+        `}</style>
 
         <div className="text-center mb-10 relative z-10">
           <h2
@@ -418,18 +306,17 @@ export default function MaskotSection() {
             <span className="font-edwardian text-6xl sm:text-7xl mr-2 ">M</span>
             askot
             <span className="font-edwardian text-6xl sm:text-7xl mr-2">P</span>
-            anggih <br />
-            <span className="font-edwardian text-6xl sm:text-7xl mr-2 ">S</span>
+            anggih{" "}
+            <span className="font-edwardian text-6xl sm:text-7xl  ">
+              <br className="sm:hidden" />S
+            </span>{" "}
             edulur
-          </h2>
-          <p className="text-[14px] sm:text-[16px] text-slate-600 leading-relaxed px-4">
+          </h2>{" "}
+          <p className="mt-5 text-neutral-500  text-lg leading-relaxed">
             Dua sahabat yang siap menemanimu menemukan Ukm & Paguyuban yang
             sesuai!
           </p>
         </div>
-
-        {/* ── Mascot rows ────────────────────────────────────────────────────── */}
-
         <div className="max-w-3xl mx-auto relative z-10">
           {MASCOTS.map((mascot, i) => (
             <div key={mascot.id}>
@@ -445,7 +332,7 @@ export default function MaskotSection() {
             </div>
           ))}
         </div>
-      </section>
-    </>
+      </motion.div>
+    </section>
   );
 }
