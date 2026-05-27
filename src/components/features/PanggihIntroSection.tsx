@@ -73,13 +73,19 @@ export function PanggihIntroSection() {
         <div className="max-w-3xl mx-auto text-center  relative z-10">
           <h2
             id="intro-heading"
-            className="text-3xl sm:text-4xl font-semibold tracking-tighter text-center text-gradient mb-2"
+            className="text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tighter text-center text-gradient mb-2"
           >
-            <span className="font-edwardian text-6xl sm:text-7xl mr-2">A</span>
+            <span className="font-edwardian text-5xl sm:text-6xl md:text-7xl mr-1 sm:mr-2">
+              A
+            </span>
             pa itu{" "}
-            <span className="font-edwardian text-6xl sm:text-7xl mr-2">P</span>
+            <span className="font-edwardian text-5xl sm:text-6xl md:text-7xl mr-1 sm:mr-2">
+              P
+            </span>
             anggih{" "}
-            <span className="font-edwardian text-6xl sm:text-7xl mr-2">S</span>
+            <span className="font-edwardian text-5xl sm:text-6xl md:text-7xl mr-1 sm:mr-2">
+              S
+            </span>
             edulur
           </h2>{" "}
           <p className="text-center  max-w-sm transition-colors"></p>

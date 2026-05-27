@@ -21,6 +21,20 @@ export function ImageCarouselHero({ images }: ImageCarouselHeroProps) {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [rotatingCards, setRotatingCards] = useState<number[]>([]);
   const [isInView, setIsInView] = useState(false);
+  const [radius, setRadius] = useState(180);
+
+  useEffect(() => {
+    const updateRadius = () => {
+      const w = window.innerWidth;
+      if (w < 400) setRadius(100);
+      else if (w < 640) setRadius(130);
+      else if (w < 1024) setRadius(160);
+      else setRadius(180);
+    };
+    updateRadius();
+    window.addEventListener("resize", updateRadius);
+    return () => window.removeEventListener("resize", updateRadius);
+  }, []);
 
   useEffect(() => {
     const el = containerRef.current;
@@ -60,27 +74,27 @@ export function ImageCarouselHero({ images }: ImageCarouselHeroProps) {
   };
 
   return (
-    <div className="relative w-full min-h-screen  from-background via-background to-background overflow-hidden">
+    <div className="relative w-full from-background via-background to-background overflow-hidden">
       {/* Animated background gradient */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-primary/5 to-transparent rounded-full blur-3xl animate-pulse" />
         <div className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-tr from-primary/5 to-transparent rounded-full blur-3xl animate-pulse" />
       </div>
 
-      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-4 sm:px-6 lg:px-8">
+      <div className="relative z-10 flex flex-col items-center justify-center py-8 px-4 sm:px-6 lg:px-8">
         {/* Carousel Container */}
         <div
           ref={containerRef}
-          className="relative w-full max-w-6xl h-96 sm:h-[500px] mb-12 sm:mb-16"
+          className="relative w-full max-w-6xl h-64 xs:h-72 sm:h-80 md:h-96 lg:h-[500px] mb-8 sm:mb-12 lg:mb-16"
           onMouseMove={handleMouseMove}
         >
           {/* Rotating Image Cards */}
           <div className="absolute inset-0 flex items-center justify-center perspective">
             {images.map((image, index) => {
               const angle = (rotatingCards[index] || 0) * (Math.PI / 180);
-              const radius = isInView ? 180 : 0;
-              const x = Math.cos(angle) * radius;
-              const y = Math.sin(angle) * radius;
+              const orbitRadius = isInView ? radius : 0;
+              const x = Math.cos(angle) * orbitRadius;
+              const y = Math.sin(angle) * orbitRadius;
 
               // 3D perspective effect based on mouse position
               const perspectiveX = (mousePosition.x - 0.5) * 20;
@@ -89,7 +103,7 @@ export function ImageCarouselHero({ images }: ImageCarouselHeroProps) {
               return (
                 <div
                   key={image.id}
-                  className="absolute w-32 h-40 sm:w-40 sm:h-48 transition-all duration-700 ease-out"
+                  className="absolute w-20 h-28 xs:w-24 xs:h-32 sm:w-32 sm:h-40 md:w-36 md:h-44 lg:w-40 lg:h-48 transition-all duration-700 ease-out"
                   style={{
                     transform: `
                       translate(${x}px, ${y}px)
