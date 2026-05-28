@@ -4,8 +4,8 @@ import { ExpandableCardDemo } from "@/components/features/ExpandableCardDemo";
 import {
   expandableCards,
   type ExpandableCardItem,
-} from "@/data/paguyuban-data";
-import { type UKM } from "@/data/ukm-data";
+} from "@/data/UkmPaguyubanData";
+import { type UKM } from "@/data/UkmLogic";
 
 interface UkmCardProps {
   ukm: UKM;
@@ -29,6 +29,8 @@ export function UkmCard({ ukm, rank }: UkmCardProps) {
     detailTitle: `Tentang ${ukm.name}`,
     detailBody: ukm.description,
     detailFooterTitle: "Informasi UKM",
+    name: ukm.name,
+    type: "UKM",
   };
 
   const detailFooterTitle = rank
@@ -44,6 +46,12 @@ export function UkmCard({ ukm, rank }: UkmCardProps) {
       detailTitle={cardData.detailTitle}
       detailBody={cardData.detailBody}
       detailFooterTitle={detailFooterTitle}
+      photoUrl={cardData.photoUrl ?? ukm.photoUrl}
+      logoUrl={cardData.logoUrl ?? ukm.logoUrl}
+      type={cardData.type ?? ukm.type}
+      contactPerson={cardData.contactPerson ?? ukm.contactPerson}
+      contact={cardData.contact ?? ukm.contact}
+      instagram={cardData.instagram ?? ukm.instagram}
     />
   );
 }

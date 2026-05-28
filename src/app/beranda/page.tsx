@@ -6,7 +6,10 @@ import { MaskotProfilesSection } from "@/components/features/MaskotProfilesSecti
 import { SloganBannerSection } from "@/components/features/SloganBannerSection";
 
 import { GridPattern } from "@/components/ui/grid-pattern";
-import TestimonialsSection from "@/components/testimonial-v2";
+import TestimonialsSection from "@/components/testimoni";
+import CircularTestimonials, {
+  Sambutan,
+} from "@/components/circular-testimonials";
 
 export const metadata: Metadata = {
   title: "Panggih Sedulur Beranda",
@@ -35,6 +38,7 @@ export default function Beranda() {
           <MaskotProfilesSection />
           <SloganBannerSection />
           <TestimonialsSection />
+          <Sambutan />
         </div>
       </div>
     </>

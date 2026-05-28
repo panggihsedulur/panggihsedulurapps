@@ -7,9 +7,16 @@ export interface ExpandableCardItem {
   detailTitle: string;
   detailBody: string;
   detailFooterTitle: string;
+  name?: string;
+  type?: "UKM" | "Paguyuban";
+  logoUrl?: string;
+  photoUrl?: string;
+  contactPerson?: string;
+  contact?: string;
+  instagram?: string;
 }
 
-export const fullUkmAndPaguyubanData: ExpandableCardItem[] = [
+const rawUkmAndPaguyubanData: ExpandableCardItem[] = [
   // ==========================================
   // KATEGORI: PAGUYUBAN DAERAH
   // ==========================================
@@ -715,5 +722,22 @@ export const fullUkmAndPaguyubanData: ExpandableCardItem[] = [
     detailFooterTitle: "Nomor: 118/UND/DAGRI/BEM/III/2026",
   },
 ];
+
+function withDummyCardFields(item: ExpandableCardItem): ExpandableCardItem {
+  const inferredType = item.id.startsWith("pg-") ? "Paguyuban" : "UKM";
+  return {
+    ...item,
+    name: item.name ?? item.title,
+    type: item.type ?? inferredType,
+    photoUrl: item.photoUrl ?? item.src,
+    logoUrl: item.logoUrl ?? item.src,
+    contactPerson: item.contactPerson ?? "CP Humas",
+    contact: item.contact ?? "08xx-xxxx-xxxx",
+    instagram: item.instagram ?? "@panggihsedulur",
+  };
+}
+
+export const fullUkmAndPaguyubanData =
+  rawUkmAndPaguyubanData.map(withDummyCardFields);
 
 export const expandableCards = fullUkmAndPaguyubanData;

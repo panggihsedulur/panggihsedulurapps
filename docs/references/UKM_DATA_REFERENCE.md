@@ -2,7 +2,7 @@
 
 # 📚 UKM Data & Recommendation System
 
-Dokumentasi lengkap tentang `lib/ukm-data.ts` dan cara kerja sistem rekomendasi UKM.
+Dokumentasi lengkap tentang `data/UkmLogic.ts` dan cara kerja sistem rekomendasi UKM.
 
 ---
 
@@ -46,7 +46,7 @@ Sistem rekomendasi UKM bekerja dengan 3 level:
 ### Struktur File
 
 ```
-lib/ukm-data.ts
+data/UkmLogic.ts
 ├── Interface UKM
 ├── Pre-filtering Rules (agama, KIP-K, fakultas)
 ├── Kategori Arrays:
@@ -140,7 +140,7 @@ interface UKM {
 Cari UKM berdasarkan ID atau nama.
 
 ```typescript
-import { getUKMById } from "@/lib/ukm-data";
+import { getUKMById } from "@/data/UkmLogic";
 
 const ukm = getUKMById("ukm-104");
 // or
@@ -154,7 +154,7 @@ console.log(ukm?.name); // "UFC"
 Dapatkan rekomendasi UKM hanya berdasarkan scoring (tanpa pre-filtering).
 
 ```typescript
-import { getRecommendedUKM } from "@/lib/ukm-data";
+import { getRecommendedUKM } from "@/data/UkmLogic";
 
 const topKategori = ["Olahraga", "Seni"];
 const recommendations = getRecommendedUKM(topKategori);
@@ -175,7 +175,7 @@ Dapatkan rekomendasi UKM gabungan.
 - Fallback scoring digunakan hanya jika tidak ada rekomendasi dari branch dan tidak ada pre-filter biodata.
 
 ```typescript
-import { getCombinedRecommendations } from '@/lib/ukm-data'
+import { getCombinedRecommendations } from '@/data/UkmLogic'
 
 const recommendations = getCombinedRecommendations(
   topKategori: ['Olahraga', 'Seni'],

@@ -4,7 +4,7 @@ import {
   getCombinedRecommendations,
   getRecommendedUKM,
   type UKM,
-} from "@/data/ukm-data";
+} from "@/data/UkmLogic";
 
 type SerializedError = {
   message: string;
@@ -156,7 +156,7 @@ export async function saveQuizResult(
 
 /**
  * Get recommended UKM berdasarkan top kategori dari scoring
- * Integrasi dengan ukm-data.ts untuk recommendation logic
+ * Integrasi dengan UkmLogic.ts untuk recommendation logic
  */
 export function getRecommendedUKMNames(
   topKategori: string[],

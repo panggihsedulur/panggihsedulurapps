@@ -15,7 +15,7 @@ Status plan disesuaikan dengan implementasi yang sudah ada di repo saat ini.
 - [x] src/lib/questions.ts
   - [x] Level 1 (5 pertanyaan utama)
   - [x] Level 2-3 branching
-- [x] src/lib/ukm-data.ts
+- [x] src/data/UkmLogic.ts
   - [x] Mapping kategori ke UKM
   - [x] Pre-filtering biodata
   - [x] Data UKM + priority

@@ -10,7 +10,33 @@ export interface UKM {
   category: string;
   description: string;
   priority: number;
+  type?: "UKM";
+  logoUrl?: string;
+  photoUrl?: string;
+  contactPerson?: string;
+  contact?: string;
+  instagram?: string;
 }
+
+const buildDummyUkmFields = (ukm: UKM): UKM => {
+  const safeName = ukm.name || ukm.title || "UKM";
+  const encodedName = encodeURIComponent(safeName);
+
+  return {
+    ...ukm,
+    type: ukm.type ?? "UKM",
+    photoUrl:
+      ukm.photoUrl ??
+      `https://dummyimage.com/400x400/9e9e9e/ffffff&text=${encodedName}`,
+    logoUrl:
+      ukm.logoUrl ??
+      `https://dummyimage.com/200x200/ffffff/111111&text=${encodedName}`,
+    contactPerson: ukm.contactPerson ?? "CP Humas",
+    contact: ukm.contact ?? "08xx-xxxx-xxxx",
+    instagram:
+      ukm.instagram ?? `@${safeName.replace(/\s+/g, "").toLowerCase()}`,
+  };
+};
 
 /**
  * PRE-FILTERING RULES
@@ -36,7 +62,7 @@ export const preFilteringRules = {
  * Level 1: Scoring → Top kategori
  * Level 2-3: Tanya jenis olahraga (tim, beladiri, raket, strategi)
  */
-export const olahragaUKM: UKM[] = [
+const olahragaUKMBase: UKM[] = [
   // Tim Sports
   {
     id: "ukm-104",
@@ -165,12 +191,14 @@ export const olahragaUKM: UKM[] = [
   },
 ];
 
+export const olahragaUKM = olahragaUKMBase.map(buildDummyUkmFields);
+
 /**
  * KATEGORI 2: SENI & BUDAYA
  * Level 1: Scoring → Top kategori
  * Level 2-3: Tanya media seni (vokal, musik, teater/tari, budaya populer)
  */
-export const seniUKM: UKM[] = [
+const seniUKMBase: UKM[] = [
   // Vokal
   {
     id: "ukm-093",
@@ -210,12 +238,14 @@ export const seniUKM: UKM[] = [
   },
 ];
 
+export const seniUKM = seniUKMBase.map(buildDummyUkmFields);
+
 /**
  * KATEGORI 3: PENALARAN, BAHASA & TEKNOLOGI
  * Level 1: Scoring → Top kategori
  * Level 2-3: Tanya cara eksplorasi ide (riset, debat, jurnalisme, teknologi)
  */
-export const penaranUKM: UKM[] = [
+const penaranUKMBase: UKM[] = [
   // Riset & Keilmuan
   {
     id: "ukm-097",
@@ -274,12 +304,14 @@ export const penaranUKM: UKM[] = [
   },
 ];
 
+export const penaranUKM = penaranUKMBase.map(buildDummyUkmFields);
+
 /**
  * KATEGORI 4: PECINTA ALAM & OUTDOOR EKSTRIM
  * Level 1: Scoring → Top kategori
  * Level 2-3: Tanya medan (hutan, ketinggian, arus deras)
  */
-export const alamBebasUKM: UKM[] = [
+const alamBebasUKMBase: UKM[] = [
   // Hiking & Survival
   {
     id: "ukm-090",
@@ -318,12 +350,14 @@ export const alamBebasUKM: UKM[] = [
   },
 ];
 
+export const alamBebasUKM = alamBebasUKMBase.map(buildDummyUkmFields);
+
 /**
  * KATEGORI 5: SOSIAL, KEMANUSIAAN & BELA NEGARA
  * Level 1: Scoring → Top kategori
  * Level 2-3: Tanya peran (medis, keamanan, relawan, sosial)
  */
-export const sosialUKM: UKM[] = [
+const sosialUKMBase: UKM[] = [
   // Medis & Kesehatan
   {
     id: "ukm-101",
@@ -381,11 +415,13 @@ export const sosialUKM: UKM[] = [
   },
 ];
 
+export const sosialUKM = sosialUKMBase.map(buildDummyUkmFields);
+
 /**
  * UKM KEROHANIAN (Special Category)
  * Biasanya tidak muncul dari scoring, tapi dari pre-filtering biodata
  */
-export const kerohanianUKM: UKM[] = [
+const kerohanianUKMBase: UKM[] = [
   {
     id: "ukm-086",
     name: "USMAN",
@@ -421,10 +457,12 @@ export const kerohanianUKM: UKM[] = [
   },
 ];
 
+export const kerohanianUKM = kerohanianUKMBase.map(buildDummyUkmFields);
+
 /**
  * UKM KHUSUS (Beasiswa, dll)
  */
-export const khususUKM: UKM[] = [
+const khususUKMBase: UKM[] = [
   {
     id: "ukm-082",
     name: "Himabisi",
@@ -442,6 +480,8 @@ export const khususUKM: UKM[] = [
     priority: 1,
   },
 ];
+
+export const khususUKM = khususUKMBase.map(buildDummyUkmFields);
 
 /**
  * Master UKM Map by Category

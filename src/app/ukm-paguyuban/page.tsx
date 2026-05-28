@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 import { ExpandableCardDemo } from "@/components/features/ExpandableCardDemo";
-import { expandableCards } from "@/data/paguyuban-data";
+import { expandableCards } from "@/data/UkmPaguyubanData";
 export default function UkmPaguyuban() {
   return (
     <div className="relative w-full overflow-hidden font-sans ">
@@ -32,6 +32,12 @@ export default function UkmPaguyuban() {
               detailTitle={card.detailTitle}
               detailBody={card.detailBody}
               detailFooterTitle={card.detailFooterTitle}
+              photoUrl={card.photoUrl}
+              logoUrl={card.logoUrl}
+              type={card.type}
+              contactPerson={card.contactPerson}
+              contact={card.contact}
+              instagram={card.instagram}
             />
           ))}
         </div>

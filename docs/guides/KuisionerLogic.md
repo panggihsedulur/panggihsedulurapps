@@ -24,10 +24,10 @@ src/
     QuestionCard.tsx
     ProgressBar.tsx
     UkmCard.tsx
-  lib/
+  data/
     schema.ts
     questions.ts
-    ukm-data.ts
+    UkmLogic.ts
     quiz-helpers.ts
     supabase.ts
 ```
@@ -83,7 +83,7 @@ Payload yang dikirim ke Supabase:
 
 - lib/schema.ts: schema biodata, schema hasil, kategori utama
 - lib/questions.ts: level 1 + branching level 2/3
-- lib/ukm-data.ts: data UKM + pre-filter rules + helper rekomendasi
+- data/UkmLogic.ts: data UKM + pre-filter rules + helper rekomendasi
 - lib/quiz-helpers.ts: helper submit, top kategori, kombinasi rekomendasi
 - lib/supabase.ts: client Supabase dan type StudentResult
 
