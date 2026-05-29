@@ -1,4 +1,5 @@
 import { ExpandableCard } from "@/components/ui/expandable-card";
+import { FaInstagram, FaWhatsapp } from "react-icons/fa6";
 
 interface ExpandableCardDemoProps {
   title: string;
@@ -36,23 +37,17 @@ export function ExpandableCardDemo({
 }: ExpandableCardDemoProps) {
   const badgeLabel = category;
   const modalSubtitle = category ? `Kategori ${category}` : undefined;
-  const badges = [type, category, detailFooterTitle].filter(
-    Boolean,
-  ) as string[];
   const resolvedSrc = photoUrl || src;
   const resolvedLogoSrc = logoUrl || logoSrc || resolvedSrc;
-  const contactLabel = [contactPerson, contact].filter(Boolean).join(" · ");
-  const instagramLabel = instagram?.startsWith("@");
-  const instagramText = instagramLabel
-    ? instagram
-    : instagram
-      ? `@${instagram}`
-      : "";
-  const instagramHref = instagram
-    ? instagram.startsWith("http")
-      ? instagram
-      : `https://instagram.com/${instagram.replace(/^@/, "")}`
+  const contactNumber = contact ? contact.replace(/\D/g, "") : "";
+  const waHref = contactNumber ? `https://wa.me/${contactNumber}` : undefined;
+  const showWhatsappButton = Boolean(waHref);
+  const instagramHandle = instagram ? instagram.replace(/^@/, "") : "";
+  const instagramText = instagramHandle ? `@${instagramHandle}` : "";
+  const instagramHref = instagramHandle
+    ? `https://instagram.com/${instagramHandle}`
     : undefined;
+  const showInstagramButton = Boolean(instagramHref);
 
   return (
     <ExpandableCard
@@ -62,35 +57,35 @@ export function ExpandableCardDemo({
       badgeLabel={badgeLabel}
       logoSrc={resolvedLogoSrc}
       modalSubtitle={modalSubtitle}
-      badges={badges}
       classNameExpanded="[&_p.section-title]:text-zinc-900 dark:[&_p.section-title]:text-zinc-50"
     >
       <p className="section-title mb-1 text-sm font-semibold">{detailTitle}</p>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{detailBody}</p>
-      {contactLabel || instagramText ? (
-        <div className="mt-4 space-y-2 rounded-xl border border-zinc-200/70 bg-zinc-50 p-3 text-sm text-zinc-600 dark:border-zinc-800/70 dark:bg-zinc-900/40 dark:text-zinc-300">
-          {contactLabel ? (
-            <div className="flex flex-wrap items-center gap-2">
-              <span className="rounded-full bg-white px-2 py-1 text-xs font-semibold text-zinc-700 shadow-sm dark:bg-zinc-950 dark:text-zinc-100">
-                Kontak
-              </span>
-              <span className="text-sm">{contactLabel}</span>
-            </div>
+      {showWhatsappButton || showInstagramButton ? (
+        <div className="mt-4 flex flex-wrap gap-2">
+          {showWhatsappButton && waHref ? (
+            <a
+              className="inline-flex items-center justify-center rounded-full border border-emerald-200/70 bg-emerald-50 px-3 py-2 text-xs font-semibold text-emerald-700 transition hover:bg-emerald-100 dark:border-emerald-900/60 dark:bg-emerald-950/40 dark:text-emerald-200 dark:hover:bg-emerald-950/70"
+              href={waHref}
+              rel="noreferrer"
+              target="_blank"
+              aria-label="Hubungi admin via WhatsApp"
+            >
+              <FaWhatsapp className="mr-2 h-4 w-4" />
+              Hubungi Admin
+            </a>
           ) : null}
-          {instagramText && instagramHref ? (
-            <div className="flex flex-wrap items-center gap-2">
-              <span className="rounded-full bg-white px-2 py-1 text-xs font-semibold text-zinc-700 shadow-sm dark:bg-zinc-950 dark:text-zinc-100">
-                Instagram
-              </span>
-              <a
-                className="text-sm text-emerald-600 hover:underline dark:text-emerald-400"
-                href={instagramHref}
-                rel="noreferrer"
-                target="_blank"
-              >
-                {instagramText}
-              </a>
-            </div>
+          {showInstagramButton && instagramHref ? (
+            <a
+              className="inline-flex items-center justify-center rounded-full border border-emerald-200/70 bg-emerald-50 px-3 py-2 text-xs font-semibold text-emerald-700 transition hover:bg-emerald-100 dark:border-emerald-900/60 dark:bg-emerald-950/40 dark:text-emerald-200 dark:hover:bg-emerald-950/70"
+              href={instagramHref}
+              rel="noreferrer"
+              target="_blank"
+              aria-label="Hubungi admin via Instagram"
+            >
+              <FaInstagram className="mr-2 h-4 w-4" />
+              {instagramText}
+            </a>
           ) : null}
         </div>
       ) : null}

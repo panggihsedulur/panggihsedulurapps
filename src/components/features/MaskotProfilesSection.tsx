@@ -193,8 +193,12 @@ function MascotFigure({ mascot }: { mascot: MascotData }) {
         alt={`Maskot ${mascot.name}`}
         width={240}
         height={330}
-        className="w-full object-contain select-none"
-        style={{ filter: "drop-shadow(0 8px 20px rgba(0,0,0,0.13))" }}
+        className="object-contain select-none"
+        style={{
+          filter: "drop-shadow(0 8px 20px rgba(0,0,0,0.13))",
+          width: "100%",
+          height: "auto",
+        }}
         loading="lazy"
         draggable={false}
       />

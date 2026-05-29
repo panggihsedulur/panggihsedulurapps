@@ -128,6 +128,7 @@ export function ImageCarouselHero({ images }: ImageCarouselHeroProps) {
                       src={image.src || "/placeholder.svg"}
                       alt={image.alt}
                       fill
+                      sizes="(max-width: 480px) 6rem, (max-width: 640px) 8rem, (max-width: 768px) 9rem, (max-width: 1024px) 10rem, 10rem"
                       className="object-cover group-hover:scale-110 transition-transform duration-500"
                       priority={index < 3}
                     />

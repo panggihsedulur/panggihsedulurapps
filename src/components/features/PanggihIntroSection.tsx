@@ -76,27 +76,35 @@ export function PanggihIntroSection() {
             aria-label="Apa itu Panggih Sedulur"
             className="text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tighter text-center text-gradient mb-2"
           >
-            <span className="font-edwardian text-5xl sm:text-6xl md:text-7xl mr-1 sm:mr-2" aria-hidden="true">
+            <span
+              className="font-edwardian text-5xl sm:text-6xl md:text-7xl mr-1 sm:mr-2"
+              aria-hidden="true"
+            >
               A
             </span>
             pa itu{" "}
-            <span className="font-edwardian text-5xl sm:text-6xl md:text-7xl mr-1 sm:mr-2" aria-hidden="true">
+            <span
+              className="font-edwardian text-5xl sm:text-6xl md:text-7xl mr-1 sm:mr-2"
+              aria-hidden="true"
+            >
               P
             </span>
             anggih{" "}
-            <span className="font-edwardian text-5xl sm:text-6xl md:text-7xl mr-1 sm:mr-2" aria-hidden="true">
+            <span
+              className="font-edwardian text-5xl sm:text-6xl md:text-7xl mr-1 sm:mr-2"
+              aria-hidden="true"
+            >
               S
             </span>
             edulur
           </h2>{" "}
-
           <p className="mt-5 text-neutral-500  text-lg leading-relaxed">
             Panggih Sedulur merupakan program pengenalan Unit Kegiatan Mahasiswa
             (UKM) dan Paguyuban Mahasiswa Daerah kepada mahasiswa aktif
             Universitas Jenderal Soedirman, terutama kepada mahasiswa baru.
           </p>
         </div>
-        <div className="">
+        <div className="mt-10 lg:mt-15">
           <ImageCarouselHero images={demoImages} />
         </div>
       </motion.div>
