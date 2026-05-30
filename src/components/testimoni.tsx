@@ -12,6 +12,7 @@ type CardT = {
 };
 
 const DEFAULT_DATA: CardT[] = [
+  // --- DATA ORIGINAL ---
   {
     image:
       "https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=200",
@@ -91,6 +92,128 @@ const DEFAULT_DATA: CardT[] = [
     handle: "@tiaralrs",
     quote:
       "Maba UNSOED wajib banget buka ini sih! Ngebantu banget milih UKM Kewirausahaan buat nambah skill bisnis mumpung kita masih muda.",
+  },
+
+  // --- DATA TAMBAHAN BARU ---
+  {
+    image:
+      "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&auto=format&fit=crop&q=60",
+    name: "Ayu Pratiwi",
+    handle: "@ayupratiwi_12",
+    quote:
+      "Dari dulu pengen banget gabung KSR PMI tapi takut infonya susah dicari. Untung ada Panggih Sedulur, semuanya dijelasin detail dari syarat sampe jadwal kumpul!",
+  },
+  {
+    image:
+      "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=200&auto=format&fit=crop&q=60",
+    name: "Gilang Ramadhan",
+    handle: "@gilangrmdhn",
+    quote:
+      "Platform yang sangat inovatif buat kampus! Aku nemu Paguyuban Jabodetabek yang asik parah. Tiap minggu ada aja acara kumpul bareng anak rantau.",
+  },
+  {
+    image:
+      "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=200&auto=format&fit=crop&q=60",
+    name: "Citra Kirana",
+    handle: "@citrakrn_",
+    quote:
+      "Awalnya ngira web ini cuma buat pendaftaran biasa, eh ternyata ngebantu banget buat matchmaking UKM. Sekarang aktif di Paduan Suara dan enjoy banget!",
+  },
+  {
+    image:
+      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&auto=format&fit=crop&q=60",
+    name: "Fajar Hidayat",
+    handle: "@fajarhidayat",
+    quote:
+      "Visualisasinya kece, infonya up-to-date. Maba sekarang bener-bener dimanjain sama Panggih Sedulur. Sukses terus buat tim developer-nya!",
+  },
+  {
+    image:
+      "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=200&auto=format&fit=crop&q=60",
+    name: "Bella Safira",
+    handle: "@bellasfr",
+    quote:
+      "Karena Panggih Sedulur, aku bisa cepet adaptasi di Purwokerto. Nemu komunitas pecinta alam yang bener-bener supportif. Maskot Giya lucu banget!",
+  },
+  {
+    image:
+      "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=200&auto=format&fit=crop&q=60",
+    name: "Bayu Santoso",
+    handle: "@bayusantoso",
+    quote:
+      "Salut sama sistem filtering-nya. Tinggal masukin minat kita, langsung keluar daftar UKM Jurnalistik dan Pers yang sesuai. Gak perlu tanya kating satu-satu.",
+  },
+  {
+    image:
+      "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=200&auto=format&fit=crop&q=60",
+    name: "Tari Lestari",
+    handle: "@tarilestarii",
+    quote:
+      "Suka banget sama interaksi di dalam kuesionernya. Bikin aku sadar kalau ternyata minat utamaku ada di UKM Pramuka dan Relawan. Thank you!",
+  },
+  {
+    image:
+      "https://images.unsplash.com/photo-1504257432389-52343af06ae3?w=200&auto=format&fit=crop&q=60",
+    name: "Rio Pratama",
+    handle: "@rio.prtma",
+    quote:
+      "Sebagai cowok introvert, nyari info Paguyuban kadang bikin deg-degan. Lewat website ini, aku bisa pelajari profil mereka dulu sebelum mutusin gabung.",
+  },
+  {
+    image:
+      "https://images.unsplash.com/photo-1517365830460-955ce3ccd263?w=200&auto=format&fit=crop&q=60",
+    name: "Sarah Amelia",
+    handle: "@saraah_am",
+    quote:
+      "Ngebantu banget buat anak Sumatera kayak aku! Langsung diarahin ke Paguyuban daerahku dan sekarang jadi ketua angkatan di sana. Keren abis!",
+  },
+  {
+    image:
+      "https://images.unsplash.com/photo-1513956589380-bad6acb9b9d4?w=200&auto=format&fit=crop&q=60",
+    name: "Aldo Wijaya",
+    handle: "@aldowjy",
+    quote:
+      "Dulu bingung bedanya UKM satu dengan yang lain, tapi deskripsi di Panggih Sedulur super komprehensif. Masuk UKM Bahasa Asing jadi pilihan terbaikku.",
+  },
+  {
+    image:
+      "https://images.unsplash.com/photo-1554151228-14d9def656e4?w=200&auto=format&fit=crop&q=60",
+    name: "Intan Permata",
+    handle: "@intanprmta",
+    quote:
+      "Tampilan webnya ringan dan gak lemot pas diakses pake HP. Buat maba yang fakir kuota, ini ngebantu banget pas lagi milih-milih UKM Kesenian.",
+  },
+  {
+    image:
+      "https://images.unsplash.com/photo-1463453091185-61582044d556?w=200&auto=format&fit=crop&q=60",
+    name: "Surya Saputra",
+    handle: "@suryasptr_",
+    quote:
+      "Gokil, ada panduan lengkap cara daftar dan jadwal seleksi tiap UKM. Semuanya terpusat di satu pintu, jadi nggak perlu ribet buka banyak sosmed.",
+  },
+  {
+    image:
+      "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=200&auto=format&fit=crop&q=60",
+    name: "Maya Indah",
+    handle: "@mayaindahh",
+    quote:
+      "Dudu dan Giya ngasih vibe yang welcoming banget buat mahasiswa baru. Sempat nyasar cari info Paguyuban Pantura, akhirnya ketemu di sini!",
+  },
+  {
+    image:
+      "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=200&auto=format&fit=crop&q=60",
+    name: "Dika Anggara",
+    handle: "@dikaanggr",
+    quote:
+      "UKM Bela Diri yang aku cari infonya lengkap banget. Ada foto kegiatan, kontak person, sampai testimoni anggotanya. Memudahkan banget buat filter.",
+  },
+  {
+    image:
+      "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=200&auto=format&fit=crop&q=60",
+    name: "Rina Mulyani",
+    handle: "@rinamlyni",
+    quote:
+      "Satu kata: Praktis! Buat kalian angkatan baru UNSOED yang masih bingung mau ngembangin minat di mana, mending langsung tes kuesionernya aja.",
   },
 ];
 
