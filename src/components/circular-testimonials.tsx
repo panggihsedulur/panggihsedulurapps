@@ -304,7 +304,7 @@ export const CircularTestimonials = ({
           position: relative;
           width: 100%;
           max-width: 18rem;
-          aspect-ratio: 9 / 16;
+          aspect-ratio: 3 / 4;
           perspective: 1000px;
         }
         .testimonial-image {
@@ -363,7 +363,7 @@ export const CircularTestimonials = ({
           }
           .image-container {
             max-width: 100%;
-            aspect-ratio: 4 / 5;
+            aspect-ratio: 3 / 4;
           }
           .testimonial-content {
             align-items: flex-start;
@@ -395,7 +395,7 @@ const testimonials = [
     ],
     name: "Azza Febra Pramudika",
     designation: "Presiden BEM UNSOED 2026",
-    src: "https://images.unsplash.com/photo-1512316609839-ce289d3eba0a?q=80&w=1368&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    src: "https://instagram.fjog3-1.fna.fbcdn.net/v/t51.82787-15/632370847_18557892634029685_1882539544758128850_n.webp?_nc_cat=101&ig_cache_key=MzgzMjk3NDQ4MTE3MzkwMTQzOA%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNBUk9VU0VMX0lURU0ueHBpZHMuMTQ0MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=FVhmqW_WpiYQ7kNvwEURgdD&_nc_oc=Adrl-T6k6hm-SFPVAYNC1gY5KzMtX7lxGY8BXd2dSZb7Jd--OkFDqGq6D6NoNgOs4Gw&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=instagram.fjog3-1.fna&_nc_gid=UHck9TubVuXA1T9_BkNW4Q&_nc_ss=7a22e&oh=00_Af4h40KFo-a1NGdoAhwv5crEbXDY7Erx9xEa2eeUmkDreA&oe=6A2044C9",
   },
   {
     quote: [
@@ -404,7 +404,7 @@ const testimonials = [
     ],
     name: "Rosmay Diana",
     designation: "Menteri Dalam Negeri BEM UNSOED 2026",
-    src: "https://images.unsplash.com/photo-1628749528992-f5702133b686?q=80&w=1368&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fA%3D%3D",
+    src: "https://instagram.fjog3-1.fna.fbcdn.net/v/t51.82787-15/701140319_18351452134214394_3115002566820318875_n.webp?_nc_cat=103&ig_cache_key=Mzg5OTU2NDYyMzg1ODUxNTg5OQ%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNBUk9VU0VMX0lURU0ueHBpZHMuMTA4MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=75GqX6y_atwQ7kNvwHeRYbf&_nc_oc=AdodwBW5zea0JPaj3scQuDz1lkMZe-Ahc9QXen9uIh6C1qxY7H0cwJXNQe6d2D4-Iho&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=instagram.fjog3-1.fna&_nc_gid=A1TZo1hfuwQkCRUgc6PEUg&_nc_ss=7a22e&oh=00_Af5ZQqfvTtUrDIkmxoJcE4oBF8dly26YjKUmvkVHcc_0Tg&oe=6A205F14",
   },
   {
     quote: [
@@ -413,7 +413,7 @@ const testimonials = [
     ],
     name: "Fada",
     designation: "Project Officer Panggih Sedulur 2026",
-    src: "https://images.unsplash.com/photo-1524267213992-b76e8577d046?q=80&w=1368&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fA%3D%3D",
+    src: "https://instagram.fjog3-1.fna.fbcdn.net/v/t51.82787-15/671112872_17986106276985330_7593033665659493505_n.webp?_nc_cat=110&ig_cache_key=Mzg3NjgxMTE2MDQ0NDcxMTQ5MA%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNBUk9VU0VMX0lURU0ueHBpZHMuMTQ0MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=Nw88Mw_Gbr0Q7kNvwHQJxOC&_nc_oc=Adoobgg2G2gAG8kWkrlFtgUBHgJ2P926zk9z1sawURFl2T0n5lShtUKjFSWiqr0fUIc&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=instagram.fjog3-1.fna&_nc_gid=HlOg50nsGgzxcspsEvlg8Q&_nc_ss=7a22e&oh=00_Af4M7ZQ4nc9qDghBZFqmUn_y11oeluXuFk0k-KdvIpB0uA&oe=6A20693F",
   },
 ];
 

@@ -6,7 +6,7 @@ import { ImageCarouselHero } from "@/components/ai-image-generator-hero";
 const demoImages = [
   {
     id: "1",
-    src: "https://images.unsplash.com/photo-1684369176170-463e84248b70?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fGFpfGVufDB8MXwwfHx8MA%3D%3D&auto=format&fit=crop&q=60&w=900",
+    src: "https://ksvrcbwywzzuvjfhklmc.supabase.co/storage/v1/object/public/panggihsedulur/HomePage/DSC00262.JPG?format=webp",
     alt: "Mountain landscape",
     rotation: -15,
   },
