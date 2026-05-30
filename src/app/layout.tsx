@@ -7,6 +7,11 @@ import { cn } from "@/lib/utils";
 import { SpeedInsights } from "@vercel/speed-insights/react";
 import { AnimatedMenuDemo } from "@/components/navigation/menu";
 import { Footer } from "@/components/layout/footer";
+// 1. Import CSS bawaan Lenis
+import "lenis/dist/lenis.css";
+
+// 2. Import komponen yang baru dibuat
+import SmoothScrolling from "@/components/layout/smoothScrolling";
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL ??
   "https://www.panggihsedulur.bem-unsoed.com";
@@ -116,7 +121,7 @@ export default function RootLayout({
       )}
     >
       <body className="min-h-full flex flex-col justify-center  ">
-        {children}
+        <SmoothScrolling>{children}</SmoothScrolling>
         <SpeedInsights />
         <Analytics />
         <AnimatedMenuDemo />

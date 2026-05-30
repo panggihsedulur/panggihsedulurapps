@@ -198,19 +198,32 @@ export function AnimatedMenuList({
   children,
   ...props
 }: AnimatedMenuListProps) {
-  const { isOpen } = useAnimatedMenuContext();
+  const { isOpen, setIsOpen } = useAnimatedMenuContext();
   return (
-    <motion.div
-      className={cn("z-[800] ", className)}
-      variants={variants}
-      initial="close"
-      animate={isOpen ? "open" : "close"}
-      {...props}
-    >
+    <>
       <AnimatePresence>
-        {isOpen && (children as React.ReactNode)}
+        {isOpen && (
+          <motion.div
+            className="fixed inset-0 z-[700] bg-black/20 backdrop-blur-sm"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setIsOpen(false)}
+          />
+        )}
       </AnimatePresence>
-    </motion.div>
+      <motion.div
+        className={cn("z-[800] ", className)}
+        variants={variants}
+        initial="close"
+        animate={isOpen ? "open" : "close"}
+        {...props}
+      >
+        <AnimatePresence>
+          {isOpen && (children as React.ReactNode)}
+        </AnimatePresence>
+      </motion.div>
+    </>
   );
 }
 
