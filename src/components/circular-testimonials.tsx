@@ -485,7 +485,7 @@ export const Sambutan = () => (
             testimony: "#171717",
             arrowBackground: "#141414",
             arrowForeground: "#f1f1f7",
-            arrowHoverBackground: "#00A6FB",
+            arrowHoverBackground: "#3A7989",
           }}
           fontSizes={{
             name: "28px",
