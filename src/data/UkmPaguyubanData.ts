@@ -43,7 +43,7 @@ const rawUkmAndPaguyubanData: ExpandableCardItem[] = [
     title: "Payung Jati, Jawa Timur",
     src: "https://dummyimage.com/400x400/004d40/ffffff&text=Jawa+Timur",
     description: "Paguyuban Mahasiswa Jawa Timur",
-    category: "Paguyuban Daerah",
+    category: "Jawa Timur",
     detailTitle: "Tentang Payung Jati, Jawa Timur",
     detailBody:
       "Payung Jati adalah sebuah organisasi primordial yang berfungsi sebagai rumah kedua bagi seluruh mahasiswa asal Jawa Timur yang sedang merantau di Unsoed. Lebih dari sekadar organisasi, Payung Jati adalah sebuah keluarga.",
@@ -61,7 +61,7 @@ const rawUkmAndPaguyubanData: ExpandableCardItem[] = [
     title: "Ikatan Mahasiswa Pekalongan-Batang",
     src: "https://dummyimage.com/400x400/004d40/ffffff&text=Pekalongan-Batang",
     description: "Paguyuban Mahasiswa Pekalongan & Batang",
-    category: "Paguyuban Daerah",
+    category: "Pekalongan-Batang",
     detailTitle: "Tentang Ikatan Mahasiswa Pekalongan-Batang",
     detailBody:
       "IMAKABA Purwokerto adalah paguyuban mahasiswa asal Kota/Kabupaten Pekalongan dan Kabupaten Batang yang menempuh studi di Purwokerto. Sejak 2004, IMAKABA menjadi ruang kebersamaan dan persaudaraan yang membersamai perjalanan mahasiswa di tanah rantau.",
@@ -81,7 +81,7 @@ const rawUkmAndPaguyubanData: ExpandableCardItem[] = [
     title: "Himpunan Mahasiswa Bekasi",
     src: "https://dummyimage.com/400x400/004d40/ffffff&text=Bekasi",
     description: "Paguyuban Mahasiswa Bekasi",
-    category: "Paguyuban Daerah",
+    category: "Bekasi",
     detailTitle: "Tentang Himpunan Mahasiswa Bekasi",
     detailBody:
       "Himpunan Mahasiswa Bekasi Unsoed merupakan Himpunan Mahasiswa Bekasi Unsoed yang studi di Banyumas. HIMAKASI juga merupakan satu-satunya organisasi mahasiswa Bekasi di Purwokerto dan berstatus koordinatif Himpunan Mahasiswa Bekasi (HIMAKASI). Himakasi Unsoed berasaskan Pancasila dan bersifat kekeluargaan serta gotong royong.",
@@ -99,7 +99,7 @@ const rawUkmAndPaguyubanData: ExpandableCardItem[] = [
     title: "Himpunan Mahasiswa Lampung",
     src: "https://dummyimage.com/400x400/004d40/ffffff&text=Lampung",
     description: "Paguyuban Mahasiswa Lampung",
-    category: "Paguyuban Daerah",
+    category: "Lampung",
     detailTitle: "Tentang Himpunan Mahasiswa Lampung",
     detailBody:
       "Himpunan Mahasiswa Lampung (HIMALA) Universitas Jenderal Soedirman merupakan organisasi yang dibentuk sebagai wadah bagi mahasiswa asal Lampung untuk bersinergi, mempererat solidaritas, dan mengembangkan potensi di berbagai bidang. Kehadiran HIMALA tidak hanya menjadi media bagi mahasiswa Lampung untuk menjaga identitas budaya dan kearifan lokal, tetapi juga untuk berkontribusi aktif dalam dinamika kehidupan kampus dan masyarakat.",
@@ -117,7 +117,7 @@ const rawUkmAndPaguyubanData: ExpandableCardItem[] = [
     title: "Hima Adipati Ewangga Kuningan",
     src: "https://dummyimage.com/400x400/004d40/ffffff&text=Kuningan",
     description: "Paguyuban Mahasiswa Kuningan",
-    category: "Paguyuban Daerah",
+    category: "Kuningan",
     detailTitle: "Tentang Himpunan Mahasiswa Adipati Ewangga Kuningan",
     detailBody:
       "Himpunan Mahasiswa Lampung (HIMALA) Universitas Jenderal Soedirman merupakan organisasi yang dibentuk sebagai wadah bagi mahasiswa asal Lampung untuk bersinergi, mempererat solidaritas, dan mengembangkan potensi di berbagai bidang. Kehadiran HIMALA tidak hanya menjadi media bagi mahasiswa Lampung untuk menjaga identitas budaya dan kearifan lokal, tetapi juga untuk berkontribusi aktif dalam dinamika kehidupan kampus dan masyarakat.",
@@ -135,7 +135,7 @@ const rawUkmAndPaguyubanData: ExpandableCardItem[] = [
     title: "KPM Galuh Pamitran Ciamis",
     src: "https://dummyimage.com/400x400/004d40/ffffff&text=Ciamis",
     description: "Keluarga Pelajar Mahasiswa Ciamis",
-    category: "Paguyuban Daerah",
+    category: "Ciamis",
     detailTitle: "Tentang KPM Galuh Pamitran Ciamis",
     detailBody:
       "Keluarga Pelajar Mahasiswa Galuh Pamitran (KPMGP) adalah sebuah paguyuban yang terdiri dari berbagai mahasiswa Universitas Jenderal Soedirman dan  berasal dari Kabupaten Ciamis. Tujuan dari paguyuban ini ialah untuk menjalin rasa kekeluargaan sehingga dapat meningkatkan kebersamaan atas dasar latar belakang daerah yang sama.",
@@ -153,7 +153,7 @@ const rawUkmAndPaguyubanData: ExpandableCardItem[] = [
     title: "Keluarga Mahasiswa Jepara-Unsoed",
     src: "https://dummyimage.com/400x400/004d40/ffffff&text=Jepara",
     description: "Paguyuban Mahasiswa Jepara",
-    category: "Paguyuban Daerah",
+    category: "Jepara",
     detailTitle: "Tentang Keluarga Mahasiswa Jepara-Unsoed",
     detailBody:
       "KM PARASOED atau Keluarga Mahasiswa Jepara Unsoed adalah paguyuban Mahasiswa Jepara yang menempuh pendidikan di Universitas Jenderal Soedirman. KM Parasoed dibentuk pada tanggal 04 Maret 2016. Paguyuban ini bertujuan untuk menjalin komunikasi dan mempererat silaturahmi antar Keluarga Mahasiswa sesama Jepara yang sedang menempuh pendidikan di Unsoed.",
@@ -171,7 +171,7 @@ const rawUkmAndPaguyubanData: ExpandableCardItem[] = [
     title: "Keluarga Mahasiswa Paku Jawa Magelang",
     src: "https://dummyimage.com/400x400/004d40/ffffff&text=Magelang",
     description: "Paguyuban Mahasiswa Magelang",
-    category: "Paguyuban Daerah",
+    category: "Magelang",
     detailTitle: "Tentang Keluarga Mahasiswa Paku Jawa Magelang",
     detailBody: "Wadah silaturahmi bagi mahasiswa asal Magelang.",
     detailFooterTitle: "Nomor: 128/UND/DAGRI/BEM/III/2026",
@@ -188,7 +188,7 @@ const rawUkmAndPaguyubanData: ExpandableCardItem[] = [
     title: "Keluarga Mahasiswa Bandung",
     src: "https://dummyimage.com/400x400/004d40/ffffff&text=Bandung",
     description: "Paguyuban Mahasiswa Bandung",
-    category: "Paguyuban Daerah",
+    category: "Bandung",
     detailTitle: "Tentang Keluarga Mahasiswa Bandung",
     detailBody:
       "Keluarga Mahasiswa Bandung (KMB) atau Keluarga Mahasiswa Bandung Raya merupakan salah satu paguyuban mahasiswa daerah di Universitas Jenderal Soedirman (Unsoed) yang menjadi wadah silaturahmi, kebersamaan, serta pengembangan potensi mahasiswa asal Bandung dan sekitarnya. Organisasi ini berperan dalam mempererat hubungan antaranggota, membantu mahasiswa baru dalam proses adaptasi di lingkungan kampus, serta melestarikan budaya daerah melalui berbagai kegiatan sosial, akademik, dan kekeluargaan. Selain itu, KMB juga menjadi sarana membangun jaringan antar mahasiswa untuk saling mendukung selama menempuh pendidikan di Unsoed.",
@@ -206,7 +206,7 @@ const rawUkmAndPaguyubanData: ExpandableCardItem[] = [
     title: "KM Unsoed Purworejo-Purwokerto",
     src: "https://dummyimage.com/400x400/004d40/ffffff&text=Purworejo",
     description: "Paguyuban Mahasiswa Purworejo",
-    category: "Paguyuban Daerah",
+    category: "Purworejo",
     detailTitle: "Tentang Keluarga Mahasiswa Unsoed Purworejo-Purwokerto",
     detailBody:
       "Keluarga Mahasiswa Purworejo (KMP) Universitas Jenderal Soedirman adalah Organisasi Mahasiswa Daerah (Ormada) yang menjadi wadah pemersatu serta rumah bagi seluruh mahasiswa asal Kabupaten Purworejo yang menempuh studi di Unsoed. KMP berkomitmen untuk menjalin silaturahmi antaranggota lintas fakultas, menjadi pusat distribusi informasi strategis terkait akademik maupun beasiswa bagi mahasiswa asal daerah, serta berperan aktif dalam pengabdian masyarakat dan sosialisasi pendidikan tinggi bagi putra-putri daerah di Kabupaten Purworejo.",
@@ -224,7 +224,7 @@ const rawUkmAndPaguyubanData: ExpandableCardItem[] = [
     title: "Himpunan Mahasiswa Cilacap",
     src: "https://dummyimage.com/400x400/004d40/ffffff&text=Cilacap",
     description: "Paguyuban Mahasiswa Cilacap",
-    category: "Paguyuban Daerah",
+    category: "Cilacap",
     detailTitle: "Tentang Himpunan Mahasiswa Cilacap",
     detailBody:
       "HMC Unsoed merupakan organisasi berbasis paguyuban kedaerahan yang menjadi wadah silaturahmi dalam rangka menjalin komunikasi antarmahasiswa Unsoed yang berasal dari Kabupaten Cilacap. Tidak hanya menjadi wadah silaturahmi, HMC Unsoed juga dapat menjadi ruang berproses bagi anggota dalam bidang keorganisasian melalui serangkaian progam kerja yang disusun berdasarkan musyawarah mufakat. Dalam penyusunannya setidaknya terdapat satu progam kerja yang berdampak positif terhadap elemen masyarakat Kabupaten Cilacap.",
@@ -242,7 +242,7 @@ const rawUkmAndPaguyubanData: ExpandableCardItem[] = [
     title: "Ikatan Mahasiswa Banjarnegara",
     src: "https://dummyimage.com/400x400/004d40/ffffff&text=Banjarnegara",
     description: "Paguyuban Mahasiswa Banjarnegara",
-    category: "Paguyuban Daerah",
+    category: "Banjarnegara",
     detailTitle: "Tentang Ikatan Mahasiswa Banjarnegara",
     detailBody:
       "Ikatan Mahasiswa Banjarnegara (IMBARA) yaitu organisasi kedaerahan yang menjadi wadah bagi mahasiswa asal Banjarnegara yang menempuh  pendidikan di Universitas Jenderal Soedirman sebagai sarana tali silaturahmi dan memperkuat rasa kekeluargaan.",
@@ -260,7 +260,7 @@ const rawUkmAndPaguyubanData: ExpandableCardItem[] = [
     title: "Himpunan Mahasiswa Papua",
     src: "https://dummyimage.com/400x400/004d40/ffffff&text=Papua",
     description: "Paguyuban Mahasiswa Papua",
-    category: "Paguyuban Daerah",
+    category: "Papua",
     detailTitle: "Tentang Himpunan Mahasiswa Papua",
     detailBody:
       "Paguyuban himappa ada untuk merangkul pelajar dan mahasiswa di kota purwokerto.",
@@ -278,7 +278,7 @@ const rawUkmAndPaguyubanData: ExpandableCardItem[] = [
     title: "Ikatan Pelajar Mahasiswa Cirebon",
     src: "https://dummyimage.com/400x400/004d40/ffffff&text=Cirebon",
     description: "Paguyuban Mahasiswa Cirebon",
-    category: "Paguyuban Daerah",
+    category: "Cirebon",
     detailTitle: "Tentang Ikatan Pelajar Mahasiswa Cirebon",
     detailBody:
       "IPMC adalah organisasi kedaerahan yang menjadi wadah bagi mahasiswa asal Cirebon yang sedang menempuh pendidikan di purwokerto (UNSOED). Organisasi ini bertujuan mempererat tali silaturahmi, membangun rasa kekeluargaan, serta menjaga identitas budaya Cirebon di lingkungan akademik. Secara fungsi, IPMC biasanya tidak hanya jadi tempat kumpul, tapi juga punya peran strategis: mulai dari pengembangan potensi anggota (akademik maupun non-akademik), advokasi mahasiswa daerah, sampai kontribusi sosial ke masyarakat, baik di tanah rantau maupun di Cirebon sendiri. Kegiatan yang dijalankan bisa berupa diskusi, pengabdian masyarakat, pelestarian budaya (seperti seni tari, bahasa, atau kuliner khas Cirebon), hingga program kaderisasi kepemimpinan.",
@@ -296,7 +296,7 @@ const rawUkmAndPaguyubanData: ExpandableCardItem[] = [
     title: "Himpunan Mahasiswa Kebumen",
     src: "https://dummyimage.com/400x400/004d40/ffffff&text=Kebumen",
     description: "Paguyuban Mahasiswa Kebumen",
-    category: "Paguyuban Daerah",
+    category: "Kebumen",
     detailTitle: "Tentang Himpunan Mahasiswa Kebumen",
     detailBody:
       "Himpunan Mahasiswa Kebumen adalah kepanjangan dari HMK. HMK merupakan organisasi yang mewadahi mahasiswa asal kebumen dengan prinsip kekeluargaan dan kebersamaan. Tujuannya adalah untuk memperkuat silahturahmi, mengembangkan porensi mahasiswa, serta berkontribusi bagi darah kebumen. Mahasiswa adalah menambah relasi, mendapat dukungan sosial, dan menambangkan soft skills seperti kepemimpinan dan kerja sama melalui berbagai kegiatan positif.",
@@ -314,7 +314,7 @@ const rawUkmAndPaguyubanData: ExpandableCardItem[] = [
     title: "Ikatan Keluarga Mahasiswa Minang",
     src: "https://dummyimage.com/400x400/004d40/ffffff&text=Minang",
     description: "Paguyuban Mahasiswa Minang",
-    category: "Paguyuban Daerah",
+    category: "Minang",
     detailTitle: "Tentang Ikatan Keluarga Mahasiswa Minang",
     detailBody:
       "IKAMMI adalah paguyuban mahasiswa asal Sumatera Barat dan keturunan Minang yang menempuh pendidikan di Universitas Jenderal Soedirman. Berlandaskan adat dan budaya Minangkabau, IKAMMI menjadi wadah untuk mempererat hubungan serta menjadi rumah bagi mahasiswa Minang di Purwokerto.",
@@ -332,7 +332,7 @@ const rawUkmAndPaguyubanData: ExpandableCardItem[] = [
     title: "Soedirman Perwira",
     src: "https://dummyimage.com/400x400/004d40/ffffff&text=Purbalingga",
     description: "Paguyuban Mahasiswa Purbalingga",
-    category: "Paguyuban Daerah",
+    category: "Purbalingga",
     detailTitle: "Tentang Soedirman Perwira",
     detailBody:
       "Soedirman Perwira merupakan Organisasi yang mewadahi seluruh Mahasiswa Unsoed yang berasal dari Kabupaten Purbalingga, Jawa Tengah",
@@ -350,7 +350,7 @@ const rawUkmAndPaguyubanData: ExpandableCardItem[] = [
     title: "KM Tasikmalaya Sukapura-Purwokerto",
     src: "https://dummyimage.com/400x400/004d40/ffffff&text=Tasikmalaya",
     description: "Paguyuban Mahasiswa Tasikmalaya",
-    category: "Paguyuban Daerah",
+    category: "Tasikmalaya",
     detailTitle: "Tentang Keluarga Mahasiswa Tasikmalaya Sukapura-Purwokerto",
     detailBody:
       "Keluarga Mahasiswa Tasikmalaya Sukapura-Purwokerto atau sering disebut KMTSP. KMTSP sendiri merupakan satu-satunya organisasi Keluarga Mahasiswa Tasikmalaya di Purwokerto yang berstatus Koordinatif Keluarga Mahasiswa Jawa Barat (KMJB). Organisasi ini berisi mahasiswa-mahasiswa yang sedang melanjutkan studinya di universitas universitas yang ada di Purwokerto.",
@@ -368,7 +368,7 @@ const rawUkmAndPaguyubanData: ExpandableCardItem[] = [
     title: "Forum Mahasiswa Indramayu-Purwokerto",
     src: "https://dummyimage.com/400x400/004d40/ffffff&text=Indramayu",
     description: "Paguyuban Mahasiswa Indramayu",
-    category: "Paguyuban Daerah",
+    category: "Indramayu",
     detailTitle: "Tentang Forum Mahasiswa Indramayu-Purwokerto",
     detailBody:
       "Forum Mahasiswa Indramayu (FORMASI) merupakan sebuah paguyuban mahasiswa atau sebuah organisasi yang berisikan mahasiswa dari seluruh penjuru kampus yang ada di daerah Purwokerto dan sekitarnya dengan tujuan untuk menciptakan kebersamaan, solidaritas, dan kerja sama dalam mencapai tujuan bersama.",
@@ -386,7 +386,7 @@ const rawUkmAndPaguyubanData: ExpandableCardItem[] = [
     title: "Jakarta Merdeka",
     src: "https://dummyimage.com/400x400/004d40/ffffff&text=Jakarta",
     description: "Paguyuban Mahasiswa DKI Jakarta",
-    category: "Paguyuban Daerah",
+    category: "Jakarta",
     detailTitle: "Tentang Jakarta Merdeka",
     detailBody:
       "HIMAKA Purwokerto adalah paguyuban mahasiswa asal Majalengka yang menempuh studi di wilayah Purwokerto. Organisasi ini menjadi wadah kebersamaan untuk mempererat persaudaraan, menumbuhkan semangat kekeluargaan, dan mendorong kontribusi aktif bagi kemajuan daerah.",
@@ -404,7 +404,7 @@ const rawUkmAndPaguyubanData: ExpandableCardItem[] = [
     title: "Himpunan Mahasiswa Surakarta",
     src: "https://dummyimage.com/400x400/004d40/ffffff&text=Surakarta",
     description: "Paguyuban Mahasiswa Surakarta",
-    category: "Paguyuban Daerah",
+    category: "Surakarta",
     detailTitle: "Tentang Himpunan Mahasiswa Surakarta",
     detailBody:
       "Ikatan Mahasiswa Surakarta merupakan wadah kekeluargaan bagi mahasiswa yang berasal dari wilayah karesidenan Surakarta. Paguyuban ini dibentuk sebagai sarana untuk mempererat hubungan antar mahasiswa perantau, dan menciptakan rasa kebersamaan di lingkungan kampus. Paguyuban Surakarta juga berperan aktif dalam mengenalkan budaya Jawa khas Solo, seperti seni, bahasa, dan tradisi, serta kegiatan sosial, diskusi, dan kebersamaan antar anggota, serta menjadi tempat berbagi informasi dan dukungan, khususnya bagi mahasiswa baru agar lebih mudah beradaptasi dengan kehidupan di Unsoed.",
@@ -422,7 +422,7 @@ const rawUkmAndPaguyubanData: ExpandableCardItem[] = [
     title: "Himpunan Mahasiswa Sulawesi Unsoed",
     src: "https://dummyimage.com/400x400/004d40/ffffff&text=Sulawesi",
     description: "Paguyuban Mahasiswa Sulawesi",
-    category: "Paguyuban Daerah",
+    category: "Sulawesi",
     detailTitle: "Tentang Himpunan Mahasiswa Sulawesi Unsoed",
     detailBody: "Wadah silaturahmi bagi mahasiswa asal Pulau Sulawesi.",
     detailFooterTitle: "Nomor: 142/UND/DAGRI/BEM/III/2026",
@@ -439,7 +439,7 @@ const rawUkmAndPaguyubanData: ExpandableCardItem[] = [
     title: "Paguyuban Unsoed Bogor",
     src: "https://dummyimage.com/400x400/004d40/ffffff&text=Bogor",
     description: "Paguyuban Mahasiswa Bogor",
-    category: "Paguyuban Daerah",
+    category: "Bogor",
     detailTitle: "Tentang Paguyuban Unsoed Bogor",
     detailBody: "Wadah silaturahmi bagi mahasiswa asal Bogor.",
     detailFooterTitle: "Nomor: 143/UND/DAGRI/BEM/III/2026",
@@ -456,7 +456,7 @@ const rawUkmAndPaguyubanData: ExpandableCardItem[] = [
     title: "Ikatan Mahasiswa Pemalang",
     src: "https://dummyimage.com/400x400/004d40/ffffff&text=Pemalang",
     description: "Paguyuban Mahasiswa Pemalang",
-    category: "Paguyuban Daerah",
+    category: "Pemalang",
     detailTitle: "Tentang Ikatan Mahasiswa Pemalang",
     detailBody:
       "Merupakan wadah organisasi yang menghimpun mahasiswa asal Pemalang untuk saling terhubung, berkolaborasi, dan berkontribusi bagi daerah. IMP tidak hanya berfungsi sebagai tempat kekeluargaan berkumpul, tetapi juga sebagai sarana pengembangan diri, solidaritas, serta pengabdian terhadap Pendidikan untuk generasi bangsa. Melalui organisasi ini, mahasiswa diharapkan mampu menjadi agen perubahan yang membawa dampak positif, baik di lingkungan kampus maupun di daerah asal.",
@@ -474,7 +474,7 @@ const rawUkmAndPaguyubanData: ExpandableCardItem[] = [
     title: "Forum Komunikasi Mahasiswa Banten",
     src: "https://dummyimage.com/400x400/004d40/ffffff&text=Banten",
     description: "Paguyuban Mahasiswa Banten",
-    category: "Paguyuban Daerah",
+    category: "Banten",
     detailTitle: "Tentang Forum Komunikasi Mahasiswa Banten",
     detailBody: "Wadah silaturahmi bagi mahasiswa asal Provinsi Banten.",
     detailFooterTitle: "Nomor: 145/UND/DAGRI/BEM/III/2026",
@@ -491,7 +491,7 @@ const rawUkmAndPaguyubanData: ExpandableCardItem[] = [
     title: "Himpunan Mahasiswa Sumatera Utara",
     src: "https://dummyimage.com/400x400/004d40/ffffff&text=Sumatera+Utara",
     description: "Paguyuban Mahasiswa Sumatera Utara",
-    category: "Paguyuban Daerah",
+    category: "Sumatera Utara",
     detailTitle: "Tentang Himpunan Mahasiswa Sumatera Utara",
     detailBody:
       "HIMASTRA (Himpunan Mahasiswa Sumatera Utara) adalah rumah kedua bagi seluruh mahasiswa asal Sumatera Utara yang sedang menempuh pendidikan di Universitas Jenderal Soedirman. Sebagai perantau yang jauh dari kampung halaman, HIMASTRA hadir sebagai wadah untuk mempererat tali silaturahmi, memperkuat solidaritas, serta melestarikan budaya dan nilai-nilai kedaerahan masing-masing suku yang ada di Sumatera Utara yaitu seperti suku Batak, Melayu, Mandailing, Karo, Simalungun, dan suku-suku lainnya di Sumatera Utara. Kita disini bukan hanya sekedar perkumpulan tetapi rumah dan keluarga!",
