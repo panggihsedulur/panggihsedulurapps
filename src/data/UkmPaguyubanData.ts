@@ -58,9 +58,9 @@ const rawUkmAndPaguyubanData: ExpandableCardItem[] = [
   },
   {
     id: "pg-122",
-    title: "Ikatan Mahasiswa Pekalongan-Batang",
+    title: "IMAKABA",
     src: "https://dummyimage.com/400x400/004d40/ffffff&text=Pekalongan-Batang",
-    description: "Paguyuban Mahasiswa Pekalongan & Batang",
+    description: "Paguyuban Pekalongan & Batang",
     category: "Pekalongan-Batang",
     detailTitle: "Tentang Ikatan Mahasiswa Pekalongan-Batang",
     detailBody:
@@ -150,7 +150,7 @@ const rawUkmAndPaguyubanData: ExpandableCardItem[] = [
   },
   {
     id: "pg-127",
-    title: "Keluarga Mahasiswa Jepara-Unsoed",
+    title: "KM PARASOED",
     src: "https://dummyimage.com/400x400/004d40/ffffff&text=Jepara",
     description: "Paguyuban Mahasiswa Jepara",
     category: "Jepara",
@@ -168,7 +168,7 @@ const rawUkmAndPaguyubanData: ExpandableCardItem[] = [
   },
   {
     id: "pg-128",
-    title: "Keluarga Mahasiswa Paku Jawa Magelang",
+    title: "KMPJ Magelang",
     src: "https://dummyimage.com/400x400/004d40/ffffff&text=Magelang",
     description: "Paguyuban Mahasiswa Magelang",
     category: "Magelang",
@@ -347,7 +347,7 @@ const rawUkmAndPaguyubanData: ExpandableCardItem[] = [
   },
   {
     id: "pg-138",
-    title: "KM Tasikmalaya Sukapura-Purwokerto",
+    title: "KMTSP - Purwkoerto",
     src: "https://dummyimage.com/400x400/004d40/ffffff&text=Tasikmalaya",
     description: "Paguyuban Mahasiswa Tasikmalaya",
     category: "Tasikmalaya",
@@ -365,7 +365,7 @@ const rawUkmAndPaguyubanData: ExpandableCardItem[] = [
   },
   {
     id: "pg-139",
-    title: "Forum Mahasiswa Indramayu-Purwokerto",
+    title: "FORMASI",
     src: "https://dummyimage.com/400x400/004d40/ffffff&text=Indramayu",
     description: "Paguyuban Mahasiswa Indramayu",
     category: "Indramayu",
@@ -419,7 +419,7 @@ const rawUkmAndPaguyubanData: ExpandableCardItem[] = [
   },
   {
     id: "pg-142",
-    title: "Himpunan Mahasiswa Sulawesi Unsoed",
+    title: "HIMAS",
     src: "https://dummyimage.com/400x400/004d40/ffffff&text=Sulawesi",
     description: "Paguyuban Mahasiswa Sulawesi",
     category: "Sulawesi",
@@ -471,7 +471,7 @@ const rawUkmAndPaguyubanData: ExpandableCardItem[] = [
   },
   {
     id: "pg-145",
-    title: "Forum Komunikasi Mahasiswa Banten",
+    title: "FKMB",
     src: "https://dummyimage.com/400x400/004d40/ffffff&text=Banten",
     description: "Paguyuban Mahasiswa Banten",
     category: "Banten",
@@ -488,7 +488,7 @@ const rawUkmAndPaguyubanData: ExpandableCardItem[] = [
   },
   {
     id: "pg-146",
-    title: "Himpunan Mahasiswa Sumatera Utara",
+    title: "HIMASTRA",
     src: "https://dummyimage.com/400x400/004d40/ffffff&text=Sumatera+Utara",
     description: "Paguyuban Mahasiswa Sumatera Utara",
     category: "Sumatera Utara",
@@ -511,7 +511,7 @@ const rawUkmAndPaguyubanData: ExpandableCardItem[] = [
   // ==========================================
   {
     id: "ukm-082",
-    title: "Himabisi",
+    title: "HIMABISI",
     src: "https://dummyimage.com/400x400/ff6f00/ffffff&text=Himabisi",
     description: "Himpunan Mahasiswa Bidikmisi",
     category: "Beasiswa & Kesejahteraan",
@@ -548,7 +548,7 @@ const rawUkmAndPaguyubanData: ExpandableCardItem[] = [
     id: "ukm-084",
     title: "PMKP",
     src: "https://dummyimage.com/400x400/4a148c/ffffff&text=PMKP",
-    description: "Persekutuan Mahasiswa Kristen Protestan",
+    description: "Persekutuan Mahasiswa Kristen Pro...",
     category: "Kerohanian",
     detailTitle: "Tentang PMKP",
     detailBody: "Wadah pembinaan dan persekutuan mahasiswa Kristen Protestan.",
@@ -623,7 +623,7 @@ const rawUkmAndPaguyubanData: ExpandableCardItem[] = [
     id: "ukm-097",
     title: "UKMPR",
     src: "https://dummyimage.com/400x400/e65100/ffffff&text=UKMPR",
-    description: "Unit Kegiatan Mahasiswa Penalaran dan Riset",
+    description: "Unit Kegiatan Mahasiswa Penalaran ...",
     category: "Keilmuan",
     detailTitle: "Tentang UKMPR",
     detailBody:
@@ -717,7 +717,7 @@ const rawUkmAndPaguyubanData: ExpandableCardItem[] = [
     id: "ukm-093",
     title: "PSM GBS",
     src: "https://dummyimage.com/400x400/b71c1c/ffffff&text=PSM+GBS",
-    description: "Paduan Suara Mahasiswa Gita Buana Soedirman",
+    description: "Paduan Suara Mahasiswa Gita Buana ...",
     category: "Seni",
     detailTitle: "Tentang PSM GBS",
     detailBody: "Mewadahi minat dan bakat mahasiswa di bidang paduan suara.",
@@ -1055,7 +1055,7 @@ const rawUkmAndPaguyubanData: ExpandableCardItem[] = [
     id: "ukm-090",
     title: "UPL MPA",
     src: "https://dummyimage.com/400x400/1b5e20/ffffff&text=UPL+MPA",
-    description: "Unit Pandu Lingkungan Mahasiswa Pecinta Alam",
+    description: "Unit Pandu Lingkungan Mahasiswa ...",
     category: "Alam Bebas & Lingkungan",
     detailTitle: "Tentang UPL MPA",
     detailBody:

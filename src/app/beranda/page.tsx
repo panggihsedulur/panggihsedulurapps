@@ -4,6 +4,7 @@ import HeroSection from "@/components/features/Hero";
 import { PanggihIntroSection } from "@/components/features/PanggihIntroSection";
 import { MaskotProfilesSection } from "@/components/features/MaskotProfilesSection";
 import { SloganBannerSection } from "@/components/features/SloganBannerSection";
+import UkmPaguyubanCarouselSection from "@/components/features/UkmPaguyubanCarouselSection";
 
 import { GridPattern } from "@/components/ui/grid-pattern";
 import TestimonialsSection from "@/components/testimoni";
@@ -34,6 +35,7 @@ export default function Beranda() {
           />
         </div>
         <div className="relative z-10">
+          <UkmPaguyubanCarouselSection />
           <PanggihIntroSection />
           <MaskotProfilesSection />
           <SloganBannerSection />
