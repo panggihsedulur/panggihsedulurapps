@@ -3,6 +3,7 @@
 "use client";
 
 import * as React from "react";
+import * as ReactDOM from "react-dom";
 
 import { cn } from "@/lib/utils";
 
@@ -41,7 +42,12 @@ export function ExpandableCard({
   modalProps,
 }: ExpandableCardProps) {
   const [active, setActive] = React.useState(false);
+  const [mounted, setMounted] = React.useState(false);
   const id = React.useId();
+
+  React.useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // Memoized callbacks untuk menghindari re-render
   const handleClose = React.useCallback(() => {
@@ -75,81 +81,83 @@ export function ExpandableCard({
   const safeBadges = (badges || []).filter(Boolean);
   const { className: modalClassName, ...restModalProps } = modalProps ?? {};
 
+  const modalContent = active ? (
+    <div
+      className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/50 p-4 backdrop-blur-md"
+      onClick={handleClose}
+    >
+      <div
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby={`expandable-card-title-${id}`}
+        className={cn(
+          "w-full max-w-lg overflow-hidden rounded-2xl bg-white shadow-2xl dark:bg-zinc-950",
+          classNameExpanded,
+          modalClassName,
+        )}
+        onClick={(e) => e.stopPropagation()}
+        {...restModalProps}
+      >
+        {/* Modal header image */}
+        <div className="relative h-56 w-full bg-zinc-200 dark:bg-zinc-800">
+          <img
+            className="h-full w-full object-cover"
+            src={src}
+            alt={title}
+            loading="eager"
+          />
+          <button
+            type="button"
+            onClick={handleClose}
+            aria-label="Tutup"
+            className="absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-full bg-white/80 text-lg font-bold text-zinc-700 shadow transition hover:bg-white focus:outline-none dark:bg-zinc-900/80 dark:text-zinc-200 dark:hover:bg-zinc-900"
+          >
+            ×
+          </button>
+        </div>
+
+        {/* Modal body */}
+        <div className="p-5">
+          {modalSubtitle ? (
+            <p className="mb-1 text-xs text-zinc-500 dark:text-zinc-400">
+              {modalSubtitle}
+            </p>
+          ) : null}
+
+          <h3
+            id={`expandable-card-title-${id}`}
+            className="mb-4 text-xl font-semibold leading-snug text-zinc-900 dark:text-zinc-50"
+          >
+            {title}
+          </h3>
+
+          <div className="text-sm leading-relaxed text-zinc-600 dark:text-zinc-300">
+            {children}
+          </div>
+
+          {safeBadges.length ? (
+            <div className="mt-4 flex flex-wrap items-center gap-2">
+              {safeBadges.map((label) => (
+                <span
+                  key={label}
+                  className="inline-flex items-center gap-1 rounded-full border border-zinc-200 bg-zinc-100 px-3 py-1 text-xs font-medium text-zinc-700 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-200"
+                >
+                  {label}
+                </span>
+              ))}
+            </div>
+          ) : null}
+        </div>
+      </div>
+    </div>
+  ) : null;
+
   return (
     <>
-      {active && (
-        <>
-          {/* Modal overlay (clicking outside closes) */}
-          <div
-            className="fixed inset-0 z-100 flex items-center justify-center bg-black/50 p-4 backdrop-blur-md"
-            onClick={handleClose}
-          >
-            <div
-              role="dialog"
-              aria-modal="true"
-              aria-labelledby={`expandable-card-title-${id}`}
-              className={cn(
-                "w-full max-w-lg overflow-hidden rounded-2xl bg-white shadow-2xl dark:bg-zinc-950",
-                classNameExpanded,
-                modalClassName,
-              )}
-              onClick={(e) => e.stopPropagation()}
-              {...restModalProps}
-            >
-              {/* Modal header image */}
-              <div className="relative h-56 w-full bg-zinc-200 dark:bg-zinc-800">
-                <img
-                  className="h-full w-full object-cover"
-                  src={src}
-                  alt={title}
-                  loading="eager"
-                />
-                <button
-                  type="button"
-                  onClick={handleClose}
-                  aria-label="Tutup"
-                  className="absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-full bg-white/80 text-lg font-bold text-zinc-700 shadow transition hover:bg-white focus:outline-none dark:bg-zinc-900/80 dark:text-zinc-200 dark:hover:bg-zinc-900"
-                >
-                  ×
-                </button>
-              </div>
-
-              {/* Modal body */}
-              <div className="p-5">
-                {modalSubtitle ? (
-                  <p className="mb-1 text-xs text-zinc-500 dark:text-zinc-400">
-                    {modalSubtitle}
-                  </p>
-                ) : null}
-
-                <h3
-                  id={`expandable-card-title-${id}`}
-                  className="mb-4 text-xl font-semibold leading-snug text-zinc-900 dark:text-zinc-50"
-                >
-                  {title}
-                </h3>
-
-                <div className="text-sm leading-relaxed text-zinc-600 dark:text-zinc-300">
-                  {children}
-                </div>
-
-                {safeBadges.length ? (
-                  <div className="mt-4 flex flex-wrap items-center gap-2">
-                    {safeBadges.map((label) => (
-                      <span
-                        key={label}
-                        className="inline-flex items-center gap-1 rounded-full border border-zinc-200 bg-zinc-100 px-3 py-1 text-xs font-medium text-zinc-700 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-200"
-                      >
-                        {label}
-                      </span>
-                    ))}
-                  </div>
-                ) : null}
-              </div>
-            </div>
-          </div>
-        </>
-      )}
+      {/* Portal: render modal di document.body agar tidak terhalang z-index section */}
+      {mounted && modalContent
+        ? ReactDOM.createPortal(modalContent, document.body)
+        : null}
 
       <button
         type="button"

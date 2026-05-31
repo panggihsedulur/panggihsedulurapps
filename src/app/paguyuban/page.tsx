@@ -2,25 +2,16 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { ChevronDown, Search } from "lucide-react";
-import { UkmGrid } from "@/components/ukm/UkmCard";
-import { ukmByCategory, type UKM } from "@/data/UkmLogic";
+import { PaguyubanGrid } from "@/components/paguyuban/PaguyubanCard";
+import {
+  allPaguyuban,
+  paguyubanCategoryOptions,
+} from "@/data/PaguyubanLogic";
 import { GridPattern } from "@/components/ui/grid-pattern";
-const categoryMatchers: Record<string, (category: string) => boolean> = {
-  Olahraga: (category) => category.startsWith("Olahraga"),
-  Seni: (category) => category.startsWith("Seni"),
-  Penalaran: (category) => category.startsWith("Penalaran"),
-  "Pecinta Alam": (category) => category.startsWith("Alam"),
-  "Sosial & Disiplin": (category) => category.startsWith("Sosial"),
-  Kerohanian: (category) => category.startsWith("Kerohanian"),
-  Khusus: (category) =>
-    category.startsWith("Khusus") || category.startsWith("Beasiswa"),
-};
 
-const categoryOptions = ["Semua Kategori", ...Object.keys(ukmByCategory)];
-
-export default function UkmPage() {
+export default function PaguyubanPage() {
   const [query, setQuery] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("Semua Kategori");
+  const [selectedCategory, setSelectedCategory] = useState("Semua Daerah");
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
   const categoryMenuRef = useRef<HTMLDivElement>(null);
 
@@ -42,46 +33,24 @@ export default function UkmPage() {
     };
   }, [isCategoryOpen]);
 
-  const allUkm = useMemo<UKM[]>(() => {
-    const uniqueMap = new Map<string, UKM>();
-    for (const group of Object.values(ukmByCategory)) {
-      for (const ukm of group) {
-        if (!uniqueMap.has(ukm.id)) {
-          uniqueMap.set(ukm.id, ukm);
-        }
-      }
-    }
-    return Array.from(uniqueMap.values());
-  }, []);
-
-  const filteredUkm = useMemo(() => {
+  const filteredPaguyuban = useMemo(() => {
     const trimmedQuery = query.trim().toLowerCase();
-    const matchCategory =
-      selectedCategory === "Semua Kategori"
-        ? () => true
-        : categoryMatchers[selectedCategory] ||
-          ((category: string) =>
-            category.toLowerCase().includes(selectedCategory.toLowerCase()));
 
-    const filtered = allUkm.filter((ukm) => {
-      if (!matchCategory(ukm.category)) return false;
-      if (!trimmedQuery) return true;
+    return allPaguyuban
+      .filter((pg) => {
+        const matchCategory =
+          selectedCategory === "Semua Daerah" ||
+          pg.category.toLowerCase() === selectedCategory.toLowerCase();
 
-      const haystack = `${ukm.name} ${ukm.title} ${ukm.category}`.toLowerCase();
-      return haystack.includes(trimmedQuery);
-    });
+        if (!matchCategory) return false;
+        if (!trimmedQuery) return true;
 
-    const uniqueMap = new Map<string, UKM>();
-    for (const ukm of filtered) {
-      if (!uniqueMap.has(ukm.id)) {
-        uniqueMap.set(ukm.id, ukm);
-      }
-    }
-
-    return Array.from(uniqueMap.values()).sort(
-      (a, b) => a.priority - b.priority || a.name.localeCompare(b.name),
-    );
-  }, [allUkm, query, selectedCategory]);
+        const haystack =
+          `${pg.name ?? ""} ${pg.title} ${pg.category} ${pg.description}`.toLowerCase();
+        return haystack.includes(trimmedQuery);
+      })
+      .sort((a, b) => a.priority - b.priority || a.title.localeCompare(b.title));
+  }, [query, selectedCategory]);
 
   return (
     <div className="min-h-screen bg-[#fef6f9]">
@@ -89,36 +58,30 @@ export default function UkmPage() {
         {" "}
         <div className="relative mx-auto mt-15 flex max-w-5xl flex-col items-center gap-6 text-center">
           <h1
-            id="intro-heading"
-            aria-label="Apa itu Panggih Sedulur"
+            id="paguyuban-heading"
+            aria-label="Paguyuban Daerah Unsoed"
             className="text-2xl font-semibold tracking-tighter text-center sm:text-3xl md:text-4xl"
           >
             <span
               className="font-edwardian text-5xl sm:text-6xl md:text-7xl mr-1 sm:mr-2"
               aria-hidden="true"
             >
-              U
+              P
             </span>
-            nit
+            aguyuban
             <span
-              className="font-edwardian text-5xl sm:text-6xl md:text-7xl mr-1 sm:mr-2"
+              className="font-edwardian text-5xl sm:text-6xl md:text-7xl mx-1 sm:mx-2"
               aria-hidden="true"
             >
-              K
+              D
             </span>
-            egiatan
-            <span
-              className="font-edwardian text-5xl sm:text-6xl md:text-7xl mr-1 sm:mr-2"
-              aria-hidden="true"
-            >
-              M
-            </span>
-            ahasiswa
+            aerah
           </h1>
           <p className="max-w-3xl text-base text-white/85 sm:text-lg">
-            Temukan UKM yang cocok dengan minatmu, mulai dari olahraga, seni,
-            penalaran, hingga kegiatan sosial. Gunakan pencarian untuk melihat
-            detail UKM beserta kontak pengurusnya.
+            Temukan paguyuban daerahmu di Unsoed. Sambung silaturahmi,
+            perkuat kebersamaan, dan jadilah bagian dari keluarga besar
+            mahasiswa perantau. Gunakan pencarian untuk menemukan paguyuban
+            sesuai daerah asalmu.
           </p>
 
           <div className="mt-4 w-full max-w-3xl rounded-3xl bg-white/10 p-4 backdrop-blur-md">
@@ -127,7 +90,7 @@ export default function UkmPage() {
                 <Search className="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-black" />
                 <input
                   type="text"
-                  placeholder="Cari UKM yang kamu minati..."
+                  placeholder="Cari paguyuban daerahmu..."
                   value={query}
                   onChange={(event) => setQuery(event.target.value)}
                   className="w-full rounded-2xl border border-white/40 bg-white/90 py-3 pl-12 pr-4 text-sm text-neutral-800 shadow-sm outline-none transition focus:border-white/70 focus:ring-2 focus:ring-white/40"
@@ -154,14 +117,14 @@ export default function UkmPage() {
                 </button>
                 <div
                   role="listbox"
-                  aria-label="Pilih kategori"
-                  className={`absolute left-0 right-0 z-50 mt-2 rounded-2xl border border-white/70 bg-white/95 p-2 text-sm text-neutral-800 shadow-lg backdrop-blur-sm transition ${
+                  aria-label="Pilih daerah"
+                  className={`absolute left-0 right-0 z-50 mt-2 max-h-64 overflow-y-auto rounded-2xl border border-white/70 bg-white/95 p-2 text-sm text-neutral-800 shadow-lg backdrop-blur-sm transition ${
                     isCategoryOpen
                       ? "pointer-events-auto scale-100 opacity-100"
                       : "pointer-events-none scale-95 opacity-0"
                   }`}
                 >
-                  {categoryOptions.map((category) => {
+                  {paguyubanCategoryOptions.map((category) => {
                     const isSelected = selectedCategory === category;
                     return (
                       <button
@@ -204,25 +167,25 @@ export default function UkmPage() {
         </div>
         <div className="relative z-10 mx-auto max-w-6xl px-4 py-12 sm:px-6">
           <div className="mb-8 flex flex-col gap-2 text-center justify-center items-center">
-            <div className="bg- inline-block rounded-2xl px-3 py-1  w-max">
+            <div className="inline-block rounded-2xl px-3 py-1 w-max">
               <p className="text-sm font-semibold uppercase tracking-[0.3em] text-gradient">
-                Daftar UKM
+                Daftar Paguyuban
               </p>
             </div>
             <h2 className="text-2xl font-semibold text-neutral-900 sm:text-3xl">
-              {filteredUkm.length} UKM ditemukan
+              {filteredPaguyuban.length} Paguyuban ditemukan
             </h2>
             <p className="text-neutral-600">
               Klik kartu untuk melihat deskripsi lengkap dan informasi kontak.
             </p>
           </div>
 
-          {filteredUkm.length > 0 ? (
-            <UkmGrid ukms={filteredUkm} showRank={false} />
+          {filteredPaguyuban.length > 0 ? (
+            <PaguyubanGrid paguyubans={filteredPaguyuban} />
           ) : (
             <div className="rounded-2xl border border-pink-100 bg-white p-8 text-center text-neutral-600 shadow-sm">
-              Tidak ada UKM yang sesuai. Coba kata kunci lain atau ganti
-              kategori.
+              Tidak ada paguyuban yang sesuai. Coba kata kunci lain atau ganti
+              daerah.
             </div>
           )}
         </div>

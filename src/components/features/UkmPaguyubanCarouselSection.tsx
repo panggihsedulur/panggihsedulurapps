@@ -19,7 +19,7 @@ interface CarouselSectionProps {
 }
 
 const CARD_WIDTH_CLASSES =
-  "w-full max-w-[320px] sm:w-[250px] sm:max-w-none md:w-[280px] lg:w-[260px] xl:w-[280px]";
+  "w-[calc(100vw-2rem)] max-w-[320px] sm:w-[250px] sm:max-w-none md:w-[280px] lg:w-[260px] xl:w-[280px]";
 
 function CarouselSection({
   title,
@@ -196,7 +196,7 @@ function CarouselSection({
             }}
             className={cn(
               "flex gap-6 overflow-x-auto pb-6 pt-2 snap-x snap-mandatory scroll-smooth px-4 sm:px-0",
-              "justify-center sm:justify-start",
+              "justify-start",
               "touch-pan-y [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden",
               isDragging ? "cursor-grabbing" : "cursor-grab",
             )}
@@ -209,7 +209,7 @@ function CarouselSection({
               <div
                 key={card.id}
                 className={cn(
-                  "snap-center sm:snap-start shrink-0",
+                  "snap-center sm:snap-start shrink-0 flex justify-center sm:block",
                   CARD_WIDTH_CLASSES,
                 )}
               >

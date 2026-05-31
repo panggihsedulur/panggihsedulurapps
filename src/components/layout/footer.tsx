@@ -28,7 +28,7 @@ export function Footer() {
     return null;
   }
   return (
-    <footer className="relative">
+    <footer className="relative z-0">
       <div
         className={cn(
           "mx-auto max-w-7xl lg:border-x",
