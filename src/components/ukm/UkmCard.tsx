@@ -66,7 +66,7 @@ export function UkmGrid({ ukms, showRank = true }: UkmGridProps) {
     <div className="grid grid-cols-1 items-start justify-items-center gap-6 sm:grid-cols-2 lg:grid-cols-4">
       {ukms.map((ukm, index) => (
         <UkmCard
-          key={ukm.id}
+          key={`${ukm.id}-${ukm.category}`}
           ukm={ukm}
           rank={showRank ? index + 1 : undefined}
         />

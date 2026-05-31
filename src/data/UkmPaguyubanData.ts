@@ -511,7 +511,7 @@ const rawUkmAndPaguyubanData: ExpandableCardItem[] = [
   // ==========================================
   {
     id: "ukm-082",
-    title: "HIMABISI",
+    title: "Himabisi",
     src: "https://dummyimage.com/400x400/ff6f00/ffffff&text=Himabisi",
     description: "Himpunan Mahasiswa Bidikmisi",
     category: "Beasiswa & Kesejahteraan",
@@ -548,7 +548,7 @@ const rawUkmAndPaguyubanData: ExpandableCardItem[] = [
     id: "ukm-084",
     title: "PMKP",
     src: "https://dummyimage.com/400x400/4a148c/ffffff&text=PMKP",
-    description: "Persekutuan Mahasiswa Kristen Pro...",
+    description: "Persekutuan Mahasiswa Kristen Protestan",
     category: "Kerohanian",
     detailTitle: "Tentang PMKP",
     detailBody: "Wadah pembinaan dan persekutuan mahasiswa Kristen Protestan.",
@@ -623,7 +623,7 @@ const rawUkmAndPaguyubanData: ExpandableCardItem[] = [
     id: "ukm-097",
     title: "UKMPR",
     src: "https://dummyimage.com/400x400/e65100/ffffff&text=UKMPR",
-    description: "Unit Kegiatan Mahasiswa Penalaran ...",
+    description: "UKM Penalaran dan Riset",
     category: "Keilmuan",
     detailTitle: "Tentang UKMPR",
     detailBody:
@@ -717,7 +717,7 @@ const rawUkmAndPaguyubanData: ExpandableCardItem[] = [
     id: "ukm-093",
     title: "PSM GBS",
     src: "https://dummyimage.com/400x400/b71c1c/ffffff&text=PSM+GBS",
-    description: "Paduan Suara Mahasiswa Gita Buana ...",
+    description: "Paduan Suara Mahasiswa Gita Buana Soedirman",
     category: "Seni",
     detailTitle: "Tentang PSM GBS",
     detailBody: "Mewadahi minat dan bakat mahasiswa di bidang paduan suara.",
@@ -1055,7 +1055,7 @@ const rawUkmAndPaguyubanData: ExpandableCardItem[] = [
     id: "ukm-090",
     title: "UPL MPA",
     src: "https://dummyimage.com/400x400/1b5e20/ffffff&text=UPL+MPA",
-    description: "Unit Pandu Lingkungan Mahasiswa ...",
+    description: "Unit Pandu Lingkungan Mahasiswa Pecinta Alam",
     category: "Alam Bebas & Lingkungan",
     detailTitle: "Tentang UPL MPA",
     detailBody:

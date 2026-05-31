@@ -3,7 +3,7 @@
 "use client";
 
 import * as React from "react";
-import { AnimatePresence, motion } from "motion/react";
+import { motion } from "motion/react";
 
 import { cn } from "@/lib/utils";
 
@@ -78,116 +78,99 @@ export function ExpandableCard({
 
   return (
     <>
-      <AnimatePresence mode="wait">
-        {active && (
-          <>
-            {/* Modal overlay (clicking outside closes) */}
-            <motion.div
-              key="modal-overlay"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.18 }}
-              className="fixed inset-0 z-100 flex items-center justify-center bg-black/50 p-4 backdrop-blur-md"
-              onClick={handleClose}
+      {active && (
+        <>
+          {/* Modal overlay (clicking outside closes) */}
+          <div
+            className="fixed inset-0 z-100 flex items-center justify-center bg-black/50 p-4 backdrop-blur-md"
+            onClick={handleClose}
+          >
+            <div
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby={`expandable-card-title-${id}`}
+              className={cn(
+                "w-full max-w-lg overflow-hidden rounded-2xl bg-white shadow-2xl dark:bg-zinc-950",
+                classNameExpanded,
+                modalClassName,
+              )}
+              onClick={(e) => e.stopPropagation()}
+              {...restModalProps}
             >
-              <motion.div
-                role="dialog"
-                aria-modal="true"
-                aria-labelledby={`expandable-card-title-${id}`}
-                layoutId={`card-${title}-${id}`}
-                initial={{ opacity: 0, scale: 0.92 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.92 }}
-                transition={{ duration: 0.22, ease: [0.34, 1.1, 0.64, 1] }}
-                className={cn(
-                  "w-full max-w-lg overflow-hidden rounded-2xl bg-white shadow-2xl dark:bg-zinc-950",
-                  classNameExpanded,
-                  modalClassName,
-                )}
-                onClick={(e) => e.stopPropagation()}
-                {...restModalProps}
-              >
-                {/* Modal header image */}
-                <motion.div
-                  layoutId={`image-${title}-${id}`}
-                  className="relative h-56 w-full bg-zinc-200 dark:bg-zinc-800"
+              {/* Modal header image */}
+              <div className="relative h-56 w-full bg-zinc-200 dark:bg-zinc-800">
+                <img
+                  className="h-full w-full object-cover"
+                  src={src}
+                  alt={title}
+                  loading="eager"
+                />
+                <button
+                  type="button"
+                  onClick={handleClose}
+                  aria-label="Tutup"
+                  className="absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-full bg-white/80 text-lg font-bold text-zinc-700 shadow transition hover:bg-white focus:outline-none dark:bg-zinc-900/80 dark:text-zinc-200 dark:hover:bg-zinc-900"
                 >
-                  <img
-                    className="h-full w-full object-cover"
-                    src={src}
-                    alt={title}
-                    loading="eager"
-                  />
-                  <button
-                    type="button"
-                    onClick={handleClose}
-                    aria-label="Tutup"
-                    className="absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-full bg-white/80 text-lg font-bold text-zinc-700 shadow transition hover:bg-white focus:outline-none dark:bg-zinc-900/80 dark:text-zinc-200 dark:hover:bg-zinc-900"
-                  >
-                    ×
-                  </button>
-                </motion.div>
+                  ×
+                </button>
+              </div>
 
-                {/* Modal body */}
-                <div className="p-5">
-                  {modalSubtitle ? (
-                    <p className="mb-1 text-xs text-zinc-500 dark:text-zinc-400">
-                      {modalSubtitle}
-                    </p>
-                  ) : null}
+              {/* Modal body */}
+              <div className="p-5">
+                {modalSubtitle ? (
+                  <p className="mb-1 text-xs text-zinc-500 dark:text-zinc-400">
+                    {modalSubtitle}
+                  </p>
+                ) : null}
 
-                  <h3
-                    id={`expandable-card-title-${id}`}
-                    className="mb-4 text-xl font-semibold leading-snug text-zinc-900 dark:text-zinc-50"
-                  >
-                    {title}
-                  </h3>
+                <h3
+                  id={`expandable-card-title-${id}`}
+                  className="mb-4 text-xl font-semibold leading-snug text-zinc-900 dark:text-zinc-50"
+                >
+                  {title}
+                </h3>
 
-                  <div className="text-sm leading-relaxed text-zinc-600 dark:text-zinc-300">
-                    {children}
-                  </div>
-
-                  {safeBadges.length ? (
-                    <div className="mt-4 flex flex-wrap items-center gap-2">
-                      {safeBadges.map((label) => (
-                        <span
-                          key={label}
-                          className="inline-flex items-center gap-1 rounded-full border border-zinc-200 bg-zinc-100 px-3 py-1 text-xs font-medium text-zinc-700 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-200"
-                        >
-                          {label}
-                        </span>
-                      ))}
-                    </div>
-                  ) : null}
+                <div className="text-sm leading-relaxed text-zinc-600 dark:text-zinc-300">
+                  {children}
                 </div>
-              </motion.div>
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence>
 
-      <motion.button
+                {safeBadges.length ? (
+                  <div className="mt-4 flex flex-wrap items-center gap-2">
+                    {safeBadges.map((label) => (
+                      <span
+                        key={label}
+                        className="inline-flex items-center gap-1 rounded-full border border-zinc-200 bg-zinc-100 px-3 py-1 text-xs font-medium text-zinc-700 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-200"
+                      >
+                        {label}
+                      </span>
+                    ))}
+                  </div>
+                ) : null}
+              </div>
+            </div>
+          </div>
+        </>
+      )}
+
+      <button
         type="button"
-        layoutId={`card-${title}-${id}`}
         onClick={handleClickCard}
         className={cn(
-          "group w-full max-w-xs cursor-pointer overflow-visible rounded-2xl border border-zinc-200/70 bg-white shadow-sm transition-shadow duration-200 hover:shadow-md focus:outline-none dark:border-zinc-800/70 dark:bg-zinc-950 dark:hover:shadow-none",
+          "group w-full max-w-[290px] lg:max-w-[280] cursor-pointer overflow-visible rounded-2xl border border-zinc-200/70 bg-white shadow-sm transition-shadow duration-200 hover:shadow-md focus:outline-none dark:border-zinc-800/70 dark:bg-zinc-950 dark:hover:shadow-none",
           className,
         )}
         aria-haspopup="dialog"
       >
         {/* Image wrapper */}
-        <motion.div
-          layoutId={`image-${title}-${id}`}
-          className="relative h-42 w-full overflow-visible rounded-t-2xl bg-zinc-200 dark:bg-zinc-800"
-        >
-          <img
-            className="block h-full w-full rounded-t-2xl object-cover"
-            src={src}
-            alt={title}
-            loading="lazy"
-          />
+        <div className="relative h-42 w-full overflow-visible rounded-t-2xl bg-zinc-200 dark:bg-zinc-800">
+          <div className="h-full w-full overflow-hidden rounded-t-2xl">
+            <img
+              className="block h-full w-full object-cover transition-transform duration-300 ease-out group-hover:scale-105"
+              src={src}
+              alt={title}
+              loading="lazy"
+            />
+          </div>
 
           {badgeLabel ? (
             <span className="absolute left-2.5 top-2.5 max-w-[70%] truncate rounded-full border border-zinc-200/70 bg-white px-2.5 py-1 text-xs font-medium text-zinc-800 dark:border-zinc-800/70 dark:bg-zinc-950 dark:text-zinc-100">
@@ -204,7 +187,7 @@ export function ExpandableCard({
               loading="lazy"
             />
           </div>
-        </motion.div>
+        </div>
 
         {/* Body */}
         <div className="px-3.5 pb-4 pt-12 text-left">
@@ -215,7 +198,7 @@ export function ExpandableCard({
             {description}
           </p>
         </div>
-      </motion.button>
+      </button>
     </>
   );
 }

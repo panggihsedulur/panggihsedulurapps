@@ -9,6 +9,7 @@ import {
 } from "@/data/UkmPaguyubanData";
 import { cn } from "@/lib/utils";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import Link from "next/link";
 
 interface CarouselSectionProps {
   title: string;
@@ -130,14 +131,19 @@ function CarouselSection({
     }
   };
 
+  const titleHref = tone === "paguyuban" ? "/paguyuban" : "/ukm";
+
   return (
     <section className="" aria-label={title}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight text-neutral-900">
-              {title}
-            </h2>
+            <Link href={titleHref} className="group inline-flex">
+              <h2 className="flex items-center gap-2 text-2xl sm:text-3xl font-semibold tracking-tight text-neutral-900 transition-opacity duration-200 group-hover:opacity-80">
+                {title}
+                <ChevronRight className="transition-transform duration-200 group-hover:translate-x-2" />
+              </h2>
+            </Link>
             <p className="mt-2 text-sm sm:text-base text-neutral-500 max-w-2xl">
               {subtitle}
             </p>

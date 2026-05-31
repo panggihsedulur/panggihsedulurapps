@@ -6,6 +6,7 @@ import {
   AnimatedMenuButtonLabel,
   AnimatedMenuList,
   AnimatedMenuItem,
+  useAnimatedMenu,
 } from "@/components/navigation/animated-menu";
 import Link from "next/link";
 import { useState, useEffect } from "react";
@@ -17,8 +18,12 @@ const menuItems = [
     href: "/#home",
   },
   {
-    title: "UKM & Paguyuban",
-    href: "/ukm-paguyuban",
+    title: "UKM",
+    href: "/ukm",
+  },
+  {
+    title: "Paguyuban",
+    href: "/paguyuban",
   },
   {
     title: "Kuisioner",
@@ -26,11 +31,7 @@ const menuItems = [
   },
   {
     title: "Panitia",
-    href: "/portfolio",
-  },
-  {
-    title: "Contact",
-    href: "/contact",
+    href: "/panitia",
   },
 ];
 
@@ -48,6 +49,44 @@ const socialLinks = [
     href: "https://wa.me/6281234567890",
   },
 ];
+
+function AnimatedMenuContent() {
+  const { setIsOpen } = useAnimatedMenu();
+  const handleMenuItemClick = () => setIsOpen(false);
+
+  return (
+    <div className="flex flex-col px-6 justify-evenly gap-6 items-start size-full">
+      <div className="flex flex-col items-start gap-4 *:transition-blur *:duration-300 [&:hover>*]:blur-[2px] [&>*:hover]:blur-none">
+        {menuItems.map((item, i) => (
+          <AnimatedMenuItem key={i} order={i}>
+            <Link
+              className="text-2xl font-medium text-muted text-gradient"
+              href={item.href}
+              title={item.title}
+              onClick={handleMenuItemClick}
+            >
+              {item.title}
+            </Link>
+          </AnimatedMenuItem>
+        ))}
+      </div>
+      <div className="flex gap-4 *:transition-blur *:duration-300 [&:hover>*]:blur-[2px] [&>*:hover]:blur-none">
+        {socialLinks.map((item, i) => (
+          <AnimatedMenuItem key={item.title} order={i + menuItems.length}>
+            <Link
+              className=" font-medium text-muted/80 text-sm tracking-wide uppercase text-gradient"
+              href={item.href}
+              title={item.title}
+              onClick={handleMenuItemClick}
+            >
+              {item.title}
+            </Link>
+          </AnimatedMenuItem>
+        ))}
+      </div>
+    </div>
+  );
+}
 
 export function AnimatedMenuDemo() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -103,37 +142,7 @@ export function AnimatedMenuDemo() {
             <AnimatedMenuButtonLabel />
           </AnimatedMenuButton>
           <AnimatedMenuList className="absolute right-0 top-0.5 bg-linear-to-bl from-primary/95 to-primary border shadow-md inset-shadow-xs inset-shadow-foreground rounded-3xl ">
-            <div className="flex flex-col px-6 justify-evenly gap-6 items-start size-full">
-              <div className="flex flex-col items-start gap-4 *:transition-blur *:duration-300 [&:hover>*]:blur-[2px] [&>*:hover]:blur-none">
-                {menuItems.map((item, i) => (
-                  <AnimatedMenuItem key={i} order={i}>
-                    <Link
-                      className="text-2xl font-medium text-muted text-gradient"
-                      href={item.href}
-                      title={item.title}
-                    >
-                      {item.title}
-                    </Link>
-                  </AnimatedMenuItem>
-                ))}
-              </div>
-              <div className="flex gap-4 *:transition-blur *:duration-300 [&:hover>*]:blur-[2px] [&>*:hover]:blur-none">
-                {socialLinks.map((item, i) => (
-                  <AnimatedMenuItem
-                    key={item.title}
-                    order={i + menuItems.length}
-                  >
-                    <Link
-                      className=" font-medium text-muted/80 text-sm tracking-wide uppercase text-gradient"
-                      href={item.href}
-                      title={item.title}
-                    >
-                      {item.title}
-                    </Link>
-                  </AnimatedMenuItem>
-                ))}
-              </div>
-            </div>
+            <AnimatedMenuContent />
           </AnimatedMenuList>
         </AnimatedMenu>
       </div>

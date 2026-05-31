@@ -75,6 +75,10 @@ function useAnimatedMenuContext() {
   return context;
 }
 
+export function useAnimatedMenu() {
+  return useAnimatedMenuContext();
+}
+
 export function AnimatedMenu({
   ...props
 }: React.HTMLAttributes<HTMLDivElement>) {
