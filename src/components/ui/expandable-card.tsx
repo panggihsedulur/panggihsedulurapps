@@ -3,7 +3,6 @@
 "use client";
 
 import * as React from "react";
-import { motion } from "motion/react";
 
 import { cn } from "@/lib/utils";
 
@@ -23,8 +22,8 @@ interface ExpandableCardProps {
   children?: React.ReactNode;
   className?: string;
   classNameExpanded?: string;
-  /** Props forwarded to the expanded modal panel (motion.div). */
-  modalProps?: React.ComponentPropsWithoutRef<typeof motion.div>;
+  /** Props forwarded to the expanded modal panel (div). */
+  modalProps?: React.ComponentPropsWithoutRef<"div">;
 }
 
 export function ExpandableCard({
