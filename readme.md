@@ -8,7 +8,7 @@ Web app kuisioner minat bakat UKM dan paguyuban UNSOED.
 - TypeScript
 - Tailwind CSS
 - Supabase (penyimpanan hasil kuis)
-- Zod + React Hook Form (validasi biodata)
+- Zod + React Hook Form (validasi biodata)H
 
 ## Jalankan Lokal
 
