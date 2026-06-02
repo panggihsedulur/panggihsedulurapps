@@ -5,13 +5,13 @@ import { ChevronDown, Search } from "lucide-react";
 import { PaguyubanGrid } from "@/components/paguyuban/PaguyubanCard";
 import {
   allPaguyuban,
-  paguyubanCategoryOptions,
+  paguyubanProvinsiOptions,
 } from "@/data/PaguyubanLogic";
 import { GridPattern } from "@/components/ui/grid-pattern";
 
 export default function PaguyubanPage() {
   const [query, setQuery] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("Semua Daerah");
+  const [selectedProvinsi, setSelectedProvinsi] = useState("Semua Provinsi");
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
   const categoryMenuRef = useRef<HTMLDivElement>(null);
 
@@ -38,19 +38,19 @@ export default function PaguyubanPage() {
 
     return allPaguyuban
       .filter((pg) => {
-        const matchCategory =
-          selectedCategory === "Semua Daerah" ||
-          pg.category.toLowerCase() === selectedCategory.toLowerCase();
+        const matchProvinsi =
+          selectedProvinsi === "Semua Provinsi" ||
+          pg.provinsi === selectedProvinsi;
 
-        if (!matchCategory) return false;
+        if (!matchProvinsi) return false;
         if (!trimmedQuery) return true;
 
         const haystack =
-          `${pg.name ?? ""} ${pg.title} ${pg.category} ${pg.description}`.toLowerCase();
+          `${pg.name ?? ""} ${pg.title} ${pg.category} ${pg.provinsi} ${pg.description}`.toLowerCase();
         return haystack.includes(trimmedQuery);
       })
       .sort((a, b) => a.priority - b.priority || a.title.localeCompare(b.title));
-  }, [query, selectedCategory]);
+  }, [query, selectedProvinsi]);
 
   return (
     <div className="min-h-screen bg-[#fef6f9]">
@@ -108,7 +108,7 @@ export default function PaguyubanPage() {
                   }}
                   className="flex w-full items-center justify-between gap-3 rounded-2xl border border-white/50 bg-white/90 px-4 py-3 text-left text-sm font-medium text-neutral-800 shadow-sm outline-none transition hover:border-white/70 focus:border-white/80 focus:ring-2 focus:ring-white/50"
                 >
-                  <span className="truncate">{selectedCategory}</span>
+                  <span className="truncate">{selectedProvinsi}</span>
                   <ChevronDown
                     className={`h-4 w-4 text-neutral-500 transition ${
                       isCategoryOpen ? "rotate-180" : ""
@@ -117,30 +117,30 @@ export default function PaguyubanPage() {
                 </button>
                 <div
                   role="listbox"
-                  aria-label="Pilih daerah"
+                  aria-label="Pilih provinsi"
                   className={`absolute left-0 right-0 z-50 mt-2 max-h-64 overflow-y-auto rounded-2xl border border-white/70 bg-white/95 p-2 text-sm text-neutral-800 shadow-lg backdrop-blur-sm transition ${
                     isCategoryOpen
                       ? "pointer-events-auto scale-100 opacity-100"
                       : "pointer-events-none scale-95 opacity-0"
                   }`}
                 >
-                  {paguyubanCategoryOptions.map((category) => {
-                    const isSelected = selectedCategory === category;
+                  {paguyubanProvinsiOptions.map((prov) => {
+                    const isSelected = selectedProvinsi === prov;
                     return (
                       <button
-                        key={category}
+                        key={prov}
                         type="button"
                         role="option"
                         aria-selected={isSelected}
                         onClick={() => {
-                          setSelectedCategory(category);
+                          setSelectedProvinsi(prov);
                           setIsCategoryOpen(false);
                         }}
                         className={`w-full rounded-xl px-3 py-2 text-left transition hover:bg-neutral-100/80 ${
                           isSelected ? "bg-neutral-100 font-semibold" : ""
                         }`}
                       >
-                        {category}
+                        {prov}
                       </button>
                     );
                   })}
