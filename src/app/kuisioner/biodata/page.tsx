@@ -29,14 +29,14 @@ export default function BiodataPage() {
     <div className="min-h-screen py-10 px-4 text-gradient ">
       <div className="max-w-2xl mx-auto mt-15">
         {/* Header */}
-        <div className="text-center mb-10">
+        {/* <div className="text-center mb-10">
           <h1 className="text-3xl sm:text-5xl font-normal font-heading  text-center">
             Kuisioner Minat Bakat UKM
           </h1>
           <p className="text-black/50">
             Temukan UKM yang paling sesuai dengan minat dan bakatmu
           </p>
-        </div>
+        </div> */}
 
         {/* Form Section */}
         <div className="bg-white/50 backdrop-blur-xl rounded-[1rem] shadow-[0_25px_50px_-12px_rgba(0,0,0,0.5)] border border-white/10 p-8 md:p-12">
