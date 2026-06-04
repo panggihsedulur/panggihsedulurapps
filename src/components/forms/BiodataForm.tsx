@@ -212,6 +212,27 @@ export function BiodataForm({ onSubmit, isLoading = false }: BiodataFormProps) {
         )}
       </div>
 
+      {/* Nomor HP */}
+      <div>
+        <label
+          htmlFor="no_hp"
+          className="block text-sm font-bold text-gradient mb-2"
+        >
+          Nomor HP / WhatsApp *
+        </label>
+        <input
+          id="no_hp"
+          {...register("no_hp")}
+          placeholder="Contoh: 081234567890"
+          className="w-full px-4 py-3 border border-white/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-500/30 bg-white/5 text-gradient placeholder:text-white/30 backdrop-blur-sm transition-all focus:bg-white/10"
+        />
+        {errors.no_hp && (
+          <p className="text-rose-400 text-xs font-medium mt-1.5 ml-1">
+            ⚠ {errors.no_hp.message}
+          </p>
+        )}
+      </div>
+
       {/* KIP-K */}
       <div className="flex items-center gap-3">
         <input

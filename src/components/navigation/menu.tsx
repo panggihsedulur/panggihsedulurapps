@@ -108,7 +108,9 @@ export function AnimatedMenuDemo() {
   if (pathname.startsWith("/kuisioner/test")) {
     return null;
   }
-
+  if (pathname.startsWith("/dashboard")) {
+    return null;
+  }
   return (
     <header
       className={`dark fixed top-0 left-0 right-0 z-50 flex justify-center transition-all duration-300 px-4 ${

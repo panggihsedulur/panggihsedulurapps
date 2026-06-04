@@ -114,6 +114,7 @@ export async function saveQuizResult(
       fakultas: validated.biodata.fakultas,
       jurusan: validated.biodata.jurusan,
       agama: validated.biodata.agama,
+      no_hp: validated.biodata.no_hp,
       is_kipk: validated.biodata.is_kipk,
       skor_kategori: validated.skor_kategori,
       rekomendasi_ukm: validated.rekomendasi_ukm,

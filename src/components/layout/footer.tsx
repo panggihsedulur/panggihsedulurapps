@@ -27,6 +27,9 @@ export function Footer() {
   if (pathname.startsWith("/kuisioner")) {
     return null;
   }
+  if (pathname.startsWith("/dashboard")) {
+    return null;
+  }
   return (
     <footer className="relative z-0">
       <div

@@ -17,6 +17,7 @@ export type StudentResult = {
   fakultas: string;
   jurusan: string;
   agama?: string;
+  no_hp: string;
   is_kipk: boolean;
   skor_kategori: Record<string, number>;
   rekomendasi_ukm: string[];
