@@ -1,10 +1,8 @@
-/* eslint-disable @next/next/no-img-element */
-
 "use client";
 
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 
 interface ExpandableCardProps {
@@ -100,11 +98,12 @@ export function ExpandableCard({
       >
         {/* Modal header image */}
         <div className="relative h-56 w-full bg-zinc-200 dark:bg-zinc-800">
-          <img
-            className="h-full w-full object-cover"
+          <Image
             src={src}
             alt={title}
-            loading="eager"
+            fill
+            sizes="(max-width: 640px) 280px, 250px"
+            className="object-cover"
           />
           <button
             type="button"
@@ -170,11 +169,13 @@ export function ExpandableCard({
       >
         {/* Image wrapper */}
         <div className="relative h-42 w-full overflow-visible rounded-t-2xl bg-zinc-200 dark:bg-zinc-800">
-          <div className="h-full w-full overflow-hidden rounded-t-2xl">
-            <img
-              className="block h-full w-full object-cover transition-transform duration-300 ease-out group-hover:scale-105"
+          <div className="relative h-full w-full overflow-hidden rounded-t-2xl">
+            <Image
               src={src}
               alt={title}
+              fill
+              sizes="(max-width: 640px) 320px, 280px"
+              className="object-cover transition-transform duration-300 ease-out group-hover:scale-105"
               loading="lazy"
             />
           </div>
@@ -187,10 +188,12 @@ export function ExpandableCard({
 
           {/* Logo (overlapping) */}
           <div className="absolute -bottom-10 left-3.5 z-10 h-20 w-20 overflow-hidden rounded-full border-[3px] border-white bg-zinc-200 dark:border-zinc-950 dark:bg-zinc-800">
-            <img
-              className="h-full w-full object-cover"
+            <Image
               src={resolvedLogoSrc}
               alt={resolvedLogoAlt}
+              fill
+              sizes="80px"
+              className="object-cover"
               loading="lazy"
             />
           </div>

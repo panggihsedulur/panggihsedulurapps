@@ -26,6 +26,11 @@ const nextConfig: NextConfig = {
         port: "",
         pathname: "/**",
       },
+      {
+        // Placeholder images — hapus setelah semua data pakai gambar lokal
+        protocol: "https",
+        hostname: "dummyimage.com",
+      },
     ],
   },
 };
