@@ -8,6 +8,7 @@ export interface UKM {
   name: string;
   title: string;
   category: string;
+  description: string;
   priority: number;
   type?: "UKM" | "Paguyuban";
   logoUrl?: string;
