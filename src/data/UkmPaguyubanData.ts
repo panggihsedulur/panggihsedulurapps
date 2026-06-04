@@ -64,7 +64,7 @@ const rawUkmAndPaguyubanData: ExpandableCardItem[] = [
     category: "Pekalongan-Batang",
     detailTitle: "Tentang Ikatan Mahasiswa Pekalongan-Batang",
     detailBody:
-      "IMAKABA Purwokerto adalah paguyuban mahasiswa asal Kota/Kabupaten Pekalongan dan Kabupaten Batang yang menempuh studi di Purwokerto. Sejak 2004, IMAKABA menjadi ruang kebersamaan dan persaudaraan yang membersamai perjalanan mahasiswa di tanah rantau.",
+      "IMAKABA Purwokerto adalah paguyuban mahasiswa asal Pekalongan dan Batang yang menempuh studi di Purwokerto. Sejak 2004, IMAKABA menjadi ruang kebersamaan dan persaudaraan yang membersamai perjalanan mahasiswa di tanah rantau.",
     detailFooterTitle: "Nomor: 122/UND/DAGRI/BEM/III/2026",
     name: "Ikatan Mahasiswa Pekalongan-Batang",
     type: "Paguyuban",
@@ -1221,4 +1221,3 @@ const rawUkmAndPaguyubanData: ExpandableCardItem[] = [
 export const fullUkmAndPaguyubanData = rawUkmAndPaguyubanData;
 
 export const expandableCards = rawUkmAndPaguyubanData;
-
