@@ -39,7 +39,10 @@ export function ExpandableCardDemo({
   const modalSubtitle = category ? `Kategori ${category}` : undefined;
   const resolvedSrc = photoUrl || src;
   const resolvedLogoSrc = logoUrl || logoSrc || resolvedSrc;
-  const contactNumber = contact ? contact.replace(/\D/g, "") : "";
+  let contactNumber = contact ? contact.replace(/\D/g, "") : "";
+  if (contactNumber.startsWith("0")) {
+    contactNumber = "62" + contactNumber.substring(1);
+  }
   const waHref = contactNumber ? `https://wa.me/${contactNumber}` : undefined;
   const showWhatsappButton = Boolean(waHref);
   const instagramHandle = instagram ? instagram.replace(/^@/, "") : "";

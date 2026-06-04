@@ -8,9 +8,8 @@ export interface UKM {
   name: string;
   title: string;
   category: string;
-  description: string;
   priority: number;
-  type?: "UKM";
+  type?: "UKM" | "Paguyuban";
   logoUrl?: string;
   photoUrl?: string;
   contactPerson?: string;
@@ -187,6 +186,23 @@ const olahragaUKMBase: UKM[] = [
     category: "Olahraga - Strategi",
     description:
       "Pengembangan talenta di cabang olahraga catur dengan strategi.",
+    priority: 1,
+  },
+  // Lain-lain
+  {
+    id: "ukm-120",
+    name: "Aquatik",
+    title: "UKM Olahraga Aquatik",
+    category: "Olahraga - Lainnya",
+    description: "Pengembangan talenta di bidang olahraga air.",
+    priority: 1,
+  },
+  {
+    id: "ukm-121",
+    name: "Petanque",
+    title: "UKM Olahraga Petanque",
+    category: "Olahraga - Lainnya",
+    description: "Olahraga lempar bola logam dengan presisi dan strategi.",
     priority: 1,
   },
 ];

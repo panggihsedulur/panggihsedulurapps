@@ -1,4 +1,4 @@
-﻿export interface ExpandableCardItem {
+export interface ExpandableCardItem {
   id: string;
   title: string;
   src: string;
@@ -1027,6 +1027,42 @@ const rawUkmAndPaguyubanData: ExpandableCardItem[] = [
     contactPerson: "CP Humas",
     contact: "088215251151",
     instagram: "@handball.unsoed",
+  },
+  {
+    id: "ukm-120",
+    title: "Aquatik",
+    src: "https://dummyimage.com/400x400/01579b/ffffff&text=Aquatik",
+    description: "UKM Olahraga Aquatik",
+    category: "Olahraga",
+    detailTitle: "Tentang Aquatik",
+    detailBody:
+      "UKM Aquatik Unsoed adalah Unit Kegiatan Mahasiswa yang menjadi wadah bagi mahasiswa yang memiliki minat dan bakat di bidang olahraga air, meliputi renang, polo air, loncat indah, dan cabang aquatik lainnya. UKM ini berkomitmen untuk mencetak atlet-atlet berprestasi sekaligus menjaga kebugaran dan kesehatan anggotanya melalui latihan rutin di kolam renang.",
+    detailFooterTitle: "Nomor: 120/UND/DAGRI/BEM/III/2026",
+    name: "Aquatik",
+    type: "UKM",
+    logoUrl: "https://dummyimage.com/400x400/01579b/ffffff&text=Aquatik",
+    photoUrl: "https://dummyimage.com/400x400/01579b/ffffff&text=Aquatik",
+    contactPerson: "CP Humas",
+    contact: "08xx-xxxx-xxxx",
+    instagram: "@aquatik.unsoed",
+  },
+  {
+    id: "ukm-121",
+    title: "Petanque",
+    src: "https://dummyimage.com/400x400/01579b/ffffff&text=Petanque",
+    description: "UKM Olahraga Petanque",
+    category: "Olahraga",
+    detailTitle: "Tentang Petanque",
+    detailBody:
+      "UKM Petanque Unsoed adalah Unit Kegiatan Mahasiswa yang mewadahi mahasiswa yang berminat dalam olahraga petanque, yakni olahraga lempar bola logam yang memadukan ketenangan, presisi, dan strategi. Olahraga asal Prancis ini telah berkembang pesat di Indonesia dan menjadi cabang olahraga resmi dalam Pekan Olahraga Nasional (PON). UKM ini aktif berpartisipasi dalam kompetisi tingkat regional dan nasional.",
+    detailFooterTitle: "Nomor: 121/UND/DAGRI/BEM/III/2026",
+    name: "Petanque",
+    type: "UKM",
+    logoUrl: "https://dummyimage.com/400x400/01579b/ffffff&text=Petanque",
+    photoUrl: "https://dummyimage.com/400x400/01579b/ffffff&text=Petanque",
+    contactPerson: "CP Humas",
+    contact: "08xx-xxxx-xxxx",
+    instagram: "@petanque.unsoed",
   },
 
   // ==========================================

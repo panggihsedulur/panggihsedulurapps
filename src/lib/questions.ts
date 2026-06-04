@@ -404,6 +404,18 @@ export const BRANCH_QUESTIONS: Record<string, Question> = {
         weight: zeroWeight,
         recommendations: ["Catur"],
       },
+      {
+        id: "olahraga-l2-aquatic",
+        text: "Aku suka olahraga air seperti renang dan polo air.",
+        weight: zeroWeight,
+        recommendations: ["Aquatik"],
+      },
+      {
+        id: "olahraga-l2-petanque",
+        text: "Aku suka olahraga yang mengutamakan presisi lemparan seperti bola logam.",
+        weight: zeroWeight,
+        recommendations: ["Petanque"],
+      },
     ],
   },
   "olahraga-l3-team": {

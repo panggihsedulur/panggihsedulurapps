@@ -166,6 +166,8 @@ export function getRecommendedUKMNames(
   return recommended.map((ukm) => ukm.name);
 }
 
+import { fullUkmAndPaguyubanData } from "@/data/UkmPaguyubanData";
+
 /**
  * Get combined recommendations: scoring + pre-filtering biodata
  * Sesuai RancanganLogikaKuis.md section 1 & Level 1-3
@@ -175,19 +177,20 @@ export function getCombinedRecommendationNames(
   agama?: string,
   is_kipk?: boolean,
   fakultas?: string,
+  asal_daerah?: string,
   branchRecommendations: string[] = [],
   limit?: number,
 ): string[] {
-  const combined = getCombinedRecommendations(
+  const combined = getCombinedRecommendationObjects(
     topKategori,
     agama,
     is_kipk,
     fakultas,
+    asal_daerah,
     branchRecommendations,
+    limit
   );
-  return limit
-    ? combined.slice(0, limit).map((ukm) => ukm.name)
-    : combined.map((ukm) => ukm.name);
+  return combined.map((ukm) => ukm.name);
 }
 
 /**
@@ -199,6 +202,7 @@ export function getCombinedRecommendationObjects(
   agama?: string,
   is_kipk?: boolean,
   fakultas?: string,
+  asal_daerah?: string,
   branchRecommendations: string[] = [],
   limit?: number,
 ): UKM[] {
@@ -209,7 +213,37 @@ export function getCombinedRecommendationObjects(
     fakultas,
     branchRecommendations,
   );
-  return limit ? combined.slice(0, limit) : combined;
+
+  let result = combined;
+
+  // Add Paguyuban based on asal_daerah
+  if (asal_daerah) {
+    const paguyubanMatch = fullUkmAndPaguyubanData.find(
+      (p) => p.type === "Paguyuban" && p.category === asal_daerah
+    );
+    if (paguyubanMatch) {
+      // Convert to UKM format
+      const paguyubanUKM: UKM = {
+        id: paguyubanMatch.id,
+        name: paguyubanMatch.title, // or paguyubanMatch.name
+        title: paguyubanMatch.title,
+        category: "Paguyuban Daerah",
+        description: paguyubanMatch.description,
+        priority: 0, // High priority so it shows up
+        type: "Paguyuban",
+        logoUrl: paguyubanMatch.logoUrl,
+        photoUrl: paguyubanMatch.photoUrl,
+        contactPerson: paguyubanMatch.contactPerson,
+        contact: paguyubanMatch.contact,
+        instagram: paguyubanMatch.instagram,
+      };
+      
+      // Prepend Paguyuban so it shows first
+      result = [paguyubanUKM, ...result];
+    }
+  }
+
+  return limit ? result.slice(0, limit) : result;
 }
 
 /**

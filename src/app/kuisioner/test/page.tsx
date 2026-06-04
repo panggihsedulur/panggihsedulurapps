@@ -143,6 +143,7 @@ export default function TestPage() {
         biodata.agama,
         biodata.is_kipk,
         biodata.fakultas,
+        biodata.asal_daerah,
         selectedBranchRecommendations,
       );
 

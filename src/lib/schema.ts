@@ -27,6 +27,7 @@ export const BiodataSchema = z.object({
       "Konghucu",
     ])
     .optional(),
+  asal_daerah: z.string().optional(),
   is_kipk: z.boolean().default(false),
 });
 

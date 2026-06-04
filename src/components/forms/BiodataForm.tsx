@@ -155,6 +155,63 @@ export function BiodataForm({ onSubmit, isLoading = false }: BiodataFormProps) {
         )}
       </div>
 
+      {/* Asal Daerah / Paguyuban */}
+      <div>
+        <label
+          htmlFor="asal_daerah"
+          className="block text-sm font-bold text-gradient mb-2"
+        >
+          Asal Daerah / Paguyuban (Opsional)
+        </label>
+        <select
+          id="asal_daerah"
+          {...register("asal_daerah")}
+          className="w-full px-4 py-3 border border-white/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-500/30 bg-white/5 text-gradient backdrop-blur-sm transition-all focus:bg-white/10 appearance-none [&>option]:bg-slate-900 [&>option]:text-white [&>optgroup]:bg-slate-900 [&>optgroup]:text-cyan-400 [&>optgroup]:font-bold"
+        >
+          <option value="">-- Tidak Dipilih / Lainnya --</option>
+          <optgroup label="Tingkat Provinsi / Pulau">
+            <option value="Jawa Timur">Jawa Timur</option>
+            <option value="Lampung">Lampung</option>
+            <option value="Papua">Papua</option>
+            <option value="Sulawesi">Sulawesi</option>
+            <option value="Banten">Banten</option>
+            <option value="Sumatera Utara">Sumatera Utara</option>
+            <option value="Jakarta">DKI Jakarta</option>
+          </optgroup>
+          <optgroup label="Tingkat Karesidenan / Gabungan">
+            <option value="Pekalongan-Batang">Pekalongan-Batang</option>
+            <option value="Surakarta">Surakarta Raya</option>
+          </optgroup>
+          <optgroup label="Tingkat Kabupaten / Kota">
+            <option value="Majalengka">Majalengka</option>
+            <option value="Bekasi">Bekasi</option>
+            <option value="Kuningan">Kuningan</option>
+            <option value="Ciamis">Ciamis</option>
+            <option value="Jepara">Jepara</option>
+            <option value="Magelang">Magelang</option>
+            <option value="Bandung">Bandung</option>
+            <option value="Purworejo">Purworejo</option>
+            <option value="Cilacap">Cilacap</option>
+            <option value="Banjarnegara">Banjarnegara</option>
+            <option value="Cirebon">Cirebon</option>
+            <option value="Kebumen">Kebumen</option>
+            <option value="Purbalingga">Purbalingga</option>
+            <option value="Tasikmalaya">Tasikmalaya</option>
+            <option value="Indramayu">Indramayu</option>
+            <option value="Bogor">Bogor</option>
+            <option value="Pemalang">Pemalang</option>
+          </optgroup>
+          <optgroup label="Etnis / Budaya">
+            <option value="Minang">Minang</option>
+          </optgroup>
+        </select>
+        {errors.asal_daerah && (
+          <p className="text-rose-400 text-xs font-medium mt-1.5 ml-1">
+            ⚠ {errors.asal_daerah.message}
+          </p>
+        )}
+      </div>
+
       {/* KIP-K */}
       <div className="flex items-center gap-3">
         <input
