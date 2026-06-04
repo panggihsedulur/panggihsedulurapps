@@ -30,14 +30,25 @@ export default function HeroSection() {
     <div className="relative w-full min-h-dvh text-white overflow-hidden font-sans flex flex-col">
       {/* Background Image with Gradient Mask */}
       <div
-        className="absolute inset-0 z-0 bg-[url('/bghero.webp')] bg-cover bg-center opacity-100"
+        className="absolute inset-0 z-0"
         style={{
           maskImage:
             "linear-gradient(180deg, transparent, black 0%, black 70%, transparent)",
           WebkitMaskImage:
             "linear-gradient(180deg, transparent, black 0%, black 70%, transparent)",
         }}
-      />
+      >
+        <Image
+          src="/bghero.webp"
+          alt=""
+          fill
+          priority
+          fetchPriority="high"
+          sizes="100vw"
+          className="object-cover object-center"
+          quality={80}
+        />
+      </div>
 
       <div className=" relative z-10 mx-auto max-w-7xl w-full flex-1 flex items-center px-4 py-12 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-8 items-center mt-17 lg:mt-0 md:mt-0">

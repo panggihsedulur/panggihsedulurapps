@@ -21,6 +21,11 @@ interface CarouselSectionProps {
 const CARD_WIDTH_CLASSES =
   "w-[calc(100vw-2rem)] max-w-[320px] sm:w-[250px] sm:max-w-none md:w-[280px] lg:w-[260px] xl:w-[280px]";
 
+/** Jumlah kartu yang ditampilkan pertama kali */
+const INITIAL_VISIBLE = 8;
+/** Jumlah kartu yang ditambahkan setiap kali sentinel terlihat */
+const LOAD_MORE_COUNT = 6;
+
 function CarouselSection({
   title,
   subtitle,
@@ -28,6 +33,7 @@ function CarouselSection({
   tone,
 }: CarouselSectionProps) {
   const scrollRef = useRef<HTMLDivElement | null>(null);
+  const sentinelRef = useRef<HTMLDivElement | null>(null);
   const pointerState = useRef({
     isDown: false,
     startX: 0,
@@ -40,6 +46,38 @@ function CarouselSection({
   const [canScrollRight, setCanScrollRight] = useState(true);
   const [isDragging, setIsDragging] = useState(false);
   const [isAutoPaused, setIsAutoPaused] = useState(false);
+
+  // --- Lazy load state ---
+  const [visibleCount, setVisibleCount] = useState(INITIAL_VISIBLE);
+  const displayedItems = useMemo(
+    () => items.slice(0, visibleCount),
+    [items, visibleCount],
+  );
+  const hasMore = visibleCount < items.length;
+
+  // IntersectionObserver: load more saat sentinel terlihat
+  useEffect(() => {
+    const sentinel = sentinelRef.current;
+    if (!sentinel || !hasMore) return;
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setVisibleCount((prev) =>
+            Math.min(prev + LOAD_MORE_COUNT, items.length),
+          );
+        }
+      },
+      {
+        root: scrollRef.current,
+        rootMargin: "0px 300px 0px 0px", // trigger 300px sebelum ujung
+        threshold: 0,
+      },
+    );
+
+    io.observe(sentinel);
+    return () => io.disconnect();
+  }, [hasMore, items.length]);
 
   useEffect(() => {
     const el = scrollRef.current;
@@ -59,7 +97,7 @@ function CarouselSection({
       el.removeEventListener("scroll", update);
       window.removeEventListener("resize", update);
     };
-  }, [items.length]);
+  }, [displayedItems.length]);
 
   const scrollByAmount = (direction: 1 | -1) => {
     const el = scrollRef.current;
@@ -70,7 +108,7 @@ function CarouselSection({
 
   useEffect(() => {
     const el = scrollRef.current;
-    if (!el || items.length === 0) return;
+    if (!el || displayedItems.length === 0) return;
 
     const intervalId = window.setInterval(() => {
       if (isAutoPaused) return;
@@ -84,7 +122,7 @@ function CarouselSection({
     }, 3500);
 
     return () => window.clearInterval(intervalId);
-  }, [isAutoPaused, items.length]);
+  }, [isAutoPaused, displayedItems.length]);
 
   const handlePointerDown = (event: React.PointerEvent<HTMLDivElement>) => {
     const el = scrollRef.current;
@@ -205,7 +243,7 @@ function CarouselSection({
             onFocus={() => setIsAutoPaused(true)}
             onBlur={() => setIsAutoPaused(false)}
           >
-            {items.map((card) => (
+            {displayedItems.map((card) => (
               <div
                 key={card.id}
                 className={cn(
@@ -230,6 +268,36 @@ function CarouselSection({
                 />
               </div>
             ))}
+
+            {/* Sentinel: memicu load lebih banyak kartu saat terlihat */}
+            {hasMore && (
+              <div
+                ref={sentinelRef}
+                className="shrink-0 w-1 self-stretch"
+                aria-hidden="true"
+              />
+            )}
+
+            {/* Skeleton placeholder saat masih ada yang belum dimuat */}
+            {hasMore &&
+              Array.from({ length: 2 }).map((_, i) => (
+                <div
+                  key={`skeleton-${i}`}
+                  className={cn(
+                    "snap-center sm:snap-start shrink-0",
+                    CARD_WIDTH_CLASSES,
+                  )}
+                >
+                  <div className="w-full rounded-2xl border border-zinc-200/70 bg-white overflow-hidden animate-pulse">
+                    <div className="h-42 bg-zinc-100" />
+                    <div className="px-3.5 pb-4 pt-14 space-y-2">
+                      <div className="h-3.5 w-3/4 rounded bg-zinc-100" />
+                      <div className="h-3 w-full rounded bg-zinc-100" />
+                      <div className="h-3 w-2/3 rounded bg-zinc-100" />
+                    </div>
+                  </div>
+                </div>
+              ))}
           </div>
         </div>
       </div>
