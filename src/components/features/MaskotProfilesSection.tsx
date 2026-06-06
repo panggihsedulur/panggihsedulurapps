@@ -317,7 +317,7 @@ export function MaskotProfilesSection() {
             edulur
           </h2>{" "}
           <p className="mt-5 text-neutral-500  text-lg leading-relaxed">
-            Dua sahabat yang siap menemanimu menemukan Ukm & Paguyuban yang
+            Dua sahabat yang siap menemanimu menemukan UKM & Paguyuban yang
             sesuai!
           </p>
         </div>

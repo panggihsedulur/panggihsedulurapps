@@ -504,6 +504,42 @@ const rawUkmAndPaguyubanData: ExpandableCardItem[] = [
     contact: "089620516812",
     instagram: "@himastraunsoed",
   },
+  {
+    id: "pg-147",
+    title: "HIMUSKA",
+    src: "https://dummyimage.com/400x400/004d40/ffffff&text=Karawang",
+    description: "Himpunan Mahasiswa Unsoed Karawang",
+    category: "Karawang",
+    detailTitle: "Tentang Himpunan Mahasiswa Karawang",
+    detailBody:
+      "HIMUSKA (Himpunan Mahasiswa Unsoed Karawang) merupakan wadah bagi mahasiswa Universitas Jenderal Soedirman yang berasal dari Kabupaten Karawang untuk menjalin silaturahmi, mempererat rasa kekeluargaan, serta mengembangkan potensi diri melalui berbagai kegiatan yang positif dan bermanfaat. HIMUSKA hadir sebagai rumah bersama bagi mahasiswa Karawang di perantauan, tempat untuk saling mendukung, berbagi informasi, berkolaborasi, dan bertumbuh bersama dalam bidang akademik, organisasi, maupun sosial. Dengan mengusung semangat kebersamaan dan identitas daerah, HIMUSKA berkomitmen menjadi ruang yang inklusif, aktif, dan berdampak bagi anggotanya serta masyarakat luas.Ti Karawang Ngahiji, di Soedirman Ngabakti.",
+    detailFooterTitle: "Nomor: 147/UND/DAGRI/BEM/III/2026",
+    name: "Himpunan Mahasiswa Karawang",
+    type: "Paguyuban",
+    logoUrl: "https://dummyimage.com/400x400/004d40/ffffff&text=Karawang",
+    photoUrl: "/paguyuban/Karawang/foto.webp",
+    contactPerson: "CP Humas",
+    contact: "082258679804",
+    instagram: "@himuska.unsoed",
+  },
+  {
+    id: "pg-148",
+    title: "HIMABUMI ",
+    src: "https://dummyimage.com/400x400/004d40/ffffff&text=Sumatera+Utara",
+    description: "Himpunan Mahasiswa Sukabumi",
+    category: "Sukabumi",
+    detailTitle: "Tentang Himpunan Mahasiswa Sukabumi",
+    detailBody:
+      "Himpunan Mahasiswa Sukabumi Universitas Jenderal Soedirman (Himabumi Unsoed) merupakan paguyuban mahasiswa yang berasal dari Kota Sukabumi dan Kabupaten Sukabumi yang sedang menempuh pendidikan di Universitas Jenderal Soedirman. Himabumi merupakan wadah bagi para Mahasiswa Sukabumi untuk bersilaturahmi, bertukar pikiran, dan saling merangkul demi menciptakan rasa kekeluargaan yang erat.",
+    detailFooterTitle: "Nomor: 148/UND/DAGRI/BEM/III/2026",
+    name: "Himpunan Mahasiswa Sumatera Utara",
+    type: "Paguyuban",
+    logoUrl: "/paguyuban/HIMABUMI/logo.png",
+    photoUrl: "/paguyuban/HIMABUMI/foto.webp",
+    contactPerson: "CP Humas",
+    contact: "083191482144",
+    instagram: "@himabumi_unsoed",
+  },
 
   // ==========================================
   // KATEGORI: KEROHANIAN / BEASISWA / KHUSUS

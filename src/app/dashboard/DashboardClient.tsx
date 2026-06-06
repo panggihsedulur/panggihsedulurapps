@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState, useMemo } from "react";
 import type { StudentResult } from "@/lib/supabase";
 import {
@@ -160,23 +161,28 @@ export default function DashboardClient({
             </button>
           </nav>
         </div>
-
-        <div className="p-4 border-t border-gray-100 flex items-center gap-3">
-          <div className="w-8 h-8 rounded-full bg-gray-200 overflow-hidden shrink-0">
-            <img
-              src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
-              alt="Profile"
-              className="w-full h-full object-cover"
-            />
+        <Link
+          href="https://instagram.com/najmi.zaa"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <div className="p-4 border-t border-gray-100 flex items-center gap-3 cursor-pointer">
+            <div className="w-8 h-8 rounded-full bg-gray-200 overflow-hidden shrink-0">
+              <img
+                src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
+                alt="Profile"
+                className="w-full h-full object-cover"
+              />
+            </div>
+            <div className="flex-1 min-w-0">
+              <p className="text-sm font-medium text-gray-900 truncate">
+                Najmi Faza
+              </p>
+              <p className="text-xs text-gray-500 truncate">@najmi.zaa</p>
+            </div>
+            <MoreVertical className="w-4 h-4 text-gray-400" />
           </div>
-          <div className="flex-1 min-w-0">
-            <p className="text-sm font-medium text-gray-900 truncate">
-              Najmi Faza
-            </p>
-            <p className="text-xs text-gray-500 truncate">@najmi.zaa</p>
-          </div>
-          <MoreVertical className="w-4 h-4 text-gray-400" />
-        </div>
+        </Link>
       </aside>
 
       {/* MAIN CONTENT */}
@@ -547,7 +553,7 @@ export default function DashboardClient({
 
           {/* TAB: DATA MAHASISWA */}
           {activeTab === "data" && (
-            <div className="max-w-[1200px] mx-auto animate-in fade-in duration-300 pb-20">
+            <div className="max-w-[98%] mx-auto animate-in fade-in duration-300">
               <div className="bg-white rounded-xl shadow-[0_1px_2px_rgba(0,0,0,0.02)] border border-gray-100 overflow-hidden">
                 <div className="p-5 border-b border-gray-100 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                   <div>
@@ -592,7 +598,7 @@ export default function DashboardClient({
                 </div>
 
                 <div
-                  className="overflow-x-auto overflow-y-auto w-full max-h-[calc(100vh-16rem)] custom-scrollbar"
+                  className="overflow-x-auto overflow-y-auto w-full max-h-[calc(100vh-13em)] custom-scrollbar"
                   data-lenis-prevent
                 >
                   <table className="w-full text-xs text-left relative">
