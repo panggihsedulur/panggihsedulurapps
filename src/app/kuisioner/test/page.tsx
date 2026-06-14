@@ -262,10 +262,10 @@ export default function TestPage() {
   // Loading state
   if (isInitializing) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#081819]">
+      <div className="min-h-screen flex items-center justify-center bg-transparent">
         <div className="text-center">
-          <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-white mb-4"></div>
-          <p className="text-white/80">Memuat kuis...</p>
+          <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-black mb-4"></div>
+          <p className="text-black/80">Memuat kuis...</p>
         </div>
       </div>
     );
@@ -274,8 +274,8 @@ export default function TestPage() {
   // Error state
   if (error) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#081819] p-4">
-        <div className="bg-white rounded-[2rem] shadow-[0_25px_50px_-12px_rgba(13,77,77,0.2)] border-b-8 border-gray-200 p-8 max-w-md text-center">
+      <div className="min-h-screen flex items-center justify-center bg-transparent p-4">
+        <div className="bg-white rounded-[2rem] shadow-[0_25px_50px_-12px_rgba(0,0,0,0.1)] border-b-8 border-gray-200 p-8 max-w-md text-center border border-black/10">
           <h2 className="text-2xl font-bold text-red-600 mb-4">
             Terjadi Kesalahan
           </h2>
@@ -315,10 +315,10 @@ export default function TestPage() {
       : levelOneQuestions.length + branchStep;
 
   return (
-    <div className="relative min-h-screen px-4 py-8 text-white">
+    <div className="relative min-h-screen px-4 py-8 text-black">
       <div className="mx-auto w-full max-w-3xl">
         {/* Progress Bar */}
-        <div className="relative z-10 mb-8 rounded-3xl border border-white/10 bg-white/5 p-4 shadow-[0_20px_45px_-30px_rgba(0,0,0,0.9)] backdrop-blur-xl">
+        <div className="relative z-10 mb-8 rounded-3xl border border-black/10 bg-white/80 p-4 shadow-sm backdrop-blur-xl">
           <ProgressBar
             current={currentProgressIndex + 1}
             total={totalQuestions}
@@ -339,25 +339,25 @@ export default function TestPage() {
           </div>
         )}
 
-        <div className="relative z-10 mt-8 rounded-3xl border border-white/10 bg-white/5 p-6 shadow-[0_20px_45px_-30px_rgba(0,0,0,0.9)] backdrop-blur-xl">
-          <h3 className="mb-4 text-base font-semibold text-white/90">
+        <div className="relative z-10 mt-8 rounded-3xl border border-black/10 bg-white/80 p-6 shadow-sm backdrop-blur-xl">
+          <h3 className="mb-4 text-base font-semibold text-black/90">
             Poin Kategori Saat Ini
           </h3>
           <div className="grid grid-cols-2 gap-3 md:grid-cols-5">
             {Object.entries(skor).map(([kategori, poin]) => (
               <div
                 key={kategori}
-                className="rounded-xl border border-white/10 bg-black/20 p-3 text-center"
+                className="rounded-xl border border-black/10 bg-black/5 p-3 text-center"
               >
-                <p className="text-xs font-medium text-zinc-300">{kategori}</p>
-                <p className="text-2xl font-bold text-white">{poin}</p>
+                <p className="text-xs font-medium text-slate-600">{kategori}</p>
+                <p className="text-2xl font-bold text-black">{poin}</p>
               </div>
             ))}
           </div>
         </div>
 
         <div className="relative z-10 mt-7 flex items-center justify-center">
-          <p className="text-sm text-white/60">
+          <p className="text-sm text-black/60">
             Jawab sesuai preferensi pribadimu
           </p>
         </div>

@@ -33,9 +33,9 @@ export default function HeroSection() {
         className="absolute inset-0 z-0"
         style={{
           maskImage:
-            "linear-gradient(180deg, transparent, black 0%, black 70%, transparent)",
+            "linear-gradient(180deg, transparent, black 0%, black 80%, transparent)",
           WebkitMaskImage:
-            "linear-gradient(180deg, transparent, black 0%, black 70%, transparent)",
+            "linear-gradient(180deg, transparent, black 0%, black 80%, transparent)",
         }}
       >
         <Image

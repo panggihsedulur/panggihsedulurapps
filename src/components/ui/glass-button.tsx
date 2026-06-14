@@ -22,7 +22,7 @@ const glassButtonVariants = cva(
 );
 
 const glassButtonTextVariants = cva(
-  "glass-button-text relative block select-none tracking-tighter",
+  "glass-button-text relative block select-none tracking-tighter text-black",
   {
     variants: {
       size: {

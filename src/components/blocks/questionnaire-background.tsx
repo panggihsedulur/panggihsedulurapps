@@ -1,12 +1,7 @@
 "use client";
 
 import React from "react";
-const ImageBackground = () => (
-  <div
-    className="fixed inset-0 z-0 bg-[url('/bghero.webp')] bg-cover bg-center bg-no-repeat"
-    aria-hidden="true"
-  />
-);
+import { GridPattern } from "@/components/ui/grid-pattern";
 
 export const QuestionnaireBackground = ({
   children,
@@ -15,7 +10,13 @@ export const QuestionnaireBackground = ({
 }) => {
   return (
     <div className="relative min-h-screen bg-background overflow-hidden flex flex-col">
-      <ImageBackground />
+      <div className="absolute inset-0 pointer-events-none">
+        <GridPattern
+          width={48}
+          height={48}
+          className="absolute inset-0 stroke-[#5aa0ac]/25 fill-[#5aa0ac]/[0.06] [mask-image:radial-gradient(ellipse_at_center,black_55%,transparent_82%)]"
+        />
+      </div>
 
       <div className="relative z-10 w-full flex-1">{children}</div>
     </div>

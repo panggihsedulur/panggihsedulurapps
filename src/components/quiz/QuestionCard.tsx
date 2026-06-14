@@ -67,11 +67,11 @@ export function QuestionCard({
   return (
     <div className="w-full max-w-3xl mx-auto">
       <div className="relative z-10 text-center mb-8">
-        <div className="relative rounded-3xl border border-white/10 bg-white/5 px-6 py-8 md:px-8 md:py-10 shadow-[0_22px_40px_-18px_rgba(0,0,0,0.7)] backdrop-blur-xl">
-          <div className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/15 bg-[#0b141b] px-6 py-2 text-2xl font-semibold text-[#ffd15a] shadow-[0_6px_16px_rgba(0,0,0,0.35)]">
+        <div className="relative rounded-3xl border border-black/10 bg-white/80 px-6 py-8 md:px-8 md:py-10 shadow-sm backdrop-blur-xl">
+          <div className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/50 bg-cyan-600 px-6 py-2 text-2xl font-semibold text-white shadow-sm">
             {currentIndex + 1} / {totalQuestions}
           </div>
-          <h2 className="text-xl leading-tight md:text-3xl font-semibold text-white">
+          <h2 className="text-xl leading-tight md:text-3xl font-semibold text-black">
             {question.text}
           </h2>
         </div>
@@ -121,7 +121,7 @@ export function QuestionCard({
         <Button
           onClick={handleSubmitAnswer}
           disabled={!selectedOption || isLoading}
-          className="flex-1 bg-gradient-to-b from-[#05b682] to-[#027a56] text-white py-5 rounded-[16px] font-bold text-xl transition-all duration-150 disabled:opacity-50 disabled:cursor-not-allowed shadow-[0_6px_0_#014d36,0_10px_10px_rgba(0,0,0,0.25)] active:translate-y-[6px] active:shadow-none hover:brightness-110"
+          className="flex-1 bg-gradient-to-b from-[#F472B6] to-[#DB2777] text-white py-5 rounded-[12px] font-bold text-xl transition-all duration-150 disabled:opacity-50 disabled:cursor-not-allowed shadow-[0_4px_12px_rgba(219,39,119,0.2)] active:scale-[0.98] hover:brightness-105"
         >
           {isLoading
             ? "Loading..."
@@ -132,7 +132,7 @@ export function QuestionCard({
       </div>
 
       {!selectedOption && (
-        <p className="mt-6 text-center text-sm font-medium text-white/70 animate-pulse">
+        <p className="mt-6 text-center text-sm font-medium text-black/70 animate-pulse">
           Pilih satu jawaban untuk melanjutkan
         </p>
       )}
