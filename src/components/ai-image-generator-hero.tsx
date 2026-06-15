@@ -81,7 +81,7 @@ export function ImageCarouselHero({ images }: ImageCarouselHeroProps) {
         <div className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-tr from-primary/5 to-transparent rounded-full blur-3xl animate-pulse" />
       </div>
 
-      <div className="relative z-10 flex flex-col items-center justify-center py-8 px-4 sm:px-6 lg:px-8">
+      <div className="relative z-10 flex flex-col items-center justify-center py-11 md:py-24 lg:py-10 px-4 sm:px-6 lg:px-8">
         {/* Carousel Container */}
         <div
           ref={containerRef}

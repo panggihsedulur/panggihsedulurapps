@@ -339,7 +339,7 @@ export default function TestPage() {
           </div>
         )}
 
-        <div className="relative z-10 mt-8 rounded-3xl border border-black/10 bg-white/80 p-6 shadow-sm backdrop-blur-xl">
+        {/* <div className="relative z-10 mt-8 rounded-3xl border border-black/10 bg-white/80 p-6 shadow-sm backdrop-blur-xl">
           <h3 className="mb-4 text-base font-semibold text-black/90">
             Poin Kategori Saat Ini
           </h3>
@@ -354,7 +354,7 @@ export default function TestPage() {
               </div>
             ))}
           </div>
-        </div>
+        </div> */}
 
         <div className="relative z-10 mt-7 flex items-center justify-center">
           <p className="text-sm text-black/60">

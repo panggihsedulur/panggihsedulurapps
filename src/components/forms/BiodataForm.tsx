@@ -92,7 +92,7 @@ export function BiodataForm({ onSubmit, isLoading = false }: BiodataFormProps) {
                 id="nama"
                 {...register("nama")}
                 placeholder="Masukkan nama lengkap"
-                className="w-full px-4 py-3 border border-black/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-500/30 bg-black/5 text-black placeholder:text-black/40 backdrop-blur-sm transition-all focus:bg-white"
+                className="w-full px-4 py-3 border border-gray-400 rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-500/30 bg-black/5 text-black placeholder:text-gray-600 backdrop-blur-sm transition-all focus:bg-white"
               />
               {errors.nama && (
                 <p className="text-rose-500 text-xs font-medium mt-1.5 ml-1">
@@ -113,7 +113,7 @@ export function BiodataForm({ onSubmit, isLoading = false }: BiodataFormProps) {
                 id="nim"
                 {...register("nim")}
                 placeholder="Masukkan NIM"
-                className="w-full px-4 py-3 border border-black/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-500/30 bg-black/5 text-black placeholder:text-black/40 backdrop-blur-sm transition-all focus:bg-white"
+                className="w-full px-4 py-3 border border-gray-400 rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-500/30 bg-black/5 text-black placeholder:text-gray-600 backdrop-blur-sm transition-all focus:bg-white"
               />
               {errors.nim && (
                 <p className="text-rose-500 text-xs font-medium mt-1.5 ml-1">
@@ -134,7 +134,7 @@ export function BiodataForm({ onSubmit, isLoading = false }: BiodataFormProps) {
                 id="no_hp"
                 {...register("no_hp")}
                 placeholder="Contoh: 081234567890"
-                className="w-full px-4 py-3 border border-black/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-500/30 bg-black/5 text-black placeholder:text-black/40 backdrop-blur-sm transition-all focus:bg-white"
+                className="w-full px-4 py-3 border border-gray-400 rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-500/30 bg-black/5 text-black placeholder:text-gray-600 backdrop-blur-sm transition-all focus:bg-white"
               />
               {errors.no_hp && (
                 <p className="text-rose-500 text-xs font-medium mt-1.5 ml-1">
@@ -146,7 +146,7 @@ export function BiodataForm({ onSubmit, isLoading = false }: BiodataFormProps) {
             <Button
               type="button"
               onClick={() => handleNext(["nama", "nim", "no_hp"])}
-              className="w-full bg-black/5 hover:bg-black/10 text-black py-6 rounded-xl font-bold text-lg transition-all"
+              className="w-full bg-gradient-to-r from-cyan-500 to-emerald-500 hover:from-cyan-600 hover:to-emerald-600 text-white shadow-lg shadow-cyan-500/30 py-6 rounded-xl font-bold text-lg transition-all"
             >
               Selanjutnya →
             </Button>
@@ -247,7 +247,7 @@ export function BiodataForm({ onSubmit, isLoading = false }: BiodataFormProps) {
               <Button
                 type="button"
                 onClick={() => handleNext(["fakultas", "jurusan"])}
-                className="w-2/3 bg-black/5 hover:bg-black/10 text-black py-6 rounded-xl font-bold text-lg transition-all"
+                className="w-2/3 bg-gradient-to-r from-cyan-500 to-emerald-500 hover:from-cyan-600 hover:to-emerald-600 text-white shadow-lg shadow-cyan-500/30 py-6 rounded-xl font-bold text-lg transition-all"
               >
                 Selanjutnya →
               </Button>
