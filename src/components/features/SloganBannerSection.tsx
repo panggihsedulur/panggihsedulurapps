@@ -18,7 +18,7 @@ export function SloganBannerSection() {
         className="max-w-3xl mx-auto"
       >
         <Image
-          src="https://raw.githubusercontent.com/panggihsedulur/asset/refs/heads/main/slogan.png"
+          src="https://raw.githubusercontent.com/panggihsedulur/asset/refs/heads/main/tema-besar.webp"
           alt="Find Your Playground, Find Your People"
           width={1920}
           height={680}
