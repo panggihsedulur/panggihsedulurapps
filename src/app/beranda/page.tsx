@@ -11,6 +11,7 @@ import TestimonialsSection from "@/components/testimoni";
 import CircularTestimonials, {
   Sambutan,
 } from "@/components/circular-testimonials";
+import Sponsorship from "@/components/features/Sponsorship";
 
 export const metadata: Metadata = {
   title: "Panggih Sedulur Beranda",
@@ -41,6 +42,7 @@ export default function Beranda() {
           <SloganBannerSection />
           <TestimonialsSection />
           <Sambutan />
+          <Sponsorship />
         </div>
       </div>
     </>
