@@ -3,10 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { ChevronDown, Search } from "lucide-react";
 import { PaguyubanGrid } from "@/components/paguyuban/PaguyubanCard";
-import {
-  allPaguyuban,
-  paguyubanProvinsiOptions,
-} from "@/data/PaguyubanLogic";
+import { allPaguyuban, paguyubanProvinsiOptions } from "@/data/PaguyubanLogic";
 import { GridPattern } from "@/components/ui/grid-pattern";
 
 export default function PaguyubanPage() {
@@ -49,7 +46,9 @@ export default function PaguyubanPage() {
           `${pg.name ?? ""} ${pg.title} ${pg.category} ${pg.provinsi} ${pg.description}`.toLowerCase();
         return haystack.includes(trimmedQuery);
       })
-      .sort((a, b) => a.priority - b.priority || a.title.localeCompare(b.title));
+      .sort(
+        (a, b) => a.priority - b.priority || a.title.localeCompare(b.title),
+      );
   }, [query, selectedProvinsi]);
 
   return (
@@ -78,10 +77,10 @@ export default function PaguyubanPage() {
             aerah
           </h1>
           <p className="max-w-3xl text-base text-white/85 sm:text-lg">
-            Temukan paguyuban daerahmu di Unsoed. Sambung silaturahmi,
-            perkuat kebersamaan, dan jadilah bagian dari keluarga besar
-            mahasiswa perantau. Gunakan pencarian untuk menemukan paguyuban
-            sesuai daerah asalmu.
+            Temukan paguyuban daerahmu di Unsoed. Sambung silaturahmi, perkuat
+            kebersamaan, dan jadilah bagian dari keluarga besar mahasiswa
+            perantau. Gunakan pencarian untuk menemukan paguyuban sesuai daerah
+            asalmu.
           </p>
 
           <div className="mt-4 w-full max-w-3xl rounded-3xl bg-white/10 p-4 backdrop-blur-md">
