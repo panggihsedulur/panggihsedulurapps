@@ -1,4 +1,4 @@
-import { LogoCloud } from "@/components/ui/logo-cloud-4";
+import { LogoCloud, type Logo } from "@/components/ui/logo-cloud-4";
 const logos: Logo[] = [
   {
     src: "/sponsor_rent.webp",

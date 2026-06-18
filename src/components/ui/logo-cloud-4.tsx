@@ -184,7 +184,7 @@ function ProgressiveBlur({
 /*  LogoCloud                                                           */
 /* ------------------------------------------------------------------ */
 
-type Logo = {
+export type Logo = {
   src: string;
   alt: string;
   width?: number;
