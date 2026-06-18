@@ -1247,7 +1247,7 @@ const rawUkmAndPaguyubanData: ExpandableCardItem[] = [
     name: "Muda Bersinar",
     type: "UKM",
     logoUrl: "/UKM/Muda_Bersinar/logo.webp",
-    photoUrl: "https://dummyimage.com/400x400/607d8b/ffffff&text=Muda+Bersinar",
+    photoUrl: "/UKM/Muda_Bersinar/foto.webp",
     contactPerson: "CP Humas",
     contact: "08xx-xxxx-xxxx",
     instagram: "@mudabersinar.unsoed",

@@ -305,7 +305,7 @@ function CarouselSection({
   );
 }
 
-export default function UkmPaguyubanCarouselSection() {
+export default function UkmPaguyubanCarouselSection({ className }: { className?: string }) {
   const ukmCards = useMemo(
     () => expandableCards.filter((card) => card.type === "UKM"),
     [],
@@ -316,7 +316,7 @@ export default function UkmPaguyubanCarouselSection() {
   );
 
   return (
-    <div className="relative ">
+    <div className={cn("relative", className)}>
       <CarouselSection
         title="UKM Pilihan"
         subtitle="Geser untuk melihat UKM unggulan. Klik kartu untuk detail lengkap dan kontak pengurusnya."

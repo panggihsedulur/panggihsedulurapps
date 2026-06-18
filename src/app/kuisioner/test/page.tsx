@@ -18,6 +18,20 @@ import {
 } from "@/lib/quiz-helpers";
 import { initializeSkor, type Biodata, type Kategori } from "@/lib/schema";
 
+interface HistoryState {
+  phase: "level1" | "branch";
+  currentQuestionIndex: number;
+  branchQuestionId: string | null;
+  branchStep: number;
+  branchTotalSteps: number;
+  branchCategories: Kategori[];
+  branchCategoryIndex: number;
+  branchRecommendations: string[];
+  dominantCategory: Kategori | null;
+  skor: Record<Kategori, number>;
+  finalSkorForSubmit: Record<Kategori, number> | null;
+}
+
 export default function TestPage() {
   const router = useRouter();
   const [biodata, setBiodata] = useState<Biodata | null>(null);
@@ -39,6 +53,7 @@ export default function TestPage() {
     Kategori,
     number
   > | null>(null);
+  const [history, setHistory] = useState<HistoryState[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isInitializing, setIsInitializing] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -80,6 +95,7 @@ export default function TestPage() {
         setBranchRecommendations([]);
         setDominantCategory(null);
         setFinalSkorForSubmit(null);
+        setHistory([]);
         setIsInitializing(false);
       } catch (err) {
         console.error("Error parsing biodata:", err);
@@ -184,6 +200,24 @@ export default function TestPage() {
     const currentQuestion = levelOneQuestions[currentQuestionIndex];
     if (!currentQuestion) return;
 
+    // Save history before updating state
+    setHistory((prev) => [
+      ...prev,
+      {
+        phase,
+        currentQuestionIndex,
+        branchQuestionId,
+        branchStep,
+        branchTotalSteps,
+        branchCategories,
+        branchCategoryIndex,
+        branchRecommendations,
+        dominantCategory,
+        skor,
+        finalSkorForSubmit,
+      },
+    ]);
+
     const option = currentQuestion.options.find((opt) => opt.id === optionId);
     if (!option) return;
 
@@ -232,6 +266,24 @@ export default function TestPage() {
   const handleBranchAnswer = async (optionId: string) => {
     if (!branchQuestionId) return;
 
+    // Save history before updating state
+    setHistory((prev) => [
+      ...prev,
+      {
+        phase,
+        currentQuestionIndex,
+        branchQuestionId,
+        branchStep,
+        branchTotalSteps,
+        branchCategories,
+        branchCategoryIndex,
+        branchRecommendations,
+        dominantCategory,
+        skor,
+        finalSkorForSubmit,
+      },
+    ]);
+
     const branchOption = getBranchOption(branchQuestionId, optionId);
     if (!branchOption) return;
 
@@ -257,6 +309,28 @@ export default function TestPage() {
     }
 
     await handleBranchAnswer(optionId);
+  };
+
+  const handleBack = () => {
+    setHistory((prev) => {
+      if (prev.length === 0) return prev;
+      const newHistory = [...prev];
+      const lastState = newHistory.pop();
+      if (lastState) {
+        setPhase(lastState.phase);
+        setCurrentQuestionIndex(lastState.currentQuestionIndex);
+        setBranchQuestionId(lastState.branchQuestionId);
+        setBranchStep(lastState.branchStep);
+        setBranchTotalSteps(lastState.branchTotalSteps);
+        setBranchCategories(lastState.branchCategories);
+        setBranchCategoryIndex(lastState.branchCategoryIndex);
+        setBranchRecommendations(lastState.branchRecommendations);
+        setDominantCategory(lastState.dominantCategory);
+        setSkor(lastState.skor);
+        setFinalSkorForSubmit(lastState.finalSkorForSubmit);
+      }
+      return newHistory;
+    });
   };
 
   // Loading state
@@ -305,14 +379,18 @@ export default function TestPage() {
         ? getBranchQuestionById(branchQuestionId)
         : null;
 
-  const totalQuestions =
-    phase === "level1"
-      ? levelOneQuestions.length
-      : levelOneQuestions.length + branchTotalSteps;
-  const currentProgressIndex =
-    phase === "level1"
-      ? currentQuestionIndex
-      : levelOneQuestions.length + branchStep;
+  const remainingCategories = phase === "branch" ? branchCategories.length - branchCategoryIndex : 0;
+  let estimatedRemainingSteps = 0;
+  if (phase === "level1") {
+    estimatedRemainingSteps = levelOneQuestions.length - history.length;
+  } else {
+    const currentCategoryRemaining = branchTotalSteps - branchStep;
+    const otherCategoriesRemaining = remainingCategories > 1 ? (remainingCategories - 1) * 1 : 0;
+    estimatedRemainingSteps = currentCategoryRemaining + otherCategoriesRemaining;
+  }
+
+  const totalQuestions = history.length + estimatedRemainingSteps;
+  const currentProgressIndex = history.length;
 
   return (
     <div className="relative min-h-screen px-4 py-8 text-black">
@@ -332,6 +410,7 @@ export default function TestPage() {
             <QuestionCard
               question={currentQuestion}
               onAnswer={handleAnswer}
+              onBack={handleBack}
               isLoading={isLoading}
               currentIndex={currentProgressIndex}
               totalQuestions={totalQuestions}

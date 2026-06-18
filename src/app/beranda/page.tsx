@@ -8,9 +8,7 @@ import UkmPaguyubanCarouselSection from "@/components/features/UkmPaguyubanCarou
 
 import { GridPattern } from "@/components/ui/grid-pattern";
 import TestimonialsSection from "@/components/testimoni";
-import CircularTestimonials, {
-  Sambutan,
-} from "@/components/circular-testimonials";
+import { Sambutan } from "@/components/circular-testimonials";
 import Sponsorship from "@/components/features/Sponsorship";
 
 export const metadata: Metadata = {
@@ -36,7 +34,7 @@ export default function Beranda() {
           />
         </div>
         <div className="relative z-10">
-          <UkmPaguyubanCarouselSection />
+          <UkmPaguyubanCarouselSection className="mt-10" />
           <PanggihIntroSection />
           <MaskotProfilesSection />
           <SloganBannerSection />

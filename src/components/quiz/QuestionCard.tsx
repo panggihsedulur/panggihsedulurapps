@@ -4,9 +4,16 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { type Question } from "@/lib/questions";
 
+let clickAudio: HTMLAudioElement | null = null;
+if (typeof window !== "undefined") {
+  clickAudio = new Audio("/ClickEffect/ClickEffect.mp3");
+  clickAudio.preload = "auto";
+}
+
 interface QuestionCardProps {
   question: Question;
   onAnswer: (optionId: string) => void;
+  onBack?: () => void;
   isLoading?: boolean;
   currentIndex: number;
   totalQuestions: number;
@@ -15,11 +22,11 @@ interface QuestionCardProps {
 export function QuestionCard({
   question,
   onAnswer,
+  onBack,
   isLoading = false,
   currentIndex,
   totalQuestions,
 }: QuestionCardProps) {
-  const [selectedOption, setSelectedOption] = useState<string | null>(null);
 
   const optionStyles = [
     {
@@ -54,14 +61,27 @@ export function QuestionCard({
     },
   ];
 
-  const handleSelectOption = (optionId: string) => {
-    setSelectedOption(optionId);
+  const playClickSound = () => {
+    try {
+      if (clickAudio) {
+        clickAudio.currentTime = 0; // reset to start
+        clickAudio.play().catch(() => {
+          // ignore autoplay errors if any
+        });
+      }
+    } catch (e) {
+      // ignore audio errors
+    }
   };
 
-  const handleSubmitAnswer = () => {
-    if (!selectedOption) return;
-    onAnswer(selectedOption);
-    setSelectedOption(null);
+  const handleSelectOption = (optionId: string) => {
+    playClickSound();
+    onAnswer(optionId);
+  };
+
+  const handleBackClick = () => {
+    playClickSound();
+    if (onBack) onBack();
   };
 
   return (
@@ -80,38 +100,24 @@ export function QuestionCard({
       <div className="grid grid-cols-1 gap-4 mb-8">
         {question.options.map((option, index) => {
           const palette = optionStyles[index % optionStyles.length];
-          const isSelected = selectedOption === option.id;
-
           return (
             <button
               key={option.id}
               type="button"
               onClick={() => handleSelectOption(option.id)}
-              className={`group relative flex w-full items-center gap-4 rounded-2xl border px-6 py-5 text-left transition-all active:scale-[0.98] backdrop-blur-sm ${
-                isSelected ? palette.isSelected : palette.base
-              }`}
+              disabled={isLoading}
+              className={`group relative flex w-full items-center gap-4 rounded-2xl border px-6 py-5 text-left transition-all active:scale-[0.98] backdrop-blur-sm ${palette.base} disabled:opacity-70 disabled:cursor-not-allowed`}
             >
               <div
-                className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/5 transition-all group-hover:scale-110 ${
-                  isSelected
-                    ? "border-cyan-500/50 bg-cyan-500/20 text-white"
-                    : "text-white/40"
-                }`}
+                className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/5 transition-all group-hover:scale-110 text-white/40`}
               >
                 {String.fromCharCode(65 + index)}
               </div>
               <span
-                className={`text-lg md:text-xl font-medium transition-colors ${
-                  isSelected
-                    ? "text-white"
-                    : "text-white/80 group-hover:text-white"
-                }`}
+                className={`text-lg md:text-xl font-medium transition-colors text-white/80 group-hover:text-white`}
               >
                 {option.text}
               </span>
-              {isSelected && (
-                <div className="absolute right-6 h-2 w-2 rounded-full bg-cyan-400 shadow-[0_0_10px_rgba(34,211,238,0.8)]" />
-              )}
             </button>
           );
         })}
@@ -119,23 +125,13 @@ export function QuestionCard({
 
       <div className="flex gap-3">
         <Button
-          onClick={handleSubmitAnswer}
-          disabled={!selectedOption || isLoading}
+          onClick={handleBackClick}
+          disabled={currentIndex === 0 || isLoading}
           className="flex-1 bg-gradient-to-b from-[#F472B6] to-[#DB2777] text-white py-5 rounded-[12px] font-bold text-xl transition-all duration-150 disabled:opacity-50 disabled:cursor-not-allowed shadow-[0_4px_12px_rgba(219,39,119,0.2)] active:scale-[0.98] hover:brightness-105"
         >
-          {isLoading
-            ? "Loading..."
-            : currentIndex === totalQuestions - 1
-              ? "Selesai"
-              : "Lanjut →"}
+          ← Kembali
         </Button>
       </div>
-
-      {!selectedOption && (
-        <p className="mt-6 text-center text-sm font-medium text-black/70 animate-pulse">
-          Pilih satu jawaban untuk melanjutkan
-        </p>
-      )}
     </div>
   );
 }
