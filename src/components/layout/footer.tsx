@@ -5,12 +5,9 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import {
-  FaFacebookF,
-  FaGithub,
   FaInstagram,
-  FaLinkedinIn,
-  FaYoutube,
-  FaXTwitter,
+  FaTiktok,
+  FaWhatsapp,
 } from "react-icons/fa6";
 
 export function Footer() {
@@ -72,9 +69,9 @@ export function Footer() {
             </div>
           </div>
           <div className="col-span-3 w-full md:col-span-1">
-            <span className="text-muted-foreground text-xs">Resources</span>
+            <span className="text-muted-foreground text-xs">Navigasi</span>
             <div className="mt-2 flex flex-col gap-2">
-              {resources.map(({ href, title }) => (
+              {navigasi.map(({ href, title }) => (
                 <a
                   className="w-max text-sm hover:underline"
                   href={href}
@@ -86,13 +83,14 @@ export function Footer() {
             </div>
           </div>
           <div className="col-span-3 w-full md:col-span-1">
-            <span className="text-muted-foreground text-xs">Company</span>
+            <span className="text-muted-foreground text-xs">Sosial Media</span>
             <div className="mt-2 flex flex-col gap-2">
-              {company.map(({ href, title }) => (
+              {kontak.map(({ href, title }) => (
                 <a
                   className="w-max text-sm hover:underline"
                   href={href}
                   key={title}
+                  target="_blank"
                 >
                   {title}
                 </a>
@@ -112,75 +110,55 @@ export function Footer() {
   );
 }
 
-const company = [
+const navigasi = [
   {
-    title: "About Us",
-    href: "#",
+    title: "Beranda",
+    href: "/#home",
   },
   {
-    title: "Careers",
-    href: "#",
+    title: "UKM",
+    href: "/ukm",
   },
   {
-    title: "Brand assets",
-    href: "#",
+    title: "Paguyuban",
+    href: "/paguyuban",
   },
   {
-    title: "Privacy Policy",
-    href: "#",
+    title: "Kuisioner",
+    href: "/kuisioner",
   },
   {
-    title: "Terms of Service",
-    href: "#",
+    title: "Panitia",
+    href: "/panitia",
   },
 ];
 
-const resources = [
+const kontak = [
   {
-    title: "Blog",
-    href: "#",
+    title: "Instagram",
+    href: "https://www.instagram.com/panggihsedulur/",
   },
   {
-    title: "Help Center",
-    href: "#",
+    title: "Tiktok",
+    href: "https://www.tiktok.com/@panggihsedulur",
   },
   {
-    title: "Contact Support",
-    href: "#",
-  },
-  {
-    title: "Community",
-    href: "#",
-  },
-  {
-    title: "Security",
-    href: "#",
+    title: "Whatsapp",
+    href: "https://wa.me/6281234567890",
   },
 ];
 
 const socialLinks = [
   {
-    icon: <FaFacebookF />,
-    link: "#",
-  },
-  {
-    icon: <FaGithub />,
-    link: "#",
-  },
-  {
     icon: <FaInstagram />,
-    link: "#",
+    link: "https://www.instagram.com/panggihsedulur/",
   },
   {
-    icon: <FaLinkedinIn />,
-    link: "#",
+    icon: <FaTiktok />,
+    link: "https://www.tiktok.com/@panggihsedulur",
   },
   {
-    icon: <FaXTwitter />,
-    link: "#",
-  },
-  {
-    icon: <FaYoutube />,
-    link: "#",
+    icon: <FaWhatsapp />,
+    link: "https://wa.me/6281234567890",
   },
 ];
