@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { type Question } from "@/lib/questions";
+import { ChevronLeft } from "lucide-react";
 
 let clickAudio: HTMLAudioElement | null = null;
 if (typeof window !== "undefined") {
@@ -129,7 +130,7 @@ export function QuestionCard({
           disabled={currentIndex === 0 || isLoading}
           className="flex-1 bg-gradient-to-b from-[#F472B6] to-[#DB2777] text-white py-5 rounded-[12px] font-bold text-xl transition-all duration-150 disabled:opacity-50 disabled:cursor-not-allowed shadow-[0_4px_12px_rgba(219,39,119,0.2)] active:scale-[0.98] hover:brightness-105"
         >
-          ← Kembali
+          <ChevronLeft strokeWidth={3} className="mr-2 h-6 w-6" /> Kembali
         </Button>
       </div>
     </div>

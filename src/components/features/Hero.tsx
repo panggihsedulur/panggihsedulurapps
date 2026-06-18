@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ChevronRight } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { FaInstagram } from "react-icons/fa6";
@@ -91,7 +91,10 @@ export default function HeroSection() {
               <Link href="kuisioner">
                 <GlassButton contentClassName="flex items-center justify-center gap-2 px-4 py-2 sm:px-8 sm:py-4 text-sm font-semibold text-white">
                   Mulai Kuisioner
-                  <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                  <ChevronRight
+                    strokeWidth={3}
+                    className="w-4 h-4 transition-transform group-hover:translate-x-1"
+                  />
                 </GlassButton>
               </Link>
               <Link
