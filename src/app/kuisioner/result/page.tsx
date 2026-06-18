@@ -86,7 +86,7 @@ export default function ResultPage() {
           </p>
           <div className="inline-block bg-white/80 backdrop-blur-md border border-black/10 rounded-2xl px-6 py-3 shadow-md">
             <p className="text-lg font-semibold text-black">
-              Kategori Dominan:{" "}
+              Kategori Dominan: <br className="lg:hidden" />
               <span className="text-2xl text-cyan-600">{highestCategory}</span>
             </p>
             <p className="text-sm text-black/70 mt-1">

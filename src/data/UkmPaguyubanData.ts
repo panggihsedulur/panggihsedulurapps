@@ -1246,7 +1246,7 @@ const rawUkmAndPaguyubanData: ExpandableCardItem[] = [
     detailFooterTitle: "Nomor: 111/UND/DAGRI/BEM/III/2026",
     name: "Muda Bersinar",
     type: "UKM",
-    logoUrl: "https://dummyimage.com/400x400/607d8b/ffffff&text=Muda+Bersinar",
+    logoUrl: "/UKM/Muda_Bersinar/logo.webp",
     photoUrl: "https://dummyimage.com/400x400/607d8b/ffffff&text=Muda+Bersinar",
     contactPerson: "CP Humas",
     contact: "08xx-xxxx-xxxx",
