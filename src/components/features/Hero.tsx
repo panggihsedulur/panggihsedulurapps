@@ -83,7 +83,7 @@ export default function HeroSection() {
             <p className="animate-fade-in delay-300 max-w-xl text-lg text-white leading-relaxed">
               Ikuti kuisioner interaktif untuk mendapatkan rekomendasi Unit
               Kegiatan Mahasiswa dan Paguyuban Daerah yang paling sesuai dengan
-              minat, bakat, dan karaktermu.
+              minat, bakat, dan karaktermuuu.
             </p>
 
             {/* CTA Buttons */}
