@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { motion, AnimatePresence } from "framer-motion";
 import { QuestionCard } from "@/components/quiz/QuestionCard";
 import { ProgressBar } from "@/components/quiz/ProgressBar";
 import {
@@ -379,21 +380,24 @@ export default function TestPage() {
         ? getBranchQuestionById(branchQuestionId)
         : null;
 
-  const remainingCategories = phase === "branch" ? branchCategories.length - branchCategoryIndex : 0;
+  const remainingCategories =
+    phase === "branch" ? branchCategories.length - branchCategoryIndex : 0;
   let estimatedRemainingSteps = 0;
   if (phase === "level1") {
     estimatedRemainingSteps = levelOneQuestions.length - history.length;
   } else {
     const currentCategoryRemaining = branchTotalSteps - branchStep;
-    const otherCategoriesRemaining = remainingCategories > 1 ? (remainingCategories - 1) * 1 : 0;
-    estimatedRemainingSteps = currentCategoryRemaining + otherCategoriesRemaining;
+    const otherCategoriesRemaining =
+      remainingCategories > 1 ? (remainingCategories - 1) * 1 : 0;
+    estimatedRemainingSteps =
+      currentCategoryRemaining + otherCategoriesRemaining;
   }
 
   const totalQuestions = history.length + estimatedRemainingSteps;
   const currentProgressIndex = history.length;
 
   return (
-    <div className="relative min-h-screen px-4 py-8 text-black">
+    <div className="relative min-h-screen overflow-x-hidden px-4 py-8 text-black">
       <div className="mx-auto w-full max-w-3xl">
         {/* Progress Bar */}
         <div className="relative z-10 mb-8 rounded-3xl border border-black/10 bg-white/80 p-4 shadow-sm backdrop-blur-xl">
@@ -405,18 +409,28 @@ export default function TestPage() {
         </div>
 
         {/* Question Card */}
-        {currentQuestion && (
-          <div className="relative z-10">
-            <QuestionCard
-              question={currentQuestion}
-              onAnswer={handleAnswer}
-              onBack={handleBack}
-              isLoading={isLoading}
-              currentIndex={currentProgressIndex}
-              totalQuestions={totalQuestions}
-            />
-          </div>
-        )}
+        <div className="relative z-10 min-h-[400px]">
+          <AnimatePresence mode="wait">
+            {currentQuestion && (
+              <motion.div
+                key={currentQuestion.id}
+                initial={{ opacity: 0, x: 30 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -30 }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+              >
+                <QuestionCard
+                  question={currentQuestion}
+                  onAnswer={handleAnswer}
+                  onBack={handleBack}
+                  isLoading={isLoading}
+                  currentIndex={currentProgressIndex}
+                  totalQuestions={totalQuestions}
+                />
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
 
         {/* <div className="relative z-10 mt-8 rounded-3xl border border-black/10 bg-white/80 p-6 shadow-sm backdrop-blur-xl">
           <h3 className="mb-4 text-base font-semibold text-black/90">

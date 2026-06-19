@@ -28,7 +28,7 @@ export function QuestionCard({
   currentIndex,
   totalQuestions,
 }: QuestionCardProps) {
-
+  const [selectedOptionId, setSelectedOptionId] = useState<string | null>(null);
   const optionStyles = [
     {
       base: "bg-gradient-to-b from-[#A8B81B] to-[#616F00] text-white rounded-[12px] shadow-[0_4px_4px_rgba(0,0,0,0.25)] hover:brightness-110 transition-all",
@@ -76,8 +76,15 @@ export function QuestionCard({
   };
 
   const handleSelectOption = (optionId: string) => {
+    if (isLoading || selectedOptionId) return;
+    
+    setSelectedOptionId(optionId);
     playClickSound();
-    onAnswer(optionId);
+    
+    setTimeout(() => {
+      onAnswer(optionId);
+      setSelectedOptionId(null);
+    }, 400);
   };
 
   const handleBackClick = () => {
@@ -101,13 +108,16 @@ export function QuestionCard({
       <div className="grid grid-cols-1 gap-4 mb-8">
         {question.options.map((option, index) => {
           const palette = optionStyles[index % optionStyles.length];
+          const isSelected = option.id === selectedOptionId;
+          const appliedStyle = isSelected ? palette.isSelected : palette.base;
+          
           return (
             <button
               key={option.id}
               type="button"
               onClick={() => handleSelectOption(option.id)}
-              disabled={isLoading}
-              className={`group relative flex w-full items-center gap-4 rounded-2xl border px-6 py-5 text-left transition-all active:scale-[0.98] backdrop-blur-sm ${palette.base} disabled:opacity-70 disabled:cursor-not-allowed`}
+              disabled={isLoading || selectedOptionId !== null}
+              className={`group relative flex w-full items-center gap-4 rounded-2xl border px-6 py-5 text-left transition-all active:scale-[0.98] backdrop-blur-sm ${appliedStyle} disabled:opacity-70 disabled:cursor-not-allowed`}
             >
               <div
                 className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/5 transition-all group-hover:scale-110 text-white/40`}
