@@ -7,6 +7,82 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { BiodataSchema, type Biodata } from "@/lib/schema";
 import { Button } from "@/components/ui/button";
 
+const FAKULTAS_JURUSAN: Record<string, string[]> = {
+  "Fakultas Pertanian": [
+    "Teknik Pertanian",
+    "Teknologi Pangan",
+    "Agribisnis",
+    "Agroteknologi",
+    "Proteksi Tanaman",
+  ],
+  "Fakultas Biologi": [
+    "Biologi",
+    "Mikrobiologi",
+    "Biologi Terapan",
+  ],
+  "Fakultas Ekonomi dan Bisnis": [
+    "Ekonomi Pembangunan",
+    "Manajemen",
+    "Akuntansi",
+    "Pendidikan Ekonomi",
+  ],
+  "Fakultas Peternakan": [
+    "Peternakan",
+  ],
+  "Fakultas Hukum": [
+    "Hukum",
+  ],
+  "Fakultas Ilmu Sosial dan Ilmu Politik": [
+    "Administrasi Publik",
+    "Ilmu Politik",
+    "Sosiologi",
+    "Ilmu Komunikasi",
+    "Hubungan Internasional",
+  ],
+  "Fakultas Kedokteran": [
+    "Pendidikan Dokter",
+    "Kedokteran Gigi",
+  ],
+  "Fakultas Teknik": [
+    "Teknik Elektro",
+    "Teknik Mesin",
+    "Teknik Sipil",
+    "Teknik Industri",
+    "Teknik Geologi",
+    "Informatika",
+    "Teknik Komputer",
+    "Arsitektur",
+    "Teknik Pertambangan",
+  ],
+  "Fakultas Ilmu-ilmu Kesehatan": [
+    "Kesehatan Masyarakat",
+    "Ilmu Gizi",
+    "Keperawatan",
+    "Farmasi",
+    "Pendidikan Jasmani",
+    "Pendidikan Kepelatihan Olahraga",
+  ],
+  "Fakultas Ilmu Budaya": [
+    "Sastra Indonesia",
+    "Sastra Inggris",
+    "Sastra Jepang",
+    "Pendidikan Bahasa Indonesia",
+    "Pendidikan Bahasa Inggris",
+    "Pendidikan Bahasa Jepang",
+  ],
+  "Fakultas Matematika dan Ilmu Pengetahuan Alam (MIPA)": [
+    "Matematika",
+    "Fisika",
+    "Kimia",
+    "Statistika",
+  ],
+  "Fakultas Perikanan dan Ilmu Kelautan": [
+    "Ilmu Kelautan",
+    "Manajemen Sumberdaya Perairan",
+    "Akuakultur",
+  ],
+};
+
 interface BiodataFormProps {
   onSubmit: (data: Biodata) => void;
   isLoading?: boolean;
@@ -20,6 +96,8 @@ export function BiodataForm({ onSubmit, isLoading = false }: BiodataFormProps) {
     register,
     handleSubmit,
     trigger,
+    watch,
+    setValue,
     formState: { errors },
   } = useForm<BiodataFormValues>({
     resolver: zodResolver(BiodataSchema),
@@ -27,6 +105,9 @@ export function BiodataForm({ onSubmit, isLoading = false }: BiodataFormProps) {
       is_kipk: false,
     },
   });
+
+  const selectedFakultas = watch("fakultas");
+  const availableJurusan = selectedFakultas ? FAKULTAS_JURUSAN[selectedFakultas] || [] : [];
 
   const handleNext = async (fieldsToValidate: (keyof BiodataFormValues)[]) => {
     const isValid = await trigger(fieldsToValidate);
@@ -174,22 +255,17 @@ export function BiodataForm({ onSubmit, isLoading = false }: BiodataFormProps) {
               </label>
               <select
                 id="fakultas"
-                {...register("fakultas")}
+                {...register("fakultas", {
+                  onChange: () => setValue("jurusan", ""),
+                })}
                 className="w-full px-4 py-3 border border-black/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-500/30 bg-black/5 text-black backdrop-blur-sm transition-all focus:bg-white appearance-none [&>option]:bg-white [&>option]:text-black"
               >
                 <option value="">-- Pilih Fakultas --</option>
-                <option value="Teknik">Teknik</option>
-                <option value="Pertanian">Pertanian</option>
-                <option value="Kesehatan">Kesehatan</option>
-                <option value="Kedokteran">Kedokteran</option>
-                <option value="Hukum">Hukum</option>
-                <option value="Ekonomi dan Bisnis">Ekonomi dan Bisnis</option>
-                <option value="Ilmu Sosial dan Ilmu Politik">
-                  Ilmu Sosial dan Ilmu Politik
-                </option>
-                <option value="Pendidikan dan Ilmu Perilaku">
-                  Pendidikan dan Ilmu Perilaku
-                </option>
+                {Object.keys(FAKULTAS_JURUSAN).map((fak) => (
+                  <option key={fak} value={fak}>
+                    {fak}
+                  </option>
+                ))}
               </select>
               {errors.fakultas && (
                 <p className="text-rose-500 text-xs font-medium mt-1.5 ml-1">
@@ -206,12 +282,19 @@ export function BiodataForm({ onSubmit, isLoading = false }: BiodataFormProps) {
               >
                 Jurusan/Program Studi *
               </label>
-              <input
+              <select
                 id="jurusan"
                 {...register("jurusan")}
-                placeholder="Masukkan jurusan/program studi"
-                className="w-full px-4 py-3 border border-black/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-500/30 bg-black/5 text-black placeholder:text-black/40 backdrop-blur-sm transition-all focus:bg-white"
-              />
+                disabled={!selectedFakultas || availableJurusan.length === 0}
+                className="w-full px-4 py-3 border border-black/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-500/30 bg-black/5 text-black backdrop-blur-sm transition-all focus:bg-white appearance-none disabled:opacity-50 disabled:cursor-not-allowed [&>option]:bg-white [&>option]:text-black"
+              >
+                <option value="">-- Pilih Jurusan --</option>
+                {availableJurusan.map((jur) => (
+                  <option key={jur} value={jur}>
+                    {jur}
+                  </option>
+                ))}
+              </select>
               {errors.jurusan && (
                 <p className="text-rose-500 text-xs font-medium mt-1.5 ml-1">
                   ⚠ {errors.jurusan.message}

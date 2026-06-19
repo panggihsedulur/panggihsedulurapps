@@ -305,7 +305,11 @@ function CarouselSection({
   );
 }
 
-export default function UkmPaguyubanCarouselSection({ className }: { className?: string }) {
+export default function UkmPaguyubanCarouselSection({
+  className,
+}: {
+  className?: string;
+}) {
   const ukmCards = useMemo(
     () => expandableCards.filter((card) => card.type === "UKM"),
     [],
