@@ -45,7 +45,7 @@ const buildDummyUkmFields = (ukm: UKM): UKM => {
 export const preFilteringRules = {
   agama: {
     Islam: ["UKKI", "USMAN"],
-    "Kristen Protestan": ["PMKP"],
+    "Kristen Protestan": [],
     "Kristen Katolik": ["UMAKA"],
   },
   kipk: {
@@ -402,16 +402,7 @@ const sosialUKMBase: UKM[] = [
     description: "Pramuka dengan fokus pada relawan dan pandu arah.",
     priority: 2,
   },
-  // Sosial Kemanusiaan
-  {
-    id: "ukm-111",
-    name: "Muda Bersinar",
-    title: "UKM Anti Narkoba Muda Bersinar",
-    category: "Sosial - Anti Narkoba",
-    description:
-      "Unit kegiatan mahasiswa yang berfokus pada edukasi, kampanye, dan pencegahan penyalahgunaan narkoba.",
-    priority: 1,
-  },
+
   // Sosial & Kepemimpinan Internasional
   {
     id: "ukm-110",
@@ -456,14 +447,7 @@ const kerohanianUKMBase: UKM[] = [
     description: "Pusat kegiatan dan syiar Islam bagi mahasiswa muslim.",
     priority: 1,
   },
-  {
-    id: "ukm-084",
-    name: "PMKP",
-    title: "Persekutuan Mahasiswa Kristen Protestan",
-    category: "Kerohanian",
-    description: "Wadah pembinaan mahasiswa Kristen Protestan.",
-    priority: 1,
-  },
+
   {
     id: "ukm-083",
     name: "UMAKA",

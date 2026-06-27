@@ -660,7 +660,7 @@ export const BRANCH_QUESTIONS: Record<string, Question> = {
         id: "sosial-l2-campaign",
         text: "Kampanye sosial, penyuluhan, dan pengabdian masyarakat.",
         weight: zeroWeight,
-        recommendations: ["Muda Bersinar", "AIESEC"],
+        recommendations: ["AIESEC"],
       },
     ],
   },
