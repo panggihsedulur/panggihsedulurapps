@@ -45,12 +45,9 @@ const buildDummyUkmFields = (ukm: UKM): UKM => {
 export const preFilteringRules = {
   agama: {
     Islam: ["UKKI", "USMAN"],
-    "Kristen Protestan": [],
     "Kristen Katolik": ["UMAKA"],
   },
-  kipk: {
-    true: ["Himabisi"],
-  },
+  kipkUKM: ["Himabisi"],
   fakultas: {
     Kesehatan: ["CIMSA"],
     Kedokteran: ["CIMSA"],
@@ -501,17 +498,18 @@ export const ukmByCategory = {
 /**
  * Helper: Cari UKM berdasarkan name/id
  */
+const allUKMFlattened = [
+  ...olahragaUKM,
+  ...seniUKM,
+  ...penaranUKM,
+  ...alamBebasUKM,
+  ...sosialUKM,
+  ...kerohanianUKM,
+  ...khususUKM,
+];
+
 export function getUKMById(id: string): UKM | undefined {
-  const allUKM = [
-    ...olahragaUKM,
-    ...seniUKM,
-    ...penaranUKM,
-    ...alamBebasUKM,
-    ...sosialUKM,
-    ...kerohanianUKM,
-    ...khususUKM,
-  ];
-  return allUKM.find((ukm) => ukm.id === id || ukm.name === id);
+  return allUKMFlattened.find((ukm) => ukm.id === id || ukm.name === id);
 }
 
 /**
@@ -530,14 +528,14 @@ export function getRecommendedUKM(
     const ukmList = ukmByCategory[kategori as keyof typeof ukmByCategory] || [];
     // Ambil top 2 UKM per kategori berdasarkan priority
     recommended.push(
-      ...ukmList.sort((a, b) => a.priority - b.priority).slice(0, 2),
+      ...[...ukmList].sort((a, b) => a.priority - b.priority).slice(0, 2),
     );
   }
 
   // Remove duplicates & sort by priority
   const uniqueUKM = Array.from(
     new Map(recommended.map((ukm) => [ukm.id, ukm])).values(),
-  );
+  ).sort((a, b) => a.priority - b.priority);
   return typeof limit === "number" ? uniqueUKM.slice(0, limit) : uniqueUKM;
 }
 
@@ -568,8 +566,8 @@ export function getCombinedRecommendations(
       ...preFilteringRules.agama[agama as keyof typeof preFilteringRules.agama],
     );
   }
-  if (is_kipk && preFilteringRules.kipk["true"]) {
-    preFiltered.push(...preFilteringRules.kipk["true"]);
+  if (is_kipk) {
+    preFiltered.push(...preFilteringRules.kipkUKM);
   }
   if (fakultas) {
     for (const key in preFilteringRules.fakultas) {
@@ -592,19 +590,23 @@ export function getCombinedRecommendations(
     .map((name) => getUKMById(name))
     .filter((ukm): ukm is UKM => ukm !== undefined);
 
-  // Prefer the most specific signal from quiz flow.
-  // If user answered branch questions, only use branch-based recommendations
-  // (plus biodata pre-filtering), without adding generic scoring fallback.
-  const combined =
-    branchRecommendedUKM.length > 0
-      ? [...branchRecommendedUKM, ...preFilteredUKM]
-      : preFilteredUKM.length > 0
-        ? [...preFilteredUKM]
-        : [...recommended];
+  // Prefer the most specific signal from quiz flow by putting it first.
+  // We merge all signals so that if branch recommendations are few,
+  // scoring recommendations still fill up the remaining slots up to the limit.
+  const combined = [
+    ...branchRecommendedUKM,
+    ...preFilteredUKM,
+    ...recommended
+  ];
+
+  // Fallback jika sama sekali tidak ada rekomendasi
+  if (combined.length === 0) {
+    combined.push(...getRecommendedUKM(["Olahraga", "Seni", "Penalaran"], 5));
+  }
   const uniqueIds = new Set<string>();
   return combined.filter((ukm) => {
     if (uniqueIds.has(ukm.id)) return false;
     uniqueIds.add(ukm.id);
     return true;
-  });
+  }).slice(0, 8);
 }

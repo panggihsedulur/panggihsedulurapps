@@ -968,7 +968,7 @@ const rawUkmAndPaguyubanData: ExpandableCardItem[] = [
     detailBody:
       "Football Club Unsoed (FC Unsoed) adalah Unit Kegiatan Mahasiswa yang menaungi minat dan bakat mahasiswa dalam olahraga sepak bola.",
     detailFooterTitle: "Nomor: 104/UND/DAGRI/BEM/III/2026",
-    name: "Football Club Unsoed",
+    name: "UFC",
     type: "UKM",
     logoUrl: "/UKM/FC_Unsoed/logo.webp",
     photoUrl: "/UKM/FC_Unsoed/foto.webp",
