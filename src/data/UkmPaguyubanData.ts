@@ -526,14 +526,14 @@ const rawUkmAndPaguyubanData: ExpandableCardItem[] = [
   {
     id: "pg-148",
     title: "HIMABUMI ",
-    src: "https://dummyimage.com/400x400/004d40/ffffff&text=Sumatera+Utara",
+    src: "https://dummyimage.com/400x400/004d40/ffffff&text=Sukabumi",
     description: "Himpunan Mahasiswa Sukabumi",
     category: "Sukabumi",
     detailTitle: "Tentang Himpunan Mahasiswa Sukabumi",
     detailBody:
       "Himpunan Mahasiswa Sukabumi Universitas Jenderal Soedirman (Himabumi Unsoed) merupakan paguyuban mahasiswa yang berasal dari Kota Sukabumi dan Kabupaten Sukabumi yang sedang menempuh pendidikan di Universitas Jenderal Soedirman. Himabumi merupakan wadah bagi para Mahasiswa Sukabumi untuk bersilaturahmi, bertukar pikiran, dan saling merangkul demi menciptakan rasa kekeluargaan yang erat.",
     detailFooterTitle: "Nomor: 148/UND/DAGRI/BEM/III/2026",
-    name: "Himpunan Mahasiswa Sumatera Utara",
+    name: "Himpunan Mahasiswa Sukabumi",
     type: "Paguyuban",
     logoUrl: "/paguyuban/HIMABUMI/logo.png",
     photoUrl: "/paguyuban/HIMABUMI/foto.png",
