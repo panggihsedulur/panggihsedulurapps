@@ -345,20 +345,20 @@ const rawUkmAndPaguyubanData: ExpandableCardItem[] = [
   },
   {
     id: "pg-138",
-    title: "KMTSP - Purwkoerto",
+    title: "KMTS-P",
     src: "https://dummyimage.com/400x400/004d40/ffffff&text=Tasikmalaya",
     description: "Paguyuban Mahasiswa Tasikmalaya",
     category: "Tasikmalaya",
     detailTitle: "Tentang Keluarga Mahasiswa Tasikmalaya Sukapura-Purwokerto",
     detailBody:
-      "Keluarga Mahasiswa Tasikmalaya Sukapura-Purwokerto atau sering disebut KMTSP. KMTSP sendiri merupakan satu-satunya organisasi Keluarga Mahasiswa Tasikmalaya di Purwokerto yang berstatus Koordinatif Keluarga Mahasiswa Jawa Barat (KMJB). Organisasi ini berisi mahasiswa-mahasiswa yang sedang melanjutkan studinya di universitas universitas yang ada di Purwokerto.",
+      "Keluarga Mahasiswa Tasikmalaya Sukapura-Purwokerto atau sering disebut KMTS-P. KMTS-P sendiri merupakan satu-satunya organisasi Keluarga Mahasiswa Tasikmalaya di Purwokerto yang berstatus Koordinatif Keluarga Mahasiswa Jawa Barat (KMJB). Organisasi ini berisi mahasiswa-mahasiswa yang sedang melanjutkan studinya di universitas universitas yang ada di Purwokerto.",
     detailFooterTitle: "Nomor: 138/UND/DAGRI/BEM/III/2026",
     name: "KM Tasikmalaya Sukapura-Purwokerto",
     type: "Paguyuban",
     logoUrl: "/paguyuban/KMTSP/logo.webp",
     photoUrl: "/paguyuban/KMTSP/foto.webp",
     contactPerson: "CP Humas",
-    contact: "085606090346 ",
+    contact: "0895619717590",
     instagram: "@kmts_purwokerto",
   },
   {
@@ -1096,7 +1096,7 @@ const rawUkmAndPaguyubanData: ExpandableCardItem[] = [
     category: "Sosial & Kepanduan",
     detailTitle: "Tentang Racana Soedirman",
     detailBody:
-      "Racana Soedirman adalah Unit Kegiatan Mahasiswa (UKM) di Universitas Jenderal Soedirman yang bergerak di bidang kepramukaan  sebagai wadah pramuka golongan pandega dan anggota pramuka calon pandega. Berdiri sejak Juni 1980 dengan nomor Gugus Depan 26.1953 - 26.1954, Racana Soedirman bergerak berdasarkan Prinsip Dasar dan Metode Kepramukaan yang berlandaskan Tri Satya dan Dasadarma serta Tridharma perguruan tinggi.",
+      "Racana Soedirman adalah Unit Kegiatan Mahasiswa (UKM) di Universitas Jenderal Soedirman yang bergerak di bidang kepramukaan sebagai wadah pembinaan bagi pramuka golongan pandega dan anggota pramuka calon pandega. Berdiri sejak Juni 1980 dengan nomor Gugus Depan 26.1953 - 26.1954, Racana Soedirman berfokus pada keselarasan Tri Satya dan Dasadarma serta Tridharma perguruan tinggi.",
     detailFooterTitle: "Nomor: 087/UND/DAGRI/BEM/III/2026",
     name: "Racana Soedirman",
     type: "UKM",

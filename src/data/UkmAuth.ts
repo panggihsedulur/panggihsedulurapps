@@ -349,7 +349,7 @@ export const ukmAuthData: UkmAuthEntry[] = [
     id: "pg-138",
     username: "kmtsp",
     password: "sukapurakmtsp2o26",
-    name: "KMTSP - Purwkoerto",
+    name: "KMTS-P",
   },
   {
     id: "pg-139",
