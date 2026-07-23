@@ -32,10 +32,16 @@ import {
 
 export default function DashboardClient({
   results,
+  authRole = "admin",
+  authUsername,
+  authUkmName,
 }: {
   results: StudentResult[];
+  authRole?: string;
+  authUsername?: string;
+  authUkmName?: string;
 }) {
-  const [activeTab, setActiveTab] = useState<"analytics" | "data">("analytics");
+  const [activeTab, setActiveTab] = useState<"analytics" | "data">(authRole === "ukm" ? "data" : "analytics");
 
   // Parse and group data
   const { groupedData, totalStudents, kipkStudents, topCategoriesData } =
@@ -66,6 +72,7 @@ export default function DashboardClient({
         } catch (e) {}
 
         recs.forEach((orgName) => {
+          if (authRole === "ukm" && orgName !== authUkmName) return;
           if (!map[orgName]) map[orgName] = [];
           map[orgName].push(student);
         });
@@ -141,22 +148,24 @@ export default function DashboardClient({
             Dashboards
           </div>
           <nav className="space-y-0.5">
-            {/* Active Analytics Tab */}
-            <button
-              onClick={() => setActiveTab("analytics")}
-              className={`w-full flex items-center justify-between px-3 py-2 text-sm rounded-lg ${activeTab === "analytics" ? "bg-gray-100 text-gray-900 font-medium" : "text-gray-600 hover:bg-gray-50"}`}
-            >
-              <div className="flex items-center gap-3">
-                <LineChart className="w-4 h-4" /> Kuisioner Analytics
-              </div>
-            </button>
+            {/* Active Analytics Tab - Hanya untuk Admin */}
+            {authRole === "admin" && (
+              <button
+                onClick={() => setActiveTab("analytics")}
+                className={`w-full flex items-center justify-between px-3 py-2 text-sm rounded-lg ${activeTab === "analytics" ? "bg-gray-100 text-gray-900 font-medium" : "text-gray-600 hover:bg-gray-50"}`}
+              >
+                <div className="flex items-center gap-3">
+                  <LineChart className="w-4 h-4" /> Kuisioner Analytics
+                </div>
+              </button>
+            )}
             {/* Active Data Tab */}
             <button
               onClick={() => setActiveTab("data")}
               className={`w-full flex items-center justify-between px-3 py-2 text-sm rounded-lg ${activeTab === "data" ? "bg-gray-100 text-gray-900 font-medium" : "text-gray-600 hover:bg-gray-50"}`}
             >
               <div className="flex items-center gap-3">
-                <Users className="w-4 h-4" /> Data Anak UKM
+                <Users className="w-4 h-4" /> Data Anak {authRole === "ukm" ? "Baru" : "UKM"}
               </div>
             </button>
           </nav>
@@ -209,20 +218,22 @@ export default function DashboardClient({
           </div>
 
           <div className="flex items-center gap-4">
-            <span className="text-sm font-medium text-purple-600 hidden sm:block cursor-pointer">
-              Get Pro
-            </span>
-            <div className="flex items-center gap-3 text-gray-500">
-              <Bell className="w-4 h-4 cursor-pointer hover:text-gray-900" />
-              <Moon className="w-4 h-4 cursor-pointer hover:text-gray-900" />
+            <div className="flex flex-col text-right hidden sm:flex">
+              <span className="text-sm font-bold text-gray-900">{authRole === "admin" ? "Panitia Pusat" : authUkmName}</span>
+              <span className="text-xs text-gray-500 capitalize">{authRole}</span>
             </div>
-            <div className="w-7 h-7 rounded-full bg-gray-200 overflow-hidden cursor-pointer ml-1">
-              <img
-                src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
-                alt="Profile"
-                className="w-full h-full object-cover"
-              />
-            </div>
+            
+            <form action="/login/actions" method="POST" className="m-0 p-0">
+              <button 
+                formAction={async () => {
+                  const { logoutAction } = await import("@/app/login/actions");
+                  await logoutAction();
+                }}
+                className="text-xs font-medium bg-red-50 text-red-600 px-3 py-1.5 rounded-md hover:bg-red-100 transition-colors"
+              >
+                Logout
+              </button>
+            </form>
           </div>
         </header>
 

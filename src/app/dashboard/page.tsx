@@ -1,9 +1,37 @@
 import { supabase } from "@/lib/supabase";
 import DashboardClient from "./DashboardClient";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
+import { getUKMById } from "@/data/UkmLogic";
+import { expandableCards } from "@/data/UkmPaguyubanData";
+
+import { ukmAuthData } from "@/data/UkmAuth";
 
 export const revalidate = 0; // Disable cache for this page so it always fetches latest
 
 export default async function DashboardPage() {
+  const cookieStore = await cookies();
+  const authRole = cookieStore.get("auth_role")?.value;
+  const authUsername = cookieStore.get("auth_username")?.value;
+  
+  if (!authRole) {
+    redirect("/login");
+  }
+
+  let exactSystemName = "";
+  if (authRole === "ukm" && authUsername) {
+    const authEntry = ukmAuthData.find(u => u.username === authUsername);
+    if (authEntry) {
+      const ukm = getUKMById(authEntry.id);
+      if (ukm) {
+        exactSystemName = ukm.name;
+      } else {
+        const pag = expandableCards.find(c => c.id === authEntry.id);
+        if (pag) exactSystemName = pag.name || pag.title;
+      }
+    }
+  }
+
   const { data, error } = await supabase
     .from("student_results")
     .select("*")
@@ -23,5 +51,12 @@ export default async function DashboardPage() {
     );
   }
 
-  return <DashboardClient results={data || []} />;
+  return (
+    <DashboardClient 
+      results={data || []} 
+      authRole={authRole}
+      authUsername={authUsername}
+      authUkmName={exactSystemName}
+    />
+  );
 }
