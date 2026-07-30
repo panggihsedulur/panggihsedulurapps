@@ -151,6 +151,8 @@ export default function Panitia() {
                             src={src}
                             alt={`${divisi.name} card ${i + 1}`}
                             fill
+                            sizes="720px"
+                            quality={60}
                             className="object-cover"
                           />
                         </div>
