@@ -5,81 +5,55 @@ export default function Panitia() {
   const divisions = [
     {
       name: "Steering Commite",
-      images: [
-        "https://images.unsplash.com/photo-1480074568708-e7b720bb3f09?q=80&w=500&auto=format",
-        "https://images.unsplash.com/photo-1449844908441-8829872d2607?q=80&w=500&auto=format",
-        "https://images.unsplash.com/photo-1452626212852-811d58933cae?q=80&w=500&auto=format",
-        "https://images.unsplash.com/photo-1572120360610-d971b9d7767c?q=80&w=500&auto=format",
-      ],
+      images: Array.from({ length: 2 }, (_, i) => `/panitia/sc${2 - i}.webp`),
     },
     {
       name: "Project Officer",
-      images: [
-        "https://images.unsplash.com/photo-1452626212852-811d58933cae?q=80&w=500&auto=format",
-        "https://images.unsplash.com/photo-1572120360610-d971b9d7767c?q=80&w=500&auto=format",
-      ],
+      images: ["/panitia/po.webp"],
     },
     {
       name: "Divisi Sekretaris",
-      images: [
-        "https://images.unsplash.com/photo-1480074568708-e7b720bb3f09?q=80&w=500&auto=format",
-        "https://images.unsplash.com/photo-1452626212852-811d58933cae?q=80&w=500&auto=format",
-      ],
+      images: Array.from({ length: 3 }, (_, i) => `/panitia/se${3 - i}.webp`),
     },
     {
       name: "Divisi IT",
-      images: [
-        "https://images.unsplash.com/photo-1449844908441-8829872d2607?q=80&w=500&auto=format",
-        "https://images.unsplash.com/photo-1572120360610-d971b9d7767c?q=80&w=500&auto=format",
-      ],
+      images: Array.from({ length: 5 }, (_, i) => `/panitia/it${5 - i}.webp`),
     },
     {
       name: "Divisi Bendahara",
-      images: [
-        "https://images.unsplash.com/photo-1480074568708-e7b720bb3f09?q=80&w=500&auto=format",
-      ],
+      images: Array.from({ length: 3 }, (_, i) => `/panitia/be${3 - i}.webp`),
     },
     {
       name: "Divisi Humpub",
-      images: [
-        "https://images.unsplash.com/photo-1452626212852-811d58933cae?q=80&w=500&auto=format",
-      ],
+      images: Array.from({ length: 24 }, (_, i) => `/panitia/hu${24 - i}.webp`),
     },
     {
       name: "Divisi Acara",
-      images: [
-        "https://images.unsplash.com/photo-1449844908441-8829872d2607?q=80&w=500&auto=format",
-      ],
+      images: Array.from({ length: 13 }, (_, i) => `/panitia/ac${13 - i}.webp`),
     },
     {
       name: "Divisi Usdakom",
-      images: [
-        "https://images.unsplash.com/photo-1572120360610-d971b9d7767c?q=80&w=500&auto=format",
-      ],
+      images: Array.from({ length: 10 }, (_, i) => `/panitia/us${10 - i}.webp`),
     },
     {
       name: "Divisi ATP",
-      images: [
-        "https://images.unsplash.com/photo-1480074568708-e7b720bb3f09?q=80&w=500&auto=format",
-      ],
+      images: Array.from({ length: 12 }, (_, i) => `/panitia/at${12 - i}.webp`),
     },
     {
       name: "Divisi Sponsorship",
-      images: [
-        "https://images.unsplash.com/photo-1452626212852-811d58933cae?q=80&w=500&auto=format",
-      ],
+      images: Array.from({ length: 10 }, (_, i) => `/panitia/sp${10 - i}.webp`),
     },
     {
       name: "Divisi Lapangan",
-      images: [
-        "https://images.unsplash.com/photo-1449844908441-8829872d2607?q=80&w=500&auto=format",
-      ],
+      images: Array.from({ length: 14 }, (_, i) => `/panitia/la${14 - i}.webp`),
     },
     {
       name: "Divisi Medis",
-      images: [
-        "https://images.unsplash.com/photo-1572120360610-d971b9d7767c?q=80&w=500&auto=format",
-      ],
+      images: Array.from({ length: 7 }, (_, i) => `/panitia/me${7 - i}.webp`),
+    },
+    {
+      name: "Divisi Desain & Dokumentasi",
+      images: Array.from({ length: 12 }, (_, i) => `/panitia/dd${12 - i}.webp`),
     },
   ];
 
@@ -141,13 +115,18 @@ export default function Panitia() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-x-8 gap-y-20 justify-items-center">
             {divisions.map((divisi, index) => {
               let gridClass = "sm:col-span-1 lg:col-span-2";
+              const itemsInLastRow = (divisions.length - 2) % 3;
+
               if (index < 2) {
                 gridClass = "sm:col-span-1 lg:col-span-3";
-              } else if (
-                index === divisions.length - 1 &&
-                (divisions.length - 2) % 3 === 1
-              ) {
+              } else if (itemsInLastRow === 1 && index === divisions.length - 1) {
                 gridClass = "sm:col-span-1 lg:col-span-2 lg:col-start-3";
+              } else if (itemsInLastRow === 2 && index === divisions.length - 2) {
+                gridClass = "sm:col-span-1 lg:col-span-2 lg:col-start-2";
+              }
+
+              if (divisions.length % 2 === 1 && index === divisions.length - 1) {
+                gridClass = gridClass.replace("sm:col-span-1", "sm:col-span-2");
               }
 
               return (
@@ -158,7 +137,7 @@ export default function Panitia() {
                   <h3 className="text-2xl font-semibold text-[#5aa0ac]">
                     {divisi.name}
                   </h3>
-                  <div className="relative w-64 h-80 sm:w-72 sm:h-96">
+                  <div className="relative w-64 sm:w-72 aspect-[2079/3213]">
                     <Stack
                       randomRotation={true}
                       sensitivity={200}
