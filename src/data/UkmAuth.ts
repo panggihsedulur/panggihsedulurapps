@@ -40,7 +40,7 @@ export const ukmAuthData: UkmAuthEntry[] = [
   {
     id: "ukm-105",
     username: "taekwondo",
-    password: "pangsudsukses",
+    password: "TAEKWONDO",
     name: "Taekwondo",
   },
   {
@@ -52,7 +52,7 @@ export const ukmAuthData: UkmAuthEntry[] = [
   {
     id: "ukm-091",
     username: "merpatiputih",
-    password: "pangsudsukses",
+    password: "kepakansayap25",
     name: "Merpati Putih",
   },
   {
@@ -142,7 +142,7 @@ export const ukmAuthData: UkmAuthEntry[] = [
   {
     id: "ukm-095",
     username: "sef",
-    password: "pangsudsukses",
+    password: "SEFUNSOED79",
     name: "SEF",
   },
   {
@@ -214,13 +214,13 @@ export const ukmAuthData: UkmAuthEntry[] = [
   {
     id: "ukm-086",
     username: "usman",
-    password: "pangsudsukses",
+    password: "Usman!Sukses2026",
     name: "USMAN",
   },
   {
     id: "ukm-085",
     username: "ukki",
-    password: "pangsudsukses",
+    password: "ukkiunsoed2026",
     name: "UKKI",
   },
   {
@@ -232,7 +232,7 @@ export const ukmAuthData: UkmAuthEntry[] = [
   {
     id: "ukm-082",
     username: "himabisi",
-    password: "pangsudsukses",
+    password: "HimabisiKIPK2026",
     name: "Himabisi",
   },
 
@@ -270,7 +270,7 @@ export const ukmAuthData: UkmAuthEntry[] = [
   {
     id: "pg-125",
     username: "himaadipatie",
-    password: "pangsudsukses",
+    password: "himadiwdiwkng01*",
     name: "Hima Adipati Ewangga Kuningan",
   },
   {
@@ -312,7 +312,7 @@ export const ukmAuthData: UkmAuthEntry[] = [
   {
     id: "pg-132",
     username: "ikatanbanjarnegara",
-    password: "pangsudsukses",
+    password: "Iniakunimbaraunsoed26",
     name: "Ikatan Mahasiswa Banjarnegara",
   },
   {
@@ -372,7 +372,7 @@ export const ukmAuthData: UkmAuthEntry[] = [
   {
     id: "pg-142",
     username: "himas",
-    password: "pangsudsukses",
+    password: "himasunsoed.22",
     name: "HIMAS",
   },
   {
