@@ -1061,7 +1061,7 @@ const rawUkmAndPaguyubanData: ExpandableCardItem[] = [
     name: "Aquatik",
     type: "UKM",
     logoUrl: "/UKM/aquatik/logo.webp",
-    photoUrl: "/UKM/aquatik/foto.webp",
+    photoUrl: "/UKM/aquatik/logo.webp",
     contactPerson: "CP Humas",
     contact: "08xx-xxxx-xxxx",
     instagram: "@aquatik.unsoed",
