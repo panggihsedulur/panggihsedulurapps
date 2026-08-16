@@ -207,6 +207,9 @@ export function getCombinedRecommendationObjects(
   branchRecommendations: string[] = [],
   limit?: number,
 ): UKM[] {
+  // asal_daerah TIDAK diteruskan ke getCombinedRecommendations karena fungsi
+  // tersebut (di UkmLogic.ts) tidak menangani Paguyuban. Paguyuban di-inject
+  // secara terpisah melalui paguyubanMatch di bawah berdasarkan asal_daerah.
   const combined = getCombinedRecommendations(
     topKategori,
     agama,

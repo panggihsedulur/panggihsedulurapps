@@ -123,17 +123,18 @@ export default function TestPage() {
 
   const proceedToNextBranchOrSubmit = async (
     mergedRecommendations: string[],
+    currentCategories: Kategori[],
+    currentCategoryIndex: number,
+    skorToSubmit: Record<Kategori, number>,
+    dominant: Kategori | null,
   ) => {
-    const categories = branchCategories;
-    for (let i = branchCategoryIndex + 1; i < categories.length; i += 1) {
-      if (startBranchForCategory(categories[i])) {
+    for (let i = currentCategoryIndex + 1; i < currentCategories.length; i += 1) {
+      if (startBranchForCategory(currentCategories[i])) {
         setBranchCategoryIndex(i);
         return;
       }
     }
 
-    const skorToSubmit = finalSkorForSubmit ?? skor;
-    const dominant = categories[0] ?? dominantCategory;
     await handleSubmitQuiz(skorToSubmit, dominant, mergedRecommendations);
   };
 
@@ -300,7 +301,13 @@ export default function TestPage() {
       return;
     }
 
-    await proceedToNextBranchOrSubmit(mergedRecommendations);
+    await proceedToNextBranchOrSubmit(
+      mergedRecommendations,
+      branchCategories,
+      branchCategoryIndex,
+      finalSkorForSubmit ?? skor,
+      branchCategories[0] ?? dominantCategory,
+    );
   };
 
   const handleAnswer = async (optionId: string) => {

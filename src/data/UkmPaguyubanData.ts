@@ -1084,6 +1084,24 @@ const rawUkmAndPaguyubanData: ExpandableCardItem[] = [
     contact: "081000000000",
     instagram: "@panggihsedulur",
   },
+  {
+    id: "ukm-122",
+    title: "Gateball",
+    src: "/UKM/GATEBALL/logo.png",
+    description: "UKM Gateball Universitas Jenderal Soedirman",
+    category: "Olahraga",
+    detailTitle: "Tentang UKM Gateball Unsoed",
+    detailBody:
+      "Unit Kegiatan Mahasiswa (UKM) Gateball Universitas Jenderal Soedirman merupakan organisasi kemahasiswaan di bidang olahraga yang berfungsi sebagai wadah pengembangan bakat mahasiswa. UKM ini membuka kesempatan bagi mahasiswa untuk berpartisipasi dalam berbagai kompetisi guna memperkuat semangat sportivitas serta kerja sama tim.",
+    detailFooterTitle: "Nomor: 122/UND/DAGRI/BEM/III/2026",
+    name: "Gateball",
+    type: "UKM",
+    logoUrl: "/UKM/GATEBALL/logo.png",
+    photoUrl: "/UKM/GATEBALL/logo.png",
+    contactPerson: "Cahya",
+    contact: "0882003256313",
+    instagram: "@ukmgateballunsoed",
+  },
 
   // ==========================================
   // KATEGORI: SOSIAL, LINGKUNGAN & ALAM BEBAS

@@ -416,6 +416,12 @@ export const BRANCH_QUESTIONS: Record<string, Question> = {
         weight: zeroWeight,
         recommendations: ["Petanque"],
       },
+      {
+        id: "olahraga-l2-gateball",
+        text: "Aku suka olahraga tim berbasis presisi menggunakan mallet dan bola seperti gateball.",
+        weight: zeroWeight,
+        recommendations: ["Gateball"],
+      },
     ],
   },
   "olahraga-l3-team": {

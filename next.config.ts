@@ -36,6 +36,7 @@ const nextConfig: NextConfig = {
         hostname: "svgl.app",
       },
     ],
+    qualities: [75, 80],
   },
 };
 

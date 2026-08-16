@@ -27,8 +27,10 @@ export const daerahToProvinsi: Record<string, string> = {
   Ciamis: "Jawa Barat",
   Cirebon: "Jawa Barat",
   Indramayu: "Jawa Barat",
+  Karawang: "Jawa Barat",
   Kuningan: "Jawa Barat",
   Majalengka: "Jawa Barat",
+  Sukabumi: "Jawa Barat",
   Tasikmalaya: "Jawa Barat",
 
   // Jawa Tengah

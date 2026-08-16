@@ -203,6 +203,14 @@ const olahragaUKMBase: UKM[] = [
     description: "Olahraga lempar bola logam dengan presisi dan strategi.",
     priority: 1,
   },
+  {
+    id: "ukm-122",
+    name: "Gateball",
+    title: "UKM Gateball Unsoed",
+    category: "Olahraga - Lainnya",
+    description: "Olahraga tim berbasis presisi dan kerja sama menggunakan mallet dan bola.",
+    priority: 2,
+  },
 ];
 
 export const olahragaUKM = olahragaUKMBase.map(buildDummyUkmFields);
