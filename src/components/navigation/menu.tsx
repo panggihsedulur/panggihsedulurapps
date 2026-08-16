@@ -33,6 +33,10 @@ const menuItems = [
     title: "Panitia",
     href: "/panitia",
   },
+  {
+    title: "Login",
+    href: "/login",
+  },
 ];
 
 const socialLinks = [
