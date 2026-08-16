@@ -14,6 +14,7 @@ interface Testimonial {
   name: string;
   designation: string;
   src: string;
+  previewLimit?: number;
 }
 interface Colors {
   name?: string;
@@ -70,6 +71,7 @@ export const CircularTestimonials = ({
   const [hoverPrev, setHoverPrev] = useState(false);
   const [hoverNext, setHoverNext] = useState(false);
   const [containerWidth, setContainerWidth] = useState(1200);
+  const [isExpanded, setIsExpanded] = useState(false);
 
   const imageContainerRef = useRef<HTMLDivElement>(null);
   const autoplayIntervalRef = useRef<NodeJS.Timeout | null>(null);
@@ -119,12 +121,14 @@ export const CircularTestimonials = ({
   // Navigation handlers
   const handleNext = useCallback(() => {
     setActiveIndex((prev) => (prev + 1) % testimonialsLength);
+    setIsExpanded(false);
     if (autoplayIntervalRef.current) clearInterval(autoplayIntervalRef.current);
   }, [testimonialsLength]);
   const handlePrev = useCallback(() => {
     setActiveIndex(
       (prev) => (prev - 1 + testimonialsLength) % testimonialsLength,
     );
+    setIsExpanded(false);
     if (autoplayIntervalRef.current) clearInterval(autoplayIntervalRef.current);
   }, [testimonialsLength]);
 
@@ -217,14 +221,27 @@ export const CircularTestimonials = ({
                   {testi.designation}
                 </p>
                 <div className="quote" style={{ fontSize: fontSizeQuote }}>
-                  {testi.quote.map((paragraph, paragraphIndex) => (
+                  {testi.quote
+                    .slice(0, testi.previewLimit || 4)
+                    .map((paragraph, paragraphIndex) => (
+                      <span
+                        key={paragraphIndex}
+                        style={{ display: "block", marginBottom: "1rem" }}
+                      >
+                        {paragraph}
+                      </span>
+                    ))}
+                  {testi.quote.length > (testi.previewLimit || 4) && (
                     <span
-                      key={paragraphIndex}
-                      style={{ display: "block", marginBottom: "1rem" }}
+                      style={{
+                        display: "block",
+                        marginBottom: "1rem",
+                        color: "transparent",
+                      }}
                     >
-                      {paragraph}
+                      Selengkapnya
                     </span>
-                  ))}
+                  )}
                 </div>
               </div>
             ))}
@@ -254,43 +271,49 @@ export const CircularTestimonials = ({
                   >
                     {activeTestimonial.designation}
                   </p>
-                  <motion.p
+                  <div
                     className="quote"
                     style={{ color: colorTestimony, fontSize: fontSizeQuote }}
                   >
-                    {activeTestimonial.quote.map(
-                      (paragraph, paragraphIndex) => (
-                        <span
-                          key={paragraphIndex}
-                          style={{ display: "block", marginBottom: "1rem" }}
-                        >
-                          {paragraph.split(" ").map((word, i) => (
-                            <motion.span
-                              key={`${paragraphIndex}-${i}`}
-                              initial={{
-                                filter: "blur(10px)",
-                                opacity: 0,
-                                y: 5,
-                              }}
-                              animate={{
-                                filter: "blur(0px)",
-                                opacity: 1,
-                                y: 0,
-                              }}
-                              transition={{
-                                duration: 0.22,
-                                ease: "easeInOut",
-                                delay: 0.025 * i,
-                              }}
-                              style={{ display: "inline-block" }}
-                            >
-                              {word}&nbsp;
-                            </motion.span>
-                          ))}
-                        </span>
-                      ),
+                    {(isExpanded
+                      ? activeTestimonial.quote
+                      : activeTestimonial.quote.slice(
+                          0,
+                          activeTestimonial.previewLimit || 4,
+                        )
+                    ).map((paragraph, paragraphIndex) => (
+                      <span
+                        key={paragraphIndex}
+                        style={{ display: "block", marginBottom: "1rem" }}
+                      >
+                        {paragraph}
+                        {!isExpanded &&
+                          paragraphIndex ===
+                            (activeTestimonial.previewLimit || 4) - 1 &&
+                          activeTestimonial.quote.length >
+                            (activeTestimonial.previewLimit || 4) &&
+                          "..."}
+                      </span>
+                    ))}
+                    {activeTestimonial.quote.length >
+                      (activeTestimonial.previewLimit || 4) && (
+                      <button
+                        onClick={() => setIsExpanded(!isExpanded)}
+                        style={{
+                          background: "none",
+                          border: "none",
+                          padding: 0,
+                          color: "#3A7989",
+                          fontWeight: "bold",
+                          cursor: "pointer",
+                          fontSize: "0.9em",
+                          textDecoration: "underline",
+                        }}
+                      >
+                        {isExpanded ? "Tutup" : "Selengkapnya"}
+                      </button>
                     )}
-                  </motion.p>
+                  </div>
                 </motion.div>
               </AnimatePresence>
             </div>
@@ -437,30 +460,60 @@ export default CircularTestimonials;
 const testimonials = [
   {
     quote: [
-      "Selamat datang di keluarga besar Panggih Sedulur 2026! Sebagai mahasiswa, perjalanan kita di kampus tentu tidak hanya sebatas ruang kelas dan tugas akademik. Oleh karena itu, kami menghadirkan Panggih Sedulur sebagai ruang kebersamaan yang hangat dan inklusif untuk saling mengenal, berbagi cerita, serta membangun jejaring yang luas. Harapan kami, melalui wadah ini, Anda bisa merasakan langsung suasana yang ramah, guyub, dan penuh semangat gotong royong di setiap pertemuan, sekaligus menemukan keluarga baru yang akan senantiasa mendukung langkah adaptasi dan eksplorasi Anda di lingkungan kampus tercinta ini.",
-      "Lebih dari sekadar ajang pengenalan, melalui setiap rangkaian kegiatan di sini, kami memiliki komitmen kuat untuk menumbuhkan rasa bangga dan kepedulian yang mendalam terhadap komunitas. Panggih Sedulur dirancang untuk memperluas kesempatan kolaborasi tanpa batas lintas UKM dan Paguyuban Daerah, menyatukan berbagai minat dan bakat menjadi sebuah harmoni. Kami mengucapkan terima kasih yang sebesar-besarnya karena Anda telah bersedia menjadi bagian penting dari perjalanan sejarah ini. Mari kita melangkah bersama, tumbuh beriringan, dan menghasilkan karya-karya nyata demi mewujudkan lingkungan kampus UNSOED yang inklusif, prestatif, dan memberikan dampak positif bagi masyarakat luas.",
+      "Menemukan Ruang, Menemukan Kawan, Menemukan Jalan Perjuangan.",
+      "Selamat datang di Panggih Sedulur.",
+      "Di Universitas Jenderal Soedirman, menjadi mahasiswa bukan sekadar tentang datang ke ruang kelas, mengejar nilai, lalu menunggu hari wisuda. Menjadi mahasiswa adalah tentang menemukan siapa diri kita, dengan siapa kita bertumbuh, dan untuk apa ilmu yang kita miliki kelak digunakan.",
+      "Karena itu, Panggih Sedulur hadir bukan sekadar sebagai etalase Unit Kegiatan Mahasiswa dan Paguyuban Mahasiswa Daerah. Panggih sedulur adalah ruang perjumpaan, tempat mahasiswa menemukan gagasan, kegelisahan, keberanian, dan mungkin juga jalan hidupnya.",
+      "Kepada seluruh mahasiswa universitas Jenderal Soedirman, jangan datang ke kampus hanya untuk menjadi penonton. Datanglah untuk mengambil peran.",
+      "Temukan ruang yang membuatmu berani berbicara. Temukan platform yang membuatmu belajar bekerja bersama. Temukan organisasi yang mengajarkanmu bertanggung jawab. Temukan kawan yang membuatmu tumbuh, bahkan pada saat kalian berbeda pandangan.",
+      "Masuklah ke sebuah ruang karena kamu ingin bertumbuh dan memberi arti.",
+      "Semoga di Panggih Sedulur hari ini kalian bukan hanya menemukan sebuah UKM. Bisa jadi kamu menemukan paguyuban yang terasa seperti rumah. Tapi bukan tidak mungkin, dari sebuah perjumpaan sederhana inilah kamu menemukan sahabat seperjalanan, dan pilihan yang akan kalian tentukan.",
+      "Selamat menemukan ruangmu.",
+      "Selamat menemukan kawanmu.",
+      "Selamat menemukan jalanmu.",
+      "HIDUP MAHASISWA!",
     ],
     name: "Azza Febra Pramudika",
     designation: "Presiden BEM UNSOED 2026",
     src: "./azza.webp",
+    previewLimit: 4,
   },
   {
     quote: [
-      "Kementerian Dalam Negeri BEM UNSOED percaya bahwa setiap mahasiswa memiliki potensi, minat, dan bakat yang luar biasa besar untuk terus dikembangkan dan diwujudkan dalam bentuk karya nyata. Memahami hal tersebut, Panggih Sedulur hadir dan diinisiasi sebagai sebuah 'rumah' bersama yang aman dan suportif bagi kita semua. Di rumah inilah kita bisa saling mendukung kreativitas, memberikan ruang eksplorasi dan pembelajaran yang seluas-luasnya, sehingga setiap ide brilian—sekecil apa pun itu—dapat dipupuk dan bertumbuh subur menjadi sebuah aksi nyata yang membawa manfaat bagi banyak orang.",
-      "Untuk mewujudkan visi tersebut, mari kita bersama-sama menjaga nilai-nilai kebersamaan dan persaudaraan ini dengan senantiasa mengedepankan rasa saling menghargai. Mari perkuat kolaborasi antarmahasiswa, menjaga iklim komunikasi yang sehat dan konstruktif, serta selalu membuka pintu lebar-lebar bagi lahirnya inovasi dan inisiatif baru. Kami sangat berharap bahwa partisipasi aktif dan kehadiran Anda di sini tidak hanya sekadar menggugurkan kewajiban, tetapi juga mampu membawa inspirasi baru, menebarkan energi positif ke sekitar, serta mengobarkan semangat pengabdian dan pelayanan yang tulus untuk memajukan komunitas kampus kita.",
+      "Assalamu’alaikum Warahmatullahi Wabarakatuh, Shalom, Om Swastiastu, Namo Buddhaya, Salam Kebajikan, dan Salam Sejahtera Bagi Kita Semua.",
+      "Halo, Sedulur!",
+      "Universitas Jenderal Soedirman adalah tempat di mana ribuan mimpi bertemu, bertumbuh, dan membentuk identitas. Bagi kalian para mahasiswa Unsoed atau mahasiswa baru, kami memahami bahwa fase ini seringkali mendatangkan rasa bimbang atau disorientasi dalam memahami ekosistem kampus. Oleh karena itu, Kementerian Dalam Negeri BEM Unsoed hadir membawa solusi melalui Panggih Sedulur 2026.",
+      "Dalam Panggih Sedulur 2026, kami hadir sebagai wadah penghubung dan ruang perjumpaan bagi teman-teman mahasiswa baru maupun aktif untuk mengenal lebih dekat berbagai Unit Kegiatan Mahasiswa (UKM) dan Paguyuban yang ada di lingkungan Universitas Jenderal Soedirman. Di sinilah tempat di mana minat, bakat, serta ikatan kekeluargaan berpadu, membentuk warna dan energi positif. Kami ingin memastikan setiap mahasiswa mendapatkan kesempatan yang sama, tanpa terkecuali, untuk berekspresi dan berproses secara inklusif di lingkungan yang ramah.",
+      "Mari kita jadikan Panggih Sedulur 2026 sebagai titik awal kolaborasi yang memperkuat sinergi dan solidaritas antar lembaga mahasiswa. Selamat menjelajah, selamat menemukan keluarga baru, dan selamat merayakan kebersamaan di Universitas Negeri Jenderal Sudirman!",
+      "Hidup Mahasiswa!",
+      "Hidup Kesinergian Lembaga Mahasiswa!",
+      "Salam hangat,",
+      "[Rosmay Diana]",
+      "Menteri Dalam Negeri BEM Unsoed 2026",
     ],
     name: "Rosmay Diana",
     designation: "Menteri Dalam Negeri BEM UNSOED 2026",
     src: "./rosmay_diana.webp",
+    previewLimit: 3,
   },
   {
     quote: [
-      "Halo, Sedulur semua! Mewakili seluruh panitia, saya ingin menyampaikan rasa terima kasih yang tak terhingga atas dukungan dan antusiasme Anda untuk Panggih Sedulur 2026 di setiap langkah persiapan hingga pelaksanaannya. Perjalanan dan kebersamaan kita ini sejak awal dibangun dan dilandasi oleh semangat kekeluargaan untuk saling menolong, merangkul, dan menjaga erat tali silaturahmi. Misi utama kami adalah memastikan bahwa setiap mahasiswa baru maupun mahasiswa aktif di UNSOED merasa diterima dengan tangan terbuka, memiliki 'tempat berpulang', dan menemukan ruang yang tepat untuk bertumbuh sesuai dengan passion mereka masing-masing.",
-      "Sebagai pelaksana, kami telah merancang serangkaian program dengan penuh pertimbangan dan harapan agar setiap kegiatan yang disajikan dapat memberikan manfaat yang nyata dan tepat sasaran. Tidak hanya berfokus pada ranah pengembangan hardskill dan softskill individu, tetapi juga menyentuh aspek sosial melalui pengabdian kepada masyarakat sekitar. Perjalanan ini baru saja dimulai. Oleh karena itu, ayo kita terus bergandengan tangan, satukan visi dan misi demi menciptakan kebaikan bersama, dan mari ukir cerita perjalanan kolaborasi yang jauh lebih kuat, seru, dan tak terlupakan di Panggih Sedulur tahun ini!",
+      "Assalamu’alaikum Warahmatullahi Wabarakatuh",
+      "Halo, Sedulur!",
+      "Bagi aku, Panggih Sedulur 2026 adalah tentang menemukan ruang dan orang-orang yang membuat perjalanan di kampus menjadi lebih berarti. Melalui semangat Campus Playground, tahun ini Panggih Sedulur hadir untuk memberikan ruang bagi mahasiswa untuk mengeksplorasi minat dan bakat, mencoba hal baru, serta menemukan orang-orang yang memiliki semangat dan ketertarikan yang sama.",
+      "Di balik semua itu, ada begitu banyak orang yang telah memberikan waktu, tenaga, pikiran, dan hatinya untuk perjalanan ini. Untuk seluruh panitia, SC, PH, dan koordinator, terima kasih sudah mau berjalan bersama, saling membantu, dan terus memberikan yang terbaik sampai sejauh ini. Terima kasih khusus untuk May dan Rahes selaku Steering Committee, serta Jean, Nitya, Defani, Sulthon, Rambu, Zharfan, Rissa, Najmi, Alma, Caca, dan Sovia yang telah membersamai dan menjaga setiap bagian dari perjalanan Panggih Sedulur 2026. Terima kasih juga untuk seluruh UKM dan Paguyuban yang telah berpartisipasi, serta sponsor dan media partner yang telah memberikan dukungan untuk Panggih Sedulur tahun ini.",
+      "Special thanks untuk Faada Fitrazaky, yang telah menjadi bagian awal dari perjalanan Panggih Sedulur 2026 dan memperkenalkan gagasan Campus Playground yang kemudian kami lanjutkan bersama. Terima kasih untuk setiap pemikiran, waktu, dan jejak yang telah ditinggalkan. Menjadi bagian dari perjalanan yang sudah kamu mulai adalah sebuah kehormatan bagiku. Terima kasih juga untuk Kementerian Dalam Negeri BEM Unsoed dan Ditjen Paguyuban yang telah memberikan ruang dan kepercayaan bagi Panggih Sedulur untuk berjalan hingga hari ini.",
+      "Untuk semua yang telah menjadi bagian dari perjalanan ini, terima kasih sudah memilih untuk berjalan bersama. Semoga apa yang kita bangun bersama tidak hanya menjadi sebuah acara, tetapi menjadi cerita baik yang suatu hari nanti akan kita ingat dengan senyuman dan rasa bangga.",
+      "Dan untuk setiap orang yang datang ke Panggih Sedulur, semoga kalian menemukan ruang untuk bertumbuh, mencoba, dan menjadi diri sendiri, serta menemukan orang-orang yang membuat perjalanan kalian terasa lebih berarti.",
+      "Find Your Playground, Find Your People.",
+      "Salam hangat,",
+      "[Jenita Eka Lestari]",
+      "Project Officer Panggih Sedulur 2026",
     ],
-    name: "Fada",
+    name: "Jenita Eka Lestari",
     designation: "Project Officer Panggih Sedulur 2026",
-    src: "./FAADA_FITRAZAKY.webp",
+    src: "./jeni.webp",
+    previewLimit: 3,
   },
 ];
 

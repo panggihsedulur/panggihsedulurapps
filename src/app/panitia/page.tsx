@@ -52,7 +52,7 @@ export default function Panitia() {
       images: Array.from({ length: 7 }, (_, i) => `/panitia/me${7 - i}.webp`),
     },
     {
-      name: "Divisi Desain & Dokumentasi",
+      name: "Desain Dokumentasi & Dekorasi",
       images: Array.from({ length: 12 }, (_, i) => `/panitia/dd${12 - i}.webp`),
     },
   ];
@@ -119,13 +119,22 @@ export default function Panitia() {
 
               if (index < 2) {
                 gridClass = "sm:col-span-1 lg:col-span-3";
-              } else if (itemsInLastRow === 1 && index === divisions.length - 1) {
+              } else if (
+                itemsInLastRow === 1 &&
+                index === divisions.length - 1
+              ) {
                 gridClass = "sm:col-span-1 lg:col-span-2 lg:col-start-3";
-              } else if (itemsInLastRow === 2 && index === divisions.length - 2) {
+              } else if (
+                itemsInLastRow === 2 &&
+                index === divisions.length - 2
+              ) {
                 gridClass = "sm:col-span-1 lg:col-span-2 lg:col-start-2";
               }
 
-              if (divisions.length % 2 === 1 && index === divisions.length - 1) {
+              if (
+                divisions.length % 2 === 1 &&
+                index === divisions.length - 1
+              ) {
                 gridClass = gridClass.replace("sm:col-span-1", "sm:col-span-2");
               }
 
