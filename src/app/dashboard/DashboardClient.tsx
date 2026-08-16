@@ -44,57 +44,109 @@ export default function DashboardClient({
   const [activeTab, setActiveTab] = useState<"analytics" | "data">(authRole === "ukm" ? "data" : "analytics");
 
   // Parse and group data
-  const { groupedData, totalStudents, kipkStudents, topCategoriesData } =
-    useMemo(() => {
-      const map: Record<string, StudentResult[]> = {};
-      let kipkCount = 0;
-      const catCount: Record<string, number> = {};
+  const {
+    groupedData,
+    totalStudents,
+    kipkStudents,
+    topCategoriesData,
+    topOrgsData,
+    submissionsByDay,
+    topFakultasData,
+    avgRekPerPeserta,
+  } = useMemo(() => {
+    const map: Record<string, StudentResult[]> = {};
+    let kipkCount = 0;
+    const catCount: Record<string, number> = {};
+    const dayCount: Record<string, { label: string; value: number }> = {};
+    const fakCount: Record<string, number> = {};
+    let totalRekCount = 0;
 
-      results.forEach((student) => {
-        if (student.is_kipk) kipkCount++;
-        let cats: string[] = [];
-        try {
-          if (Array.isArray(student.top_kategori)) cats = student.top_kategori;
-          else if (typeof student.top_kategori === "string")
-            cats = JSON.parse(student.top_kategori);
-        } catch (e) {}
+    results.forEach((student) => {
+      if (student.is_kipk) kipkCount++;
 
-        cats.forEach((c) => {
-          catCount[c] = (catCount[c] || 0) + 1;
+      // Distribusi per Fakultas
+      if (student.fakultas) {
+        const shortFak = student.fakultas
+          .replace("Fakultas ", "")
+          .replace("Ilmu-ilmu ", "")
+          .slice(0, 20);
+        fakCount[shortFak] = (fakCount[shortFak] || 0) + 1;
+      }
+
+      // Submission per hari
+      if (student.created_at) {
+        const dateKey = student.created_at.slice(0, 10);
+        const label = new Date(student.created_at).toLocaleDateString("id-ID", {
+          day: "2-digit",
+          month: "short",
         });
+        if (!dayCount[dateKey]) dayCount[dateKey] = { label, value: 0 };
+        dayCount[dateKey].value++;
+      }
 
-        let recs: string[] = [];
-        try {
-          if (Array.isArray(student.rekomendasi_ukm))
-            recs = student.rekomendasi_ukm;
-          else if (typeof student.rekomendasi_ukm === "string")
-            recs = JSON.parse(student.rekomendasi_ukm);
-        } catch (e) {}
-
-        recs.forEach((orgName) => {
-          if (authRole === "ukm" && orgName !== authUkmName) return;
-          if (!map[orgName]) map[orgName] = [];
-          map[orgName].push(student);
-        });
+      // Kategori dominan
+      let cats: string[] = [];
+      try {
+        if (Array.isArray(student.top_kategori)) cats = student.top_kategori;
+        else if (typeof student.top_kategori === "string")
+          cats = JSON.parse(student.top_kategori);
+      } catch (e) {}
+      cats.forEach((c) => {
+        catCount[c] = (catCount[c] || 0) + 1;
       });
 
-      const topOrgsArr = Object.keys(map)
-        .map((name) => ({ name, count: map[name].length }))
-        .sort((a, b) => b.count - a.count)
-        .slice(0, 7);
+      // Rekomendasi UKM
+      let recs: string[] = [];
+      try {
+        if (Array.isArray(student.rekomendasi_ukm))
+          recs = student.rekomendasi_ukm;
+        else if (typeof student.rekomendasi_ukm === "string")
+          recs = JSON.parse(student.rekomendasi_ukm);
+      } catch (e) {}
+      totalRekCount += recs.length;
 
-      const topCatArr = Object.keys(catCount)
-        .map((name) => ({ name, value: catCount[name] }))
-        .sort((a, b) => b.value - a.value);
+      recs.forEach((orgName) => {
+        if (authRole === "ukm" && orgName !== authUkmName) return;
+        if (!map[orgName]) map[orgName] = [];
+        map[orgName].push(student);
+      });
+    });
 
-      return {
-        groupedData: map,
-        totalStudents: results.length,
-        kipkStudents: kipkCount,
-        topCategoriesData: topCatArr,
-        topOrgsData: topOrgsArr,
-      };
-    }, [results]);
+    const topOrgsArr = Object.keys(map)
+      .map((name) => ({ name, count: map[name].length }))
+      .sort((a, b) => b.count - a.count)
+      .slice(0, 7);
+
+    const topCatArr = Object.keys(catCount)
+      .map((name) => ({ name, value: catCount[name] }))
+      .sort((a, b) => b.value - a.value);
+
+    const dayArr = Object.entries(dayCount)
+      .sort(([a], [b]) => a.localeCompare(b))
+      .slice(-8)
+      .map(([, { label, value }]) => ({ name: label, value }));
+
+    const topFakArr = Object.entries(fakCount)
+      .map(([name, count]) => ({ name, count }))
+      .sort((a, b) => b.count - a.count)
+      .slice(0, 3);
+
+    const avgRek =
+      results.length > 0
+        ? (totalRekCount / results.length).toFixed(1)
+        : "0";
+
+    return {
+      groupedData: map,
+      totalStudents: results.length,
+      kipkStudents: kipkCount,
+      topCategoriesData: topCatArr,
+      topOrgsData: topOrgsArr,
+      submissionsByDay: dayArr,
+      topFakultasData: topFakArr,
+      avgRekPerPeserta: avgRek,
+    };
+  }, [results, authRole, authUkmName]);
 
   const orgNames = Object.keys(groupedData).sort();
   const [searchOrg, setSearchOrg] = useState("");
@@ -104,6 +156,7 @@ export default function DashboardClient({
   const [selectedOrg, setSelectedOrg] = useState<string>(
     filteredOrgs.length > 0 ? filteredOrgs[0] : "",
   );
+  const [headerSearch, setHeaderSearch] = useState("");
 
   useMemo(() => {
     if (filteredOrgs.length > 0 && !filteredOrgs.includes(selectedOrg)) {
@@ -111,19 +164,21 @@ export default function DashboardClient({
     }
   }, [filteredOrgs, selectedOrg]);
 
+  // Pencarian global (nama / NIM) lintas semua organisasi
+  const headerSearchTerm = headerSearch.trim().toLowerCase();
+  const globalSearchResults = headerSearchTerm
+    ? results.filter(
+        (s) =>
+          s.nama?.toLowerCase().includes(headerSearchTerm) ||
+          s.nim?.toLowerCase().includes(headerSearchTerm),
+      )
+    : [];
+  const isGlobalSearchActive = headerSearchTerm.length > 0;
+
   const COLORS = ["#1f2937", "#4b5563", "#9ca3af"];
   const BAR_COLOR = "url(#barGradient)";
 
-  // Dummy Chart Data for Earning Reports lookalike
-  const dummyBarData = [
-    { name: "Mo", value: 400 },
-    { name: "Tu", value: 300 },
-    { name: "We", value: 550 },
-    { name: "Th", value: 200 },
-    { name: "Fr", value: 278 },
-    { name: "Sa", value: 189 },
-    { name: "Su", value: 349 },
-  ];
+  // Bar chart menggunakan data real dari submissions
 
   return (
     <div className="flex min-h-screen bg-[#FAFAFA] font-sans text-gray-800">
@@ -171,23 +226,18 @@ export default function DashboardClient({
           </nav>
         </div>
         <Link
-          href="https://instagram.com/najmi.zaa"
-          target="_blank"
-          rel="noopener noreferrer"
+          href="#"
+          onClick={(e) => e.preventDefault()}
         >
-          <div className="p-4 border-t border-gray-100 flex items-center gap-3 cursor-pointer">
-            <div className="w-8 h-8 rounded-full bg-gray-200 overflow-hidden shrink-0">
-              <img
-                src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
-                alt="Profile"
-                className="w-full h-full object-cover"
-              />
+          <div className="p-4 border-t border-gray-100 flex items-center gap-3 cursor-default">
+            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-cyan-400 to-emerald-500 flex items-center justify-center text-white text-sm font-bold shrink-0">
+              {authRole === "admin" ? "A" : (authUkmName?.[0] ?? "U")}
             </div>
             <div className="flex-1 min-w-0">
               <p className="text-sm font-medium text-gray-900 truncate">
-                Najmi Faza
+                {authRole === "admin" ? "Panitia Pusat" : authUkmName}
               </p>
-              <p className="text-xs text-gray-500 truncate">@najmi.zaa</p>
+              <p className="text-xs text-gray-500 truncate capitalize">{authRole}</p>
             </div>
             <MoreVertical className="w-4 h-4 text-gray-400" />
           </div>
@@ -206,14 +256,22 @@ export default function DashboardClient({
               <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
               <input
                 type="text"
-                placeholder="Search..."
-                className="w-full bg-gray-50 border border-gray-200 rounded-lg pl-9 pr-12 py-1.5 text-sm focus:outline-none focus:ring-1 focus:ring-gray-300"
+                placeholder="Cari nama / NIM mahasiswa..."
+                value={headerSearch}
+                onChange={(e) => {
+                  setHeaderSearch(e.target.value);
+                  if (e.target.value.trim()) setActiveTab("data");
+                }}
+                className="w-full bg-gray-50 border border-gray-200 rounded-lg pl-9 pr-4 py-1.5 text-sm focus:outline-none focus:ring-1 focus:ring-gray-300"
               />
-              <div className="absolute right-2 top-1/2 -translate-y-1/2 flex items-center gap-1">
-                <kbd className="px-1.5 py-0.5 bg-white border border-gray-200 rounded text-[10px] text-gray-500 font-sans">
-                  ⌘K
-                </kbd>
-              </div>
+              {headerSearch && (
+                <button
+                  onClick={() => setHeaderSearch("")}
+                  className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 text-xs"
+                >
+                  ✕
+                </button>
+              )}
             </div>
           </div>
 
@@ -270,163 +328,101 @@ export default function DashboardClient({
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 <div className="bg-white p-4 rounded-xl border border-gray-100 shadow-[0_1px_2px_rgba(0,0,0,0.02)]">
                   <div className="flex justify-between items-start mb-2">
-                    <span className="text-xs font-medium text-gray-500">
-                      Daily active users
-                    </span>
-                    <span className="bg-emerald-50 text-emerald-600 text-[10px] font-bold px-1.5 py-0.5 rounded flex items-center gap-0.5">
-                      <TrendingUp className="w-3 h-3" /> +12.1%
-                    </span>
+                    <span className="text-xs font-medium text-gray-500">Total Peserta Kuis</span>
+                    <Users className="w-4 h-4 text-gray-300" />
                   </div>
-                  <div className="text-2xl font-bold text-gray-900">3,450</div>
+                  <div className="text-2xl font-bold text-gray-900">{totalStudents}</div>
+                  <p className="text-[10px] text-gray-400 mt-1">Seluruh pengisi kuisioner</p>
                 </div>
 
                 <div className="bg-white p-4 rounded-xl border border-gray-100 shadow-[0_1px_2px_rgba(0,0,0,0.02)]">
                   <div className="flex justify-between items-start mb-2">
-                    <span className="text-xs font-medium text-gray-500">
-                      Weekly sessions (Kuis)
-                    </span>
-                    <span className="bg-red-50 text-red-600 text-[10px] font-bold px-1.5 py-0.5 rounded flex items-center gap-0.5">
-                      <TrendingUp className="w-3 h-3 rotate-180" /> -9.8%
-                    </span>
+                    <span className="text-xs font-medium text-gray-500">Penerima KIP-K</span>
+                    <Ticket className="w-4 h-4 text-gray-300" />
                   </div>
-                  <div className="text-2xl font-bold text-gray-900">
-                    {totalStudents}
-                  </div>
+                  <div className="text-2xl font-bold text-gray-900">{kipkStudents}</div>
+                  <p className="text-[10px] text-gray-400 mt-1">dari {totalStudents} total peserta</p>
                 </div>
 
                 <div className="bg-white p-4 rounded-xl border border-gray-100 shadow-[0_1px_2px_rgba(0,0,0,0.02)]">
                   <div className="flex justify-between items-start mb-2">
-                    <span className="text-xs font-medium text-gray-500">
-                      Duration (Avg)
-                    </span>
-                    <span className="bg-emerald-50 text-emerald-600 text-[10px] font-bold px-1.5 py-0.5 rounded flex items-center gap-0.5">
-                      <TrendingUp className="w-3 h-3" /> +7.7%
-                    </span>
+                    <span className="text-xs font-medium text-gray-500">Avg. Rekomendasi / Peserta</span>
+                    <Activity className="w-4 h-4 text-gray-300" />
                   </div>
-                  <div className="text-2xl font-bold text-gray-900">5.2min</div>
+                  <div className="text-2xl font-bold text-gray-900">{avgRekPerPeserta}</div>
+                  <p className="text-[10px] text-gray-400 mt-1">UKM per mahasiswa</p>
                 </div>
 
                 <div className="bg-white p-4 rounded-xl border border-gray-100 shadow-[0_1px_2px_rgba(0,0,0,0.02)]">
                   <div className="flex justify-between items-start mb-2">
-                    <span className="text-xs font-medium text-gray-500">
-                      KIP-K Rate
-                    </span>
-                    <span className="bg-emerald-50 text-emerald-600 text-[10px] font-bold px-1.5 py-0.5 rounded flex items-center gap-0.5">
-                      <TrendingUp className="w-3 h-3" /> +4.3%
-                    </span>
+                    <span className="text-xs font-medium text-gray-500">KIP-K Rate</span>
+                    <TrendingUp className="w-4 h-4 text-gray-300" />
                   </div>
                   <div className="text-2xl font-bold text-gray-900">
                     {totalStudents > 0
                       ? ((kipkStudents / totalStudents) * 100).toFixed(1)
-                      : 0}
-                    %
+                      : 0}%
                   </div>
+                  <p className="text-[10px] text-gray-400 mt-1">Proporsi penerima KIP-K</p>
                 </div>
               </div>
 
               {/* MIDDLE ROW */}
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                {/* Earning Reports Lookalike */}
+                {/* Pendaftar per Hari */}
                 <div className="bg-white p-5 rounded-xl border border-gray-100 shadow-[0_1px_2px_rgba(0,0,0,0.02)] lg:col-span-2 flex flex-col md:flex-row gap-8">
-                  {/* Left Side (Chart) */}
                   <div className="flex-1">
                     <div className="flex justify-between items-start mb-4">
                       <div>
-                        <h3 className="text-sm font-bold text-gray-900">
-                          Traffic Reports
-                        </h3>
-                        <p className="text-xs text-gray-500">Last 28 days</p>
+                        <h3 className="text-sm font-bold text-gray-900">Pendaftar per Hari</h3>
+                        <p className="text-xs text-gray-500">Berdasarkan tanggal submission</p>
                       </div>
-                      <button className="flex items-center gap-1.5 text-xs font-medium text-gray-600 bg-gray-50 hover:bg-gray-100 px-2 py-1.5 rounded-md border border-gray-200">
-                        <Download className="w-3 h-3" /> Export
-                      </button>
                     </div>
-
                     <div className="flex items-end gap-2 mb-6">
-                      <span className="text-2xl font-bold text-gray-900">
-                        1,468
-                      </span>
-                      <span className="bg-emerald-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded mb-1.5">
-                        +4.2%
-                      </span>
+                      <span className="text-2xl font-bold text-gray-900">{totalStudents}</span>
+                      <span className="text-xs text-gray-500 mb-1">total peserta</span>
                     </div>
-
-                    <div className="h-40 w-full">
-                      <ResponsiveContainer width="100%" height="100%">
+                    <div className="h-40 w-full min-w-0">
+                      <ResponsiveContainer width="100%" height="100%" minWidth={0}>
                         <BarChart
-                          data={dummyBarData}
+                          data={submissionsByDay.length > 0 ? submissionsByDay : [{ name: "-", value: 0 }]}
                           margin={{ top: 0, right: 0, left: -20, bottom: 0 }}
                         >
-                          <XAxis
-                            dataKey="name"
-                            axisLine={false}
-                            tickLine={false}
-                            tick={{ fill: "#9ca3af", fontSize: 10 }}
-                          />
-                          <Bar
-                            dataKey="value"
-                            fill={BAR_COLOR}
-                            radius={[2, 2, 0, 0]}
-                            barSize={32}
-                          />
+                          <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fill: "#9ca3af", fontSize: 10 }} />
+                          <Bar dataKey="value" fill={BAR_COLOR} radius={[2, 2, 0, 0]} barSize={32} />
                         </BarChart>
                       </ResponsiveContainer>
                     </div>
                   </div>
 
-                  {/* Right Side (Progress Bars) */}
+                  {/* Top Fakultas */}
                   <div className="w-full md:w-48 flex flex-col justify-center space-y-5 shrink-0">
-                    <div>
-                      <div className="flex justify-between text-xs mb-1">
-                        <span className="text-gray-600 flex items-center gap-1.5">
-                          <Users className="w-3.5 h-3.5" /> Pendaftar
-                        </span>
-                        <span className="font-bold text-gray-900">545</span>
-                      </div>
-                      <div className="w-full bg-gray-100 rounded-full h-1.5">
-                        <div
-                          className="bg-gray-800 h-1.5 rounded-full"
-                          style={{ width: "75%" }}
-                        ></div>
-                      </div>
-                    </div>
-
-                    <div>
-                      <div className="flex justify-between text-xs mb-1">
-                        <span className="text-gray-600 flex items-center gap-1.5">
-                          <Activity className="w-3.5 h-3.5" /> Aktif
-                        </span>
-                        <span className="font-bold text-gray-900">256</span>
-                      </div>
-                      <div className="w-full bg-gray-100 rounded-full h-1.5">
-                        <div
-                          className="bg-gray-800 h-1.5 rounded-full"
-                          style={{ width: "45%" }}
-                        ></div>
-                      </div>
-                    </div>
-
-                    <div>
-                      <div className="flex justify-between text-xs mb-1">
-                        <span className="text-gray-600 flex items-center gap-1.5">
-                          <ArrowDownRight className="w-3.5 h-3.5" /> Batal
-                        </span>
-                        <span className="font-bold text-gray-900">74</span>
-                      </div>
-                      <div className="w-full bg-gray-100 rounded-full h-1.5">
-                        <div
-                          className="bg-gray-800 h-1.5 rounded-full"
-                          style={{ width: "15%" }}
-                        ></div>
-                      </div>
-                    </div>
+                    <p className="text-xs font-semibold text-gray-700">Top Fakultas</p>
+                    {topFakultasData.length > 0 ? (
+                      topFakultasData.map((fak) => {
+                        const pct = totalStudents > 0 ? Math.round((fak.count / totalStudents) * 100) : 0;
+                        return (
+                          <div key={fak.name}>
+                            <div className="flex justify-between text-xs mb-1">
+                              <span className="text-gray-600 truncate max-w-[7.5rem]">{fak.name}</span>
+                              <span className="font-bold text-gray-900">{fak.count}</span>
+                            </div>
+                            <div className="w-full bg-gray-100 rounded-full h-1.5">
+                              <div className="bg-gray-800 h-1.5 rounded-full transition-all" style={{ width: `${pct}%` }} />
+                            </div>
+                          </div>
+                        );
+                      })
+                    ) : (
+                      <p className="text-xs text-gray-400">Belum ada data</p>
+                    )}
                   </div>
                 </div>
 
                 {/* Donut Chart Block */}
                 <div className="bg-white p-5 rounded-xl border border-gray-100 shadow-[0_1px_2px_rgba(0,0,0,0.02)] flex flex-col justify-between">
                   <div className="flex-1 relative flex justify-center items-center">
-                    <ResponsiveContainer width="100%" height={180}>
+                    <ResponsiveContainer width="100%" height={180} minWidth={0}>
                       <PieChart>
                         <Pie
                           data={
@@ -512,51 +508,74 @@ export default function DashboardClient({
 
               {/* BOTTOM ROW */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {/* Top UKM Direkomendasikan */}
                 <div className="bg-white p-5 rounded-xl border border-gray-100 shadow-[0_1px_2px_rgba(0,0,0,0.02)]">
-                  <h3 className="text-sm font-bold text-gray-900">
-                    Website Analytics
-                  </h3>
-                  <p className="text-xs text-gray-500 mb-6">
-                    Total 28.5% Conversion Rate
-                  </p>
-                  <div className="flex justify-between items-center text-xs">
-                    <div className="flex items-center gap-2">
-                      <div className="px-2 py-1 bg-gray-100 rounded text-gray-600 font-medium">
-                        432
+                  <h3 className="text-sm font-bold text-gray-900 mb-1">Top UKM Direkomendasikan</h3>
+                  <p className="text-xs text-gray-500 mb-4">Berdasarkan hasil kuisioner</p>
+                  <div className="space-y-2">
+                    {topOrgsData && topOrgsData.slice(0, 5).map((org, i) => (
+                      <div key={org.name} className="flex items-center justify-between text-xs">
+                        <div className="flex items-center gap-2">
+                          <span className="w-4 h-4 rounded-full bg-gray-100 text-gray-500 flex items-center justify-center text-[10px] font-bold shrink-0">{i + 1}</span>
+                          <span className="font-medium text-gray-700 truncate max-w-[10rem]">{org.name}</span>
+                        </div>
+                        <span className="font-bold text-gray-900 shrink-0">{org.count}</span>
                       </div>
-                      <span className="font-semibold">Direct</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <div className="px-2 py-1 bg-gray-100 rounded text-gray-600 font-medium">
-                        216
-                      </div>
-                      <span className="font-semibold">Organic</span>
-                    </div>
+                    ))}
+                    {(!topOrgsData || topOrgsData.length === 0) && (
+                      <p className="text-xs text-gray-400">Belum ada data</p>
+                    )}
                   </div>
                 </div>
 
-                <div className="bg-white p-5 rounded-xl border border-gray-100 shadow-[0_1px_2px_rgba(0,0,0,0.02)] flex justify-between items-start">
-                  <div>
-                    <h3 className="text-xs font-medium text-gray-500 mb-1">
-                      Average Daily Sales
-                    </h3>
-                    <div className="text-xl font-bold text-gray-900">
-                      $28,450
-                    </div>
+                {/* Top Kategori Minat */}
+                <div className="bg-white p-5 rounded-xl border border-gray-100 shadow-[0_1px_2px_rgba(0,0,0,0.02)]">
+                  <h3 className="text-sm font-bold text-gray-900 mb-1">Distribusi Minat</h3>
+                  <p className="text-xs text-gray-500 mb-4">Kategori dominan peserta</p>
+                  <div className="space-y-3">
+                    {topCategoriesData.slice(0, 5).map((cat) => {
+                      const pct = totalStudents > 0 ? Math.round((cat.value / totalStudents) * 100) : 0;
+                      return (
+                        <div key={cat.name}>
+                          <div className="flex justify-between text-xs mb-1">
+                            <span className="text-gray-600 truncate max-w-[9rem]">{cat.name}</span>
+                            <span className="font-bold text-gray-900">{cat.value}</span>
+                          </div>
+                          <div className="w-full bg-gray-100 rounded-full h-1.5">
+                            <div className="bg-gray-800 h-1.5 rounded-full" style={{ width: `${pct}%` }} />
+                          </div>
+                        </div>
+                      );
+                    })}
+                    {topCategoriesData.length === 0 && <p className="text-xs text-gray-400">Belum ada data</p>}
                   </div>
-                  <TrendingUp className="w-4 h-4 text-red-500 rotate-180" />
                 </div>
 
-                <div className="bg-white p-5 rounded-xl border border-gray-100 shadow-[0_1px_2px_rgba(0,0,0,0.02)] flex justify-between items-start">
-                  <div>
-                    <h3 className="text-xs font-medium text-gray-500 mb-1">
-                      Sales Overview
-                    </h3>
-                    <div className="text-xl font-bold text-gray-900">
-                      $42.5K
+                {/* Statistik Jalur */}
+                <div className="bg-white p-5 rounded-xl border border-gray-100 shadow-[0_1px_2px_rgba(0,0,0,0.02)]">
+                  <h3 className="text-sm font-bold text-gray-900 mb-1">Statistik Jalur</h3>
+                  <p className="text-xs text-gray-500 mb-4">KIP-K vs Reguler</p>
+                  <div className="space-y-4">
+                    <div>
+                      <div className="flex justify-between text-xs mb-1">
+                        <span className="text-gray-600">Reguler</span>
+                        <span className="font-bold text-gray-900">{totalStudents - kipkStudents}</span>
+                      </div>
+                      <div className="w-full bg-gray-100 rounded-full h-2">
+                        <div className="bg-gray-800 h-2 rounded-full" style={{ width: `${totalStudents > 0 ? Math.round(((totalStudents - kipkStudents) / totalStudents) * 100) : 0}%` }} />
+                      </div>
                     </div>
+                    <div>
+                      <div className="flex justify-between text-xs mb-1">
+                        <span className="text-gray-600">KIP-K</span>
+                        <span className="font-bold text-emerald-700">{kipkStudents}</span>
+                      </div>
+                      <div className="w-full bg-gray-100 rounded-full h-2">
+                        <div className="bg-emerald-500 h-2 rounded-full" style={{ width: `${totalStudents > 0 ? Math.round((kipkStudents / totalStudents) * 100) : 0}%` }} />
+                      </div>
+                    </div>
+                    <p className="text-[10px] text-gray-400 pt-2 border-t border-gray-50">Total: {totalStudents} peserta</p>
                   </div>
-                  <TrendingUp className="w-4 h-4 text-emerald-500" />
                 </div>
               </div>
             </div>
@@ -612,6 +631,12 @@ export default function DashboardClient({
                   className="overflow-x-auto overflow-y-auto w-full max-h-[calc(100vh-13em)] custom-scrollbar"
                   data-lenis-prevent
                 >
+                  {isGlobalSearchActive && (
+                    <div className="px-5 py-2 bg-cyan-50 border-b border-cyan-100 text-xs text-cyan-700 flex items-center gap-2">
+                      <Search className="w-3 h-3 shrink-0" />
+                      Hasil pencarian <strong>&quot;{headerSearch}&quot;</strong>: {globalSearchResults.length} mahasiswa ditemukan
+                    </div>
+                  )}
                   <table className="w-full text-xs text-left relative">
                     <thead className="bg-gray-50 text-gray-500 border-b border-gray-100 sticky top-0 z-10 shadow-[0_1px_2px_rgba(0,0,0,0.05)]">
                       <tr>
@@ -629,76 +654,81 @@ export default function DashboardClient({
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-50 text-gray-700">
-                      {selectedOrg && groupedData[selectedOrg] ? (
+                      {isGlobalSearchActive ? (
+                        globalSearchResults.length > 0 ? (
+                          globalSearchResults.map((student, idx) => (
+                            <tr key={student.id || idx} className="hover:bg-gray-50 transition-colors">
+                              <td className="px-5 py-3">
+                                <div className="font-semibold text-gray-900">{student.nama}</div>
+                                <div className="text-gray-400 mt-0.5">{student.nim}</div>
+                              </td>
+                              <td className="px-5 py-3">
+                                <div className="font-medium">{student.fakultas}</div>
+                                <div className="text-gray-400 mt-0.5">{student.jurusan}</div>
+                              </td>
+                              <td className="px-5 py-3">
+                                <div className="font-medium whitespace-nowrap">
+                                  {student.no_hp ? (
+                                    <a href={`https://wa.me/${student.no_hp.replace(/\D/g, "").replace(/^0/, "62")}`} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
+                                      {student.no_hp}
+                                    </a>
+                                  ) : <span className="text-gray-300">-</span>}
+                                </div>
+                              </td>
+                              <td className="px-5 py-3 text-center">
+                                {student.is_kipk ? (
+                                  <span className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-50 text-emerald-600 border border-emerald-100">Ya</span>
+                                ) : (
+                                  <span className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-gray-100 text-gray-500 border border-gray-200">Tidak</span>
+                                )}
+                              </td>
+                              <td className="px-5 py-3 text-gray-400 whitespace-nowrap font-medium">
+                                {student.created_at ? new Date(student.created_at).toLocaleDateString("id-ID", { day: "numeric", month: "short", year: "numeric" }) : "-"}
+                              </td>
+                            </tr>
+                          ))
+                        ) : (
+                          <tr>
+                            <td colSpan={5} className="px-5 py-10 text-center text-gray-400">
+                              Tidak ada mahasiswa yang cocok dengan &quot;{headerSearch}&quot;
+                            </td>
+                          </tr>
+                        )
+                      ) : selectedOrg && groupedData[selectedOrg] ? (
                         groupedData[selectedOrg].map((student, idx) => (
-                          <tr
-                            key={student.id || idx}
-                            className="hover:bg-gray-50 transition-colors"
-                          >
+                          <tr key={student.id || idx} className="hover:bg-gray-50 transition-colors">
                             <td className="px-5 py-3">
-                              <div className="font-semibold text-gray-900">
-                                {student.nama}
-                              </div>
-                              <div className="text-gray-400 mt-0.5">
-                                {student.nim}
-                              </div>
+                              <div className="font-semibold text-gray-900">{student.nama}</div>
+                              <div className="text-gray-400 mt-0.5">{student.nim}</div>
                             </td>
                             <td className="px-5 py-3">
-                              <div className="font-medium">
-                                {student.fakultas}
-                              </div>
-                              <div className="text-gray-400 mt-0.5">
-                                {student.jurusan}
-                              </div>
+                              <div className="font-medium">{student.fakultas}</div>
+                              <div className="text-gray-400 mt-0.5">{student.jurusan}</div>
                             </td>
                             <td className="px-5 py-3">
                               <div className="font-medium whitespace-nowrap">
                                 {student.no_hp ? (
-                                  <a
-                                    href={`https://wa.me/${student.no_hp.replace(/\D/g, "").replace(/^0/, "62")}`}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="text-blue-600 hover:underline"
-                                  >
+                                  <a href={`https://wa.me/${student.no_hp.replace(/\D/g, "").replace(/^0/, "62")}`} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
                                     {student.no_hp}
                                   </a>
-                                ) : (
-                                  <span className="text-gray-300">-</span>
-                                )}
+                                ) : <span className="text-gray-300">-</span>}
                               </div>
                             </td>
                             <td className="px-5 py-3 text-center">
                               {student.is_kipk ? (
-                                <span className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-50 text-emerald-600 border border-emerald-100">
-                                  Ya
-                                </span>
+                                <span className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-50 text-emerald-600 border border-emerald-100">Ya</span>
                               ) : (
-                                <span className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-gray-100 text-gray-500 border border-gray-200">
-                                  Tidak
-                                </span>
+                                <span className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-gray-100 text-gray-500 border border-gray-200">Tidak</span>
                               )}
                             </td>
                             <td className="px-5 py-3 text-gray-400 whitespace-nowrap font-medium">
-                              {student.created_at
-                                ? new Date(
-                                    student.created_at,
-                                  ).toLocaleDateString("id-ID", {
-                                    day: "numeric",
-                                    month: "short",
-                                    year: "numeric",
-                                  })
-                                : "-"}
+                              {student.created_at ? new Date(student.created_at).toLocaleDateString("id-ID", { day: "numeric", month: "short", year: "numeric" }) : "-"}
                             </td>
                           </tr>
                         ))
                       ) : (
                         <tr>
-                          <td
-                            colSpan={5}
-                            className="px-5 py-10 text-center text-gray-400"
-                          >
-                            Belum ada data
-                          </td>
+                          <td colSpan={5} className="px-5 py-10 text-center text-gray-400">Belum ada data</td>
                         </tr>
                       )}
                     </tbody>

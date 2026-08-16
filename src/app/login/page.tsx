@@ -12,7 +12,7 @@ export default function LoginPage() {
     async (prevState: any, formData: FormData) => {
       return await loginAction(formData);
     },
-    null
+    null,
   );
 
   // Searchable Dropdown State
@@ -23,7 +23,10 @@ export default function LoginPage() {
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
         setIsOpen(false);
       }
     };
@@ -35,26 +38,27 @@ export default function LoginPage() {
     { username: "admin", name: "Panitia Pusat (Admin)", type: "Admin" },
     ...ukmAuthData
       .sort((a, b) => a.name.localeCompare(b.name))
-      .map(u => ({
+      .map((u) => ({
         username: u.username,
         name: u.name,
-        type: u.id.startsWith("ukm") ? "UKM" : "Paguyuban"
-      }))
+        type: u.id.startsWith("ukm") ? "UKM" : "Paguyuban",
+      })),
   ];
 
-  const filteredOptions = allOptions.filter(opt => 
-    opt.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
-    opt.username.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredOptions = allOptions.filter(
+    (opt) =>
+      opt.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      opt.username.toLowerCase().includes(searchTerm.toLowerCase()),
   );
 
   return (
     <div className="min-h-screen py-10 px-4 text-black flex flex-col items-center justify-center bg-gray-50 relative overflow-hidden">
       {/* Background Ornaments */}
       <div className="absolute top-0 left-0 w-full h-96 bg-gradient-to-b from-cyan-500/10 to-transparent -z-10 blur-3xl opacity-50" />
-      
+
       <Link href="/" className="mb-8 hover:scale-105 transition-transform">
         <Image
-          src="/Logo PS.png"
+          src="/logo-pangsud.webp"
           alt="Panggih Sedulur"
           width={100}
           height={100}
@@ -82,8 +86,13 @@ export default function LoginPage() {
             <label className="block text-sm font-bold text-black mb-2">
               Username Organisasi
             </label>
-            <input type="hidden" name="username" value={selectedUsername} required />
-            
+            <input
+              type="hidden"
+              name="username"
+              value={selectedUsername}
+              required
+            />
+
             <div className="relative">
               <input
                 type="text"
@@ -92,7 +101,7 @@ export default function LoginPage() {
                 onChange={(e) => {
                   setSearchTerm(e.target.value);
                   setIsOpen(true);
-                  if (selectedUsername) setSelectedUsername(""); 
+                  if (selectedUsername) setSelectedUsername("");
                 }}
                 onFocus={() => setIsOpen(true)}
                 className="w-full pl-11 pr-4 py-3 border border-black/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-500/30 bg-black/5 text-black placeholder:text-gray-500 backdrop-blur-sm transition-all focus:bg-white"
@@ -113,8 +122,12 @@ export default function LoginPage() {
                       }}
                       className={`px-4 py-3 hover:bg-cyan-50 cursor-pointer flex justify-between items-center transition-colors border-b border-gray-100 last:border-0 ${selectedUsername === opt.username ? "bg-cyan-50/50" : ""}`}
                     >
-                      <span className="font-medium text-black text-sm">{opt.name}</span>
-                      <span className={`text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded ${opt.type === "Admin" ? "text-rose-600 bg-rose-50" : "text-cyan-600 bg-cyan-50"}`}>
+                      <span className="font-medium text-black text-sm">
+                        {opt.name}
+                      </span>
+                      <span
+                        className={`text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded ${opt.type === "Admin" ? "text-rose-600 bg-rose-50" : "text-cyan-600 bg-cyan-50"}`}
+                      >
                         {opt.type}
                       </span>
                     </div>
@@ -130,7 +143,10 @@ export default function LoginPage() {
 
           {/* Password (Input) */}
           <div className="space-y-2">
-            <label htmlFor="password" className="block text-sm font-bold text-black mb-2">
+            <label
+              htmlFor="password"
+              className="block text-sm font-bold text-black mb-2"
+            >
               Password
             </label>
             <input
@@ -143,29 +159,31 @@ export default function LoginPage() {
               autoComplete="current-password"
             />
           </div>
-          
+
           {state?.error && (
             <div className="text-sm font-medium text-rose-500 bg-rose-50 border border-rose-100 p-3 rounded-xl text-center">
               ⚠ {state.error}
             </div>
           )}
 
-          <button 
-            type="submit" 
+          <button
+            type="submit"
             disabled={pending || (!selectedUsername && searchTerm.length > 0)}
             className="w-full bg-gradient-to-r from-cyan-600 to-emerald-600 hover:from-cyan-500 hover:to-emerald-500 text-white py-4 rounded-xl font-bold text-lg transition-all shadow-xl shadow-cyan-900/40 active:scale-[0.98] mt-4 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {pending ? "Memeriksa Kredensial..." : "Masuk ke Dashboard 🚀"}
           </button>
         </form>
-        
+
         <p className="text-xs text-black/40 text-center italic mt-6">
-          Gunakan username dan password yang diberikan Panitia Panggih Sedulur 2026.
+          Gunakan username dan password yang diberikan Panitia Panggih Sedulur
+          2026.
         </p>
       </div>
 
-      <style dangerouslySetInnerHTML={{
-        __html: `
+      <style
+        dangerouslySetInnerHTML={{
+          __html: `
         .custom-scrollbar::-webkit-scrollbar {
           width: 5px;
         }
@@ -179,8 +197,9 @@ export default function LoginPage() {
         .custom-scrollbar::-webkit-scrollbar-thumb:hover {
           background: #d1d5db; 
         }
-        `
-      }} />
+        `,
+        }}
+      />
     </div>
   );
 }
