@@ -56,7 +56,7 @@ function AnimatedMenuContent() {
 
   return (
     <div className="flex flex-col px-6 justify-evenly gap-6 items-start size-full">
-      <div className="flex flex-col items-start gap-4 *:transition-blur *:duration-300 [&:hover>*]:blur-[2px] [&>*:hover]:blur-none">
+      <div className="flex flex-col items-start gap-4 transition-opacity duration-300 [&:hover>*]:opacity-40 [&>*:hover]:opacity-100">
         {menuItems.map((item, i) => (
           <AnimatedMenuItem key={i} order={i}>
             <Link
@@ -70,7 +70,7 @@ function AnimatedMenuContent() {
           </AnimatedMenuItem>
         ))}
       </div>
-      <div className="flex gap-4 *:transition-blur *:duration-300 [&:hover>*]:blur-[2px] [&>*:hover]:blur-none">
+      <div className="flex gap-4 transition-opacity duration-300 [&:hover>*]:opacity-40 [&>*:hover]:opacity-100">
         {socialLinks.map((item, i) => (
           <AnimatedMenuItem key={item.title} order={i + menuItems.length}>
             <Link
@@ -93,11 +93,14 @@ export function AnimatedMenuDemo() {
   const pathname = usePathname();
 
   useEffect(() => {
+    let ticking = false;
     const handleScroll = () => {
-      if (window.scrollY > 20) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setIsScrolled(window.scrollY > 20);
+          ticking = false;
+        });
+        ticking = true;
       }
     };
 
