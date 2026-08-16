@@ -162,13 +162,13 @@ export function ExpandableCard({
         type="button"
         onClick={handleClickCard}
         className={cn(
-          "group w-full max-w-[290px] lg:max-w-[280] cursor-pointer overflow-visible rounded-2xl border border-zinc-200/70 bg-white shadow-sm transition-shadow duration-200 hover:shadow-md focus:outline-none dark:border-zinc-800/70 dark:bg-zinc-950 dark:hover:shadow-none",
+          "group w-full max-w-[290px] lg:max-w-[280] cursor-pointer overflow-visible rounded-2xl border border-zinc-200/70 bg-white shadow-sm transition-shadow duration-200 hover:shadow-md focus:outline-none dark:border-zinc-800/70 dark:bg-zinc-950 dark:hover:shadow-none flex flex-col h-full",
           className,
         )}
         aria-haspopup="dialog"
       >
         {/* Image wrapper */}
-        <div className="relative h-42 w-full overflow-visible rounded-t-2xl bg-zinc-200 dark:bg-zinc-800">
+        <div className="relative h-48 w-full overflow-visible rounded-t-2xl bg-zinc-200 dark:bg-zinc-800">
           <div className="relative h-full w-full overflow-hidden rounded-t-2xl">
             <Image
               src={src}
@@ -200,7 +200,7 @@ export function ExpandableCard({
         </div>
 
         {/* Body */}
-        <div className="px-3.5 pb-4 pt-12 text-left">
+        <div className="px-3.5 pb-4 pt-12 text-left flex-1 flex flex-col">
           <p className="mb-1.5 text-[15px] font-medium leading-snug text-zinc-900 dark:text-zinc-50">
             {title}
           </p>

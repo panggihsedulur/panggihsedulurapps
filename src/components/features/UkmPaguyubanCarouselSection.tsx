@@ -233,7 +233,7 @@ function CarouselSection({
               }
             }}
             className={cn(
-              "flex gap-6 overflow-x-auto pb-6 pt-2 snap-x snap-mandatory scroll-smooth px-4 sm:px-0",
+              "flex items-stretch gap-6 overflow-x-auto pb-6 pt-2 snap-x snap-mandatory scroll-smooth px-4 sm:px-0",
               "justify-start",
               "touch-pan-y [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden",
               isDragging ? "cursor-grabbing" : "cursor-grab",
@@ -247,7 +247,7 @@ function CarouselSection({
               <div
                 key={card.id}
                 className={cn(
-                  "snap-center sm:snap-start shrink-0 flex justify-center sm:block",
+                  "snap-center sm:snap-start shrink-0 flex items-stretch justify-center sm:block",
                   CARD_WIDTH_CLASSES,
                 )}
               >
@@ -289,7 +289,7 @@ function CarouselSection({
                   )}
                 >
                   <div className="w-full rounded-2xl border border-zinc-200/70 bg-white overflow-hidden animate-pulse">
-                    <div className="h-42 bg-zinc-100" />
+                    <div className="h-48 bg-zinc-100" />
                     <div className="px-3.5 pb-4 pt-14 space-y-2">
                       <div className="h-3.5 w-3/4 rounded bg-zinc-100" />
                       <div className="h-3 w-full rounded bg-zinc-100" />
