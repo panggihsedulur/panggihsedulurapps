@@ -71,7 +71,7 @@ export const metadata: Metadata = {
       "Temukan UKM dan paguyuban daerah yang paling sesuai dengan minat, bakat, dan karakter kamu.",
     images: [
       {
-        url: "/coming-soon.webp",
+        url: "/og.webp",
         width: 1200,
         height: 630,
         alt: "Panggih Sedulur 2026",
@@ -83,7 +83,7 @@ export const metadata: Metadata = {
     title: "Panggih Sedulur 2026",
     description:
       "Pameran interaktif UNSOED untuk eksplorasi UKM dan paguyuban daerah.",
-    images: ["/coming-soon.webp"],
+    images: ["/og.webp"],
   },
   robots: {
     index: true,
