@@ -103,8 +103,8 @@ export default function ResultPage() {
             UKM Rekomendasi Untuk Kamu
           </h2>
           <p className="text-black/70 mb-8 text-center">
-            Berdasarkan hasil kuisioner, berikut adalah UKM yang paling sesuai
-            dengan minat dan bakatmu:
+            Berdasarkan hasil kuisioner, berikut adalah UKM dan Paguyuban yang
+            paling sesuai dengan minat dan bakatmu:
           </p>
 
           {ukmObjects.length > 0 ? (
