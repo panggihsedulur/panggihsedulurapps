@@ -48,7 +48,7 @@ const demoImages = [
   },
   {
     id: "8",
-    src: "/pangsudfoto/IMG_1780 (Small).webp",
+    src: "/pangsudfoto/IMG_1074.webp",
     alt: "Creative digital artwork",
     rotation: 8,
   },
