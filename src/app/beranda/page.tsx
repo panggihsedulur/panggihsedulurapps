@@ -5,6 +5,7 @@ import { PanggihIntroSection } from "@/components/features/PanggihIntroSection";
 import { MaskotProfilesSection } from "@/components/features/MaskotProfilesSection";
 import { SloganBannerSection } from "@/components/features/SloganBannerSection";
 import UkmPaguyubanCarouselSection from "@/components/features/UkmPaguyubanCarouselSection";
+import AdModal from "@/components/features/AdModal";
 
 import { GridPattern } from "@/components/ui/grid-pattern";
 import TestimonialsSection from "@/components/testimoni";
@@ -21,6 +22,7 @@ export const metadata: Metadata = {
 export default function Beranda() {
   return (
     <>
+      <AdModal />
       <HeroSection />
       <div className="relative bg-white overflow-hidden">
         {/* Background: white + grid (#5aa0ac) */}
