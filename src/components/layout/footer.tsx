@@ -4,11 +4,8 @@ import { cn } from "@/lib/utils";
 
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import {
-  FaInstagram,
-  FaTiktok,
-  FaWhatsapp,
-} from "react-icons/fa6";
+import Image from "next/image";
+import { FaInstagram, FaTiktok, FaWhatsapp } from "react-icons/fa6";
 
 export function Footer() {
   const pathname = usePathname();
@@ -37,7 +34,7 @@ export function Footer() {
       >
         <div className="absolute inset-x-0 h-px w-full bg-border" />
         <div className="grid max-w-7xl grid-cols-6 gap-6 p-4">
-          <div className="col-span-6 flex flex-col gap-4 pt-5 md:col-span-4">
+          <div className="col-span-6 flex flex-col gap-4 pt-5 md:col-span-3">
             <Link className="justify-left w-max" href="/">
               <h1 className="text-2xl sm:text-2xl font-normal font-heading  text-center  text-gradient">
                 <span className="font-edwardian text-4xl sm:text-5xl  mr-0.5 ">
@@ -68,7 +65,19 @@ export function Footer() {
               ))}
             </div>
           </div>
-          <div className="col-span-3 w-full md:col-span-1">
+          <div className="col-span-6 w-full md:col-span-1 pt-5">
+            <span className="text-muted-foreground text-xs">Sponsor Utama</span>
+            <div className="mt-2 flex flex-col gap-2">
+              <Image
+                src="/ads/ads_logo1.png"
+                alt="Sponsor Utama"
+                width={120}
+                height={60}
+                className="object-contain drop-shadow-sm"
+              />
+            </div>
+          </div>
+          <div className="col-span-3 w-full md:col-span-1 pt-5">
             <span className="text-muted-foreground text-xs">Navigasi</span>
             <div className="mt-2 flex flex-col gap-2">
               {navigasi.map(({ href, title }) => (
@@ -82,7 +91,7 @@ export function Footer() {
               ))}
             </div>
           </div>
-          <div className="col-span-3 w-full md:col-span-1">
+          <div className="col-span-3 w-full md:col-span-1 pt-5">
             <span className="text-muted-foreground text-xs">Sosial Media</span>
             <div className="mt-2 flex flex-col gap-2">
               {kontak.map(({ href, title }) => (
