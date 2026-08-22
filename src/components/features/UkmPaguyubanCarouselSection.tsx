@@ -102,7 +102,10 @@ function CarouselSection({
   const scrollByAmount = (direction: 1 | -1) => {
     const el = scrollRef.current;
     if (!el) return;
-    const amount = Math.round(el.clientWidth * 0.85) * direction;
+    const firstCard = el.querySelector<HTMLElement>("[data-carousel-card]");
+    const cardWidth = firstCard?.offsetWidth ?? el.clientWidth * 0.85;
+    const gap = 24; // sesuai gap-6
+    const amount = (cardWidth + gap) * direction;
     el.scrollBy({ left: amount, behavior: "smooth" });
   };
 
@@ -117,7 +120,10 @@ function CarouselSection({
         el.scrollTo({ left: 0, behavior: "smooth" });
         return;
       }
-      const amount = Math.round(el.clientWidth * 0.85);
+      const firstCard = el.querySelector<HTMLElement>("[data-carousel-card]");
+      const cardWidth = firstCard?.offsetWidth ?? el.clientWidth * 0.85;
+      const gap = 24;
+      const amount = cardWidth + gap;
       el.scrollBy({ left: amount, behavior: "smooth" });
     }, 3500);
 
@@ -234,6 +240,7 @@ function CarouselSection({
             }}
             className={cn(
               "flex items-stretch gap-6 overflow-x-auto pb-6 pt-2 snap-x snap-mandatory scroll-smooth px-4 sm:px-0",
+              "scroll-pl-4 sm:scroll-pl-0",
               "justify-start",
               "touch-pan-y [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden",
               isDragging ? "cursor-grabbing" : "cursor-grab",
@@ -247,9 +254,10 @@ function CarouselSection({
               <div
                 key={card.id}
                 className={cn(
-                  "snap-center sm:snap-start shrink-0 flex items-stretch justify-center sm:block",
+                  "snap-start shrink-0 flex items-stretch justify-center sm:block",
                   CARD_WIDTH_CLASSES,
                 )}
+                data-carousel-card="true"
               >
                 <ExpandableCardDemo
                   title={card.title}
@@ -284,7 +292,7 @@ function CarouselSection({
                 <div
                   key={`skeleton-${i}`}
                   className={cn(
-                    "snap-center sm:snap-start shrink-0",
+                    "snap-start shrink-0",
                     CARD_WIDTH_CLASSES,
                   )}
                 >
